@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
   30:..//kernel/core/tos_mmheap.c **** ** All rights reserved.
   31:..//kernel/core/tos_mmheap.c **** **
   32:..//kernel/core/tos_mmheap.c **** ** Redistribution and use in source and binary forms, with or without
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 2
 
 
   33:..//kernel/core/tos_mmheap.c **** ** modification, are permitted provided that the following conditions are met:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
   87:..//kernel/core/tos_mmheap.c **** }
   88:..//kernel/core/tos_mmheap.c **** #else
   89:..//kernel/core/tos_mmheap.c **** __STATIC__ int generic_fls(uint32_t x)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 3
 
 
   90:..//kernel/core/tos_mmheap.c **** {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  144:..//kernel/core/tos_mmheap.c **** {
  145:..//kernel/core/tos_mmheap.c **** 	return blk_size(blk) == 0;
  146:..//kernel/core/tos_mmheap.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 4
 
 
  147:..//kernel/core/tos_mmheap.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
   47              		.fpu softvfp
   49              	blk_next:
   50              	.LVL1:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 5
 
 
   51              	.LFB128:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  138:..//kernel/core/tos_mmheap.c **** {
   72              		.loc 1 138 26 is_stmt 1 view .LVU11
   73              	.LBB101:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 6
 
 
  140:..//kernel/core/tos_mmheap.c **** }
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  117              		.loc 1 216 1 is_stmt 0 view .LVU24
  118 0000 10B5     		push	{r4, lr}
  119              	.LCFI0:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 7
 
 
  120              		.cfi_def_cfa_offset 8
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  163 0004 FFF7FEFF 		bl	blk_link_next
  164              	.LVL9:
  230:..//kernel/core/tos_mmheap.c ****     blk_set_prev_free(next_blk);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 8
 
 
  165              		.loc 1 230 5 is_stmt 1 view .LVU38
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  235:..//kernel/core/tos_mmheap.c **** {
  209              		.loc 1 235 1 is_stmt 1 view -0
  210              		.cfi_startproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 9
 
 
  211              		@ args = 0, pretend = 0, frame = 0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  257              	.LFB135:
  242:..//kernel/core/tos_mmheap.c **** 
  243:..//kernel/core/tos_mmheap.c **** __STATIC_INLINE__ size_t align_up(size_t x, size_t align)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 10
 
 
  244:..//kernel/core/tos_mmheap.c **** {
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  267:..//kernel/core/tos_mmheap.c **** 
  268:..//kernel/core/tos_mmheap.c **** 	/*
  269:..//kernel/core/tos_mmheap.c **** 	** Insert the new block at the head of the list, and mark the first-
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 11
 
 
  270:..//kernel/core/tos_mmheap.c **** 	** and second-level bitmaps appropriately.
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  338              		.thumb
  339              		.thumb_func
  340              		.fpu softvfp
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 12
 
 
  342              	remove_free_block:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  382 001a 8342     		cmp	r3, r0
  383 001c 01D0     		beq	.L16
  384              	.LVL28:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 13
 
 
  385              	.L13:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  418 003a 1038     		subs	r0, r0, #16
  419 003c 00EB8303 		add	r3, r0, r3, lsl #2
  420 0040 5A68     		ldr	r2, [r3, #4]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 14
 
 
  421              	.LVL32:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  317:..//kernel/core/tos_mmheap.c **** 
  318:..//kernel/core/tos_mmheap.c ****     mapping_insert(blk_size(blk), &fl, &sl);
  319:..//kernel/core/tos_mmheap.c ****     insert_free_block(blk, fl, sl);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 15
 
 
  320:..//kernel/core/tos_mmheap.c **** }
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  328:..//kernel/core/tos_mmheap.c **** __STATIC__ mmheap_blk_t *blk_split(mmheap_blk_t *blk, size_t size)
  329:..//kernel/core/tos_mmheap.c **** {
  500              		.loc 1 329 1 is_stmt 1 view -0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 16
 
 
  501              		.cfi_startproc
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  541              	.LBI116:
  138:..//kernel/core/tos_mmheap.c **** {
  542              		.loc 1 138 26 view .LVU146
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 17
 
 
  543              	.LBB117:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  581              	.LBB121:
  150:..//kernel/core/tos_mmheap.c **** }
  582              		.loc 1 150 5 view .LVU163
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 18
 
 
  150:..//kernel/core/tos_mmheap.c **** }
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  626              	.LCFI9:
  627              		.cfi_def_cfa_offset 8
  628              		.cfi_offset 4, -8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 19
 
 
  629              		.cfi_offset 14, -4
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  355:..//kernel/core/tos_mmheap.c **** {
  356:..//kernel/core/tos_mmheap.c ****     mmheap_blk_t *prev_blk;
  357:..//kernel/core/tos_mmheap.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 20
 
 
  358:..//kernel/core/tos_mmheap.c ****     if (blk_is_prev_free(blk)) {
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  412:..//kernel/core/tos_mmheap.c **** 
  413:..//kernel/core/tos_mmheap.c ****     remaining_blk = blk;
  414:..//kernel/core/tos_mmheap.c ****     if (blk_can_split(blk, size)) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 21
 
 
  415:..//kernel/core/tos_mmheap.c ****         /* We want the 2nd block. */
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  469:..//kernel/core/tos_mmheap.c ****     /*
  470:..//kernel/core/tos_mmheap.c ****     ** mapping_search can futz with the size, so for excessively large sizes it can sometimes wind 
  471:..//kernel/core/tos_mmheap.c ****     ** with indices that are off the end of the block array.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 22
 
 
  472:..//kernel/core/tos_mmheap.c ****     ** So, we protect against that here, since this is the only callsite of mapping_search.
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  245:..//kernel/core/tos_mmheap.c **** }
  696              		.loc 1 245 30 view .LVU197
  697 000a 0340     		ands	r3, r3, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 23
 
 
  698              	.LVL58:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  511:..//kernel/core/tos_mmheap.c ****     }
  512:..//kernel/core/tos_mmheap.c ****     blk_trim_free(blk, size);
  513:..//kernel/core/tos_mmheap.c ****     blk_mark_as_used(blk);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 24
 
 
  514:..//kernel/core/tos_mmheap.c ****     return blk_to_ptr(blk);
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  774              		.loc 1 531 12 view .LVU220
  775 001c 7047     		bx	lr
  776              	.LVL67:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 25
 
 
  777              	.L32:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  819 000a 0A4A     		ldr	r2, .L41
  820 000c 02EB8302 		add	r2, r2, r3, lsl #2
  821 0010 5268     		ldr	r2, [r2, #4]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 26
 
 
  822              		.loc 1 544 12 view .LVU231
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  867              		.fpu softvfp
  869              	mmheap_ctl_init:
  870              	.LFB155:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 27
 
 
  553:..//kernel/core/tos_mmheap.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  565:..//kernel/core/tos_mmheap.c **** 
  566:..//kernel/core/tos_mmheap.c ****     k_mmheap_ctl.fl_bitmap = 0;
  911              		.loc 1 566 5 is_stmt 1 view .LVU259
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 28
 
 
  912              		.loc 1 566 28 is_stmt 0 view .LVU260
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  957 0054 7047     		bx	lr
  958              	.L53:
  959 0056 00BF     		.align	2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 29
 
 
  960              	.L52:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1011              	.LCFI11:
  1012              		.cfi_def_cfa_offset 8
  1013              		.cfi_offset 3, -8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 30
 
 
  1014              		.cfi_offset 14, -4
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1059 000c 0346     		mov	r3, r0
  1060 000e 0028     		cmp	r0, #0
  1061 0010 04DB     		blt	.L63
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 31
 
 
  1062              	.L60:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1100 002c 0638     		subs	r0, r0, #6
  1101              	.LVL97:
  120:..//kernel/core/tos_mmheap.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 32
 
 
  1102              		.loc 1 120 12 view .LVU308
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1149 0010 FFF7FEFF 		bl	mapping_insert
  1150              	.LVL101:
  319:..//kernel/core/tos_mmheap.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 33
 
 
  1151              		.loc 1 319 5 is_stmt 1 view .LVU318
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1199              	.L66:
  392:..//kernel/core/tos_mmheap.c **** 
  1200              		.loc 1 392 1 view .LVU327
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 34
 
 
  1201 000c 38BD     		pop	{r3, r4, r5, pc}
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1245              		.thumb_func
  1246              		.fpu softvfp
  1248              	blk_prepare_used:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 35
 
 
  1249              	.LVL113:
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1291              		.section	.text.blk_trim_free_leading,"ax",%progbits
  1292              		.align	1
  1293              		.syntax unified
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 36
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 36
 
 
  1294              		.thumb
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1338 0018 0546     		mov	r5, r0
  1339              	.LVL123:
  417:..//kernel/core/tos_mmheap.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 37
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 37
 
 
  1340              		.loc 1 417 9 is_stmt 1 view .LVU363
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  306:..//kernel/core/tos_mmheap.c ****     int fl, sl;
  1386              		.loc 1 306 1 is_stmt 0 view .LVU374
  1387 0000 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 38
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 38
 
 
  1388              	.LCFI19:
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1433              		.align	1
  1434              		.syntax unified
  1435              		.thumb
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 39
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 39
 
 
  1436              		.thumb_func
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  359:..//kernel/core/tos_mmheap.c ****         blk_remove(prev_blk);
  1479              		.loc 1 359 9 is_stmt 1 view .LVU397
  1480              	.LVL137:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 40
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 40
 
 
  1481              	.LBB138:
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1526 0000 38B5     		push	{r3, r4, r5, lr}
  1527              	.LCFI23:
  1528              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 41
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 41
 
 
  1529              		.cfi_offset 3, -16
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1568              		.loc 1 375 15 is_stmt 0 view .LVU423
  1569 001a 2946     		mov	r1, r5
  1570 001c 2046     		mov	r0, r4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 42
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 42
 
 
  1571 001e FFF7FEFF 		bl	blk_absorb
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  401:..//kernel/core/tos_mmheap.c ****         blk_set_prev_used(remaining_blk);
  1618              		.loc 1 401 25 is_stmt 0 view .LVU433
  1619 000e 2946     		mov	r1, r5
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 43
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 43
 
 
  1620 0010 2046     		mov	r0, r4
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1667              		.loc 1 131 5 view .LVU442
  131:..//kernel/core/tos_mmheap.c ****         round = (1 << (__fls(size) - K_MMHEAP_SL_INDEX_COUNT_LOG2)) - 1;
  1668              		.loc 1 131 8 is_stmt 0 view .LVU443
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 44
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 44
 
 
  1669 0008 7F28     		cmp	r0, #127
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1714              		.loc 1 96 1 is_stmt 1 view -0
  1715              		.cfi_startproc
  1716              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 45
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 45
 
 
  1717              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  429:..//kernel/core/tos_mmheap.c **** 
  1764              		.loc 1 429 5 view .LVU464
  431:..//kernel/core/tos_mmheap.c ****     sl = *sli;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 46
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 46
 
 
  1765              		.loc 1 431 5 view .LVU465
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1804              		.loc 1 442 9 is_stmt 1 view .LVU480
  442:..//kernel/core/tos_mmheap.c ****             /* No free blocks available, memory has been exhausted. */
  1805              		.loc 1 442 12 is_stmt 0 view .LVU481
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 47
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 47
 
 
  1806 002e 2040     		ands	r0, r0, r4
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1844 0054 04EB8000 		add	r0, r4, r0, lsl #2
  1845 0058 4068     		ldr	r0, [r0, #4]
  1846              	.LVL187:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 48
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 48
 
 
  1847              	.L98:
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  1894              	.LVL191:
  463:..//kernel/core/tos_mmheap.c ****         return K_NULL;
  1895              		.loc 1 463 5 view .LVU507
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 49
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 49
 
 
  463:..//kernel/core/tos_mmheap.c ****         return K_NULL;
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  484:..//kernel/core/tos_mmheap.c **** 
  1937              		.loc 1 484 1 view .LVU521
  1938 0036 2046     		mov	r0, r4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 50
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 50
 
 
  1939 0038 02B0     		add	sp, sp, #8
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  584:..//kernel/core/tos_mmheap.c **** 
  585:..//kernel/core/tos_mmheap.c ****     return tos_mmheap_pool_add(pool_start, pool_size);
  586:..//kernel/core/tos_mmheap.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 51
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 51
 
 
  587:..//kernel/core/tos_mmheap.c **** 
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2027              		.cfi_endproc
  2028              	.LFE158:
  2030              		.section	.text.tos_mmheap_calloc,"ax",%progbits
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 52
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 52
 
 
  2031              		.align	1
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2074 0018 2046     		mov	r0, r4
  2075 001a 38BD     		pop	{r3, r4, r5, pc}
  2076              		.loc 1 612 1 view .LVU553
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 53
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 53
 
 
  2077              		.cfi_endproc
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2122              	.LVL212:
  2123              		.loc 1 623 23 view .LVU567
  2124 000e 2146     		mov	r1, r4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 54
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 54
 
 
  2125 0010 1030     		adds	r0, r0, #16
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2166              		.loc 1 632 5 is_stmt 1 view .LVU583
  2167              	.LBB144:
  2168              	.LBI144:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 55
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 55
 
 
  253:..//kernel/core/tos_mmheap.c **** {
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2209              	.LBB146:
  2210              	.LBI146:
  253:..//kernel/core/tos_mmheap.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 56
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 56
 
 
  2211              		.loc 1 253 25 view .LVU602
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  645:..//kernel/core/tos_mmheap.c ****         blk = blk_trim_free_leading(blk, gap);
  2250              		.loc 1 645 15 is_stmt 0 view .LVU617
  2251 0062 1046     		mov	r0, r2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 57
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 57
 
 
  2252              	.LVL231:
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2293              		.loc 1 183 33 view .LVU627
  2294              	.LBB149:
  185:..//kernel/core/tos_mmheap.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 58
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 58
 
 
  2295              		.loc 1 185 5 view .LVU628
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  665:..//kernel/core/tos_mmheap.c **** 
  666:..//kernel/core/tos_mmheap.c **** __API__ void *tos_mmheap_realloc(void *ptr, size_t size)
  667:..//kernel/core/tos_mmheap.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 59
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 59
 
 
  2344              		.loc 1 667 1 is_stmt 1 view -0
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  185:..//kernel/core/tos_mmheap.c **** }
  2382              		.loc 1 185 45 is_stmt 0 view .LVU653
  2383 000e A6F10807 		sub	r7, r6, #8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 60
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 60
 
 
  2384              	.LVL246:
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2423              		.loc 1 685 31 view .LVU670
  2424 0026 2344     		add	r3, r3, r4
  2425              		.loc 1 685 19 view .LVU671
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 61
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 61
 
 
  2426 0028 1D1D     		adds	r5, r3, #4
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2471              		.loc 1 691 13 is_stmt 1 view .LVU688
  2472              	.LVL259:
  692:..//kernel/core/tos_mmheap.c ****             memcpy(p, ptr, min_size);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 62
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 62
 
 
  2473              		.loc 1 692 13 view .LVU689
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  698:..//kernel/core/tos_mmheap.c ****             blk_mark_as_used(curr_blk);
  699:..//kernel/core/tos_mmheap.c ****         }
  700:..//kernel/core/tos_mmheap.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 63
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 63
 
 
  701:..//kernel/core/tos_mmheap.c ****         blk_trim_used(curr_blk, adjust_size);
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2559              		.loc 1 709 1 is_stmt 0 view .LVU708
  2560 0000 38B5     		push	{r3, r4, r5, lr}
  2561              	.LCFI38:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 64
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 64
 
 
  2562              		.cfi_def_cfa_offset 16
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2599              	.LBB161:
  250:..//kernel/core/tos_mmheap.c **** }
  2600              		.loc 1 250 5 view .LVU723
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 65
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 65
 
 
  250:..//kernel/core/tos_mmheap.c **** }
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2632              	.LBB164:
  2633              	.LBI164:
  148:..//kernel/core/tos_mmheap.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 66
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 66
 
 
  2634              		.loc 1 148 24 view .LVU737
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  746:..//kernel/core/tos_mmheap.c ****     blk_set_size(next_blk, 0);
  2673              		.loc 1 746 5 is_stmt 1 view .LVU752
  2674              	.LBB168:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 67
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 67
 
 
  2675              	.LBI168:
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2712 0056 1A68     		ldr	r2, [r3]
  536:..//kernel/core/tos_mmheap.c **** }
  2713              		.loc 1 536 50 view .LVU769
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 68
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 68
 
 
  2714 0058 511C     		adds	r1, r2, #1
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2759              		.section	.text.mmheap_init_with_pool,"ax",%progbits
  2760              		.align	1
  2761              		.global	mmheap_init_with_pool
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 69
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 69
 
 
  2762              		.syntax unified
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  756:..//kernel/core/tos_mmheap.c **** {
  2810              		.loc 1 756 1 is_stmt 1 view -0
  2811              		.cfi_startproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 70
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 70
 
 
  2812              		@ args = 0, pretend = 0, frame = 8
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2852              	.LBE177:
  2853              	.LBE176:
  767:..//kernel/core/tos_mmheap.c ****     mapping_insert(blk_size(blk), &fl, &sl);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 71
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 71
 
 
  2854              		.loc 1 767 5 is_stmt 1 view .LVU803
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2898              		.loc 1 760 5 view .LVU814
  2899 003c 40F24C40 		movw	r0, #1100
  2900              	.LVL306:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 72
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 72
 
 
  760:..//kernel/core/tos_mmheap.c **** 
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  783:..//kernel/core/tos_mmheap.c ****     blk = offset_to_blk(pool_start, -K_MMHEAP_BLK_HEADER_OVERHEAD);
  2944              		.loc 1 783 5 view .LVU825
  2945              	.LVL309:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 73
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 73
 
 
  2946              	.LBB180:
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  2984              	.LBI183:
  138:..//kernel/core/tos_mmheap.c **** {
  2985              		.loc 1 138 26 view .LVU840
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 74
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 74
 
 
  2986              	.LBB184:
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  3025              	.LVL318:
  3026              	.L165:
  3027              	.LCFI45:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 75
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 75
 
 
  3028              		.cfi_def_cfa_offset 0
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  3076              	.LCFI47:
  3077              		.cfi_def_cfa_offset 12
  3078              		.cfi_offset 4, -12
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 76
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 76
 
 
  3079              		.cfi_offset 5, -8
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  3118              		.loc 1 813 9 is_stmt 1 discriminator 2 view .LVU877
  3119              		.loc 1 813 20 is_stmt 0 discriminator 2 view .LVU878
  3120 002e 6B68     		ldr	r3, [r5, #4]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 77
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 77
 
 
  3121 0030 019A     		ldr	r2, [sp, #4]
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  3168              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
  3169              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  3170              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 78
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 78
 
 
  3171              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
@@ -4638,102 +4638,102 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 1
  3185              		.file 22 "..//kernel/core/include/tos_global.h"
  3186              		.file 23 "<built-in>"
  3187              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 79
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 79
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_mmheap.c
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:16     .text.blk_set_prev_used:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:23     .text.blk_set_prev_used:00000000 blk_set_prev_used
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:43     .text.blk_next:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:49     .text.blk_next:00000000 blk_next
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:104    .text.blk_link_next:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:110    .text.blk_link_next:00000000 blk_link_next
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:140    .text.blk_mark_as_free:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:146    .text.blk_mark_as_free:00000000 blk_mark_as_free
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:200    .text.blk_mark_as_used:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:206    .text.blk_mark_as_used:00000000 blk_mark_as_used
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:249    .text.insert_free_block:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:255    .text.insert_free_block:00000000 insert_free_block
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:331    .text.insert_free_block:0000003c $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:336    .text.remove_free_block:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:342    .text.remove_free_block:00000000 remove_free_block
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:443    .text.remove_free_block:0000005c $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:448    .text.blk_can_split:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:454    .text.blk_can_split:00000000 blk_can_split
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:491    .text.blk_split:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:497    .text.blk_split:00000000 blk_split
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:611    .text.blk_absorb:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:617    .text.blk_absorb:00000000 blk_absorb
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:664    .text.adjust_request_size:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:670    .text.adjust_request_size:00000000 adjust_request_size
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:731    .text.mmheap_pool_is_exist:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:737    .text.mmheap_pool_is_exist:00000000 mmheap_pool_is_exist
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:786    .text.mmheap_pool_is_exist:00000024 $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:791    .text.mmheap_pool_unrecord:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:797    .text.mmheap_pool_unrecord:00000000 mmheap_pool_unrecord
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:858    .text.mmheap_pool_unrecord:00000034 $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:863    .text.mmheap_ctl_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:869    .text.mmheap_ctl_init:00000000 mmheap_ctl_init
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:961    .text.mmheap_ctl_init:00000058 $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:966    .text.generic_fls:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:972    .text.generic_fls:00000000 generic_fls
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:996    .text.__fls:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1002   .text.__fls:00000000 __fls
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1026   .text.mapping_insert:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1032   .text.mapping_insert:00000000 mapping_insert
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1108   .text.blk_insert:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1114   .text.blk_insert:00000000 blk_insert
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1168   .text.blk_trim_free:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1174   .text.blk_trim_free:00000000 blk_trim_free
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1242   .text.blk_prepare_used:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1248   .text.blk_prepare_used:00000000 blk_prepare_used
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1292   .text.blk_trim_free_leading:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1298   .text.blk_trim_free_leading:00000000 blk_trim_free_leading
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1373   .text.blk_remove:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1379   .text.blk_remove:00000000 blk_remove
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1433   .text.blk_merge_prev:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1439   .text.blk_merge_prev:00000000 blk_merge_prev
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1512   .text.blk_merge_next:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1518   .text.blk_merge_next:00000000 blk_merge_next
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1581   .text.blk_trim_used:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1587   .text.blk_trim_used:00000000 blk_trim_used
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s 			page 80
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:16     .text.blk_set_prev_used:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:23     .text.blk_set_prev_used:00000000 blk_set_prev_used
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:43     .text.blk_next:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:49     .text.blk_next:00000000 blk_next
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:104    .text.blk_link_next:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:110    .text.blk_link_next:00000000 blk_link_next
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:140    .text.blk_mark_as_free:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:146    .text.blk_mark_as_free:00000000 blk_mark_as_free
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:200    .text.blk_mark_as_used:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:206    .text.blk_mark_as_used:00000000 blk_mark_as_used
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:249    .text.insert_free_block:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:255    .text.insert_free_block:00000000 insert_free_block
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:331    .text.insert_free_block:0000003c $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:336    .text.remove_free_block:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:342    .text.remove_free_block:00000000 remove_free_block
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:443    .text.remove_free_block:0000005c $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:448    .text.blk_can_split:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:454    .text.blk_can_split:00000000 blk_can_split
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:491    .text.blk_split:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:497    .text.blk_split:00000000 blk_split
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:611    .text.blk_absorb:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:617    .text.blk_absorb:00000000 blk_absorb
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:664    .text.adjust_request_size:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:670    .text.adjust_request_size:00000000 adjust_request_size
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:731    .text.mmheap_pool_is_exist:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:737    .text.mmheap_pool_is_exist:00000000 mmheap_pool_is_exist
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:786    .text.mmheap_pool_is_exist:00000024 $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:791    .text.mmheap_pool_unrecord:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:797    .text.mmheap_pool_unrecord:00000000 mmheap_pool_unrecord
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:858    .text.mmheap_pool_unrecord:00000034 $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:863    .text.mmheap_ctl_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:869    .text.mmheap_ctl_init:00000000 mmheap_ctl_init
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:961    .text.mmheap_ctl_init:00000058 $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:966    .text.generic_fls:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:972    .text.generic_fls:00000000 generic_fls
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:996    .text.__fls:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1002   .text.__fls:00000000 __fls
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1026   .text.mapping_insert:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1032   .text.mapping_insert:00000000 mapping_insert
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1108   .text.blk_insert:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1114   .text.blk_insert:00000000 blk_insert
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1168   .text.blk_trim_free:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1174   .text.blk_trim_free:00000000 blk_trim_free
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1242   .text.blk_prepare_used:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1248   .text.blk_prepare_used:00000000 blk_prepare_used
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1292   .text.blk_trim_free_leading:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1298   .text.blk_trim_free_leading:00000000 blk_trim_free_leading
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1373   .text.blk_remove:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1379   .text.blk_remove:00000000 blk_remove
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1433   .text.blk_merge_prev:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1439   .text.blk_merge_prev:00000000 blk_merge_prev
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1512   .text.blk_merge_next:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1518   .text.blk_merge_next:00000000 blk_merge_next
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1581   .text.blk_trim_used:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1587   .text.blk_trim_used:00000000 blk_trim_used
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s 			page 80
 
 
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1642   .text.mapping_search:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1648   .text.mapping_search:00000000 mapping_search
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1705   .text.__ffs:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1711   .text.__ffs:00000000 __ffs
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1740   .text.blk_search_suitable:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1746   .text.blk_search_suitable:00000000 blk_search_suitable
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1860   .text.blk_search_suitable:00000060 $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1865   .text.blk_locate_free:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1871   .text.blk_locate_free:00000000 blk_locate_free
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1948   .text.mmheap_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1955   .text.mmheap_init:00000000 mmheap_init
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1977   .text.tos_mmheap_alloc:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:1984   .text.tos_mmheap_alloc:00000000 tos_mmheap_alloc
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2031   .text.tos_mmheap_calloc:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2038   .text.tos_mmheap_calloc:00000000 tos_mmheap_calloc
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2081   .text.tos_mmheap_aligned_alloc:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2088   .text.tos_mmheap_aligned_alloc:00000000 tos_mmheap_aligned_alloc
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2265   .text.tos_mmheap_free:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2272   .text.tos_mmheap_free:00000000 tos_mmheap_free
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2334   .text.tos_mmheap_realloc:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2341   .text.tos_mmheap_realloc:00000000 tos_mmheap_realloc
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2545   .text.tos_mmheap_pool_add:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2552   .text.tos_mmheap_pool_add:00000000 tos_mmheap_pool_add
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2754   .text.tos_mmheap_pool_add:00000080 $d
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2760   .text.mmheap_init_with_pool:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2767   .text.mmheap_init_with_pool:00000000 mmheap_init_with_pool
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2800   .text.tos_mmheap_pool_rmv:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2807   .text.tos_mmheap_pool_rmv:00000000 tos_mmheap_pool_rmv
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2912   .text.tos_mmheap_pool_check:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:2919   .text.tos_mmheap_pool_check:00000000 tos_mmheap_pool_check
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:3060   .text.tos_mmheap_check:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:3067   .text.tos_mmheap_check:00000000 tos_mmheap_check
-C:\Users\tianx\AppData\Local\Temp\ccuYzUcK.s:3159   .text.tos_mmheap_check:00000050 $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1642   .text.mapping_search:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1648   .text.mapping_search:00000000 mapping_search
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1705   .text.__ffs:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1711   .text.__ffs:00000000 __ffs
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1740   .text.blk_search_suitable:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1746   .text.blk_search_suitable:00000000 blk_search_suitable
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1860   .text.blk_search_suitable:00000060 $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1865   .text.blk_locate_free:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1871   .text.blk_locate_free:00000000 blk_locate_free
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1948   .text.mmheap_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1955   .text.mmheap_init:00000000 mmheap_init
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1977   .text.tos_mmheap_alloc:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:1984   .text.tos_mmheap_alloc:00000000 tos_mmheap_alloc
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2031   .text.tos_mmheap_calloc:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2038   .text.tos_mmheap_calloc:00000000 tos_mmheap_calloc
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2081   .text.tos_mmheap_aligned_alloc:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2088   .text.tos_mmheap_aligned_alloc:00000000 tos_mmheap_aligned_alloc
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2265   .text.tos_mmheap_free:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2272   .text.tos_mmheap_free:00000000 tos_mmheap_free
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2334   .text.tos_mmheap_realloc:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2341   .text.tos_mmheap_realloc:00000000 tos_mmheap_realloc
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2545   .text.tos_mmheap_pool_add:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2552   .text.tos_mmheap_pool_add:00000000 tos_mmheap_pool_add
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2754   .text.tos_mmheap_pool_add:00000080 $d
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2760   .text.mmheap_init_with_pool:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2767   .text.mmheap_init_with_pool:00000000 mmheap_init_with_pool
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2800   .text.tos_mmheap_pool_rmv:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2807   .text.tos_mmheap_pool_rmv:00000000 tos_mmheap_pool_rmv
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2912   .text.tos_mmheap_pool_check:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:2919   .text.tos_mmheap_pool_check:00000000 tos_mmheap_pool_check
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:3060   .text.tos_mmheap_check:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:3067   .text.tos_mmheap_check:00000000 tos_mmheap_check
+C:\Users\tianx\AppData\Local\Temp\cch9MAwP.s:3159   .text.tos_mmheap_check:00000050 $d
 
 UNDEFINED SYMBOLS
 k_mmheap_ctl

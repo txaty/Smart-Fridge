@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   33 0000 70B5     		push	{r4, r5, r6, lr}
   34              	.LCFI0:
   35              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 2
 
 
   36              		.cfi_offset 4, -16
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   66              		.loc 1 33 11 is_stmt 0 view .LVU12
   67 001a 201D     		adds	r0, r4, #4
   68              	.LVL5:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 3
 
 
   33:..//kernel/core/tos_rwlock.c ****     if (err != K_ERR_NONE) {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
   24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
   25:..//kernel/core/include/tos_sys.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 4
 
 
   26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   80:..//kernel/core/include/tos_sys.h ****  *
   81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
   82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 5
 
 
   83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
  138:..//kernel/core/include/tos_sys.h **** 
  139:..//kernel/core/include/tos_sys.h **** /**
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 6
 
 
  140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   95 002c 49F6EE33 		movw	r3, #39918
   96 0030 6380     		strh	r3, [r4, #2]	@ movhi
   97              	.LVL8:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 7
 
 
   98              		.loc 2 189 19 view .LVU26
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  144              		.cfi_offset 14, -4
   49:..//kernel/core/tos_rwlock.c ****     k_err_t err0, err1;
  145              		.loc 1 49 5 is_stmt 1 view .LVU36
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 8
 
 
   50:..//kernel/core/tos_rwlock.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   54:..//kernel/core/tos_rwlock.c ****     err1 = tos_mutex_destroy(&rwlock->lock);
  177              		.loc 1 54 12 is_stmt 0 view .LVU48
  178 0018 2430     		adds	r0, r0, #36
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 9
 
 
  179              	.LVL17:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  216 0032 EFD1     		bne	.L9
   66:..//kernel/core/tos_rwlock.c **** }
  217              		.loc 1 66 12 view .LVU65
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 10
 
 
  218 0034 0546     		mov	r5, r0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  265 000a 1446     		mov	r4, r2
  266 000c 1D46     		mov	r5, r3
  267 000e 0646     		mov	r6, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 11
 
 
   75:..//kernel/core/tos_rwlock.c ****     TOS_OBJ_VERIFY(rwlock, KNL_OBJ_TYPE_RWLOCK);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
   86:..//kernel/core/tos_rwlock.c **** 
   87:..//kernel/core/tos_rwlock.c ****     if (rwlock->n_readers == (rw_cnt_t)-1) {
  307              		.loc 1 87 5 is_stmt 1 view .LVU87
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 12
 
 
  308              		.loc 1 87 15 is_stmt 0 view .LVU88
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  108:..//kernel/core/tos_rwlock.c ****         err = tos_sem_pend(&rwlock->signal, timeout);
  342              		.loc 1 108 9 is_stmt 1 view .LVU101
  343              		.loc 1 108 15 is_stmt 0 view .LVU102
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 13
 
 
  344 0066 2246     		mov	r2, r4
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  383              		.loc 1 123 5 view .LVU115
  384              		.loc 1 123 12 is_stmt 0 view .LVU116
  385 009c 1FE0     		b	.L15
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 14
 
 
  386              	.LVL38:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  428              		.loc 1 101 9 is_stmt 1 view .LVU128
  101:..//kernel/core/tos_rwlock.c ****             timeout = 1u;
  429              		.loc 1 101 12 is_stmt 0 view .LVU129
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 15
 
 
  430 00c8 54EA0503 		orrs	r3, r4, r5
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  127:..//kernel/core/tos_rwlock.c **** {
  478              		.loc 1 127 1 is_stmt 1 view -0
  479              		.cfi_startproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 16
 
 
  480              		@ args = 0, pretend = 0, frame = 0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  527              		.loc 1 136 5 view .LVU146
  528              		.loc 1 136 5 view .LVU147
  529              	.LVL57:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 17
 
 
  530              	.LBB30:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  556 001a 0022     		movs	r2, #0
  557 001c 0023     		movs	r3, #0
  558 001e 3046     		mov	r0, r6
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 18
 
 
  559              	.LVL61:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  597              		.loc 1 150 9 is_stmt 1 view .LVU171
  598 0048 0133     		adds	r3, r3, #1
  599 004a A386     		strh	r3, [r4, #52]	@ movhi
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 19
 
 
  151:..//kernel/core/tos_rwlock.c ****         return K_ERR_NONE;
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  647 0004 84B0     		sub	sp, sp, #16
  648              	.LCFI9:
  649              		.cfi_def_cfa_offset 40
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 20
 
 
  162:..//kernel/core/tos_rwlock.c ****     k_err_t err;
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  688 002a 3246     		mov	r2, r6
  689 002c 3B46     		mov	r3, r7
  690 002e 4046     		mov	r0, r8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 21
 
 
  691 0030 FFF7FEFF 		bl	tos_mutex_pend_timed
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  724              		.loc 1 194 9 is_stmt 1 view .LVU207
  725              		.loc 1 194 15 is_stmt 0 view .LVU208
  726 005a 3246     		mov	r2, r6
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 22
 
 
  727 005c 3B46     		mov	r3, r7
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  765              		.loc 1 210 29 is_stmt 0 view .LVU223
  766 008c 0123     		movs	r3, #1
  767 008e A363     		str	r3, [r4, #56]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 23
 
 
  768              	.L52:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  186:..//kernel/core/tos_rwlock.c ****         if (timeout == 0u) {
  809              		.loc 1 186 19 is_stmt 0 view .LVU234
  810 00b6 6846     		mov	r0, sp
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 24
 
 
  811              	.LVL88:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  857              		.thumb
  858              		.thumb_func
  859              		.fpu softvfp
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 25
 
 
  861              	tos_rwlock_wpend:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  908              		.loc 1 228 5 is_stmt 1 view .LVU251
  229:..//kernel/core/tos_rwlock.c **** 
  230:..//kernel/core/tos_rwlock.c ****     TOS_PTR_SANITY_CHECK(rwlock);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 26
 
 
  909              		.loc 1 230 5 view .LVU252
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  233:..//kernel/core/tos_rwlock.c ****     if (err != K_ERR_NONE) {
  940              		.loc 1 233 11 is_stmt 0 view .LVU263
  941 0018 061D     		adds	r6, r0, #4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 27
 
 
  942 001a 0022     		movs	r2, #0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  981              	.LVL108:
  982              	.L69:
  241:..//kernel/core/tos_rwlock.c ****     } else {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 28
 
 
  983              		.loc 1 241 13 view .LVU279
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1029              		.loc 2 184 5 view .LVU289
  184:..//kernel/core/include/tos_sys.h **** }
  1030              		.loc 2 184 19 is_stmt 0 view .LVU290
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 29
 
 
  1031 0006 4188     		ldrh	r1, [r0, #2]
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  262:..//kernel/core/tos_rwlock.c ****         err = K_ERR_RWLOCK_NOT_READING;
  1061              		.loc 1 262 5 is_stmt 1 view .LVU299
  262:..//kernel/core/tos_rwlock.c ****         err = K_ERR_RWLOCK_NOT_READING;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 30
 
 
  1062              		.loc 1 262 15 is_stmt 0 view .LVU300
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1103              	.LFE118:
  1105              		.section	.text.tos_rwlock_wpost,"ax",%progbits
  1106              		.align	1
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 31
 
 
  1107              		.global	tos_rwlock_wpost
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1151 0010 40F24D45 		movw	r5, #1101
  1152              	.LVL127:
  1153              	.L81:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 32
 
 
  281:..//kernel/core/tos_rwlock.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1182 002e 3046     		mov	r0, r6
  1183 0030 FFF7FEFF 		bl	tos_mutex_post
  1184              	.LVL132:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 33
 
 
  295:..//kernel/core/tos_rwlock.c **** }
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1229 0000 70B5     		push	{r4, r5, r6, lr}
  1230              	.LCFI16:
  1231              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 34
 
 
  1232              		.cfi_offset 4, -16
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  320:..//kernel/core/tos_rwlock.c ****     }
  321:..//kernel/core/tos_rwlock.c **** 
  322:..//kernel/core/tos_rwlock.c ****     tos_mutex_post(&rwlock->lock);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 35
 
 
  323:..//kernel/core/tos_rwlock.c ****     return err;
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1300 0038 ECE7     		b	.L90
  1301              	.LVL147:
  1302              	.L98:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 36
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 36
 
 
  313:..//kernel/core/tos_rwlock.c ****         }
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1342              		.loc 1 302 5 view .LVU387
  1343 0060 40F24C45 		movw	r5, #1100
  1344 0064 D6E7     		b	.L90
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 37
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 37
 
 
  1345              		.cfi_endproc
@@ -2188,33 +2188,33 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 1
  1370              		.file 23 "..//kernel/core/include/tos_mmheap.h"
  1371              		.file 24 "..//kernel/core/include/tos_sched.h"
  1372              		.file 25 "..//kernel/core/include/tos_global.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s 			page 38
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_rwlock.c
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:16     .text.tos_rwlock_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:24     .text.tos_rwlock_create:00000000 tos_rwlock_create
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:123    .text.tos_rwlock_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:130    .text.tos_rwlock_destroy:00000000 tos_rwlock_destroy
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:231    .text.tos_rwlock_rpend_timed:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:238    .text.tos_rwlock_rpend_timed:00000000 tos_rwlock_rpend_timed
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:468    .text.tos_rwlock_rpend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:475    .text.tos_rwlock_rpend:00000000 tos_rwlock_rpend
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:500    .text.tos_rwlock_rpend_try:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:507    .text.tos_rwlock_rpend_try:00000000 tos_rwlock_rpend_try
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:623    .text.tos_rwlock_wpend_timed:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:630    .text.tos_rwlock_wpend_timed:00000000 tos_rwlock_wpend_timed
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:854    .text.tos_rwlock_wpend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:861    .text.tos_rwlock_wpend:00000000 tos_rwlock_wpend
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:886    .text.tos_rwlock_wpend_try:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:893    .text.tos_rwlock_wpend_try:00000000 tos_rwlock_wpend_try
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:995    .text.tos_rwlock_rpost:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:1002   .text.tos_rwlock_rpost:00000000 tos_rwlock_rpost
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:1106   .text.tos_rwlock_wpost:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:1113   .text.tos_rwlock_wpost:00000000 tos_rwlock_wpost
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:1214   .text.tos_rwlock_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccVO0xJH.s:1221   .text.tos_rwlock_post:00000000 tos_rwlock_post
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:16     .text.tos_rwlock_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:24     .text.tos_rwlock_create:00000000 tos_rwlock_create
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:123    .text.tos_rwlock_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:130    .text.tos_rwlock_destroy:00000000 tos_rwlock_destroy
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:231    .text.tos_rwlock_rpend_timed:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:238    .text.tos_rwlock_rpend_timed:00000000 tos_rwlock_rpend_timed
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:468    .text.tos_rwlock_rpend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:475    .text.tos_rwlock_rpend:00000000 tos_rwlock_rpend
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:500    .text.tos_rwlock_rpend_try:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:507    .text.tos_rwlock_rpend_try:00000000 tos_rwlock_rpend_try
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:623    .text.tos_rwlock_wpend_timed:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:630    .text.tos_rwlock_wpend_timed:00000000 tos_rwlock_wpend_timed
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:854    .text.tos_rwlock_wpend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:861    .text.tos_rwlock_wpend:00000000 tos_rwlock_wpend
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:886    .text.tos_rwlock_wpend_try:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:893    .text.tos_rwlock_wpend_try:00000000 tos_rwlock_wpend_try
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:995    .text.tos_rwlock_rpost:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:1002   .text.tos_rwlock_rpost:00000000 tos_rwlock_rpost
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:1106   .text.tos_rwlock_wpost:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:1113   .text.tos_rwlock_wpost:00000000 tos_rwlock_wpost
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:1214   .text.tos_rwlock_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccgHZvwi.s:1221   .text.tos_rwlock_post:00000000 tos_rwlock_post
 
 UNDEFINED SYMBOLS
 tos_sem_create

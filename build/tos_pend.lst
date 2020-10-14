@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 4, -8
   37              		.cfi_offset 5, -4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 2
 
 
   22:..//kernel/core/tos_pend.c ****     k_task_t *iter;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
    8:..//kernel/core/include/tos_list.h ****  *
    9:..//kernel/core/include/tos_list.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
   10:..//kernel/core/include/tos_list.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 3
 
 
   11:..//kernel/core/include/tos_list.h ****  * License, except for the third-party components listed below which are
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   65:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
   66:..//kernel/core/include/tos_list.h ****             entry = TOS_LIST_ENTRY(entry->field.prev, type, field))
   67:..//kernel/core/include/tos_list.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 4
 
 
   68:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_SAFE(entry, tmp, type, field, list) \
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   79              		.loc 2 80 24 is_stmt 1 view .LVU16
   80              	.LBB39:
   82:..//kernel/core/include/tos_list.h ****     node->next = next;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 5
 
 
   81              		.loc 2 82 5 view .LVU17
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   17:..//kernel/core/include/tos_task.h **** 
   18:..//kernel/core/include/tos_task.h **** #ifndef _TOS_TASK_H_
   19:..//kernel/core/include/tos_task.h **** #define  _TOS_TASK_H_
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 6
 
 
   20:..//kernel/core/include/tos_task.h **** 
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   74:..//kernel/core/include/tos_task.h **** struct k_task_st {
   75:..//kernel/core/include/tos_task.h ****     k_stack_t          *sp;                     /**< task stack pointer. This lady always comes fir
   76:..//kernel/core/include/tos_task.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 7
 
 
   77:..//kernel/core/include/tos_task.h ****     knl_obj_t           knl_obj;                /**< just for verification, test whether current ob
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  131:..//kernel/core/include/tos_task.h ****                                                     by tos_event_pend to the caller */
  132:..//kernel/core/include/tos_task.h **** #endif
  133:..//kernel/core/include/tos_task.h **** };
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 8
 
 
  134:..//kernel/core/include/tos_task.h **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  188:..//kernel/core/include/tos_task.h ****  * @param[in]   prio        priority of the task.
  189:..//kernel/core/include/tos_task.h ****  * @param[in]   stk_size    stack size of the task.
  190:..//kernel/core/include/tos_task.h ****  * @param[in]   timeslice   time slice of the task.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 9
 
 
  191:..//kernel/core/include/tos_task.h ****  *
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  245:..//kernel/core/include/tos_task.h ****  * @return  errcode
  246:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_SUSPEND_IDLE  attempt to suspend idle task.
  247:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE               return successfully.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 10
 
 
  248:..//kernel/core/include/tos_task.h ****  */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  302:..//kernel/core/include/tos_task.h **** __API__ k_task_t *tos_task_curr_task_get(void);
  303:..//kernel/core/include/tos_task.h **** 
  304:..//kernel/core/include/tos_task.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 11
 
 
  305:..//kernel/core/include/tos_task.h **** #if TOS_CFG_TASK_STACK_DRAUGHT_DEPTH_DETACT_EN > 0u
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  359:..//kernel/core/include/tos_task.h ****     return task->state & K_TASK_STATE_PEND;
  360:..//kernel/core/include/tos_task.h **** }
  361:..//kernel/core/include/tos_task.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 12
 
 
  362:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ int task_state_is_suspended(k_task_t *task)
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  133              		.syntax unified
  134              		.thumb
  135              		.thumb_func
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 13
 
 
  136              		.fpu softvfp
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  156              		.loc 2 140 16 view .LVU41
  157              	.LBE43:
  158              	.LBE42:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 14
 
 
  159              		.loc 1 44 12 view .LVU42
@@ -799,14 +799,14 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  173              	.LVL15:
  174              	.L8:
  175              		.loc 1 45 30 view .LVU47
- 176 0010 0A20     		movs	r0, #10
+ 176 0010 0820     		movs	r0, #8
  177              	.LVL16:
  178              		.loc 1 45 30 view .LVU48
  179 0012 7047     		bx	lr
  180              	.LVL17:
  181              	.L9:
  182              		.loc 1 45 30 view .LVU49
- 183 0014 0A20     		movs	r0, #10
+ 183 0014 0820     		movs	r0, #8
  184              	.LVL18:
   46:..//kernel/core/tos_pend.c **** }
  185              		.loc 1 46 1 view .LVU50
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  209              	.LVL20:
   51:..//kernel/core/tos_pend.c **** }
  210              		.loc 1 51 1 view .LVU54
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 15
 
 
  211 0002 5038     		subs	r0, r0, #80
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   91:..//kernel/core/include/tos_list.h **** }
  254              		.loc 2 91 16 view .LVU66
  255              	.LBE47:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 16
 
 
  256              	.LBE46:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  300              	.LBB50:
  301              	.LBI50:
   99:..//kernel/core/include/tos_list.h **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 17
 
 
  302              		.loc 2 99 32 view .LVU77
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  102:..//kernel/core/include/tos_list.h **** }
  344              		.loc 2 102 16 is_stmt 0 view .LVU90
  345 0002 4060     		str	r0, [r0, #4]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 18
 
 
  346              	.LVL29:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  395              		.align	1
  396              		.global	pend_list_adjust
  397              		.syntax unified
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 19
 
 
  398              		.thumb
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  438              		.loc 2 91 16 view .LVU113
  439              	.LBE59:
  440              	.LBE58:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 20
 
 
  441              	.LBE57:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
   93:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_OWNER_DIE;
   94:..//kernel/core/tos_pend.c ****     } else {
   95:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_ABNORMAL;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 21
 
 
  484              		.loc 1 95 16 view .LVU125
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  530              	.LFB119:
   98:..//kernel/core/tos_pend.c **** 
   99:..//kernel/core/tos_pend.c **** __KNL__ void pend_task_wakeup(k_task_t *task, pend_state_t state)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 22
 
 
  100:..//kernel/core/tos_pend.c **** {
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  569              		.loc 3 354 16 view .LVU147
  570              	.LBE63:
  571              	.LBE62:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 23
 
 
  572              		.loc 1 107 8 view .LVU148
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  608 0030 FFF7FEFF 		bl	tick_list_remove
  609              	.LVL57:
  610 0034 F0E7     		b	.L26
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 24
 
 
  611              	.L31:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  659 0018 FFF7FEFF 		bl	pend_list_add
  660              	.LVL61:
  124:..//kernel/core/tos_pend.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 25
 
 
  125:..//kernel/core/tos_pend.c ****     if (timeout != TOS_TIME_FOREVER) {
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  708              		.loc 1 132 5 view .LVU177
  709 0004 5038     		subs	r0, r0, #80
  710 0006 FFF7FEFF 		bl	pend_task_wakeup
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 26
 
 
  711              	.LVL66:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  759 0018 FFF7FEFF 		bl	pend_task_wakeup
  760              	.LVL71:
  139:..//kernel/core/tos_pend.c ****         pend_task_wakeup(task, state);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 27
 
 
  761              		.loc 1 139 5 is_stmt 0 discriminator 3 view .LVU187
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  151:..//kernel/core/tos_pend.c **** }
  805              		.loc 1 151 1 is_stmt 0 view .LVU197
  806 0008 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 28
 
 
  807              	.LVL76:
@@ -1652,39 +1652,39 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
  835              		.file 20 "..//kernel/core/include/tos_sched.h"
  836              		.file 21 "..//kernel/core/include/tos_global.h"
  837              		.file 22 "..//kernel/core/include/tos_tick.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_pend.c
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:16     .text.pend_list_add:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:23     .text.pend_list_add:00000000 pend_list_add
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:131    .text.pend_highest_pending_prio_get:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:138    .text.pend_highest_pending_prio_get:00000000 pend_highest_pending_prio_get
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:191    .text.pend_highest_pending_task_get:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:198    .text.pend_highest_pending_task_get:00000000 pend_highest_pending_task_get
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:217    .text.pend_list_remove:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:224    .text.pend_list_remove:00000000 pend_list_remove
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:284    .text.pend_object_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:291    .text.pend_object_init:00000000 pend_object_init
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:320    .text.pend_object_deinit:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:327    .text.pend_object_deinit:00000000 pend_object_deinit
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:356    .text.pend_is_nopending:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:363    .text.pend_is_nopending:00000000 pend_is_nopending
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:395    .text.pend_list_adjust:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:402    .text.pend_list_adjust:00000000 pend_list_adjust
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:453    .text.pend_state2errno:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:460    .text.pend_state2errno:00000000 pend_state2errno
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:521    .text.pend_task_wakeup:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:528    .text.pend_task_wakeup:00000000 pend_task_wakeup
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:621    .text.pend_task_block:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:628    .text.pend_task_block:00000000 pend_task_block
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:684    .text.pend_wakeup_one:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:691    .text.pend_wakeup_one:00000000 pend_wakeup_one
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:718    .text.pend_wakeup_all:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:725    .text.pend_wakeup_all:00000000 pend_wakeup_all
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:778    .text.pend_wakeup:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:785    .text.pend_wakeup:00000000 pend_wakeup
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:16     .text.pend_list_add:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:23     .text.pend_list_add:00000000 pend_list_add
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:131    .text.pend_highest_pending_prio_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:138    .text.pend_highest_pending_prio_get:00000000 pend_highest_pending_prio_get
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:191    .text.pend_highest_pending_task_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:198    .text.pend_highest_pending_task_get:00000000 pend_highest_pending_task_get
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:217    .text.pend_list_remove:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:224    .text.pend_list_remove:00000000 pend_list_remove
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:284    .text.pend_object_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:291    .text.pend_object_init:00000000 pend_object_init
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:320    .text.pend_object_deinit:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:327    .text.pend_object_deinit:00000000 pend_object_deinit
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:356    .text.pend_is_nopending:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:363    .text.pend_is_nopending:00000000 pend_is_nopending
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:395    .text.pend_list_adjust:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:402    .text.pend_list_adjust:00000000 pend_list_adjust
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:453    .text.pend_state2errno:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:460    .text.pend_state2errno:00000000 pend_state2errno
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:521    .text.pend_task_wakeup:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:528    .text.pend_task_wakeup:00000000 pend_task_wakeup
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:621    .text.pend_task_block:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:628    .text.pend_task_block:00000000 pend_task_block
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:684    .text.pend_wakeup_one:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:691    .text.pend_wakeup_one:00000000 pend_wakeup_one
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:718    .text.pend_wakeup_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:725    .text.pend_wakeup_all:00000000 pend_wakeup_all
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:778    .text.pend_wakeup:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccAAgBVw.s:785    .text.pend_wakeup:00000000 pend_wakeup
 
 UNDEFINED SYMBOLS
 tick_list_remove

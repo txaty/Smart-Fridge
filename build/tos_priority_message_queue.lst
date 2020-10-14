@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
   30:..//kernel/core/tos_priority_message_queue.c ****     if (!prio_q_mgr_array) {
   31:..//kernel/core/tos_priority_message_queue.c ****         return K_ERR_OUT_OF_MEMORY;
   32:..//kernel/core/tos_priority_message_queue.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 2
 
 
   33:..//kernel/core/tos_priority_message_queue.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
   87:..//kernel/core/tos_priority_message_queue.c ****     k_err_t err;
   88:..//kernel/core/tos_priority_message_queue.c **** 
   89:..//kernel/core/tos_priority_message_queue.c ****     TOS_PTR_SANITY_CHECK(prio_msg_q);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 3
 
 
   90:..//kernel/core/tos_priority_message_queue.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  144:..//kernel/core/tos_priority_message_queue.c **** 
  145:..//kernel/core/tos_priority_message_queue.c ****     return tos_prio_q_flush(&prio_msg_q->prio_q);
  146:..//kernel/core/tos_priority_message_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 4
 
 
  147:..//kernel/core/tos_priority_message_queue.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
   36              		.cfi_offset 14, -4
  192:..//kernel/core/tos_priority_message_queue.c ****     task->msg = msg_ptr;
   37              		.loc 1 192 5 is_stmt 1 view .LVU2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 5
 
 
   38              		.loc 1 192 15 is_stmt 0 view .LVU3
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
   84 0006 0028     		cmp	r0, #0
   85 0008 43D0     		beq	.L11
   86 000a 0446     		mov	r4, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 6
 
 
  203:..//kernel/core/tos_priority_message_queue.c ****     TOS_OBJ_VERIFY(prio_msg_q, KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE);
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
   48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
   49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
   50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 7
 
 
   51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  105:..//kernel/core/include/tos_sys.h ****  * @attention None
  106:..//kernel/core/include/tos_sys.h ****  *
  107:..//kernel/core/include/tos_sys.h ****  * @param   None
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 8
 
 
  108:..//kernel/core/include/tos_sys.h ****  *
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
  163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
  164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 9
 
 
  165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  220:..//kernel/core/tos_priority_message_queue.c ****         TOS_LIST_FOR_EACH_ENTRY_SAFE(task, tmp, k_task_t, pend_list, &prio_msg_q->pend_obj.list) {
  221:..//kernel/core/tos_priority_message_queue.c ****             prio_msg_q_task_recv(task, msg_ptr);
  222:..//kernel/core/tos_priority_message_queue.c ****         }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 10
 
 
  223:..//kernel/core/tos_priority_message_queue.c ****     }
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  220:..//kernel/core/tos_priority_message_queue.c ****             prio_msg_q_task_recv(task, msg_ptr);
  148              		.loc 1 220 9 is_stmt 0 view .LVU34
  149 0036 50F85059 		ldr	r5, [r0], #-80
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 11
 
 
  150              	.LVL15:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  191 006a 3046     		mov	r0, r6
  192              	.LVL23:
  210:..//kernel/core/tos_priority_message_queue.c ****             return err;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 12
 
 
  193              		.loc 1 210 13 is_stmt 0 view .LVU48
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  232 008e 0024     		movs	r4, #0
  233              	.LVL32:
  228:..//kernel/core/tos_priority_message_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 13
 
 
  234              		.loc 1 228 12 view .LVU64
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  281              		.loc 1 29 24 is_stmt 0 view .LVU73
  282 000c 02EB4203 		add	r3, r2, r2, lsl #1
  283 0010 5800     		lsls	r0, r3, #1
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 14
 
 
  284              	.LVL36:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
  322              		.loc 2 187 32 view .LVU88
  323              	.LBB35:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 15
 
 
  188:..//kernel/core/include/tos_sys.h **** {
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  351              		.cfi_remember_state
  352              		.cfi_def_cfa_offset 20
  353              		@ sp needed
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 16
 
 
  354 0046 F0BD     		pop	{r4, r5, r6, r7, pc}
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  401              		.cfi_def_cfa_offset 24
  402              		.cfi_offset 4, -24
  403              		.cfi_offset 5, -20
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 17
 
 
  404              		.cfi_offset 6, -16
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  438              	.LBB41:
  220:..//kernel/core/include/tos_sys.h **** {
  221:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_STATIC;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 18
 
 
  439              		.loc 2 221 5 view .LVU121
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  480 003c E068     		ldr	r0, [r4, #12]
  481 003e FFF7FEFF 		bl	tos_mmheap_free
  482              	.LVL63:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 19
 
 
   72:..//kernel/core/tos_priority_message_queue.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  521 0056 FFF7FEFF 		bl	knl_sched
  522              	.LVL68:
   82:..//kernel/core/tos_priority_message_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 20
 
 
  523              		.loc 1 82 5 view .LVU153
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
   86:..//kernel/core/tos_priority_message_queue.c ****     k_err_t err;
  569              		.loc 1 86 1 is_stmt 0 view .LVU164
  570 0000 38B5     		push	{r3, r4, r5, lr}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 21
 
 
  571              	.LCFI10:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  189:..//kernel/core/include/tos_sys.h **** }
  612              		.loc 2 189 5 view .LVU178
  189:..//kernel/core/include/tos_sys.h **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 22
 
 
  613              		.loc 2 189 19 is_stmt 0 view .LVU179
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  105:..//kernel/core/tos_priority_message_queue.c ****     TOS_CPU_CPSR_ALLOC();
  659              		.loc 1 105 1 is_stmt 0 view .LVU190
  660 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 23
 
 
  661              	.LCFI11:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  216:..//kernel/core/include/tos_sys.h **** }
  701              		.loc 2 216 19 is_stmt 0 view .LVU205
  702 0012 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 24
 
 
  703              	.LVL89:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  743              	.LVL96:
  127:..//kernel/core/tos_priority_message_queue.c **** 
  744              		.loc 1 127 5 view .LVU220
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 25
 
 
  127:..//kernel/core/tos_priority_message_queue.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  137:..//kernel/core/tos_priority_message_queue.c **** }
  784              		.loc 1 137 5 view .LVU236
  137:..//kernel/core/tos_priority_message_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 26
 
 
  785              		.loc 1 137 12 is_stmt 0 view .LVU237
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  142:..//kernel/core/tos_priority_message_queue.c ****     TOS_OBJ_VERIFY(prio_msg_q, KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE);
  831              		.loc 1 142 5 view .LVU248
  832 0000 60B1     		cbz	r0, .L49
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 27
 
 
  141:..//kernel/core/tos_priority_message_queue.c ****     TOS_PTR_SANITY_CHECK(prio_msg_q);
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  874              	.L49:
  875              	.LCFI13:
  876              		.cfi_def_cfa_offset 0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 28
 
 
  877              		.cfi_restore 3
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  153:..//kernel/core/tos_priority_message_queue.c ****     TOS_PTR_SANITY_CHECK(prio_msg_q);
  925              		.loc 1 153 5 is_stmt 0 view .LVU270
  926 0010 0028     		cmp	r0, #0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 29
 
 
  927 0012 4DD1     		bne	.L61
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  967              	.LVL124:
  160:..//kernel/core/tos_priority_message_queue.c ****         TOS_CPU_INT_ENABLE();
  968              		.loc 1 160 5 view .LVU285
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 30
 
 
  160:..//kernel/core/tos_priority_message_queue.c ****         TOS_CPU_INT_ENABLE();
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  1009 006c 3368     		ldr	r3, [r6]
  181:..//kernel/core/tos_priority_message_queue.c ****     if (err == K_ERR_NONE) {
  1010              		.loc 1 181 11 view .LVU300
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 31
 
 
  1011 006e 93F86800 		ldrb	r0, [r3, #104]	@ zero_extendqisi2
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  1049              		.loc 1 167 9 view .LVU316
  1050 0098 3846     		mov	r0, r7
  1051 009a FFF7FEFF 		bl	tos_cpu_cpsr_restore
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 32
 
 
  1052              	.LVL134:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  231:..//kernel/core/tos_priority_message_queue.c **** __API__ k_err_t tos_prio_msg_q_post(k_prio_msg_q_t *prio_msg_q, void *msg_ptr, k_prio_t prio)
  232:..//kernel/core/tos_priority_message_queue.c **** {
  1098              		.loc 1 232 1 is_stmt 1 view -0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 33
 
 
  1099              		.cfi_startproc
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  1149              		.text
  1150              	.Letext0:
  1151              		.file 3 "..//kernel/core/include/tos_kerr.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 34
 
 
  1152              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
@@ -2004,32 +2004,32 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 1
  1172              		.file 24 "..//kernel/core/include/tos_sched.h"
  1173              		.file 25 "..//kernel/core/include/tos_global.h"
  1174              		.file 26 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s 			page 35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_priority_message_queue.c
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:16     .text.prio_msg_q_task_recv:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:23     .text.prio_msg_q_task_recv:00000000 prio_msg_q_task_recv
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:52     .text.prio_msg_q_do_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:58     .text.prio_msg_q_do_post:00000000 prio_msg_q_do_post
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:245    .text.tos_prio_msg_q_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:252    .text.tos_prio_msg_q_create:00000000 tos_prio_msg_q_create
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:384    .text.tos_prio_msg_q_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:391    .text.tos_prio_msg_q_destroy:00000000 tos_prio_msg_q_destroy
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:555    .text.tos_prio_msg_q_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:562    .text.tos_prio_msg_q_create_dyn:00000000 tos_prio_msg_q_create_dyn
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:645    .text.tos_prio_msg_q_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:652    .text.tos_prio_msg_q_destroy_dyn:00000000 tos_prio_msg_q_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:816    .text.tos_prio_msg_q_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:823    .text.tos_prio_msg_q_flush:00000000 tos_prio_msg_q_flush
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:888    .text.tos_prio_msg_q_pend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:895    .text.tos_prio_msg_q_pend:00000000 tos_prio_msg_q_pend
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:1083   .text.tos_prio_msg_q_pend:000000c4 $d
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:1088   .text.tos_prio_msg_q_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:1095   .text.tos_prio_msg_q_post:00000000 tos_prio_msg_q_post
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:1119   .text.tos_prio_msg_q_post_all:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccCzZTkf.s:1126   .text.tos_prio_msg_q_post_all:00000000 tos_prio_msg_q_post_all
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:16     .text.prio_msg_q_task_recv:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:23     .text.prio_msg_q_task_recv:00000000 prio_msg_q_task_recv
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:52     .text.prio_msg_q_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:58     .text.prio_msg_q_do_post:00000000 prio_msg_q_do_post
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:245    .text.tos_prio_msg_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:252    .text.tos_prio_msg_q_create:00000000 tos_prio_msg_q_create
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:384    .text.tos_prio_msg_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:391    .text.tos_prio_msg_q_destroy:00000000 tos_prio_msg_q_destroy
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:555    .text.tos_prio_msg_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:562    .text.tos_prio_msg_q_create_dyn:00000000 tos_prio_msg_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:645    .text.tos_prio_msg_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:652    .text.tos_prio_msg_q_destroy_dyn:00000000 tos_prio_msg_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:816    .text.tos_prio_msg_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:823    .text.tos_prio_msg_q_flush:00000000 tos_prio_msg_q_flush
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:888    .text.tos_prio_msg_q_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:895    .text.tos_prio_msg_q_pend:00000000 tos_prio_msg_q_pend
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:1083   .text.tos_prio_msg_q_pend:000000c4 $d
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:1088   .text.tos_prio_msg_q_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:1095   .text.tos_prio_msg_q_post:00000000 tos_prio_msg_q_post
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:1119   .text.tos_prio_msg_q_post_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7sqKGf.s:1126   .text.tos_prio_msg_q_post_all:00000000 tos_prio_msg_q_post_all
 
 UNDEFINED SYMBOLS
 pend_task_wakeup

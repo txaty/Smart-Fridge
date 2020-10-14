@@ -3,6 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
+                "${workspaceFolder}/../arch/arm/arm-v7m/common/include",
+                "${workspaceFolder}/../kernel/core/include",
+                "${workspaceFolder}/../arch/stm8/iccstm8",
                 "${workspaceFolder}/**",
                 "D:/arm_gcc/8 2019-q3-update/arm-none-eabi/include",
                 "D:/arm_gcc/8 2019-q3-update/arm-none-eabi/include/c++/8.3.1",
@@ -15,11 +18,13 @@
                 "Drivers/STM32F1xx_HAL_Driver/Inc/Legacy",
                 "Drivers/STM32F1xx_HAL_Driver/Src",
                 "Inc",
-                "Src",
-                "${workspaceFolder}/../arch/arm/arm-v7m/common/include",
-                "${workspaceFolder}/../kernel/core/include",
-                "TOS_CONFIG"
+                "Src"
             ],
+            "browse": {
+                "path":[
+                    "TOS_CONFIG"
+                ]
+            },
             "defines": [
                 "_DEBUG",
                 "UNICODE",
@@ -28,7 +33,7 @@
                 "STM32F103xE"
             ],
             "compilerPath": "C:/MinGW/bin/gcc",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "gcc-x86"
         }
     ],
     "version": 4

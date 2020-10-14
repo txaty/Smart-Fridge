@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   30:..//kernel/core/tos_timer.c **** 
   31:..//kernel/core/tos_timer.c ****     TOS_LIST_FOR_EACH_ENTRY(iter, k_timer_t, list, &k_timer_ctl.list) {
   32:..//kernel/core/tos_timer.c ****         if (tmr->expires < iter->expires) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 2
 
 
   33:..//kernel/core/tos_timer.c ****             break;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   87:..//kernel/core/tos_timer.c ****     tmr->expires        = (k_tick_t)0u;
   88:..//kernel/core/tos_timer.c ****     tmr->period         = (k_tick_t)0u;
   89:..//kernel/core/tos_timer.c ****     tmr->opt            = (k_opt_t)0u;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 3
 
 
   90:..//kernel/core/tos_timer.c ****     tmr->cb             = K_NULL;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  144:..//kernel/core/tos_timer.c ****     TOS_PTR_SANITY_CHECK(tmr);
  145:..//kernel/core/tos_timer.c ****     TOS_OBJ_VERIFY(tmr, KNL_OBJ_TYPE_TIMER);
  146:..//kernel/core/tos_timer.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 4
 
 
  147:..//kernel/core/tos_timer.c ****     if (tmr->state == TIMER_STATE_UNUSED) {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  201:..//kernel/core/tos_timer.c ****         return K_ERR_TIMER_STOPPED;
  202:..//kernel/core/tos_timer.c ****     }
  203:..//kernel/core/tos_timer.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 5
 
 
  204:..//kernel/core/tos_timer.c ****     if (tmr->state == TIMER_STATE_RUNNING) {
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
   19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
   20:..//kernel/core/include/tos_sys.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 6
 
 
   21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
   76:..//kernel/core/include/tos_sys.h ****  *
   77:..//kernel/core/include/tos_sys.h ****  * @attention None
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 7
 
 
   78:..//kernel/core/include/tos_sys.h ****  *
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  132:..//kernel/core/include/tos_sys.h ****  *
  133:..//kernel/core/include/tos_sys.h ****  * @param   None
  134:..//kernel/core/include/tos_sys.h ****  *
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 8
 
 
  135:..//kernel/core/include/tos_sys.h ****  * @return  None
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   56 000e 4088     		ldrh	r0, [r0, #2]
   57              	.LVL2:
   58              		.loc 2 184 19 view .LVU9
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 9
 
 
   59              	.LBE39:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   90              		.loc 1 238 9 is_stmt 1 view .LVU23
   91              		.loc 1 238 21 is_stmt 0 view .LVU24
   92 002e C3E90867 		strd	r6, [r3, #32]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 10
 
 
  239:..//kernel/core/tos_timer.c ****     } else {
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  215:..//kernel/core/tos_timer.c **** 
  132              		.loc 1 215 5 view .LVU37
  133 0064 40F24D40 		movw	r0, #1101
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 11
 
 
  134              	.LVL7:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  184              		.loc 1 60 5 is_stmt 1 view .LVU44
  185              	.LVL11:
   61:..//kernel/core/tos_timer.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 12
 
 
  186              		.loc 1 61 5 view .LVU45
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   33:..//kernel/core/include/tos_list.h **** 
   34:..//kernel/core/include/tos_list.h **** #define TOS_LIST_ENTRY(node, type, field) \
   35:..//kernel/core/include/tos_list.h ****     TOS_CONTAINER_OF_FIELD(node, type, field)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 13
 
 
   36:..//kernel/core/include/tos_list.h **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   90:..//kernel/core/include/tos_list.h ****     next->prev = prev;
   91:..//kernel/core/include/tos_list.h ****     prev->next = next;
   92:..//kernel/core/include/tos_list.h **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 14
 
 
   93:..//kernel/core/include/tos_list.h **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  225              	.LBE40:
   69:..//kernel/core/tos_timer.c ****         // if the first guy removed, we need to refresh k_timer_ctl.next_expires
  226              		.loc 1 69 5 is_stmt 1 view .LVU62
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 15
 
 
   69:..//kernel/core/tos_timer.c ****         // if the first guy removed, we need to refresh k_timer_ctl.next_expires
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  252              		.loc 3 140 16 view .LVU72
  253              	.LBE45:
  254              	.LBE44:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 16
 
 
   71:..//kernel/core/tos_timer.c ****         if (!next) {
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  300              	timer_place:
  301              	.LVL27:
  302              	.LFB110:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 17
 
 
   23:..//kernel/core/tos_timer.c ****     TOS_CPU_CPSR_ALLOC();
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  346              		.loc 1 32 9 is_stmt 1 view .LVU94
   32:..//kernel/core/tos_timer.c ****             break;
  347              		.loc 1 32 32 is_stmt 0 view .LVU95
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 18
 
 
  348 0032 D3E90667 		ldrd	r6, [r3, #24]
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
   85:..//kernel/core/include/tos_list.h **** }
  387              		.loc 3 85 5 is_stmt 1 view .LVU111
   85:..//kernel/core/include/tos_list.h **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 19
 
 
  388              		.loc 3 85 16 is_stmt 0 view .LVU112
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  432              		.global	tos_timer_create
  433              		.syntax unified
  434              		.thumb
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 20
 
 
  435              		.thumb_func
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  116:..//kernel/core/tos_timer.c ****         return K_ERR_TIMER_INVALID_OPT;
  480              		.loc 1 116 5 is_stmt 1 view .LVU134
  116:..//kernel/core/tos_timer.c ****         return K_ERR_TIMER_INVALID_OPT;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 21
 
 
  481              		.loc 1 116 38 is_stmt 0 view .LVU135
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  518              		.loc 1 133 25 is_stmt 0 view .LVU152
  519 0060 5E60     		str	r6, [r3, #4]
  134:..//kernel/core/tos_timer.c ****     tos_list_init(&tmr->list);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 22
 
 
  520              		.loc 1 134 5 is_stmt 1 view .LVU153
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  558              	.L33:
  140:..//kernel/core/tos_timer.c **** 
  559              		.loc 1 140 1 view .LVU169
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 23
 
 
  560 0076 BDE87003 		pop	{r4, r5, r6, r8, r9}
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  604              	.L37:
  105:..//kernel/core/tos_timer.c **** 
  605              		.loc 1 105 5 view .LVU180
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 24
 
 
  606 009a 40F24C40 		movw	r0, #1100
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  143:..//kernel/core/tos_timer.c ****     TOS_PTR_SANITY_CHECK(tmr);
  652              		.loc 1 143 1 is_stmt 0 view .LVU191
  653 0002 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 25
 
 
  654              	.LCFI8:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  693              		.loc 1 85 5 view .LVU206
   85:..//kernel/core/tos_timer.c ****     tmr->delay          = (k_tick_t)0u;
  694              		.loc 1 85 25 is_stmt 0 view .LVU207
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 26
 
 
  695 001a 0020     		movs	r0, #0
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  102:..//kernel/core/include/tos_list.h **** }
  731              		.loc 3 102 16 view .LVU226
  732              	.LBE59:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 27
 
 
  733              	.LBE58:
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  775              		.cfi_offset 14, -4
  145:..//kernel/core/tos_timer.c **** 
  776              		.loc 1 145 5 view .LVU238
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 28
 
 
  777 004e 40F24D40 		movw	r0, #1101
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  184:..//kernel/core/include/tos_sys.h **** }
  823              		.loc 2 184 5 view .LVU249
  184:..//kernel/core/include/tos_sys.h **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 29
 
 
  824              		.loc 2 184 19 is_stmt 0 view .LVU250
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  170:..//kernel/core/tos_timer.c ****         timer_place(tmr);
  863              		.loc 1 170 22 view .LVU266
  864 0030 C4E90623 		strd	r2, [r4, #24]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 30
 
 
  171:..//kernel/core/tos_timer.c ****         return K_ERR_NONE;
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  903              		.loc 1 181 13 is_stmt 1 view .LVU282
  181:..//kernel/core/tos_timer.c ****         }
  904              		.loc 1 181 26 is_stmt 0 view .LVU283
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 31
 
 
  905 0060 C4E90623 		strd	r2, [r4, #24]
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  192:..//kernel/core/tos_timer.c ****     TOS_OBJ_VERIFY(tmr, KNL_OBJ_TYPE_TIMER);
  954              		.loc 1 192 5 view .LVU291
  192:..//kernel/core/tos_timer.c ****     TOS_OBJ_VERIFY(tmr, KNL_OBJ_TYPE_TIMER);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 32
 
 
  955              		.loc 1 192 5 view .LVU292
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  204:..//kernel/core/tos_timer.c ****         tmr->state = TIMER_STATE_STOPPED;
  994              		.loc 1 204 8 is_stmt 0 view .LVU308
  995 001c 022A     		cmp	r2, #2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 33
 
 
  996 001e 01D0     		beq	.L84
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1039              		.loc 1 196 16 view .LVU319
  1040 003e 40F63400 		movw	r0, #2100
  1041              	.LVL103:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 34
 
 
  196:..//kernel/core/tos_timer.c ****     }
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1089              	.LVL109:
  249:..//kernel/core/tos_timer.c **** }
  1090              		.loc 1 249 1 view .LVU329
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 35
 
 
  1091 000c 03B0     		add	sp, sp, #12
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1143              		.fpu softvfp
  1145              	timer_next_expires_get:
  1146              	.LFB120:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 36
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 36
 
 
  255:..//kernel/core/tos_timer.c **** 
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1187              	.LVL114:
  1188              	.L90:
  269:..//kernel/core/tos_timer.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 37
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 37
 
 
  270:..//kernel/core/tos_timer.c **** 
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  280:..//kernel/core/tos_timer.c **** 
  281:..//kernel/core/tos_timer.c ****     if (k_timer_ctl.next_expires > k_tick_count) { // not yet
  1234              		.loc 1 281 5 view .LVU355
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 38
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 38
 
 
  1235              		.loc 1 281 20 is_stmt 0 view .LVU356
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1260              		.loc 1 287 5 view .LVU363
  1261 0024 0C3D     		subs	r5, r5, #12
  1262              	.LVL120:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 39
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 39
 
 
  287:..//kernel/core/tos_timer.c ****         if (tmr->expires > k_tick_count) {
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1303 0058 9942     		cmp	r1, r3
  1304 005a 08BF     		it	eq
  1305 005c 9042     		cmpeq	r0, r2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 40
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 40
 
 
  1306 005e 09D3     		bcc	.L98
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  316:..//kernel/core/tos_timer.c ****     while (K_TRUE) {
  317:..//kernel/core/tos_timer.c ****         next_expires = timer_next_expires_get();
  318:..//kernel/core/tos_timer.c ****         if (next_expires == TOS_TIME_FOREVER) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 41
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 41
 
 
  319:..//kernel/core/tos_timer.c ****             tos_task_suspend(K_NULL);
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1354 0002 7047     		bx	lr
  1355              		.cfi_endproc
  1356              	.LFE122:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 42
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 42
 
 
  1358              		.text
@@ -2483,39 +2483,39 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 1
  1377              		.file 21 "..//kernel/core/include/tos_sched.h"
  1378              		.file 22 "..//kernel/core/include/tos_global.h"
  1379              		.file 23 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s 			page 43
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s 			page 43
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_timer.c
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:16     .text.timer_change:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:23     .text.timer_change:00000000 timer_change
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:162    .text.timer_takeoff:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:168    .text.timer_takeoff:00000000 timer_takeoff
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:289    .text.timer_takeoff:0000004c $d
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:294    .text.timer_place:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:300    .text.timer_place:00000000 timer_place
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:424    .text.timer_place:00000074 $d
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:431    .text.tos_timer_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:438    .text.tos_timer_create:00000000 tos_timer_create
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:635    .text.tos_timer_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:642    .text.tos_timer_destroy:00000000 tos_timer_destroy
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:792    .text.tos_timer_start:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:799    .text.tos_timer_start:00000000 tos_timer_start
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:940    .text.tos_timer_stop:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:947    .text.tos_timer_stop:00000000 tos_timer_stop
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1062   .text.tos_timer_delay_change:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1069   .text.tos_timer_delay_change:00000000 tos_timer_delay_change
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1100   .text.tos_timer_period_change:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1107   .text.tos_timer_period_change:00000000 tos_timer_period_change
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1138   .text.timer_next_expires_get:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1145   .text.timer_next_expires_get:00000000 timer_next_expires_get
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1207   .text.timer_next_expires_get:0000003c $d
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1213   .text.timer_update:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1220   .text.timer_update:00000000 timer_update
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1330   .text.timer_update:0000007c $d
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1337   .text.timer_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccOiqTqi.s:1344   .text.timer_init:00000000 timer_init
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:16     .text.timer_change:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:23     .text.timer_change:00000000 timer_change
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:162    .text.timer_takeoff:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:168    .text.timer_takeoff:00000000 timer_takeoff
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:289    .text.timer_takeoff:0000004c $d
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:294    .text.timer_place:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:300    .text.timer_place:00000000 timer_place
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:424    .text.timer_place:00000074 $d
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:431    .text.tos_timer_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:438    .text.tos_timer_create:00000000 tos_timer_create
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:635    .text.tos_timer_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:642    .text.tos_timer_destroy:00000000 tos_timer_destroy
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:792    .text.tos_timer_start:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:799    .text.tos_timer_start:00000000 tos_timer_start
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:940    .text.tos_timer_stop:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:947    .text.tos_timer_stop:00000000 tos_timer_stop
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1062   .text.tos_timer_delay_change:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1069   .text.tos_timer_delay_change:00000000 tos_timer_delay_change
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1100   .text.tos_timer_period_change:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1107   .text.tos_timer_period_change:00000000 tos_timer_period_change
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1138   .text.timer_next_expires_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1145   .text.timer_next_expires_get:00000000 timer_next_expires_get
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1207   .text.timer_next_expires_get:0000003c $d
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1213   .text.timer_update:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1220   .text.timer_update:00000000 timer_update
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1330   .text.timer_update:0000007c $d
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1337   .text.timer_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccx7ZJPt.s:1344   .text.timer_init:00000000 timer_init
 
 UNDEFINED SYMBOLS
 tos_cpu_cpsr_save

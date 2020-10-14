@@ -52,7 +52,8 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
-Src/system_stm32f1xx.c  
+Src/system_stm32f1xx.c  \
+Src/task.c
 
 ARCH_SRC = \
 ${wildcard $(TOP_DIR)/arch/arm/arm-v7m/cortex-m3/gcc/*.c} \

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   35              		.cfi_offset 3, -32
   36              		.cfi_offset 4, -28
   37              		.cfi_offset 5, -24
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 2
 
 
   38              		.cfi_offset 6, -20
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   71 001e 9B6C     		ldr	r3, [r3, #72]
   72              	.LVL5:
   30:..//kernel/core/tos_tick.c ****         curr_expires = prev_expires + curr_task->tick_expires;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 3
 
 
   73              		.loc 1 30 5 discriminator 2 view .LVU14
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  114 0050 711A     		subs	r1, r6, r1
  115              	.LVL10:
  116              		.loc 1 42 24 view .LVU29
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 4
 
 
  117 0052 67EB0C02 		sbc	r2, r7, ip
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   28:..//kernel/core/include/tos_list.h **** #define TOS_LIST_NODE(node) \
   29:..//kernel/core/include/tos_list.h ****     { &(node), &(node) }
   30:..//kernel/core/include/tos_list.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 5
 
 
   31:..//kernel/core/include/tos_list.h **** #define TOS_LIST_DEFINE(list) \
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   85:..//kernel/core/include/tos_list.h ****     prev->next = node;
   86:..//kernel/core/include/tos_list.h **** }
   87:..//kernel/core/include/tos_list.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 6
 
 
   88:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_del(k_list_t *prev, k_list_t *next)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  160              		.loc 2 85 16 is_stmt 0 view .LVU46
  161 0082 1160     		str	r1, [r2]
  162              	.LVL13:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 7
 
 
   85:..//kernel/core/include/tos_list.h **** }
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  211              	.LVL17:
   54:..//kernel/core/tos_tick.c ****     k_task_t *next;
  212              		.loc 1 54 5 view .LVU55
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 8
 
 
   55:..//kernel/core/tos_tick.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  235              	.LVL21:
   59:..//kernel/core/tos_tick.c ****     if (next && task->tick_list.next != &k_tick_list) { // not the only one
  236              		.loc 1 59 5 is_stmt 1 discriminator 1 view .LVU65
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 9
 
 
  237              		.loc 1 59 8 is_stmt 0 discriminator 1 view .LVU66
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  279 004c A26C     		ldr	r2, [r4, #72]
  280              	.LVL24:
  281              	.LBB32:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 10
 
 
  282              	.LBI32:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  327              	.LVL28:
  328              	.LFB112:
   71:..//kernel/core/tos_tick.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 11
 
 
   72:..//kernel/core/tos_tick.c **** __KNL__ void tick_list_add(k_task_t *task, k_tick_t timeout)
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   33:..//kernel/core/include/tos_task.h **** // a task's tick_list is in k_tick_list
   34:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_SLEEP                (k_task_state_t)0x0001
   35:..//kernel/core/include/tos_task.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 12
 
 
   36:..//kernel/core/include/tos_task.h **** // pend for something
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   90:..//kernel/core/include/tos_task.h **** #endif
   91:..//kernel/core/include/tos_task.h **** 
   92:..//kernel/core/include/tos_task.h ****     k_list_t            stat_list;              /**< list for hooking us to the k_stat_list */
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 13
 
 
   93:..//kernel/core/include/tos_task.h **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  147:..//kernel/core/include/tos_task.h ****  * @param[in]   stk_size    stack size of the task.
  148:..//kernel/core/include/tos_task.h ****  * @param[in]   timeslice   time slice of the task.
  149:..//kernel/core/include/tos_task.h ****  *
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 14
 
 
  150:..//kernel/core/include/tos_task.h ****  * @return  errcode
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  204:..//kernel/core/include/tos_task.h ****                                                     k_timeslice_t timeslice);
  205:..//kernel/core/include/tos_task.h **** 
  206:..//kernel/core/include/tos_task.h **** #endif
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 15
 
 
  207:..//kernel/core/include/tos_task.h **** 
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  261:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE               return successfully.
  262:..//kernel/core/include/tos_task.h ****  */
  263:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_resume(k_task_t *task);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 16
 
 
  264:..//kernel/core/include/tos_task.h **** 
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  318:..//kernel/core/include/tos_task.h ****  */
  319:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_stack_draught_depth(k_task_t *task, int *depth);
  320:..//kernel/core/include/tos_task.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 17
 
 
  321:..//kernel/core/include/tos_task.h **** #endif
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  375:..//kernel/core/include/tos_task.h **** }
  376:..//kernel/core/include/tos_task.h **** 
  377:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ void task_state_reset_suspended(k_task_t *task)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 18
 
 
  378:..//kernel/core/include/tos_task.h **** {
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
   77:..//kernel/core/tos_tick.c **** 
   78:..//kernel/core/tos_tick.c **** __KNL__ void tick_list_remove(k_task_t *task)
   79:..//kernel/core/tos_tick.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 19
 
 
  375              		.loc 1 79 1 is_stmt 1 view -0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  421              		.cfi_startproc
  422              		@ args = 0, pretend = 0, frame = 0
  423              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 20
 
 
  424              		.loc 1 85 1 is_stmt 0 view .LVU113
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  470 0020 9342     		cmp	r3, r2
  471 0022 1FD0     		beq	.L28
   93:..//kernel/core/tos_tick.c ****         TOS_CPU_INT_ENABLE();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 21
 
 
   94:..//kernel/core/tos_tick.c ****         return;
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  512 0052 15D1     		bne	.L25
  108:..//kernel/core/tos_tick.c ****             break;
  109:..//kernel/core/tos_tick.c ****         }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 22
 
 
  110:..//kernel/core/tos_tick.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  552              	.L25:
  113:..//kernel/core/tos_tick.c ****     }
  114:..//kernel/core/tos_tick.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 23
 
 
  115:..//kernel/core/tos_tick.c ****     TOS_CPU_INT_ENABLE();
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  599              		.loc 1 124 5 view .LVU165
  600 0002 FFF7FEFF 		bl	tos_cpu_cpsr_save
  601              	.LVL59:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 24
 
 
  125:..//kernel/core/tos_tick.c **** 
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  646 002a 4FF0FF34 		mov	r4, #-1
  647 002e 4FF0FF35 		mov	r5, #-1
  648 0032 F0E7     		b	.L32
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 25
 
 
  649              	.L37:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  147:..//kernel/core/tos_tick.c **** #endif
  148:..//kernel/core/tos_tick.c **** }
  690              		.loc 1 148 1 is_stmt 0 view .LVU187
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 26
 
 
  691 0014 08BD     		pop	{r3, pc}
@@ -1525,29 +1525,29 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 1
  713              		.file 20 "..//kernel/core/include/tos_sched.h"
  714              		.file 21 "..//kernel/core/include/tos_global.h"
  715              		.file 22 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_tick.c
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:16     .text.tick_task_place:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:23     .text.tick_task_place:00000000 tick_task_place
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:179    .text.tick_task_place:0000008c $d
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:184    .text.tick_task_takeoff:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:190    .text.tick_task_takeoff:00000000 tick_task_takeoff
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:314    .text.tick_task_takeoff:00000068 $d
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:319    .text.tick_list_add:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:326    .text.tick_list_add:00000000 tick_list_add
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:365    .text.tick_list_remove:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:372    .text.tick_list_remove:00000000 tick_list_remove
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:410    .text.tick_update:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:417    .text.tick_update:00000000 tick_update
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:568    .text.tick_update:00000088 $d
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:574    .text.tick_next_expires_get:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:581    .text.tick_next_expires_get:00000000 tick_next_expires_get
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:652    .text.tick_next_expires_get:00000034 $d
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:657    .text.tos_tick_handler:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccetOa0C.s:664    .text.tos_tick_handler:00000000 tos_tick_handler
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:16     .text.tick_task_place:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:23     .text.tick_task_place:00000000 tick_task_place
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:179    .text.tick_task_place:0000008c $d
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:184    .text.tick_task_takeoff:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:190    .text.tick_task_takeoff:00000000 tick_task_takeoff
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:314    .text.tick_task_takeoff:00000068 $d
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:319    .text.tick_list_add:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:326    .text.tick_list_add:00000000 tick_list_add
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:365    .text.tick_list_remove:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:372    .text.tick_list_remove:00000000 tick_list_remove
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:410    .text.tick_update:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:417    .text.tick_update:00000000 tick_update
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:568    .text.tick_update:00000088 $d
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:574    .text.tick_next_expires_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:581    .text.tick_next_expires_get:00000000 tick_next_expires_get
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:652    .text.tick_next_expires_get:00000034 $d
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:657    .text.tos_tick_handler:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc2SmoXj.s:664    .text.tos_tick_handler:00000000 tos_tick_handler
 
 UNDEFINED SYMBOLS
 tos_cpu_cpsr_save

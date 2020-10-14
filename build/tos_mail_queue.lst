@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   30:..//kernel/core/tos_mail_queue.c ****         return err;
   31:..//kernel/core/tos_mail_queue.c ****     }
   32:..//kernel/core/tos_mail_queue.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 2
 
 
   33:..//kernel/core/tos_mail_queue.c ****     pend_object_init(&mail_q->pend_obj);
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   87:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_INIT(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
   88:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_set_dynamic(&mail_q->knl_obj);
   89:..//kernel/core/tos_mail_queue.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 3
 
 
   90:..//kernel/core/tos_mail_queue.c ****     return K_ERR_NONE;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  144:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_DISABLE();
  145:..//kernel/core/tos_mail_queue.c **** 
  146:..//kernel/core/tos_mail_queue.c ****     if (tos_ring_q_dequeue(&mail_q->ring_q, mail_buf, mail_size) == K_ERR_NONE) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 4
 
 
  147:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  181:..//kernel/core/tos_mail_queue.c ****     task->mail_size = mail_size;
   47              		.loc 1 181 5 is_stmt 1 view .LVU4
   48              		.loc 1 181 21 is_stmt 0 view .LVU5
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 5
 
 
   49 000c 6567     		str	r5, [r4, #116]
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   94              		.loc 1 192 5 view .LVU16
   95              		.loc 1 192 5 view .LVU17
   96 000a 0029     		cmp	r1, #0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 6
 
 
   97 000c 46D0     		beq	.L12
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
   48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
   49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 7
 
 
   50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  104:..//kernel/core/include/tos_sys.h ****  *
  105:..//kernel/core/include/tos_sys.h ****  * @attention None
  106:..//kernel/core/include/tos_sys.h ****  *
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 8
 
 
  107:..//kernel/core/include/tos_sys.h ****  * @param   None
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  161:..//kernel/core/include/tos_sys.h ****  *
  162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
  163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 9
 
 
  164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  209:..//kernel/core/tos_mail_queue.c ****                             mail_buf, mail_size);
  210:..//kernel/core/tos_mail_queue.c ****     } else { // OPT_POST_ALL
  211:..//kernel/core/tos_mail_queue.c ****         TOS_LIST_FOR_EACH_ENTRY_SAFE(task, tmp, k_task_t, pend_list, &mail_q->pend_obj.list) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 10
 
 
  212:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
  156              		.loc 1 211 9 view .LVU39
  157 003e 503D     		subs	r5, r5, #80
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 11
 
 
  158              	.LVL17:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  199 006e FFF7FEFF 		bl	tos_cpu_cpsr_restore
  200              	.LVL25:
  201:..//kernel/core/tos_mail_queue.c ****         }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 12
 
 
  201              		.loc 1 201 13 is_stmt 1 view .LVU53
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  240              		.loc 1 219 12 view .LVU68
  241 0094 C2E7     		b	.L4
  242              	.LVL34:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 13
 
 
  243              	.L11:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   29:..//kernel/core/tos_mail_queue.c ****         return err;
  289              		.loc 1 29 5 is_stmt 1 view .LVU79
   29:..//kernel/core/tos_mail_queue.c ****         return err;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 14
 
 
  290              		.loc 1 29 8 is_stmt 0 view .LVU80
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  202:..//kernel/core/include/tos_sys.h **** }
  203:..//kernel/core/include/tos_sys.h **** 
  204:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_dynamic(knl_obj_t *knl_obj)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 15
 
 
  205:..//kernel/core/include/tos_sys.h **** {
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  366              		.cfi_offset 7, -8
  367              		.cfi_offset 14, -4
   43:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 16
 
 
  368              		.loc 1 43 5 is_stmt 1 view .LVU99
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  401 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
  402              	.LVL50:
  403              		.loc 2 221 19 view .LVU114
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 17
 
 
  404              	.LBE41:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  444              	.LBB42:
  445              	.LBI42:
  192:..//kernel/core/include/tos_sys.h **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 18
 
 
  446              		.loc 2 192 32 view .LVU129
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   57:..//kernel/core/tos_mail_queue.c ****         return err;
  485              		.loc 1 57 9 is_stmt 0 view .LVU145
  486 0052 FFF7FEFF 		bl	tos_cpu_cpsr_restore
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 19
 
 
  487              	.LVL64:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  533 0002 80B1     		cbz	r0, .L34
  534 0004 0446     		mov	r4, r0
   80:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 20
 
 
  535              		.loc 1 80 5 view .LVU156
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  575              		.loc 2 204 32 view .LVU170
  576              	.LBB49:
  206:..//kernel/core/include/tos_sys.h **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 21
 
 
  577              		.loc 2 206 5 view .LVU171
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
   98:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
  624              		.loc 1 98 5 view .LVU181
   98:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 22
 
 
  625              		.loc 1 98 5 view .LVU182
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  665              	.L44:
  105:..//kernel/core/tos_mail_queue.c **** 
  666              		.loc 1 105 5 is_stmt 1 view .LVU197
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 23
 
 
  105:..//kernel/core/tos_mail_queue.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  706              		.loc 2 194 19 view .LVU212
  707              	.LBE55:
  708              	.LBE54:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 24
 
 
  118:..//kernel/core/tos_mail_queue.c **** 
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  747 0058 40F24C45 		movw	r5, #1100
  748 005c 01E0     		b	.L38
  749              	.L41:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 25
 
 
   99:..//kernel/core/tos_mail_queue.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  184:..//kernel/core/include/tos_sys.h **** }
  795              		.loc 2 184 19 view .LVU240
  796              	.LBE59:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 26
 
 
  797              	.LBE58:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  844              		.cfi_startproc
  845              		@ args = 8, pretend = 0, frame = 0
  846              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 27
 
 
  135:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  886              		.loc 2 184 19 is_stmt 0 view .LVU264
  887 001a 6288     		ldrh	r2, [r4, #2]
  888              	.LVL112:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 28
 
 
  184:..//kernel/core/include/tos_sys.h **** }
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  930              	.LVL119:
  157:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
  931              		.loc 1 157 8 view .LVU278
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 29
 
 
  932 0050 48BB     		cbnz	r0, .L68
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  171:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail_size  = 0;
  971              		.loc 1 171 9 is_stmt 1 view .LVU294
  171:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail_size  = 0;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 30
 
 
  972              		.loc 1 171 20 is_stmt 0 view .LVU295
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  159:..//kernel/core/tos_mail_queue.c ****     }
  1011              		.loc 1 159 9 view .LVU311
  159:..//kernel/core/tos_mail_queue.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 31
 
 
  1012              		.loc 1 159 16 is_stmt 0 view .LVU312
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  225:..//kernel/core/tos_mail_queue.c **** }
  1061              		.loc 1 225 1 view .LVU320
  1062 0008 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 32
 
 
  1063              		.cfi_endproc
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  1115              		.file 19 "..//kernel/core/include/tos_ring_queue.h"
  1116              		.file 20 "..//kernel/core/include/tos_mail_queue.h"
  1117              		.file 21 "..//kernel/core/include/tos_timer.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 33
 
 
  1118              		.file 22 "..//kernel/core/include/tos_mmheap.h"
@@ -1926,32 +1926,32 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
  1120              		.file 24 "..//kernel/core/include/tos_global.h"
  1121              		.file 25 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
  1122              		.file 26 "<built-in>"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s 			page 34
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_mail_queue.c
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:16     .text.mail_task_recv:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:23     .text.mail_task_recv:00000000 mail_task_recv
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:62     .text.mail_q_do_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:68     .text.mail_q_do_post:00000000 mail_q_do_post
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:255    .text.tos_mail_q_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:262    .text.tos_mail_q_create:00000000 tos_mail_q_create
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:344    .text.tos_mail_q_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:351    .text.tos_mail_q_destroy:00000000 tos_mail_q_destroy
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:508    .text.tos_mail_q_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:515    .text.tos_mail_q_create_dyn:00000000 tos_mail_q_create_dyn
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:597    .text.tos_mail_q_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:604    .text.tos_mail_q_destroy_dyn:00000000 tos_mail_q_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:761    .text.tos_mail_q_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:768    .text.tos_mail_q_flush:00000000 tos_mail_q_flush
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:833    .text.tos_mail_q_pend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:840    .text.tos_mail_q_pend:00000000 tos_mail_q_pend
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1031   .text.tos_mail_q_pend:000000c4 $d
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1036   .text.tos_mail_q_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1043   .text.tos_mail_q_post:00000000 tos_mail_q_post
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1067   .text.tos_mail_q_post_all:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1074   .text.tos_mail_q_post_all:00000000 tos_mail_q_post_all
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:16     .text.mail_task_recv:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:23     .text.mail_task_recv:00000000 mail_task_recv
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:62     .text.mail_q_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:68     .text.mail_q_do_post:00000000 mail_q_do_post
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:255    .text.tos_mail_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:262    .text.tos_mail_q_create:00000000 tos_mail_q_create
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:344    .text.tos_mail_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:351    .text.tos_mail_q_destroy:00000000 tos_mail_q_destroy
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:508    .text.tos_mail_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:515    .text.tos_mail_q_create_dyn:00000000 tos_mail_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:597    .text.tos_mail_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:604    .text.tos_mail_q_destroy_dyn:00000000 tos_mail_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:761    .text.tos_mail_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:768    .text.tos_mail_q_flush:00000000 tos_mail_q_flush
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:833    .text.tos_mail_q_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:840    .text.tos_mail_q_pend:00000000 tos_mail_q_pend
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:1031   .text.tos_mail_q_pend:000000c4 $d
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:1036   .text.tos_mail_q_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:1043   .text.tos_mail_q_post:00000000 tos_mail_q_post
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:1067   .text.tos_mail_q_post_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc9y39dl.s:1074   .text.tos_mail_q_post_all:00000000 tos_mail_q_post_all
 
 UNDEFINED SYMBOLS
 memcpy

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 3, -8
   37              		.cfi_offset 14, -4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 2
 
 
   22:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if defined(TOS_CFG_CPU_LEAD_ZEROS_ASM_PRESENT) && (TOS_CFG_CPU_LEAD_ZEROS_ASM_PRESENT == 0u)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
   59:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ void tos_cpu_int_disable(void)
   60:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
   57              		.loc 1 60 1 is_stmt 1 view -0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 3
 
 
   58              		.cfi_startproc
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  109              	tos_cpu_cpsr_save:
  110              	.LFB113:
   68:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 4
 
 
   69:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ cpu_cpsr_t tos_cpu_cpsr_save(void)
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  159              		.align	1
  160              		.global	cpu_reset
  161              		.syntax unified
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 5
 
 
  162              		.thumb
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  201              	.LCFI6:
  202              		.cfi_def_cfa_offset 8
  203              		.cfi_offset 3, -8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 6
 
 
  204              		.cfi_offset 14, -4
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  252 0000 08B5     		push	{r3, lr}
  253              	.LCFI8:
  254              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 7
 
 
  255              		.cfi_offset 3, -8
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  304              		.section	.text.cpu_init,"ax",%progbits
  305              		.align	1
  306              		.global	cpu_init
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 8
 
 
  307              		.syntax unified
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  358              	.LVL17:
  359              	.LFB121:
  114:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 9
 
 
  115:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if TOS_CFG_TICKLESS_EN > 0u
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  169:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
  170:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_reload(k_cpu_cycle_per_tick);
  171:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 10
 
 
  172:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  205:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if TOS_CFG_TASK_STACK_DRAUGHT_DEPTH_DETACT_EN > 0u
  206:..//arch/arm/arm-v7m/common/tos_cpu.c ****     uint8_t *slot = (uint8_t *)&stk_base[0];
  381              		.loc 1 206 5 is_stmt 1 view .LVU50
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 11
 
 
  207:..//arch/arm/arm-v7m/common/tos_cpu.c ****     for (; slot < (uint8_t *)sp; ++slot) {
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  424 003a 44F8183C 		str	r3, [r4, #-24]
  219:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x01010101u;    /* R1       */
  425              		.loc 1 219 5 is_stmt 1 view .LVU69
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 12
 
 
  426              	.LVL28:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  458 006e 44F8343C 		str	r3, [r4, #-52]
  242:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x06060606u;    /* R6       */
  459              		.loc 1 242 5 is_stmt 1 view .LVU83
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 13
 
 
  460              	.LVL35:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  506              		.loc 1 252 1 is_stmt 0 view .LVU94
  507 0000 70B4     		push	{r4, r5, r6}
  508              	.LCFI13:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 14
 
 
  509              		.cfi_def_cfa_offset 12
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  263:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
  548              		.loc 1 263 9 is_stmt 1 view .LVU111
  263:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 15
 
 
  549              		.loc 1 263 13 is_stmt 0 view .LVU112
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  591              	.Letext0:
  592              		.file 2 "..//kernel/core/include/tos_kerr.h"
  593              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 16
 
 
  594              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
@@ -921,38 +921,38 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
  611              		.file 21 "..//kernel/core/include/tos_sched.h"
  612              		.file 22 "..//kernel/core/include/tos_global.h"
  613              		.file 23 "..//arch/arm/arm-v7m/cortex-m3/gcc/port.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_cpu.c
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:16     .text.tos_cpu_clz:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:24     .text.tos_cpu_clz:00000000 tos_cpu_clz
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:48     .text.tos_cpu_int_disable:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:55     .text.tos_cpu_int_disable:00000000 tos_cpu_int_disable
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:75     .text.tos_cpu_int_enable:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:82     .text.tos_cpu_int_enable:00000000 tos_cpu_int_enable
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:102    .text.tos_cpu_cpsr_save:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:109    .text.tos_cpu_cpsr_save:00000000 tos_cpu_cpsr_save
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:130    .text.tos_cpu_cpsr_restore:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:137    .text.tos_cpu_cpsr_restore:00000000 tos_cpu_cpsr_restore
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:159    .text.cpu_reset:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:166    .text.cpu_reset:00000000 cpu_reset
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:186    .text.cpu_sched_start:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:193    .text.cpu_sched_start:00000000 cpu_sched_start
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:212    .text.cpu_context_switch:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:219    .text.cpu_context_switch:00000000 cpu_context_switch
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:239    .text.cpu_irq_context_switch:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:246    .text.cpu_irq_context_switch:00000000 cpu_irq_context_switch
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:266    .text.cpu_systick_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:273    .text.cpu_systick_init:00000000 cpu_systick_init
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:305    .text.cpu_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:312    .text.cpu_init:00000000 cpu_init
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:343    .text.cpu_init:0000001c $d
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:350    .text.cpu_task_stk_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:357    .text.cpu_task_stk_init:00000000 cpu_task_stk_init
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:491    .text.cpu_task_stack_draught_depth:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:498    .text.cpu_task_stack_draught_depth:00000000 cpu_task_stack_draught_depth
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:16     .text.tos_cpu_clz:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:24     .text.tos_cpu_clz:00000000 tos_cpu_clz
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:48     .text.tos_cpu_int_disable:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:55     .text.tos_cpu_int_disable:00000000 tos_cpu_int_disable
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:75     .text.tos_cpu_int_enable:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:82     .text.tos_cpu_int_enable:00000000 tos_cpu_int_enable
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:102    .text.tos_cpu_cpsr_save:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:109    .text.tos_cpu_cpsr_save:00000000 tos_cpu_cpsr_save
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:130    .text.tos_cpu_cpsr_restore:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:137    .text.tos_cpu_cpsr_restore:00000000 tos_cpu_cpsr_restore
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:159    .text.cpu_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:166    .text.cpu_reset:00000000 cpu_reset
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:186    .text.cpu_sched_start:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:193    .text.cpu_sched_start:00000000 cpu_sched_start
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:212    .text.cpu_context_switch:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:219    .text.cpu_context_switch:00000000 cpu_context_switch
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:239    .text.cpu_irq_context_switch:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:246    .text.cpu_irq_context_switch:00000000 cpu_irq_context_switch
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:266    .text.cpu_systick_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:273    .text.cpu_systick_init:00000000 cpu_systick_init
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:305    .text.cpu_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:312    .text.cpu_init:00000000 cpu_init
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:343    .text.cpu_init:0000001c $d
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:350    .text.cpu_task_stk_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:357    .text.cpu_task_stk_init:00000000 cpu_task_stk_init
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:491    .text.cpu_task_stack_draught_depth:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccDGGcjB.s:498    .text.cpu_task_stack_draught_depth:00000000 cpu_task_stack_draught_depth
 
 UNDEFINED SYMBOLS
 port_clz

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
   30:..//kernel/core/tos_completion.c **** 
   31:..//kernel/core/tos_completion.c **** __API__ k_err_t tos_completion_destroy(k_completion_t *completion)
   32:..//kernel/core/tos_completion.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 2
 
 
   33:..//kernel/core/tos_completion.c ****     TOS_CPU_CPSR_ALLOC();
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
   87:..//kernel/core/tos_completion.c ****     return tos_completion_pend_timed(completion, TOS_TIME_FOREVER);
   88:..//kernel/core/tos_completion.c **** }
   89:..//kernel/core/tos_completion.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 3
 
 
   90:..//kernel/core/tos_completion.c **** __STATIC__ k_err_t completion_do_post(k_completion_t *completion, opt_post_t opt)
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
   25:..//kernel/core/include/tos_sys.h **** 
   26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
   27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 4
 
 
   28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
   82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
   83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
   84:..//kernel/core/include/tos_sys.h ****  */
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 5
 
 
   85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  139:..//kernel/core/include/tos_sys.h **** /**
  140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
  141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 6
 
 
  142:..//kernel/core/include/tos_sys.h ****  *
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
   61 000c 9042     		cmp	r0, r2
   62 000e 02D0     		beq	.L11
   63 0010 40F24D40 		movw	r0, #1101
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 7
 
 
   64              	.LVL3:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  106:..//kernel/core/tos_completion.c ****         TOS_CPU_INT_ENABLE();
   89              		.loc 1 106 5 view .LVU21
  106:..//kernel/core/tos_completion.c ****         TOS_CPU_INT_ENABLE();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 8
 
 
   90              		.loc 1 106 9 is_stmt 0 view .LVU22
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  107:..//kernel/core/tos_completion.c ****         return K_ERR_NONE;
  131              		.loc 1 107 9 is_stmt 1 view .LVU36
  107:..//kernel/core/tos_completion.c ****         return K_ERR_NONE;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 9
 
 
  132              		.loc 1 107 9 view .LVU37
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  181              		.cfi_offset 14, -4
  182 0004 0446     		mov	r4, r0
   24:..//kernel/core/tos_completion.c ****     pend_object_init(&completion->pend_obj);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 10
 
 
  183              		.loc 1 24 5 is_stmt 1 view .LVU46
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  223 001e 7047     		bx	lr
  224              		.cfi_endproc
  225              	.LFE110:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 11
 
 
  227              		.section	.text.tos_completion_destroy,"ax",%progbits
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  270 0008 41F6EE32 		movw	r2, #7150
  271 000c 9142     		cmp	r1, r2
  272 000e 02D0     		beq	.L29
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 12
 
 
  273 0010 40F24D40 		movw	r0, #1101
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
   46:..//kernel/core/tos_completion.c ****     knl_sched();
  313              		.loc 1 46 5 view .LVU85
  314 0030 3046     		mov	r0, r6
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 13
 
 
  315 0032 FFF7FEFF 		bl	tos_cpu_cpsr_restore
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  364              		.cfi_offset 14, -4
  365 0004 0446     		mov	r4, r0
  366 0006 1646     		mov	r6, r2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 14
 
 
  367 0008 1F46     		mov	r7, r3
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  405              		.loc 1 60 5 view .LVU108
  406 0024 FFF7FEFF 		bl	tos_cpu_cpsr_save
  407              	.LVL47:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 15
 
 
  408 0028 0546     		mov	r5, r0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  447              	.LVL53:
  448 0062 DDE7     		b	.L31
  449              	.LVL54:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 16
 
 
  450              	.L40:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  490              	.L43:
  491 0090 00000000 		.word	k_curr_task
  492              		.cfi_endproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 17
 
 
  493              	.LFE112:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  543 0000 08B5     		push	{r3, lr}
  544              	.LCFI8:
  545              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 18
 
 
  546              		.cfi_offset 3, -8
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  597              	tos_completion_reset:
  598              	.LVL66:
  599              	.LFB117:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 19
 
 
  128:..//kernel/core/tos_completion.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  139:..//kernel/core/tos_completion.c **** 
  140:..//kernel/core/tos_completion.c ****     return K_ERR_NONE;
  141:..//kernel/core/tos_completion.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 20
 
 
  638              		.loc 1 141 1 view .LVU165
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  142:..//kernel/core/tos_completion.c **** 
  143:..//kernel/core/tos_completion.c **** __API__ int tos_completion_is_done(k_completion_t *completion)
  144:..//kernel/core/tos_completion.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 21
 
 
  685              		.loc 1 144 1 is_stmt 1 view -0
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  723              		.loc 1 156 1 view .LVU189
  724 0014 2046     		mov	r0, r4
  725 0016 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 22
 
 
  726              	.LVL80:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  771              		.file 14 "..//kernel/core/include/tos_ktypes.h"
  772              		.file 15 "..//kernel/core/include/tos_task.h"
  773              		.file 16 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 23
 
 
  774              		.file 17 "..//kernel/core/include/tos_list.h"
@@ -1329,30 +1329,30 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 1
  779              		.file 22 "..//kernel/core/include/tos_sched.h"
  780              		.file 23 "..//kernel/core/include/tos_global.h"
  781              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_completion.c
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:16     .text.completion_do_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:23     .text.completion_do_post:00000000 completion_do_post
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:157    .text.tos_completion_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:164    .text.tos_completion_create:00000000 tos_completion_create
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:228    .text.tos_completion_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:235    .text.tos_completion_destroy:00000000 tos_completion_destroy
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:341    .text.tos_completion_pend_timed:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:348    .text.tos_completion_pend_timed:00000000 tos_completion_pend_timed
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:491    .text.tos_completion_pend_timed:00000090 $d
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:496    .text.tos_completion_pend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:503    .text.tos_completion_pend:00000000 tos_completion_pend
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:528    .text.tos_completion_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:535    .text.tos_completion_post:00000000 tos_completion_post
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:559    .text.tos_completion_post_all:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:566    .text.tos_completion_post_all:00000000 tos_completion_post_all
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:590    .text.tos_completion_reset:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:597    .text.tos_completion_reset:00000000 tos_completion_reset
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:675    .text.tos_completion_is_done:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccq9tyHl.s:682    .text.tos_completion_is_done:00000000 tos_completion_is_done
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:16     .text.completion_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:23     .text.completion_do_post:00000000 completion_do_post
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:157    .text.tos_completion_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:164    .text.tos_completion_create:00000000 tos_completion_create
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:228    .text.tos_completion_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:235    .text.tos_completion_destroy:00000000 tos_completion_destroy
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:341    .text.tos_completion_pend_timed:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:348    .text.tos_completion_pend_timed:00000000 tos_completion_pend_timed
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:491    .text.tos_completion_pend_timed:00000090 $d
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:496    .text.tos_completion_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:503    .text.tos_completion_pend:00000000 tos_completion_pend
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:528    .text.tos_completion_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:535    .text.tos_completion_post:00000000 tos_completion_post
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:559    .text.tos_completion_post_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:566    .text.tos_completion_post_all:00000000 tos_completion_post_all
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:590    .text.tos_completion_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:597    .text.tos_completion_reset:00000000 tos_completion_reset
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:675    .text.tos_completion_is_done:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccHI7GWY.s:682    .text.tos_completion_is_done:00000000 tos_completion_is_done
 
 UNDEFINED SYMBOLS
 tos_cpu_cpsr_save

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
   35              		.cfi_def_cfa_offset 24
   36              		.cfi_offset 3, -24
   37              		.cfi_offset 4, -20
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 2
 
 
   38              		.cfi_offset 5, -16
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
   73 0020 3046     		mov	r0, r6
   74              	.LVL4:
   75              	.L3:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 3
 
 
   76              		.loc 1 39 29 discriminator 1 view .LVU18
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  117              		.loc 1 50 21 is_stmt 0 view .LVU40
  118 003e FC60     		str	r4, [r7, #12]
   51:..//kernel/core/tos_mmblk.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 4
 
 
   52:..//kernel/core/tos_mmblk.c ****     TOS_OBJ_INIT(mbp, KNL_OBJ_TYPE_MMBLK_POOL);
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
   49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
   50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
   51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 5
 
 
   52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  106:..//kernel/core/include/tos_sys.h ****  *
  107:..//kernel/core/include/tos_sys.h ****  * @param   None
  108:..//kernel/core/include/tos_sys.h ****  *
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 6
 
 
  109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
  164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
  165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 7
 
 
  166:..//kernel/core/include/tos_sys.h ****  */
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  149              	.L7:
   29:..//kernel/core/tos_mmblk.c ****     }
  150              		.loc 1 29 16 view .LVU51
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 8
 
 
  151 0054 40F2BF20 		movw	r0, #703
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  197 000c 0AD1     		bne	.L14
   61:..//kernel/core/tos_mmblk.c **** 
   62:..//kernel/core/tos_mmblk.c ****     mbp->pool_start = K_NULL;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 9
 
 
  198              		.loc 1 62 5 is_stmt 1 view .LVU63
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  237              		.loc 1 59 5 view .LVU82
  238 0022 7047     		bx	lr
  239              	.LVL21:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 10
 
 
  240              	.L14:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  284              		.loc 2 184 5 view .LVU93
  184:..//kernel/core/include/tos_sys.h **** }
  285              		.loc 2 184 19 is_stmt 0 view .LVU94
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 11
 
 
  286 0006 4088     		ldrh	r0, [r0, #2]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
   87:..//kernel/core/tos_mmblk.c ****     --mbp->blk_free;
  318              		.loc 1 87 5 is_stmt 1 view .LVU107
   87:..//kernel/core/tos_mmblk.c ****     --mbp->blk_free;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 12
 
 
  319              		.loc 1 87 23 is_stmt 0 view .LVU108
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
   77:..//kernel/core/tos_mmblk.c ****     TOS_OBJ_VERIFY(mbp, KNL_OBJ_TYPE_MMBLK_POOL);
  359              		.loc 1 77 5 view .LVU123
  360 0044 40F24C40 		movw	r0, #1100
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 13
 
 
  361              	.LVL33:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  184:..//kernel/core/include/tos_sys.h **** }
  406              		.loc 2 184 19 is_stmt 0 view .LVU136
  407 0008 4288     		ldrh	r2, [r0, #2]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 14
 
 
  408              	.LVL36:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  107:..//kernel/core/tos_mmblk.c ****     mbp->free_list  = blk;
  440              		.loc 1 107 21 view .LVU149
  441 0028 2B60     		str	r3, [r5]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 15
 
 
  108:..//kernel/core/tos_mmblk.c ****     ++mbp->blk_free;
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  482              	.LVL45:
  483              	.L30:
  484              	.LCFI5:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 16
 
 
  485              		.cfi_def_cfa_offset 16
@@ -939,19 +939,19 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 1
  519              		.file 22 "..//kernel/core/include/tos_sched.h"
  520              		.file 23 "..//kernel/core/include/tos_global.h"
  521              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_mmblk.c
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:16     .text.tos_mmblk_pool_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:24     .text.tos_mmblk_pool_create:00000000 tos_mmblk_pool_create
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:161    .text.tos_mmblk_pool_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:168    .text.tos_mmblk_pool_destroy:00000000 tos_mmblk_pool_destroy
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:250    .text.tos_mmblk_alloc:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:257    .text.tos_mmblk_alloc:00000000 tos_mmblk_alloc
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:368    .text.tos_mmblk_free:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccA5mANO.s:375    .text.tos_mmblk_free:00000000 tos_mmblk_free
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:16     .text.tos_mmblk_pool_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:24     .text.tos_mmblk_pool_create:00000000 tos_mmblk_pool_create
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:161    .text.tos_mmblk_pool_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:168    .text.tos_mmblk_pool_destroy:00000000 tos_mmblk_pool_destroy
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:250    .text.tos_mmblk_alloc:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:257    .text.tos_mmblk_alloc:00000000 tos_mmblk_alloc
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:368    .text.tos_mmblk_free:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccPYvZSZ.s:375    .text.tos_mmblk_free:00000000 tos_mmblk_free
 
 UNDEFINED SYMBOLS
 knl_is_inirq

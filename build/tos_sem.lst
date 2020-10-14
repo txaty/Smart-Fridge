@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
   30:..//kernel/core/tos_sem.c **** 
   31:..//kernel/core/tos_sem.c ****     return K_ERR_NONE;
   32:..//kernel/core/tos_sem.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 2
 
 
   33:..//kernel/core/tos_sem.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
   47              		.loc 1 65 5 view .LVU6
   48              	.LVL1:
   49              	.LBB12:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 3
 
 
   50              	.LBI12:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
   53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
   54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
   55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 4
 
 
   56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
  111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
  112:..//kernel/core/include/tos_sys.h ****  */
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 5
 
 
  113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
  168:..//kernel/core/include/tos_sys.h **** 
  169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 6
 
 
  170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
   70              	.LVL4:
   71              	.L11:
   72              		.loc 1 86 1 view .LVU13
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 7
 
 
   73 0016 0D46     		mov	r5, r1
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  112              	.LVL11:
   85:..//kernel/core/tos_sem.c **** }
  113              		.loc 1 85 5 view .LVU29
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 8
 
 
   85:..//kernel/core/tos_sem.c **** }
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  155              	.LVL16:
  156              		.loc 1 86 1 view .LVU43
  157 0066 7047     		bx	lr
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 9
 
 
  158              		.cfi_endproc
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
  201              		.loc 2 187 32 view .LVU55
  202              	.LBB15:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 10
 
 
  188:..//kernel/core/include/tos_sys.h **** {
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  250              		.cfi_offset 14, -4
   36:..//kernel/core/tos_sem.c **** }
  251              		.loc 1 36 5 is_stmt 1 view .LVU66
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 11
 
 
   36:..//kernel/core/tos_sem.c **** }
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  184:..//kernel/core/include/tos_sys.h **** }
  297              		.loc 2 184 19 is_stmt 0 view .LVU78
  298 0006 4188     		ldrh	r1, [r0, #2]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 12
 
 
  299              	.LVL27:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  338              		.loc 2 194 5 view .LVU90
  339              		.loc 2 194 19 is_stmt 0 view .LVU91
  340 002c 0025     		movs	r5, #0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 13
 
 
  341 002e 6580     		strh	r5, [r4, #2]	@ movhi
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  387              		@ args = 0, pretend = 0, frame = 0
  388              		@ frame_needed = 0, uses_anonymous_args = 0
  389              		.loc 1 89 1 is_stmt 0 view .LVU101
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 14
 
 
  390 0000 08B5     		push	{r3, lr}
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  440              		.thumb
  441              		.thumb_func
  442              		.fpu softvfp
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 15
 
 
  444              	tos_sem_pend:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  486              		.loc 2 184 19 view .LVU123
  487              	.LBE21:
  488              	.LBE20:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 16
 
 
  489              		.loc 1 104 5 view .LVU124
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  511              		.loc 1 114 5 is_stmt 1 view .LVU131
  114:..//kernel/core/tos_sem.c ****         TOS_CPU_INT_ENABLE();
  512              		.loc 1 114 8 is_stmt 0 view .LVU132
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 17
 
 
  513 002e 56EA0703 		orrs	r3, r6, r7
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  111:..//kernel/core/tos_sem.c ****     }
  554              		.loc 1 111 9 view .LVU146
  111:..//kernel/core/tos_sem.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 18
 
 
  555              		.loc 1 111 16 is_stmt 0 view .LVU147
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  600              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  601              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
  602              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 19
 
 
  603              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
@@ -1096,26 +1096,26 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 1
  615              		.file 22 "..//kernel/core/include/tos_sched.h"
  616              		.file 23 "..//kernel/core/include/tos_global.h"
  617              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_sem.c
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:16     .text.sem_do_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:23     .text.sem_do_post:00000000 sem_do_post
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:162    .text.tos_sem_create_max:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:169    .text.tos_sem_create_max:00000000 tos_sem_create_max
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:231    .text.tos_sem_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:238    .text.tos_sem_create:00000000 tos_sem_create
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:262    .text.tos_sem_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:269    .text.tos_sem_destroy:00000000 tos_sem_destroy
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:375    .text.tos_sem_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:382    .text.tos_sem_post:00000000 tos_sem_post
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:406    .text.tos_sem_post_all:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:413    .text.tos_sem_post_all:00000000 tos_sem_post_all
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:437    .text.tos_sem_pend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:444    .text.tos_sem_pend:00000000 tos_sem_pend
-C:\Users\tianx\AppData\Local\Temp\ccsAQjXj.s:590    .text.tos_sem_pend:00000094 $d
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:16     .text.sem_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:23     .text.sem_do_post:00000000 sem_do_post
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:162    .text.tos_sem_create_max:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:169    .text.tos_sem_create_max:00000000 tos_sem_create_max
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:231    .text.tos_sem_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:238    .text.tos_sem_create:00000000 tos_sem_create
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:262    .text.tos_sem_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:269    .text.tos_sem_destroy:00000000 tos_sem_destroy
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:375    .text.tos_sem_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:382    .text.tos_sem_post:00000000 tos_sem_post
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:406    .text.tos_sem_post_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:413    .text.tos_sem_post_all:00000000 tos_sem_post_all
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:437    .text.tos_sem_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:444    .text.tos_sem_pend:00000000 tos_sem_pend
+C:\Users\tianx\AppData\Local\Temp\ccJaP6Fs.s:590    .text.tos_sem_pend:00000094 $d
 
 UNDEFINED SYMBOLS
 tos_cpu_cpsr_save

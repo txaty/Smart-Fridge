@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 1
   30:Src/gpio.c    **** 
   31:Src/gpio.c    **** /* USER CODE END 1 */
   32:Src/gpio.c    **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s 			page 2
 
 
   33:Src/gpio.c    **** /** Configure pins as 
@@ -84,69 +84,69 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 1
   38              	.LCFI1:
   39              		.cfi_def_cfa_offset 48
   42:Src/gpio.c    **** 
-  43:Src/gpio.c    ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  40              		.loc 1 43 3 view .LVU1
-  41              		.loc 1 43 20 is_stmt 0 view .LVU2
+  43:Src/gpio.c    ****     GPIO_InitTypeDef GPIO_InitStruct = {0};
+  40              		.loc 1 43 5 view .LVU1
+  41              		.loc 1 43 22 is_stmt 0 view .LVU2
   42 0004 0024     		movs	r4, #0
   43 0006 0494     		str	r4, [sp, #16]
   44 0008 0594     		str	r4, [sp, #20]
   45 000a 0694     		str	r4, [sp, #24]
   46 000c 0794     		str	r4, [sp, #28]
   44:Src/gpio.c    **** 
-  45:Src/gpio.c    ****   /* GPIO Ports Clock Enable */
-  46:Src/gpio.c    ****   __HAL_RCC_GPIOC_CLK_ENABLE();
-  47              		.loc 1 46 3 is_stmt 1 view .LVU3
+  45:Src/gpio.c    ****     /* GPIO Ports Clock Enable */
+  46:Src/gpio.c    ****     __HAL_RCC_GPIOC_CLK_ENABLE();
+  47              		.loc 1 46 5 is_stmt 1 view .LVU3
   48              	.LBB2:
-  49              		.loc 1 46 3 view .LVU4
-  50              		.loc 1 46 3 view .LVU5
+  49              		.loc 1 46 5 view .LVU4
+  50              		.loc 1 46 5 view .LVU5
   51 000e 174B     		ldr	r3, .L3
   52 0010 9A69     		ldr	r2, [r3, #24]
   53 0012 42F01002 		orr	r2, r2, #16
   54 0016 9A61     		str	r2, [r3, #24]
-  55              		.loc 1 46 3 view .LVU6
+  55              		.loc 1 46 5 view .LVU6
   56 0018 9A69     		ldr	r2, [r3, #24]
   57 001a 02F01002 		and	r2, r2, #16
   58 001e 0192     		str	r2, [sp, #4]
-  59              		.loc 1 46 3 view .LVU7
+  59              		.loc 1 46 5 view .LVU7
   60 0020 019A     		ldr	r2, [sp, #4]
   61              	.LBE2:
-  47:Src/gpio.c    ****   __HAL_RCC_GPIOB_CLK_ENABLE();
-  62              		.loc 1 47 3 view .LVU8
+  47:Src/gpio.c    ****     __HAL_RCC_GPIOB_CLK_ENABLE();
+  62              		.loc 1 47 5 view .LVU8
   63              	.LBB3:
-  64              		.loc 1 47 3 view .LVU9
-  65              		.loc 1 47 3 view .LVU10
+  64              		.loc 1 47 5 view .LVU9
+  65              		.loc 1 47 5 view .LVU10
   66 0022 9A69     		ldr	r2, [r3, #24]
   67 0024 42F00802 		orr	r2, r2, #8
   68 0028 9A61     		str	r2, [r3, #24]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s 			page 3
 
 
-  69              		.loc 1 47 3 view .LVU11
+  69              		.loc 1 47 5 view .LVU11
   70 002a 9A69     		ldr	r2, [r3, #24]
   71 002c 02F00802 		and	r2, r2, #8
   72 0030 0292     		str	r2, [sp, #8]
-  73              		.loc 1 47 3 view .LVU12
+  73              		.loc 1 47 5 view .LVU12
   74 0032 029A     		ldr	r2, [sp, #8]
   75              	.LBE3:
-  48:Src/gpio.c    ****   __HAL_RCC_GPIOA_CLK_ENABLE();
-  76              		.loc 1 48 3 view .LVU13
+  48:Src/gpio.c    ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+  76              		.loc 1 48 5 view .LVU13
   77              	.LBB4:
-  78              		.loc 1 48 3 view .LVU14
-  79              		.loc 1 48 3 view .LVU15
+  78              		.loc 1 48 5 view .LVU14
+  79              		.loc 1 48 5 view .LVU15
   80 0034 9A69     		ldr	r2, [r3, #24]
   81 0036 42F00402 		orr	r2, r2, #4
   82 003a 9A61     		str	r2, [r3, #24]
-  83              		.loc 1 48 3 view .LVU16
+  83              		.loc 1 48 5 view .LVU16
   84 003c 9B69     		ldr	r3, [r3, #24]
   85 003e 03F00403 		and	r3, r3, #4
   86 0042 0393     		str	r3, [sp, #12]
-  87              		.loc 1 48 3 view .LVU17
+  87              		.loc 1 48 5 view .LVU17
   88 0044 039B     		ldr	r3, [sp, #12]
   89              	.LBE4:
   49:Src/gpio.c    **** 
-  50:Src/gpio.c    ****   /*Configure GPIO pin Output Level */
-  51:Src/gpio.c    ****   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5, GPIO_PIN_SET);
-  90              		.loc 1 51 3 view .LVU18
+  50:Src/gpio.c    ****     /*Configure GPIO pin Output Level */
+  51:Src/gpio.c    ****     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_5, GPIO_PIN_SET);
+  90              		.loc 1 51 5 view .LVU18
   91 0046 0A4D     		ldr	r5, .L3+4
   92 0048 0122     		movs	r2, #1
   93 004a 2321     		movs	r1, #35
@@ -154,38 +154,37 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 1
   95 004e FFF7FEFF 		bl	HAL_GPIO_WritePin
   96              	.LVL0:
   52:Src/gpio.c    **** 
-  53:Src/gpio.c    ****   /*Configure GPIO pins : PB0 PB1 PB5 */
-  54:Src/gpio.c    ****   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5;
-  97              		.loc 1 54 3 view .LVU19
-  98              		.loc 1 54 23 is_stmt 0 view .LVU20
+  53:Src/gpio.c    ****     /*Configure GPIO pins : PB0 PB1 PB5 */
+  54:Src/gpio.c    ****     GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_5;
+  97              		.loc 1 54 5 view .LVU19
+  98              		.loc 1 54 25 is_stmt 0 view .LVU20
   99 0052 2323     		movs	r3, #35
  100 0054 0493     		str	r3, [sp, #16]
-  55:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 101              		.loc 1 55 3 is_stmt 1 view .LVU21
- 102              		.loc 1 55 24 is_stmt 0 view .LVU22
+  55:Src/gpio.c    ****     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 101              		.loc 1 55 5 is_stmt 1 view .LVU21
+ 102              		.loc 1 55 26 is_stmt 0 view .LVU22
  103 0056 0123     		movs	r3, #1
  104 0058 0593     		str	r3, [sp, #20]
-  56:Src/gpio.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 105              		.loc 1 56 3 is_stmt 1 view .LVU23
- 106              		.loc 1 56 24 is_stmt 0 view .LVU24
+  56:Src/gpio.c    ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 105              		.loc 1 56 5 is_stmt 1 view .LVU23
+ 106              		.loc 1 56 26 is_stmt 0 view .LVU24
  107 005a 0694     		str	r4, [sp, #24]
-  57:Src/gpio.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
- 108              		.loc 1 57 3 is_stmt 1 view .LVU25
- 109              		.loc 1 57 25 is_stmt 0 view .LVU26
+  57:Src/gpio.c    ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 108              		.loc 1 57 5 is_stmt 1 view .LVU25
+ 109              		.loc 1 57 27 is_stmt 0 view .LVU26
  110 005c 0323     		movs	r3, #3
  111 005e 0793     		str	r3, [sp, #28]
-  58:Src/gpio.c    ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 112              		.loc 1 58 3 is_stmt 1 view .LVU27
+  58:Src/gpio.c    ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 112              		.loc 1 58 5 is_stmt 1 view .LVU27
  113 0060 04A9     		add	r1, sp, #16
  114 0062 2846     		mov	r0, r5
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s 			page 4
 
 
  115 0064 FFF7FEFF 		bl	HAL_GPIO_Init
  116              	.LVL1:
-  59:Src/gpio.c    **** 
-  60:Src/gpio.c    **** }
- 117              		.loc 1 60 1 is_stmt 0 view .LVU28
+  59:Src/gpio.c    **** }
+ 117              		.loc 1 59 1 is_stmt 0 view .LVU28
  118 0068 09B0     		add	sp, sp, #36
  119              	.LCFI2:
  120              		.cfi_def_cfa_offset 12
@@ -211,14 +210,14 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 1
  141              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
  142              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  143              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccobatFY.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 gpio.c
-C:\Users\tianx\AppData\Local\Temp\ccobatFY.s:16     .text.MX_GPIO_Init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccobatFY.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-C:\Users\tianx\AppData\Local\Temp\ccobatFY.s:126    .text.MX_GPIO_Init:0000006c $d
+C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s:16     .text.MX_GPIO_Init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\tianx\AppData\Local\Temp\ccQOTrpZ.s:126    .text.MX_GPIO_Init:0000006c $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

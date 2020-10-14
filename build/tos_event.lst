@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   30:..//kernel/core/tos_event.c ****     return K_ERR_NONE;
   31:..//kernel/core/tos_event.c **** }
   32:..//kernel/core/tos_event.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 2
 
 
   33:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_destroy(k_event_t *event)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   44              	.LVL2:
   45              		.loc 1 69 12 view .LVU7
   46 000e 7047     		bx	lr
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 3
 
 
   47              	.LVL3:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   85 002a 0020     		movs	r0, #0
   86              	.LVL8:
   69:..//kernel/core/tos_event.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 4
 
 
   87              		.loc 1 69 12 view .LVU25
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  112:..//kernel/core/tos_event.c **** 
  113:..//kernel/core/tos_event.c ****     pend_task_block(k_curr_task, &event->pend_obj, timeout);
  114:..//kernel/core/tos_event.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 5
 
 
  115:..//kernel/core/tos_event.c ****     TOS_CPU_INT_ENABLE();
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
   11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
   12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 6
 
 
   13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
   68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
   69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 7
 
 
   70:..//kernel/core/include/tos_sys.h **** #endif
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  124:..//kernel/core/include/tos_sys.h ****  */
  125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
  126:..//kernel/core/include/tos_sys.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 8
 
 
  127:..//kernel/core/include/tos_sys.h **** /**
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  181:..//kernel/core/include/tos_sys.h **** 
  182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
  129              		.loc 2 182 31 view .LVU34
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 9
 
 
  130              	.LBB13:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  172              	.L11:
  136:..//kernel/core/tos_event.c ****     }
  173              		.loc 1 136 9 is_stmt 1 view .LVU51
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 10
 
 
  136:..//kernel/core/tos_event.c ****     }
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  149:..//kernel/core/tos_event.c ****             }
  150:..//kernel/core/tos_event.c ****         }
  151:..//kernel/core/tos_event.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 11
 
 
  152:..//kernel/core/tos_event.c **** 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  267              		.align	1
  268              		.global	tos_event_create
  269              		.syntax unified
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 12
 
 
  270              		.thumb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  311              	.LBE15:
  312              	.LBE14:
   30:..//kernel/core/tos_event.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 13
 
 
  313              		.loc 1 30 5 is_stmt 1 view .LVU88
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  360              		.cfi_offset 14, -4
  361 0004 0446     		mov	r4, r0
   38:..//kernel/core/tos_event.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 14
 
 
  362              		.loc 1 38 5 is_stmt 1 view .LVU98
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   44:..//kernel/core/tos_event.c **** 
  403              		.loc 1 44 17 is_stmt 0 view .LVU112
  404 0026 0025     		movs	r5, #0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 15
 
 
  405 0028 E560     		str	r5, [r4, #12]
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  446              	.LVL50:
   54:..//kernel/core/tos_event.c **** 
  447              		.loc 1 54 1 view .LVU125
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 16
 
 
  448 0044 7047     		bx	lr
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   78:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
  496              		.loc 1 78 5 view .LVU134
   78:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 17
 
 
  497              		.loc 1 78 5 view .LVU135
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  536 003c 3946     		mov	r1, r7
  537 003e E068     		ldr	r0, [r4, #12]
  538              	.LVL58:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 18
 
 
   91:..//kernel/core/tos_event.c ****         if (opt_pend & TOS_OPT_EVENT_PEND_CLR) { // destroy the bridge after get across the river
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  576              	.LVL62:
  116:..//kernel/core/tos_event.c **** 
  577              		.loc 1 116 5 view .LVU168
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 19
 
 
  578 0076 FFF7FEFF 		bl	knl_sched
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  615 00a4 0020     		movs	r0, #0
  616 00a6 16E0     		b	.L40
  617              	.L53:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 20
 
 
  100:..//kernel/core/tos_event.c ****         return K_ERR_PEND_NOWAIT;
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
   82:..//kernel/core/tos_event.c ****     }
  659              		.loc 1 82 16 view .LVU199
  660 00da C820     		movs	r0, #200
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 21
 
 
  661 00dc FBE7     		b	.L40
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  713              	.LVL73:
  714              	.LFB116:
  163:..//kernel/core/tos_event.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 22
 
 
  164:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_post_keep(k_event_t *event, k_event_flag_t flag)
@@ -1308,26 +1308,26 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
  756              		.file 22 "..//kernel/core/include/tos_sched.h"
  757              		.file 23 "..//kernel/core/include/tos_global.h"
  758              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc21By56.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_event.c
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:16     .text.event_is_match:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:23     .text.event_is_match:00000000 event_is_match
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:93     .text.event_do_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:99     .text.event_do_post:00000000 event_do_post
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:267    .text.tos_event_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:274    .text.tos_event_create:00000000 tos_event_create
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:333    .text.tos_event_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:340    .text.tos_event_destroy:00000000 tos_event_destroy
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:453    .text.tos_event_pend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:460    .text.tos_event_pend:00000000 tos_event_pend
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:669    .text.tos_event_pend:000000e4 $d
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:674    .text.tos_event_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:681    .text.tos_event_post:00000000 tos_event_post
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:705    .text.tos_event_post_keep:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:712    .text.tos_event_post_keep:00000000 tos_event_post_keep
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:16     .text.event_is_match:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:23     .text.event_is_match:00000000 event_is_match
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:93     .text.event_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:99     .text.event_do_post:00000000 event_do_post
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:267    .text.tos_event_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:274    .text.tos_event_create:00000000 tos_event_create
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:333    .text.tos_event_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:340    .text.tos_event_destroy:00000000 tos_event_destroy
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:453    .text.tos_event_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:460    .text.tos_event_pend:00000000 tos_event_pend
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:669    .text.tos_event_pend:000000e4 $d
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:674    .text.tos_event_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:681    .text.tos_event_post:00000000 tos_event_post
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:705    .text.tos_event_post_keep:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc21By56.s:712    .text.tos_event_post_keep:00000000 tos_event_post_keep
 
 UNDEFINED SYMBOLS
 tos_cpu_cpsr_save
