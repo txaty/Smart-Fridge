@@ -1,0 +1,228 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gpio.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.MX_GPIO_Init,"ax",%progbits
+  16              		.align	1
+  17              		.global	MX_GPIO_Init
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	MX_GPIO_Init:
+  25              	.LFB66:
+  26              		.file 1 "Src/gpio.c"
+   1:Src/gpio.c    **** /**
+   2:Src/gpio.c    ****   ******************************************************************************
+   3:Src/gpio.c    ****   * File Name          : gpio.c
+   4:Src/gpio.c    ****   * Description        : This file provides code for the configuration
+   5:Src/gpio.c    ****   *                      of all used GPIO pins.
+   6:Src/gpio.c    ****   ******************************************************************************
+   7:Src/gpio.c    ****   * @attention
+   8:Src/gpio.c    ****   *
+   9:Src/gpio.c    ****   * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  10:Src/gpio.c    ****   * All rights reserved.</center></h2>
+  11:Src/gpio.c    ****   *
+  12:Src/gpio.c    ****   * This software component is licensed by ST under BSD 3-Clause license,
+  13:Src/gpio.c    ****   * the "License"; You may not use this file except in compliance with the
+  14:Src/gpio.c    ****   * License. You may obtain a copy of the License at:
+  15:Src/gpio.c    ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:Src/gpio.c    ****   *
+  17:Src/gpio.c    ****   ******************************************************************************
+  18:Src/gpio.c    ****   */
+  19:Src/gpio.c    **** 
+  20:Src/gpio.c    **** /* Includes ------------------------------------------------------------------*/
+  21:Src/gpio.c    **** #include "gpio.h"
+  22:Src/gpio.c    **** /* USER CODE BEGIN 0 */
+  23:Src/gpio.c    **** 
+  24:Src/gpio.c    **** /* USER CODE END 0 */
+  25:Src/gpio.c    **** 
+  26:Src/gpio.c    **** /*----------------------------------------------------------------------------*/
+  27:Src/gpio.c    **** /* Configure GPIO                                                             */
+  28:Src/gpio.c    **** /*----------------------------------------------------------------------------*/
+  29:Src/gpio.c    **** /* USER CODE BEGIN 1 */
+  30:Src/gpio.c    **** 
+  31:Src/gpio.c    **** /* USER CODE END 1 */
+  32:Src/gpio.c    **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s 			page 2
+
+
+  33:Src/gpio.c    **** /** Configure pins as 
+  34:Src/gpio.c    ****         * Analog 
+  35:Src/gpio.c    ****         * Input 
+  36:Src/gpio.c    ****         * Output
+  37:Src/gpio.c    ****         * EVENT_OUT
+  38:Src/gpio.c    ****         * EXTI
+  39:Src/gpio.c    **** */
+  40:Src/gpio.c    **** void MX_GPIO_Init(void)
+  41:Src/gpio.c    **** {
+  27              		.loc 1 41 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 32
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 30B5     		push	{r4, r5, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 12
+  34              		.cfi_offset 4, -12
+  35              		.cfi_offset 5, -8
+  36              		.cfi_offset 14, -4
+  37 0002 89B0     		sub	sp, sp, #36
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 48
+  42:Src/gpio.c    **** 
+  43:Src/gpio.c    ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  40              		.loc 1 43 3 view .LVU1
+  41              		.loc 1 43 20 is_stmt 0 view .LVU2
+  42 0004 0024     		movs	r4, #0
+  43 0006 0494     		str	r4, [sp, #16]
+  44 0008 0594     		str	r4, [sp, #20]
+  45 000a 0694     		str	r4, [sp, #24]
+  46 000c 0794     		str	r4, [sp, #28]
+  44:Src/gpio.c    **** 
+  45:Src/gpio.c    ****   /* GPIO Ports Clock Enable */
+  46:Src/gpio.c    ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+  47              		.loc 1 46 3 is_stmt 1 view .LVU3
+  48              	.LBB2:
+  49              		.loc 1 46 3 view .LVU4
+  50              		.loc 1 46 3 view .LVU5
+  51 000e 174B     		ldr	r3, .L3
+  52 0010 9A69     		ldr	r2, [r3, #24]
+  53 0012 42F01002 		orr	r2, r2, #16
+  54 0016 9A61     		str	r2, [r3, #24]
+  55              		.loc 1 46 3 view .LVU6
+  56 0018 9A69     		ldr	r2, [r3, #24]
+  57 001a 02F01002 		and	r2, r2, #16
+  58 001e 0192     		str	r2, [sp, #4]
+  59              		.loc 1 46 3 view .LVU7
+  60 0020 019A     		ldr	r2, [sp, #4]
+  61              	.LBE2:
+  62              		.loc 1 46 3 view .LVU8
+  47:Src/gpio.c    ****   __HAL_RCC_GPIOB_CLK_ENABLE();
+  63              		.loc 1 47 3 view .LVU9
+  64              	.LBB3:
+  65              		.loc 1 47 3 view .LVU10
+  66              		.loc 1 47 3 view .LVU11
+  67 0022 9A69     		ldr	r2, [r3, #24]
+  68 0024 42F00802 		orr	r2, r2, #8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s 			page 3
+
+
+  69 0028 9A61     		str	r2, [r3, #24]
+  70              		.loc 1 47 3 view .LVU12
+  71 002a 9A69     		ldr	r2, [r3, #24]
+  72 002c 02F00802 		and	r2, r2, #8
+  73 0030 0292     		str	r2, [sp, #8]
+  74              		.loc 1 47 3 view .LVU13
+  75 0032 029A     		ldr	r2, [sp, #8]
+  76              	.LBE3:
+  77              		.loc 1 47 3 view .LVU14
+  48:Src/gpio.c    ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+  78              		.loc 1 48 3 view .LVU15
+  79              	.LBB4:
+  80              		.loc 1 48 3 view .LVU16
+  81              		.loc 1 48 3 view .LVU17
+  82 0034 9A69     		ldr	r2, [r3, #24]
+  83 0036 42F00402 		orr	r2, r2, #4
+  84 003a 9A61     		str	r2, [r3, #24]
+  85              		.loc 1 48 3 view .LVU18
+  86 003c 9B69     		ldr	r3, [r3, #24]
+  87 003e 03F00403 		and	r3, r3, #4
+  88 0042 0393     		str	r3, [sp, #12]
+  89              		.loc 1 48 3 view .LVU19
+  90 0044 039B     		ldr	r3, [sp, #12]
+  91              	.LBE4:
+  92              		.loc 1 48 3 view .LVU20
+  49:Src/gpio.c    **** 
+  50:Src/gpio.c    ****   /*Configure GPIO pin Output Level */
+  51:Src/gpio.c    ****   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5, GPIO_PIN_SET);
+  93              		.loc 1 51 3 view .LVU21
+  94 0046 0A4D     		ldr	r5, .L3+4
+  95 0048 0122     		movs	r2, #1
+  96 004a 2321     		movs	r1, #35
+  97 004c 2846     		mov	r0, r5
+  98 004e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  99              	.LVL0:
+  52:Src/gpio.c    **** 
+  53:Src/gpio.c    ****   /*Configure GPIO pins : PB0 PB1 PB5 */
+  54:Src/gpio.c    ****   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5;
+ 100              		.loc 1 54 3 view .LVU22
+ 101              		.loc 1 54 23 is_stmt 0 view .LVU23
+ 102 0052 2323     		movs	r3, #35
+ 103 0054 0493     		str	r3, [sp, #16]
+  55:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 104              		.loc 1 55 3 is_stmt 1 view .LVU24
+ 105              		.loc 1 55 24 is_stmt 0 view .LVU25
+ 106 0056 0123     		movs	r3, #1
+ 107 0058 0593     		str	r3, [sp, #20]
+  56:Src/gpio.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 108              		.loc 1 56 3 is_stmt 1 view .LVU26
+ 109              		.loc 1 56 24 is_stmt 0 view .LVU27
+ 110 005a 0694     		str	r4, [sp, #24]
+  57:Src/gpio.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 111              		.loc 1 57 3 is_stmt 1 view .LVU28
+ 112              		.loc 1 57 25 is_stmt 0 view .LVU29
+ 113 005c 0323     		movs	r3, #3
+ 114 005e 0793     		str	r3, [sp, #28]
+  58:Src/gpio.c    ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s 			page 4
+
+
+ 115              		.loc 1 58 3 is_stmt 1 view .LVU30
+ 116 0060 04A9     		add	r1, sp, #16
+ 117 0062 2846     		mov	r0, r5
+ 118 0064 FFF7FEFF 		bl	HAL_GPIO_Init
+ 119              	.LVL1:
+  59:Src/gpio.c    **** 
+  60:Src/gpio.c    **** }
+ 120              		.loc 1 60 1 is_stmt 0 view .LVU31
+ 121 0068 09B0     		add	sp, sp, #36
+ 122              	.LCFI2:
+ 123              		.cfi_def_cfa_offset 12
+ 124              		@ sp needed
+ 125 006a 30BD     		pop	{r4, r5, pc}
+ 126              	.L4:
+ 127              		.align	2
+ 128              	.L3:
+ 129 006c 00100240 		.word	1073876992
+ 130 0070 000C0140 		.word	1073810432
+ 131              		.cfi_endproc
+ 132              	.LFE66:
+ 134              		.text
+ 135              	.Letext0:
+ 136              		.file 2 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 137              		.file 3 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 138              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 139              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 140              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 141              		.file 7 "d:\\arm_gcc\\9 2020-q2-update\\lib\\gcc\\arm-none-eabi\\9.3.1\\include\\stddef.h"
+ 142              		.file 8 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 143              		.file 9 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 144              		.file 10 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 145              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 146              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 gpio.c
+C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s:16     .text.MX_GPIO_Init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\tianx\AppData\Local\Temp\ccBoIdS0.s:129    .text.MX_GPIO_Init:0000006c $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_Init
