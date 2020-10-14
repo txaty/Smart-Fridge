@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 1
   30:Src/stm32f1xx_hal_msp.c **** 
   31:Src/stm32f1xx_hal_msp.c **** /* USER CODE END TD */
   32:Src/stm32f1xx_hal_msp.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s 			page 2
 
 
   33:Src/stm32f1xx_hal_msp.c **** /* Private define ------------------------------------------------------------*/
@@ -118,92 +118,89 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 1
   43              		.loc 1 70 3 view .LVU4
   44 000c 9A69     		ldr	r2, [r3, #24]
   45 000e 02F00102 		and	r2, r2, #1
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s 			page 3
 
 
   46 0012 0092     		str	r2, [sp]
   47              		.loc 1 70 3 view .LVU5
   48 0014 009A     		ldr	r2, [sp]
   49              	.LBE2:
-  50              		.loc 1 70 3 view .LVU6
   71:Src/stm32f1xx_hal_msp.c ****   __HAL_RCC_PWR_CLK_ENABLE();
-  51              		.loc 1 71 3 view .LVU7
-  52              	.LBB3:
+  50              		.loc 1 71 3 view .LVU6
+  51              	.LBB3:
+  52              		.loc 1 71 3 view .LVU7
   53              		.loc 1 71 3 view .LVU8
-  54              		.loc 1 71 3 view .LVU9
-  55 0016 DA69     		ldr	r2, [r3, #28]
-  56 0018 42F08052 		orr	r2, r2, #268435456
-  57 001c DA61     		str	r2, [r3, #28]
-  58              		.loc 1 71 3 view .LVU10
-  59 001e DB69     		ldr	r3, [r3, #28]
-  60 0020 03F08053 		and	r3, r3, #268435456
-  61 0024 0193     		str	r3, [sp, #4]
-  62              		.loc 1 71 3 view .LVU11
-  63 0026 019B     		ldr	r3, [sp, #4]
-  64              	.LBE3:
-  65              		.loc 1 71 3 view .LVU12
+  54 0016 DA69     		ldr	r2, [r3, #28]
+  55 0018 42F08052 		orr	r2, r2, #268435456
+  56 001c DA61     		str	r2, [r3, #28]
+  57              		.loc 1 71 3 view .LVU9
+  58 001e DB69     		ldr	r3, [r3, #28]
+  59 0020 03F08053 		and	r3, r3, #268435456
+  60 0024 0193     		str	r3, [sp, #4]
+  61              		.loc 1 71 3 view .LVU10
+  62 0026 019B     		ldr	r3, [sp, #4]
+  63              	.LBE3:
   72:Src/stm32f1xx_hal_msp.c **** 
   73:Src/stm32f1xx_hal_msp.c ****   /* System interrupt init*/
   74:Src/stm32f1xx_hal_msp.c **** 
   75:Src/stm32f1xx_hal_msp.c ****   /** NOJTAG: JTAG-DP Disabled and SW-DP Enabled 
   76:Src/stm32f1xx_hal_msp.c ****   */
   77:Src/stm32f1xx_hal_msp.c ****   __HAL_AFIO_REMAP_SWJ_NOJTAG();
-  66              		.loc 1 77 3 view .LVU13
-  67              	.LBB4:
-  68              		.loc 1 77 3 view .LVU14
-  69 0028 054A     		ldr	r2, .L3+4
-  70 002a 5368     		ldr	r3, [r2, #4]
-  71              	.LVL0:
-  72              		.loc 1 77 3 view .LVU15
-  73 002c 23F0E063 		bic	r3, r3, #117440512
-  74              	.LVL1:
-  75              		.loc 1 77 3 view .LVU16
-  76 0030 43F00073 		orr	r3, r3, #33554432
-  77              	.LVL2:
-  78              		.loc 1 77 3 view .LVU17
-  79 0034 5360     		str	r3, [r2, #4]
-  80              	.LBE4:
-  81              		.loc 1 77 3 view .LVU18
+  64              		.loc 1 77 3 view .LVU11
+  65              	.LBB4:
+  66              		.loc 1 77 3 view .LVU12
+  67 0028 054A     		ldr	r2, .L3+4
+  68 002a 5368     		ldr	r3, [r2, #4]
+  69              	.LVL0:
+  70              		.loc 1 77 3 view .LVU13
+  71 002c 23F0E063 		bic	r3, r3, #117440512
+  72              	.LVL1:
+  73              		.loc 1 77 3 view .LVU14
+  74 0030 43F00073 		orr	r3, r3, #33554432
+  75              	.LVL2:
+  76              		.loc 1 77 3 view .LVU15
+  77 0034 5360     		str	r3, [r2, #4]
+  78              	.LBE4:
   78:Src/stm32f1xx_hal_msp.c **** 
   79:Src/stm32f1xx_hal_msp.c ****   /* USER CODE BEGIN MspInit 1 */
   80:Src/stm32f1xx_hal_msp.c **** 
   81:Src/stm32f1xx_hal_msp.c ****   /* USER CODE END MspInit 1 */
   82:Src/stm32f1xx_hal_msp.c **** }
-  82              		.loc 1 82 1 is_stmt 0 view .LVU19
-  83 0036 02B0     		add	sp, sp, #8
-  84              	.LCFI1:
-  85              		.cfi_def_cfa_offset 0
-  86              		@ sp needed
-  87 0038 7047     		bx	lr
-  88              	.L4:
-  89 003a 00BF     		.align	2
-  90              	.L3:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 4
+  79              		.loc 1 82 1 is_stmt 0 view .LVU16
+  80 0036 02B0     		add	sp, sp, #8
+  81              	.LCFI1:
+  82              		.cfi_def_cfa_offset 0
+  83              		@ sp needed
+  84 0038 7047     		bx	lr
+  85              	.L4:
+  86 003a 00BF     		.align	2
+  87              	.L3:
+  88 003c 00100240 		.word	1073876992
+  89 0040 00000140 		.word	1073807360
+  90              		.cfi_endproc
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s 			page 4
 
 
-  91 003c 00100240 		.word	1073876992
-  92 0040 00000140 		.word	1073807360
-  93              		.cfi_endproc
-  94              	.LFE66:
-  96              		.text
-  97              	.Letext0:
-  98              		.file 2 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\machine\\_default_types.h"
-  99              		.file 3 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_stdint.h"
- 100              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 101              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 102              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
- 103              		.file 7 "d:\\arm_gcc\\9 2020-q2-update\\lib\\gcc\\arm-none-eabi\\9.3.1\\include\\stddef.h"
- 104              		.file 8 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_types.h"
- 105              		.file 9 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\reent.h"
- 106              		.file 10 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\lock.h"
- 107              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s 			page 5
+  91              	.LFE66:
+  93              		.text
+  94              	.Letext0:
+  95              		.file 2 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+  96              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+  97              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+  98              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+  99              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 100              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 101              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 102              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 103              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 104              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_msp.c
-C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s:16     .text.HAL_MspInit:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s:24     .text.HAL_MspInit:00000000 HAL_MspInit
-C:\Users\tianx\AppData\Local\Temp\cc3YczC5.s:91     .text.HAL_MspInit:0000003c $d
+C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s:16     .text.HAL_MspInit:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s:24     .text.HAL_MspInit:00000000 HAL_MspInit
+C:\Users\tianx\AppData\Local\Temp\ccQz9Ye2.s:88     .text.HAL_MspInit:0000003c $d
 
 NO UNDEFINED SYMBOLS

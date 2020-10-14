@@ -1,0 +1,1247 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_bitmap.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_bitmap_create_empty,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_bitmap_create_empty
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_bitmap_create_empty:
+  25              	.LVL0:
+  26              	.LFB110:
+  27              		.file 1 "..//kernel/core/tos_bitmap.c"
+   1:..//kernel/core/tos_bitmap.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_bitmap.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_bitmap.c ****  * available.
+   4:..//kernel/core/tos_bitmap.c ****  *
+   5:..//kernel/core/tos_bitmap.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_bitmap.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_bitmap.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_bitmap.c ****  *
+   9:..//kernel/core/tos_bitmap.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_bitmap.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_bitmap.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_bitmap.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_bitmap.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_bitmap.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_bitmap.c ****  * within TencentOS.
+  16:..//kernel/core/tos_bitmap.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_bitmap.c **** 
+  18:..//kernel/core/tos_bitmap.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_bitmap.c **** 
+  20:..//kernel/core/tos_bitmap.c **** __API__ k_err_t tos_bitmap_create_empty(k_bitmap_t *bitmap, k_bmtbl_t *bitmap_tbl, uint32_t bit_max
+  21:..//kernel/core/tos_bitmap.c **** {
+  28              		.loc 1 21 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 21 1 is_stmt 0 view .LVU1
+  34 0000 10B4     		push	{r4}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 4, -4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 2
+
+
+  22:..//kernel/core/tos_bitmap.c ****     int i = 0;
+  38              		.loc 1 22 5 is_stmt 1 view .LVU2
+  39              	.LVL1:
+  23:..//kernel/core/tos_bitmap.c **** 
+  24:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK(bitmap);
+  40              		.loc 1 24 5 view .LVU3
+  41              		.loc 1 24 5 view .LVU4
+  42 0002 0446     		mov	r4, r0
+  43 0004 B0FA80F0 		clz	r0, r0
+  44              	.LVL2:
+  45              		.loc 1 24 5 is_stmt 0 view .LVU5
+  46 0008 4009     		lsrs	r0, r0, #5
+  47 000a 90B9     		cbnz	r0, .L5
+  25:..//kernel/core/tos_bitmap.c **** 
+  26:..//kernel/core/tos_bitmap.c ****     bitmap->bitmap_tbl  = bitmap_tbl;
+  48              		.loc 1 26 5 is_stmt 1 view .LVU6
+  49              		.loc 1 26 25 is_stmt 0 view .LVU7
+  50 000c E160     		str	r1, [r4, #12]
+  27:..//kernel/core/tos_bitmap.c ****     bitmap->bit_max     = bit_max;
+  51              		.loc 1 27 5 is_stmt 1 view .LVU8
+  52              		.loc 1 27 25 is_stmt 0 view .LVU9
+  53 000e A260     		str	r2, [r4, #8]
+  28:..//kernel/core/tos_bitmap.c ****     bitmap->bit_ndx_max = K_BITMAP_TBL_SIZE(bit_max);
+  54              		.loc 1 28 5 is_stmt 1 view .LVU10
+  55              		.loc 1 28 27 is_stmt 0 view .LVU11
+  56 0010 1F32     		adds	r2, r2, #31
+  57              	.LVL3:
+  58              		.loc 1 28 27 view .LVU12
+  59 0012 5209     		lsrs	r2, r2, #5
+  60              		.loc 1 28 25 view .LVU13
+  61 0014 6260     		str	r2, [r4, #4]
+  29:..//kernel/core/tos_bitmap.c **** 
+  30:..//kernel/core/tos_bitmap.c ****     for (i = 0; i < bitmap->bit_ndx_max; ++i) {
+  62              		.loc 1 30 5 is_stmt 1 view .LVU14
+  63              	.LVL4:
+  64              	.L3:
+  65              		.loc 1 30 27 is_stmt 0 discriminator 1 view .LVU15
+  66 0016 6368     		ldr	r3, [r4, #4]
+  67              		.loc 1 30 5 discriminator 1 view .LVU16
+  68 0018 8342     		cmp	r3, r0
+  69 001a 04D9     		bls	.L7
+  31:..//kernel/core/tos_bitmap.c ****         /* all bits are 0 */
+  32:..//kernel/core/tos_bitmap.c ****         bitmap_tbl[i] = 0;
+  70              		.loc 1 32 9 is_stmt 1 discriminator 3 view .LVU17
+  71              		.loc 1 32 23 is_stmt 0 discriminator 3 view .LVU18
+  72 001c 0023     		movs	r3, #0
+  73 001e 41F82030 		str	r3, [r1, r0, lsl #2]
+  30:..//kernel/core/tos_bitmap.c ****         /* all bits are 0 */
+  74              		.loc 1 30 42 discriminator 3 view .LVU19
+  75 0022 0130     		adds	r0, r0, #1
+  76              	.LVL5:
+  30:..//kernel/core/tos_bitmap.c ****         /* all bits are 0 */
+  77              		.loc 1 30 42 discriminator 3 view .LVU20
+  78 0024 F7E7     		b	.L3
+  79              	.L7:
+  33:..//kernel/core/tos_bitmap.c ****     }
+  34:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_INIT(bitmap, KNL_OBJ_TYPE_BITMAP);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 3
+
+
+  80              		.loc 1 34 5 is_stmt 1 view .LVU21
+  81              	.LVL6:
+  82              	.LBB20:
+  83              	.LBI20:
+  84              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 4
+
+
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ 100:..//kernel/core/include/tos_sys.h **** 
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 5
+
+
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 6
+
+
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+  85              		.loc 2 187 32 view .LVU22
+  86              	.LBB21:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+  87              		.loc 2 189 5 view .LVU23
+  88              		.loc 2 189 19 is_stmt 0 view .LVU24
+  89 0026 4DF6D123 		movw	r3, #56017
+  90 002a 6380     		strh	r3, [r4, #2]	@ movhi
+  91              	.LVL7:
+  92              		.loc 2 189 19 view .LVU25
+  93              	.LBE21:
+  94              	.LBE20:
+  35:..//kernel/core/tos_bitmap.c **** 
+  36:..//kernel/core/tos_bitmap.c ****     return K_ERR_NONE;
+  95              		.loc 1 36 5 is_stmt 1 view .LVU26
+  96              		.loc 1 36 12 is_stmt 0 view .LVU27
+  97 002c 0020     		movs	r0, #0
+  98              	.LVL8:
+  99              	.L2:
+  37:..//kernel/core/tos_bitmap.c **** }
+ 100              		.loc 1 37 1 view .LVU28
+ 101 002e 10BC     		pop	{r4}
+ 102              	.LCFI1:
+ 103              		.cfi_remember_state
+ 104              		.cfi_restore 4
+ 105              		.cfi_def_cfa_offset 0
+ 106              	.LVL9:
+ 107              		.loc 1 37 1 view .LVU29
+ 108 0030 7047     		bx	lr
+ 109              	.LVL10:
+ 110              	.L5:
+ 111              	.LCFI2:
+ 112              		.cfi_restore_state
+  24:..//kernel/core/tos_bitmap.c **** 
+ 113              		.loc 1 24 5 view .LVU30
+ 114 0032 40F24C40 		movw	r0, #1100
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 7
+
+
+ 115 0036 FAE7     		b	.L2
+ 116              		.cfi_endproc
+ 117              	.LFE110:
+ 119              		.section	.text.tos_bitmap_create_full,"ax",%progbits
+ 120              		.align	1
+ 121              		.global	tos_bitmap_create_full
+ 122              		.syntax unified
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.fpu softvfp
+ 127              	tos_bitmap_create_full:
+ 128              	.LVL11:
+ 129              	.LFB111:
+  38:..//kernel/core/tos_bitmap.c **** 
+  39:..//kernel/core/tos_bitmap.c **** __API__ k_err_t tos_bitmap_create_full(k_bitmap_t *bitmap, k_bmtbl_t *bitmap_tbl, uint32_t bit_max)
+  40:..//kernel/core/tos_bitmap.c **** {
+ 130              		.loc 1 40 1 is_stmt 1 view -0
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134              		@ link register save eliminated.
+ 135              		.loc 1 40 1 is_stmt 0 view .LVU32
+ 136 0000 10B4     		push	{r4}
+ 137              	.LCFI3:
+ 138              		.cfi_def_cfa_offset 4
+ 139              		.cfi_offset 4, -4
+  41:..//kernel/core/tos_bitmap.c ****     int i = 0;
+ 140              		.loc 1 41 5 is_stmt 1 view .LVU33
+ 141              	.LVL12:
+  42:..//kernel/core/tos_bitmap.c **** 
+  43:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK(bitmap);
+ 142              		.loc 1 43 5 view .LVU34
+ 143              		.loc 1 43 5 view .LVU35
+ 144 0002 0446     		mov	r4, r0
+ 145 0004 B0FA80F0 		clz	r0, r0
+ 146              	.LVL13:
+ 147              		.loc 1 43 5 is_stmt 0 view .LVU36
+ 148 0008 4009     		lsrs	r0, r0, #5
+ 149 000a 98B9     		cbnz	r0, .L12
+  44:..//kernel/core/tos_bitmap.c **** 
+  45:..//kernel/core/tos_bitmap.c ****     bitmap->bitmap_tbl  = bitmap_tbl;
+ 150              		.loc 1 45 5 is_stmt 1 view .LVU37
+ 151              		.loc 1 45 25 is_stmt 0 view .LVU38
+ 152 000c E160     		str	r1, [r4, #12]
+  46:..//kernel/core/tos_bitmap.c ****     bitmap->bit_max     = bit_max;
+ 153              		.loc 1 46 5 is_stmt 1 view .LVU39
+ 154              		.loc 1 46 25 is_stmt 0 view .LVU40
+ 155 000e A260     		str	r2, [r4, #8]
+  47:..//kernel/core/tos_bitmap.c ****     bitmap->bit_ndx_max = K_BITMAP_TBL_SIZE(bit_max);
+ 156              		.loc 1 47 5 is_stmt 1 view .LVU41
+ 157              		.loc 1 47 27 is_stmt 0 view .LVU42
+ 158 0010 1F32     		adds	r2, r2, #31
+ 159              	.LVL14:
+ 160              		.loc 1 47 27 view .LVU43
+ 161 0012 5209     		lsrs	r2, r2, #5
+ 162              		.loc 1 47 25 view .LVU44
+ 163 0014 6260     		str	r2, [r4, #4]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 8
+
+
+  48:..//kernel/core/tos_bitmap.c **** 
+  49:..//kernel/core/tos_bitmap.c ****     for (i = 0; i < bitmap->bit_ndx_max; ++i) {
+ 164              		.loc 1 49 5 is_stmt 1 view .LVU45
+ 165              	.LVL15:
+ 166              	.L10:
+ 167              		.loc 1 49 27 is_stmt 0 discriminator 1 view .LVU46
+ 168 0016 6368     		ldr	r3, [r4, #4]
+ 169              		.loc 1 49 5 discriminator 1 view .LVU47
+ 170 0018 8342     		cmp	r3, r0
+ 171 001a 05D9     		bls	.L14
+  50:..//kernel/core/tos_bitmap.c ****         /* all bits are 1 */
+  51:..//kernel/core/tos_bitmap.c ****         bitmap_tbl[i] = ~0;
+ 172              		.loc 1 51 9 is_stmt 1 discriminator 3 view .LVU48
+ 173              		.loc 1 51 23 is_stmt 0 discriminator 3 view .LVU49
+ 174 001c 4FF0FF33 		mov	r3, #-1
+ 175 0020 41F82030 		str	r3, [r1, r0, lsl #2]
+  49:..//kernel/core/tos_bitmap.c ****         /* all bits are 1 */
+ 176              		.loc 1 49 42 discriminator 3 view .LVU50
+ 177 0024 0130     		adds	r0, r0, #1
+ 178              	.LVL16:
+  49:..//kernel/core/tos_bitmap.c ****         /* all bits are 1 */
+ 179              		.loc 1 49 42 discriminator 3 view .LVU51
+ 180 0026 F6E7     		b	.L10
+ 181              	.L14:
+  52:..//kernel/core/tos_bitmap.c ****     }
+  53:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_INIT(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 182              		.loc 1 53 5 is_stmt 1 view .LVU52
+ 183              	.LVL17:
+ 184              	.LBB22:
+ 185              	.LBI22:
+ 187:..//kernel/core/include/tos_sys.h **** {
+ 186              		.loc 2 187 32 view .LVU53
+ 187              	.LBB23:
+ 188              		.loc 2 189 5 view .LVU54
+ 189              		.loc 2 189 19 is_stmt 0 view .LVU55
+ 190 0028 4DF6D123 		movw	r3, #56017
+ 191 002c 6380     		strh	r3, [r4, #2]	@ movhi
+ 192              	.LVL18:
+ 193              		.loc 2 189 19 view .LVU56
+ 194              	.LBE23:
+ 195              	.LBE22:
+  54:..//kernel/core/tos_bitmap.c **** 
+  55:..//kernel/core/tos_bitmap.c ****     return K_ERR_NONE;
+ 196              		.loc 1 55 5 is_stmt 1 view .LVU57
+ 197              		.loc 1 55 12 is_stmt 0 view .LVU58
+ 198 002e 0020     		movs	r0, #0
+ 199              	.LVL19:
+ 200              	.L9:
+  56:..//kernel/core/tos_bitmap.c **** }
+ 201              		.loc 1 56 1 view .LVU59
+ 202 0030 10BC     		pop	{r4}
+ 203              	.LCFI4:
+ 204              		.cfi_remember_state
+ 205              		.cfi_restore 4
+ 206              		.cfi_def_cfa_offset 0
+ 207              	.LVL20:
+ 208              		.loc 1 56 1 view .LVU60
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 9
+
+
+ 209 0032 7047     		bx	lr
+ 210              	.LVL21:
+ 211              	.L12:
+ 212              	.LCFI5:
+ 213              		.cfi_restore_state
+  43:..//kernel/core/tos_bitmap.c **** 
+ 214              		.loc 1 43 5 view .LVU61
+ 215 0034 40F24C40 		movw	r0, #1100
+ 216 0038 FAE7     		b	.L9
+ 217              		.cfi_endproc
+ 218              	.LFE111:
+ 220              		.section	.text.tos_bitmap_destroy,"ax",%progbits
+ 221              		.align	1
+ 222              		.global	tos_bitmap_destroy
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ 226              		.fpu softvfp
+ 228              	tos_bitmap_destroy:
+ 229              	.LVL22:
+ 230              	.LFB112:
+  57:..//kernel/core/tos_bitmap.c **** 
+  58:..//kernel/core/tos_bitmap.c **** __API__ k_err_t tos_bitmap_destroy(k_bitmap_t *bitmap)
+  59:..//kernel/core/tos_bitmap.c **** {
+ 231              		.loc 1 59 1 is_stmt 1 view -0
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 0, uses_anonymous_args = 0
+ 235              		@ link register save eliminated.
+  60:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK(bitmap);
+ 236              		.loc 1 60 5 view .LVU63
+ 237              		.loc 1 60 5 view .LVU64
+ 238 0000 0346     		mov	r3, r0
+ 239 0002 38B1     		cbz	r0, .L17
+  61:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 240              		.loc 1 61 5 view .LVU65
+ 241              		.loc 1 61 5 view .LVU66
+ 242              	.LVL23:
+ 243              	.LBB24:
+ 244              	.LBI24:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 245              		.loc 2 182 31 view .LVU67
+ 246              	.LBB25:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 247              		.loc 2 184 5 view .LVU68
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 248              		.loc 2 184 19 is_stmt 0 view .LVU69
+ 249 0004 4188     		ldrh	r1, [r0, #2]
+ 250              	.LVL24:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 251              		.loc 2 184 19 view .LVU70
+ 252              	.LBE25:
+ 253              	.LBE24:
+ 254              		.loc 1 61 5 view .LVU71
+ 255 0006 4DF6D122 		movw	r2, #56017
+ 256 000a 9142     		cmp	r1, r2
+ 257 000c 05D1     		bne	.L18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 10
+
+
+  62:..//kernel/core/tos_bitmap.c **** 
+  63:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_DEINIT(bitmap);
+ 258              		.loc 1 63 5 is_stmt 1 view .LVU72
+ 259              	.LVL25:
+ 260              	.LBB26:
+ 261              	.LBI26:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 262              		.loc 2 192 32 view .LVU73
+ 263              	.LBB27:
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 264              		.loc 2 194 5 view .LVU74
+ 265              		.loc 2 194 19 is_stmt 0 view .LVU75
+ 266 000e 0020     		movs	r0, #0
+ 267              	.LVL26:
+ 268              		.loc 2 194 19 view .LVU76
+ 269 0010 5880     		strh	r0, [r3, #2]	@ movhi
+ 270              	.LVL27:
+ 271              		.loc 2 194 19 view .LVU77
+ 272              	.LBE27:
+ 273              	.LBE26:
+  64:..//kernel/core/tos_bitmap.c ****     return K_ERR_NONE;
+ 274              		.loc 1 64 5 is_stmt 1 view .LVU78
+ 275              		.loc 1 64 12 is_stmt 0 view .LVU79
+ 276 0012 7047     		bx	lr
+ 277              	.LVL28:
+ 278              	.L17:
+  60:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 279              		.loc 1 60 5 view .LVU80
+ 280 0014 40F24C40 		movw	r0, #1100
+ 281              	.LVL29:
+  60:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 282              		.loc 1 60 5 view .LVU81
+ 283 0018 7047     		bx	lr
+ 284              	.LVL30:
+ 285              	.L18:
+  61:..//kernel/core/tos_bitmap.c **** 
+ 286              		.loc 1 61 5 view .LVU82
+ 287 001a 40F24D40 		movw	r0, #1101
+ 288              	.LVL31:
+  65:..//kernel/core/tos_bitmap.c **** }
+ 289              		.loc 1 65 1 view .LVU83
+ 290 001e 7047     		bx	lr
+ 291              		.cfi_endproc
+ 292              	.LFE112:
+ 294              		.section	.text.tos_bitmap_set,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	tos_bitmap_set
+ 297              		.syntax unified
+ 298              		.thumb
+ 299              		.thumb_func
+ 300              		.fpu softvfp
+ 302              	tos_bitmap_set:
+ 303              	.LVL32:
+ 304              	.LFB113:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 11
+
+
+  66:..//kernel/core/tos_bitmap.c **** 
+  67:..//kernel/core/tos_bitmap.c **** __API__ k_err_t tos_bitmap_set(k_bitmap_t *bitmap, uint32_t bit)
+  68:..//kernel/core/tos_bitmap.c **** {
+ 305              		.loc 1 68 1 is_stmt 1 view -0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309              		@ link register save eliminated.
+  69:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK(bitmap);
+ 310              		.loc 1 69 5 view .LVU85
+ 311              		.loc 1 69 5 view .LVU86
+ 312 0000 0346     		mov	r3, r0
+ 313 0002 B0B1     		cbz	r0, .L21
+  70:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 314              		.loc 1 70 5 view .LVU87
+ 315              		.loc 1 70 5 view .LVU88
+ 316              	.LVL33:
+ 317              	.LBB28:
+ 318              	.LBI28:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 319              		.loc 2 182 31 view .LVU89
+ 320              	.LBB29:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 321              		.loc 2 184 5 view .LVU90
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 322              		.loc 2 184 19 is_stmt 0 view .LVU91
+ 323 0004 4088     		ldrh	r0, [r0, #2]
+ 324              	.LVL34:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 325              		.loc 2 184 19 view .LVU92
+ 326              	.LBE29:
+ 327              	.LBE28:
+ 328              		.loc 1 70 5 view .LVU93
+ 329 0006 4DF6D122 		movw	r2, #56017
+ 330 000a 9042     		cmp	r0, r2
+ 331 000c 14D1     		bne	.L22
+  71:..//kernel/core/tos_bitmap.c **** 
+  72:..//kernel/core/tos_bitmap.c ****     if (bit > bitmap->bit_max) {
+ 332              		.loc 1 72 5 is_stmt 1 view .LVU94
+ 333              		.loc 1 72 21 is_stmt 0 view .LVU95
+ 334 000e 9A68     		ldr	r2, [r3, #8]
+ 335              		.loc 1 72 8 view .LVU96
+ 336 0010 8A42     		cmp	r2, r1
+ 337 0012 14D3     		bcc	.L23
+  73:..//kernel/core/tos_bitmap.c ****         return K_ERR_BITMAP_EXCEED;
+  74:..//kernel/core/tos_bitmap.c ****     }
+  75:..//kernel/core/tos_bitmap.c **** 
+  76:..//kernel/core/tos_bitmap.c ****     bitmap->bitmap_tbl[K_BITMAP_NDX(bit)] |= K_BITMAP_BIT(bit);
+ 338              		.loc 1 76 5 is_stmt 1 view .LVU97
+ 339              		.loc 1 76 11 is_stmt 0 view .LVU98
+ 340 0014 DA68     		ldr	r2, [r3, #12]
+ 341              		.loc 1 76 43 view .LVU99
+ 342 0016 4809     		lsrs	r0, r1, #5
+ 343              		.loc 1 76 46 view .LVU100
+ 344 0018 C943     		mvns	r1, r1
+ 345              	.LVL35:
+ 346              		.loc 1 76 46 view .LVU101
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 12
+
+
+ 347 001a 01F01F01 		and	r1, r1, #31
+ 348              	.LVL36:
+ 349              		.loc 1 76 46 view .LVU102
+ 350 001e 0123     		movs	r3, #1
+ 351              	.LVL37:
+ 352              		.loc 1 76 46 view .LVU103
+ 353 0020 03FA01F1 		lsl	r1, r3, r1
+ 354              		.loc 1 76 43 view .LVU104
+ 355 0024 52F82030 		ldr	r3, [r2, r0, lsl #2]
+ 356 0028 0B43     		orrs	r3, r3, r1
+ 357 002a 42F82030 		str	r3, [r2, r0, lsl #2]
+  77:..//kernel/core/tos_bitmap.c **** 
+  78:..//kernel/core/tos_bitmap.c ****     return K_ERR_NONE;
+ 358              		.loc 1 78 5 is_stmt 1 view .LVU105
+ 359              		.loc 1 78 12 is_stmt 0 view .LVU106
+ 360 002e 0020     		movs	r0, #0
+ 361 0030 7047     		bx	lr
+ 362              	.LVL38:
+ 363              	.L21:
+  69:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 364              		.loc 1 69 5 view .LVU107
+ 365 0032 40F24C40 		movw	r0, #1100
+ 366              	.LVL39:
+  69:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 367              		.loc 1 69 5 view .LVU108
+ 368 0036 7047     		bx	lr
+ 369              	.L22:
+  70:..//kernel/core/tos_bitmap.c **** 
+ 370              		.loc 1 70 5 view .LVU109
+ 371 0038 40F24D40 		movw	r0, #1101
+ 372 003c 7047     		bx	lr
+ 373              	.L23:
+  73:..//kernel/core/tos_bitmap.c ****     }
+ 374              		.loc 1 73 16 view .LVU110
+ 375 003e 0A20     		movs	r0, #10
+  79:..//kernel/core/tos_bitmap.c **** }
+ 376              		.loc 1 79 1 view .LVU111
+ 377 0040 7047     		bx	lr
+ 378              		.cfi_endproc
+ 379              	.LFE113:
+ 381              		.section	.text.tos_bitmap_reset,"ax",%progbits
+ 382              		.align	1
+ 383              		.global	tos_bitmap_reset
+ 384              		.syntax unified
+ 385              		.thumb
+ 386              		.thumb_func
+ 387              		.fpu softvfp
+ 389              	tos_bitmap_reset:
+ 390              	.LVL40:
+ 391              	.LFB114:
+  80:..//kernel/core/tos_bitmap.c **** 
+  81:..//kernel/core/tos_bitmap.c **** __API__ k_err_t tos_bitmap_reset(k_bitmap_t *bitmap, uint32_t bit)
+  82:..//kernel/core/tos_bitmap.c **** {
+ 392              		.loc 1 82 1 is_stmt 1 view -0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 13
+
+
+ 396              		@ link register save eliminated.
+  83:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK(bitmap);
+ 397              		.loc 1 83 5 view .LVU113
+ 398              		.loc 1 83 5 view .LVU114
+ 399 0000 0346     		mov	r3, r0
+ 400 0002 B8B1     		cbz	r0, .L26
+  84:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 401              		.loc 1 84 5 view .LVU115
+ 402              		.loc 1 84 5 view .LVU116
+ 403              	.LVL41:
+ 404              	.LBB30:
+ 405              	.LBI30:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 406              		.loc 2 182 31 view .LVU117
+ 407              	.LBB31:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 408              		.loc 2 184 5 view .LVU118
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 409              		.loc 2 184 19 is_stmt 0 view .LVU119
+ 410 0004 4088     		ldrh	r0, [r0, #2]
+ 411              	.LVL42:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 412              		.loc 2 184 19 view .LVU120
+ 413              	.LBE31:
+ 414              	.LBE30:
+ 415              		.loc 1 84 5 view .LVU121
+ 416 0006 4DF6D122 		movw	r2, #56017
+ 417 000a 9042     		cmp	r0, r2
+ 418 000c 15D1     		bne	.L27
+  85:..//kernel/core/tos_bitmap.c **** 
+  86:..//kernel/core/tos_bitmap.c ****     if (bit > bitmap->bit_max) {
+ 419              		.loc 1 86 5 is_stmt 1 view .LVU122
+ 420              		.loc 1 86 21 is_stmt 0 view .LVU123
+ 421 000e 9A68     		ldr	r2, [r3, #8]
+ 422              		.loc 1 86 8 view .LVU124
+ 423 0010 8A42     		cmp	r2, r1
+ 424 0012 15D3     		bcc	.L28
+  87:..//kernel/core/tos_bitmap.c ****         return K_ERR_BITMAP_EXCEED;
+  88:..//kernel/core/tos_bitmap.c ****     }
+  89:..//kernel/core/tos_bitmap.c **** 
+  90:..//kernel/core/tos_bitmap.c ****     bitmap->bitmap_tbl[K_BITMAP_NDX(bit)] &= ~K_BITMAP_BIT(bit);
+ 425              		.loc 1 90 5 is_stmt 1 view .LVU125
+ 426              		.loc 1 90 11 is_stmt 0 view .LVU126
+ 427 0014 DA68     		ldr	r2, [r3, #12]
+ 428              		.loc 1 90 43 view .LVU127
+ 429 0016 4809     		lsrs	r0, r1, #5
+ 430              		.loc 1 90 47 view .LVU128
+ 431 0018 C943     		mvns	r1, r1
+ 432              	.LVL43:
+ 433              		.loc 1 90 47 view .LVU129
+ 434 001a 01F01F01 		and	r1, r1, #31
+ 435              	.LVL44:
+ 436              		.loc 1 90 47 view .LVU130
+ 437 001e 0123     		movs	r3, #1
+ 438              	.LVL45:
+ 439              		.loc 1 90 47 view .LVU131
+ 440 0020 03FA01F1 		lsl	r1, r3, r1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 14
+
+
+ 441              		.loc 1 90 43 view .LVU132
+ 442 0024 52F82030 		ldr	r3, [r2, r0, lsl #2]
+ 443 0028 23EA0103 		bic	r3, r3, r1
+ 444 002c 42F82030 		str	r3, [r2, r0, lsl #2]
+  91:..//kernel/core/tos_bitmap.c **** 
+  92:..//kernel/core/tos_bitmap.c ****     return K_ERR_NONE;
+ 445              		.loc 1 92 5 is_stmt 1 view .LVU133
+ 446              		.loc 1 92 12 is_stmt 0 view .LVU134
+ 447 0030 0020     		movs	r0, #0
+ 448 0032 7047     		bx	lr
+ 449              	.LVL46:
+ 450              	.L26:
+  83:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 451              		.loc 1 83 5 view .LVU135
+ 452 0034 40F24C40 		movw	r0, #1100
+ 453              	.LVL47:
+  83:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY(bitmap, KNL_OBJ_TYPE_BITMAP);
+ 454              		.loc 1 83 5 view .LVU136
+ 455 0038 7047     		bx	lr
+ 456              	.L27:
+  84:..//kernel/core/tos_bitmap.c **** 
+ 457              		.loc 1 84 5 view .LVU137
+ 458 003a 40F24D40 		movw	r0, #1101
+ 459 003e 7047     		bx	lr
+ 460              	.L28:
+  87:..//kernel/core/tos_bitmap.c ****     }
+ 461              		.loc 1 87 16 view .LVU138
+ 462 0040 0A20     		movs	r0, #10
+  93:..//kernel/core/tos_bitmap.c **** }
+ 463              		.loc 1 93 1 view .LVU139
+ 464 0042 7047     		bx	lr
+ 465              		.cfi_endproc
+ 466              	.LFE114:
+ 468              		.section	.text.tos_bitmap_is_set,"ax",%progbits
+ 469              		.align	1
+ 470              		.global	tos_bitmap_is_set
+ 471              		.syntax unified
+ 472              		.thumb
+ 473              		.thumb_func
+ 474              		.fpu softvfp
+ 476              	tos_bitmap_is_set:
+ 477              	.LVL48:
+ 478              	.LFB115:
+  94:..//kernel/core/tos_bitmap.c **** 
+  95:..//kernel/core/tos_bitmap.c **** __API__ int tos_bitmap_is_set(k_bitmap_t *bitmap, uint32_t bit)
+  96:..//kernel/core/tos_bitmap.c **** {
+ 479              		.loc 1 96 1 is_stmt 1 view -0
+ 480              		.cfi_startproc
+ 481              		@ args = 0, pretend = 0, frame = 0
+ 482              		@ frame_needed = 0, uses_anonymous_args = 0
+ 483              		@ link register save eliminated.
+  97:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK_RC(bitmap, K_FALSE);
+ 484              		.loc 1 97 5 view .LVU141
+ 485              		.loc 1 97 5 view .LVU142
+ 486 0000 0346     		mov	r3, r0
+ 487 0002 B0FA80F0 		clz	r0, r0
+ 488              	.LVL49:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 15
+
+
+ 489              		.loc 1 97 5 is_stmt 0 view .LVU143
+ 490 0006 4009     		lsrs	r0, r0, #5
+ 491 0008 A0B9     		cbnz	r0, .L31
+  96:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK_RC(bitmap, K_FALSE);
+ 492              		.loc 1 96 1 view .LVU144
+ 493 000a 10B4     		push	{r4}
+ 494              	.LCFI6:
+ 495              		.cfi_def_cfa_offset 4
+ 496              		.cfi_offset 4, -4
+  98:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, K_FALSE);
+ 497              		.loc 1 98 5 is_stmt 1 view .LVU145
+ 498              		.loc 1 98 5 view .LVU146
+ 499              	.LVL50:
+ 500              	.LBB32:
+ 501              	.LBI32:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 502              		.loc 2 182 31 view .LVU147
+ 503              	.LBB33:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 504              		.loc 2 184 5 view .LVU148
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 505              		.loc 2 184 19 is_stmt 0 view .LVU149
+ 506 000c 5C88     		ldrh	r4, [r3, #2]
+ 507              	.LVL51:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 508              		.loc 2 184 19 view .LVU150
+ 509              	.LBE33:
+ 510              	.LBE32:
+ 511              		.loc 1 98 5 view .LVU151
+ 512 000e 4DF6D122 		movw	r2, #56017
+ 513 0012 9442     		cmp	r4, r2
+ 514 0014 0CD1     		bne	.L29
+  99:..//kernel/core/tos_bitmap.c **** 
+ 100:..//kernel/core/tos_bitmap.c ****     if (bit > bitmap->bit_max) {
+ 515              		.loc 1 100 5 is_stmt 1 view .LVU152
+ 516              		.loc 1 100 21 is_stmt 0 view .LVU153
+ 517 0016 9A68     		ldr	r2, [r3, #8]
+ 518              		.loc 1 100 8 view .LVU154
+ 519 0018 8A42     		cmp	r2, r1
+ 520 001a 09D3     		bcc	.L29
+ 101:..//kernel/core/tos_bitmap.c ****         return K_FALSE;
+ 102:..//kernel/core/tos_bitmap.c ****     }
+ 103:..//kernel/core/tos_bitmap.c **** 
+ 104:..//kernel/core/tos_bitmap.c ****     return (bitmap->bitmap_tbl[K_BITMAP_NDX(bit)] & K_BITMAP_BIT(bit)) ? K_TRUE : K_FALSE;
+ 521              		.loc 1 104 5 is_stmt 1 view .LVU155
+ 522              		.loc 1 104 19 is_stmt 0 view .LVU156
+ 523 001c DB68     		ldr	r3, [r3, #12]
+ 524              	.LVL52:
+ 525              		.loc 1 104 32 view .LVU157
+ 526 001e 4A09     		lsrs	r2, r1, #5
+ 527              		.loc 1 104 31 view .LVU158
+ 528 0020 53F82200 		ldr	r0, [r3, r2, lsl #2]
+ 529              		.loc 1 104 53 view .LVU159
+ 530 0024 C943     		mvns	r1, r1
+ 531              	.LVL53:
+ 532              		.loc 1 104 53 view .LVU160
+ 533 0026 01F01F01 		and	r1, r1, #31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 16
+
+
+ 534              	.LVL54:
+ 535              		.loc 1 104 72 view .LVU161
+ 536 002a C840     		lsrs	r0, r0, r1
+ 537              		.loc 1 104 81 view .LVU162
+ 538 002c 00F00100 		and	r0, r0, #1
+ 539              	.L29:
+ 105:..//kernel/core/tos_bitmap.c **** }
+ 540              		.loc 1 105 1 view .LVU163
+ 541 0030 10BC     		pop	{r4}
+ 542              	.LCFI7:
+ 543              		.cfi_restore 4
+ 544              		.cfi_def_cfa_offset 0
+ 545 0032 7047     		bx	lr
+ 546              	.LVL55:
+ 547              	.L31:
+  97:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, K_FALSE);
+ 548              		.loc 1 97 5 view .LVU164
+ 549 0034 0020     		movs	r0, #0
+ 550              		.loc 1 105 1 view .LVU165
+ 551 0036 7047     		bx	lr
+ 552              		.cfi_endproc
+ 553              	.LFE115:
+ 555              		.section	.text.tos_bitmap_is_reset,"ax",%progbits
+ 556              		.align	1
+ 557              		.global	tos_bitmap_is_reset
+ 558              		.syntax unified
+ 559              		.thumb
+ 560              		.thumb_func
+ 561              		.fpu softvfp
+ 563              	tos_bitmap_is_reset:
+ 564              	.LVL56:
+ 565              	.LFB116:
+ 106:..//kernel/core/tos_bitmap.c **** 
+ 107:..//kernel/core/tos_bitmap.c **** __API__ int tos_bitmap_is_reset(k_bitmap_t *bitmap, uint32_t bit)
+ 108:..//kernel/core/tos_bitmap.c **** {
+ 566              		.loc 1 108 1 is_stmt 1 view -0
+ 567              		.cfi_startproc
+ 568              		@ args = 0, pretend = 0, frame = 0
+ 569              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK_RC(bitmap, K_FALSE);
+ 570              		.loc 1 109 5 view .LVU167
+ 571              		.loc 1 109 5 view .LVU168
+ 572 0000 0346     		mov	r3, r0
+ 573 0002 B0FA80F0 		clz	r0, r0
+ 574              	.LVL57:
+ 575              		.loc 1 109 5 is_stmt 0 view .LVU169
+ 576 0006 4009     		lsrs	r0, r0, #5
+ 577 0008 78B9     		cbnz	r0, .L38
+ 108:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK_RC(bitmap, K_FALSE);
+ 578              		.loc 1 108 1 view .LVU170
+ 579 000a 10B5     		push	{r4, lr}
+ 580              	.LCFI8:
+ 581              		.cfi_def_cfa_offset 8
+ 582              		.cfi_offset 4, -8
+ 583              		.cfi_offset 14, -4
+ 110:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, K_FALSE);
+ 584              		.loc 1 110 5 is_stmt 1 view .LVU171
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 17
+
+
+ 585              		.loc 1 110 5 view .LVU172
+ 586              	.LVL58:
+ 587              	.LBB34:
+ 588              	.LBI34:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 589              		.loc 2 182 31 view .LVU173
+ 590              	.LBB35:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 591              		.loc 2 184 5 view .LVU174
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 592              		.loc 2 184 19 is_stmt 0 view .LVU175
+ 593 000c 5C88     		ldrh	r4, [r3, #2]
+ 594              	.LVL59:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 595              		.loc 2 184 19 view .LVU176
+ 596              	.LBE35:
+ 597              	.LBE34:
+ 598              		.loc 1 110 5 view .LVU177
+ 599 000e 4DF6D122 		movw	r2, #56017
+ 600 0012 9442     		cmp	r4, r2
+ 601 0014 08D1     		bne	.L36
+ 111:..//kernel/core/tos_bitmap.c **** 
+ 112:..//kernel/core/tos_bitmap.c ****     if (bit > bitmap->bit_max) {
+ 602              		.loc 1 112 5 is_stmt 1 view .LVU178
+ 603              		.loc 1 112 21 is_stmt 0 view .LVU179
+ 604 0016 9A68     		ldr	r2, [r3, #8]
+ 605              		.loc 1 112 8 view .LVU180
+ 606 0018 8A42     		cmp	r2, r1
+ 607 001a 05D3     		bcc	.L36
+ 608 001c 1846     		mov	r0, r3
+ 113:..//kernel/core/tos_bitmap.c ****         return K_FALSE;
+ 114:..//kernel/core/tos_bitmap.c ****     }
+ 115:..//kernel/core/tos_bitmap.c **** 
+ 116:..//kernel/core/tos_bitmap.c ****     return tos_bitmap_is_set(bitmap, bit) ? K_FALSE : K_TRUE;
+ 609              		.loc 1 116 5 is_stmt 1 view .LVU181
+ 610              		.loc 1 116 12 is_stmt 0 view .LVU182
+ 611 001e FFF7FEFF 		bl	tos_bitmap_is_set
+ 612              	.LVL60:
+ 613              		.loc 1 116 53 view .LVU183
+ 614 0022 B0FA80F0 		clz	r0, r0
+ 615 0026 4009     		lsrs	r0, r0, #5
+ 616              	.L36:
+ 117:..//kernel/core/tos_bitmap.c **** }
+ 617              		.loc 1 117 1 view .LVU184
+ 618 0028 10BD     		pop	{r4, pc}
+ 619              	.LVL61:
+ 620              	.L38:
+ 621              	.LCFI9:
+ 622              		.cfi_def_cfa_offset 0
+ 623              		.cfi_restore 4
+ 624              		.cfi_restore 14
+ 109:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, K_FALSE);
+ 625              		.loc 1 109 5 view .LVU185
+ 626 002a 0020     		movs	r0, #0
+ 627              		.loc 1 117 1 view .LVU186
+ 628 002c 7047     		bx	lr
+ 629              		.cfi_endproc
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 18
+
+
+ 630              	.LFE116:
+ 632              		.section	.text.tos_bitmap_lsb,"ax",%progbits
+ 633              		.align	1
+ 634              		.global	tos_bitmap_lsb
+ 635              		.syntax unified
+ 636              		.thumb
+ 637              		.thumb_func
+ 638              		.fpu softvfp
+ 640              	tos_bitmap_lsb:
+ 641              	.LVL62:
+ 642              	.LFB117:
+ 118:..//kernel/core/tos_bitmap.c **** 
+ 119:..//kernel/core/tos_bitmap.c **** __API__ int tos_bitmap_lsb(k_bitmap_t *bitmap)
+ 120:..//kernel/core/tos_bitmap.c **** {
+ 643              		.loc 1 120 1 is_stmt 1 view -0
+ 644              		.cfi_startproc
+ 645              		@ args = 0, pretend = 0, frame = 0
+ 646              		@ frame_needed = 0, uses_anonymous_args = 0
+ 647              		.loc 1 120 1 is_stmt 0 view .LVU188
+ 648 0000 38B5     		push	{r3, r4, r5, lr}
+ 649              	.LCFI10:
+ 650              		.cfi_def_cfa_offset 16
+ 651              		.cfi_offset 3, -16
+ 652              		.cfi_offset 4, -12
+ 653              		.cfi_offset 5, -8
+ 654              		.cfi_offset 14, -4
+ 121:..//kernel/core/tos_bitmap.c ****     int lsb = 0, i = 0;
+ 655              		.loc 1 121 5 is_stmt 1 view .LVU189
+ 656              	.LVL63:
+ 122:..//kernel/core/tos_bitmap.c ****     k_bmtbl_t *bitmap_tbl;
+ 657              		.loc 1 122 5 view .LVU190
+ 123:..//kernel/core/tos_bitmap.c **** 
+ 124:..//kernel/core/tos_bitmap.c ****     TOS_PTR_SANITY_CHECK_RC(bitmap, -1);
+ 658              		.loc 1 124 5 view .LVU191
+ 659              		.loc 1 124 5 view .LVU192
+ 660 0002 B0FA80F4 		clz	r4, r0
+ 661 0006 6409     		lsrs	r4, r4, #5
+ 662 0008 ECB9     		cbnz	r4, .L48
+ 663 000a 0546     		mov	r5, r0
+ 125:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, -1);
+ 664              		.loc 1 125 5 view .LVU193
+ 665              		.loc 1 125 5 view .LVU194
+ 666              	.LVL64:
+ 667              	.LBB36:
+ 668              	.LBI36:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 669              		.loc 2 182 31 view .LVU195
+ 670              	.LBB37:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 671              		.loc 2 184 5 view .LVU196
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 672              		.loc 2 184 19 is_stmt 0 view .LVU197
+ 673 000c 4288     		ldrh	r2, [r0, #2]
+ 674              	.LVL65:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 675              		.loc 2 184 19 view .LVU198
+ 676              	.LBE37:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 19
+
+
+ 677              	.LBE36:
+ 678              		.loc 1 125 5 view .LVU199
+ 679 000e 4DF6D123 		movw	r3, #56017
+ 680 0012 9A42     		cmp	r2, r3
+ 681 0014 1AD1     		bne	.L49
+ 126:..//kernel/core/tos_bitmap.c **** 
+ 127:..//kernel/core/tos_bitmap.c ****     bitmap_tbl = bitmap->bitmap_tbl;
+ 682              		.loc 1 127 5 is_stmt 1 view .LVU200
+ 683              		.loc 1 127 16 is_stmt 0 view .LVU201
+ 684 0016 C168     		ldr	r1, [r0, #12]
+ 685              	.LVL66:
+ 128:..//kernel/core/tos_bitmap.c **** 
+ 129:..//kernel/core/tos_bitmap.c ****     for (i = 0; i < bitmap->bit_ndx_max - 1; ++i) {
+ 686              		.loc 1 129 5 is_stmt 1 view .LVU202
+ 687              		.loc 1 129 12 is_stmt 0 view .LVU203
+ 688 0018 2246     		mov	r2, r4
+ 689              		.loc 1 129 5 view .LVU204
+ 690 001a 00E0     		b	.L45
+ 691              	.LVL67:
+ 692              	.L46:
+ 693              		.loc 1 129 46 discriminator 2 view .LVU205
+ 694 001c 0132     		adds	r2, r2, #1
+ 695              	.LVL68:
+ 696              	.L45:
+ 697              		.loc 1 129 27 discriminator 1 view .LVU206
+ 698 001e 6B68     		ldr	r3, [r5, #4]
+ 699              		.loc 1 129 41 discriminator 1 view .LVU207
+ 700 0020 013B     		subs	r3, r3, #1
+ 701              		.loc 1 129 5 discriminator 1 view .LVU208
+ 702 0022 9342     		cmp	r3, r2
+ 703 0024 05D9     		bls	.L51
+ 130:..//kernel/core/tos_bitmap.c ****         if (*bitmap_tbl == 0) {
+ 704              		.loc 1 130 9 is_stmt 1 view .LVU209
+ 705              		.loc 1 130 13 is_stmt 0 view .LVU210
+ 706 0026 0B68     		ldr	r3, [r1]
+ 707              		.loc 1 130 12 view .LVU211
+ 708 0028 002B     		cmp	r3, #0
+ 709 002a F7D1     		bne	.L46
+ 131:..//kernel/core/tos_bitmap.c ****             lsb += K_BITMAP_SLOT_SIZE;
+ 710              		.loc 1 131 13 is_stmt 1 view .LVU212
+ 711              		.loc 1 131 17 is_stmt 0 view .LVU213
+ 712 002c 2034     		adds	r4, r4, #32
+ 713              	.LVL69:
+ 132:..//kernel/core/tos_bitmap.c ****             ++bitmap_tbl;
+ 714              		.loc 1 132 13 is_stmt 1 view .LVU214
+ 715 002e 0431     		adds	r1, r1, #4
+ 716              	.LVL70:
+ 717              		.loc 1 132 13 is_stmt 0 view .LVU215
+ 718 0030 F4E7     		b	.L46
+ 719              	.L51:
+ 133:..//kernel/core/tos_bitmap.c ****         }
+ 134:..//kernel/core/tos_bitmap.c ****     }
+ 135:..//kernel/core/tos_bitmap.c **** 
+ 136:..//kernel/core/tos_bitmap.c ****     lsb += tos_cpu_clz(*bitmap_tbl);
+ 720              		.loc 1 136 5 is_stmt 1 view .LVU216
+ 721              		.loc 1 136 12 is_stmt 0 view .LVU217
+ 722 0032 0868     		ldr	r0, [r1]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 20
+
+
+ 723              	.LVL71:
+ 724              		.loc 1 136 12 view .LVU218
+ 725 0034 FFF7FEFF 		bl	tos_cpu_clz
+ 726              	.LVL72:
+ 727              		.loc 1 136 9 view .LVU219
+ 728 0038 2044     		add	r0, r0, r4
+ 729              	.LVL73:
+ 137:..//kernel/core/tos_bitmap.c ****     if (lsb > bitmap->bit_max) {
+ 730              		.loc 1 137 5 is_stmt 1 view .LVU220
+ 731              		.loc 1 137 21 is_stmt 0 view .LVU221
+ 732 003a AB68     		ldr	r3, [r5, #8]
+ 733              		.loc 1 137 8 view .LVU222
+ 734 003c 9842     		cmp	r0, r3
+ 735 003e 00D8     		bhi	.L52
+ 736              	.LVL74:
+ 737              	.L43:
+ 138:..//kernel/core/tos_bitmap.c ****         return bitmap->bit_max + 1;
+ 139:..//kernel/core/tos_bitmap.c ****     }
+ 140:..//kernel/core/tos_bitmap.c **** 
+ 141:..//kernel/core/tos_bitmap.c ****     return lsb;
+ 142:..//kernel/core/tos_bitmap.c **** }
+ 738              		.loc 1 142 1 view .LVU223
+ 739 0040 38BD     		pop	{r3, r4, r5, pc}
+ 740              	.LVL75:
+ 741              	.L52:
+ 138:..//kernel/core/tos_bitmap.c ****         return bitmap->bit_max + 1;
+ 742              		.loc 1 138 9 is_stmt 1 view .LVU224
+ 138:..//kernel/core/tos_bitmap.c ****         return bitmap->bit_max + 1;
+ 743              		.loc 1 138 32 is_stmt 0 view .LVU225
+ 744 0042 581C     		adds	r0, r3, #1
+ 745              	.LVL76:
+ 138:..//kernel/core/tos_bitmap.c ****         return bitmap->bit_max + 1;
+ 746              		.loc 1 138 32 view .LVU226
+ 747 0044 FCE7     		b	.L43
+ 748              	.LVL77:
+ 749              	.L48:
+ 124:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, -1);
+ 750              		.loc 1 124 5 view .LVU227
+ 751 0046 4FF0FF30 		mov	r0, #-1
+ 752              	.LVL78:
+ 124:..//kernel/core/tos_bitmap.c ****     TOS_OBJ_VERIFY_RC(bitmap, KNL_OBJ_TYPE_BITMAP, -1);
+ 753              		.loc 1 124 5 view .LVU228
+ 754 004a F9E7     		b	.L43
+ 755              	.LVL79:
+ 756              	.L49:
+ 125:..//kernel/core/tos_bitmap.c **** 
+ 757              		.loc 1 125 5 view .LVU229
+ 758 004c 4FF0FF30 		mov	r0, #-1
+ 759              	.LVL80:
+ 125:..//kernel/core/tos_bitmap.c **** 
+ 760              		.loc 1 125 5 view .LVU230
+ 761 0050 F6E7     		b	.L43
+ 762              		.cfi_endproc
+ 763              	.LFE117:
+ 765              		.text
+ 766              	.Letext0:
+ 767              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 21
+
+
+ 768              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 769              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 770              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 771              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 772              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 773              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 774              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 775              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 776              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 777              		.file 13 "..//kernel/core/include/tos_ktypes.h"
+ 778              		.file 14 "..//kernel/core/include/tos_task.h"
+ 779              		.file 15 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 780              		.file 16 "..//kernel/core/include/tos_list.h"
+ 781              		.file 17 "..//kernel/core/include/tos_pend.h"
+ 782              		.file 18 "..//kernel/core/include/tos_bitmap.h"
+ 783              		.file 19 "..//kernel/core/include/tos_timer.h"
+ 784              		.file 20 "..//kernel/core/include/tos_mmheap.h"
+ 785              		.file 21 "..//kernel/core/include/tos_sched.h"
+ 786              		.file 22 "..//kernel/core/include/tos_global.h"
+ 787              		.file 23 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_bitmap.c
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:16     .text.tos_bitmap_create_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:24     .text.tos_bitmap_create_empty:00000000 tos_bitmap_create_empty
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:120    .text.tos_bitmap_create_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:127    .text.tos_bitmap_create_full:00000000 tos_bitmap_create_full
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:221    .text.tos_bitmap_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:228    .text.tos_bitmap_destroy:00000000 tos_bitmap_destroy
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:295    .text.tos_bitmap_set:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:302    .text.tos_bitmap_set:00000000 tos_bitmap_set
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:382    .text.tos_bitmap_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:389    .text.tos_bitmap_reset:00000000 tos_bitmap_reset
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:469    .text.tos_bitmap_is_set:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:476    .text.tos_bitmap_is_set:00000000 tos_bitmap_is_set
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:556    .text.tos_bitmap_is_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:563    .text.tos_bitmap_is_reset:00000000 tos_bitmap_is_reset
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:633    .text.tos_bitmap_lsb:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccyni5kT.s:640    .text.tos_bitmap_lsb:00000000 tos_bitmap_lsb
+
+UNDEFINED SYMBOLS
+tos_cpu_clz

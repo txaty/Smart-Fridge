@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 1
   29:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *
   30:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * Redistribution and use in source and binary forms, with or without modification,
   31:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * are permitted provided that the following conditions are met:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s 			page 2
 
 
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *   1. Redistributions of source code must retain the above copyright notice,
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 1
   86:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * @{
   87:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   */
   88:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s 			page 3
 
 
   89:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** /**
@@ -148,10 +148,10 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 1
   36 0000 034A     		ldr	r2, .L2
   37 0002 1368     		ldr	r3, [r2]
   38 0004 23F07F03 		bic	r3, r3, #127
-  39 0008 0843     		orrs	r0, r0, r1
+  39 0008 0143     		orrs	r1, r1, r0
   40              	.LVL1:
   41              		.loc 1 104 3 is_stmt 0 view .LVU4
-  42 000a 0343     		orrs	r3, r3, r0
+  42 000a 0B43     		orrs	r3, r3, r1
   43 000c 1360     		str	r3, [r2]
  105:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** }
   44              		.loc 1 105 1 view .LVU5
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 1
  110:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   */
  111:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** void HAL_GPIOEx_EnableEventout(void)
  112:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s 			page 4
 
 
   63              		.loc 1 112 1 is_stmt 1 view -0
@@ -238,33 +238,33 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 1
  108              		.cfi_endproc
  109              	.LFE68:
  111              		.text
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s 			page 5
 
 
  112              	.Letext0:
- 113              		.file 2 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\machine\\_default_types.h"
- 114              		.file 3 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 113              		.file 2 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 114              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
  115              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
  116              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  117              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
- 118              		.file 7 "d:\\arm_gcc\\9 2020-q2-update\\lib\\gcc\\arm-none-eabi\\9.3.1\\include\\stddef.h"
- 119              		.file 8 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_types.h"
- 120              		.file 9 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\reent.h"
- 121              		.file 10 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 118              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 119              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 120              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 121              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
  122              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_gpio_ex.c
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:16     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:24     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:49     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:54     .text.HAL_GPIOEx_EnableEventout:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:61     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:78     .text.HAL_GPIOEx_EnableEventout:0000000c $d
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:83     .text.HAL_GPIOEx_DisableEventout:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:90     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
-C:\Users\tianx\AppData\Local\Temp\ccw35pJg.s:107    .text.HAL_GPIOEx_DisableEventout:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:16     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:24     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:49     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:54     .text.HAL_GPIOEx_EnableEventout:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:61     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:78     .text.HAL_GPIOEx_EnableEventout:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:83     .text.HAL_GPIOEx_DisableEventout:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:90     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
+C:\Users\tianx\AppData\Local\Temp\ccOAhyu8.s:107    .text.HAL_GPIOEx_DisableEventout:0000000c $d
 
 NO UNDEFINED SYMBOLS

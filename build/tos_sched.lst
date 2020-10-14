@@ -1,0 +1,1453 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_sched.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.readyqueue_prio_highest_get,"ax",%progbits
+  16              		.align	1
+  17              		.arch armv7-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	readyqueue_prio_highest_get:
+  24              	.LFB110:
+  25              		.file 1 "..//kernel/core/tos_sched.c"
+   1:..//kernel/core/tos_sched.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_sched.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_sched.c ****  * available.
+   4:..//kernel/core/tos_sched.c ****  *
+   5:..//kernel/core/tos_sched.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_sched.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_sched.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_sched.c ****  *
+   9:..//kernel/core/tos_sched.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_sched.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_sched.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_sched.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_sched.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_sched.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_sched.c ****  * within TencentOS.
+  16:..//kernel/core/tos_sched.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_sched.c **** 
+  18:..//kernel/core/tos_sched.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_sched.c **** 
+  20:..//kernel/core/tos_sched.c **** __STATIC__ k_prio_t readyqueue_prio_highest_get(void)
+  21:..//kernel/core/tos_sched.c **** {
+  26              		.loc 1 21 1 view -0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 10B5     		push	{r4, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+  22:..//kernel/core/tos_sched.c ****     uint32_t *tbl;
+  35              		.loc 1 22 5 view .LVU1
+  23:..//kernel/core/tos_sched.c ****     k_prio_t prio;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 2
+
+
+  36              		.loc 1 23 5 view .LVU2
+  24:..//kernel/core/tos_sched.c **** 
+  25:..//kernel/core/tos_sched.c ****     prio    = 0;
+  37              		.loc 1 25 5 view .LVU3
+  38              	.LVL0:
+  26:..//kernel/core/tos_sched.c ****     tbl     = &k_rdyq.prio_mask[0];
+  39              		.loc 1 26 5 view .LVU4
+  27:..//kernel/core/tos_sched.c **** 
+  28:..//kernel/core/tos_sched.c ****     while (*tbl == 0) {
+  40              		.loc 1 28 5 view .LVU5
+  25:..//kernel/core/tos_sched.c ****     tbl     = &k_rdyq.prio_mask[0];
+  41              		.loc 1 25 13 is_stmt 0 view .LVU6
+  42 0002 0024     		movs	r4, #0
+  26:..//kernel/core/tos_sched.c ****     tbl     = &k_rdyq.prio_mask[0];
+  43              		.loc 1 26 13 view .LVU7
+  44 0004 054B     		ldr	r3, .L6
+  45              	.LVL1:
+  46              	.L2:
+  47              		.loc 1 28 12 view .LVU8
+  48 0006 1868     		ldr	r0, [r3]
+  49              		.loc 1 28 11 view .LVU9
+  50 0008 18B9     		cbnz	r0, .L5
+  29:..//kernel/core/tos_sched.c ****         prio += K_PRIO_TBL_SLOT_SIZE;
+  51              		.loc 1 29 9 is_stmt 1 view .LVU10
+  52              		.loc 1 29 14 is_stmt 0 view .LVU11
+  53 000a 2034     		adds	r4, r4, #32
+  54              	.LVL2:
+  55              		.loc 1 29 14 view .LVU12
+  56 000c E4B2     		uxtb	r4, r4
+  57              	.LVL3:
+  30:..//kernel/core/tos_sched.c ****         ++tbl;
+  58              		.loc 1 30 9 is_stmt 1 view .LVU13
+  59 000e 0433     		adds	r3, r3, #4
+  60              	.LVL4:
+  61              		.loc 1 30 9 is_stmt 0 view .LVU14
+  62 0010 F9E7     		b	.L2
+  63              	.L5:
+  31:..//kernel/core/tos_sched.c ****     }
+  32:..//kernel/core/tos_sched.c ****     prio += tos_cpu_clz(*tbl);
+  64              		.loc 1 32 5 is_stmt 1 view .LVU15
+  65              		.loc 1 32 13 is_stmt 0 view .LVU16
+  66 0012 FFF7FEFF 		bl	tos_cpu_clz
+  67              	.LVL5:
+  68              		.loc 1 32 10 view .LVU17
+  69 0016 2044     		add	r0, r0, r4
+  70              	.LVL6:
+  33:..//kernel/core/tos_sched.c ****     return prio;
+  71              		.loc 1 33 5 is_stmt 1 view .LVU18
+  34:..//kernel/core/tos_sched.c **** }
+  72              		.loc 1 34 1 is_stmt 0 view .LVU19
+  73 0018 C0B2     		uxtb	r0, r0
+  74              		.loc 1 34 1 view .LVU20
+  75 001a 10BD     		pop	{r4, pc}
+  76              	.L7:
+  77              		.align	2
+  78              	.L6:
+  79 001c 50000000 		.word	k_rdyq+80
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 3
+
+
+  80              		.cfi_endproc
+  81              	.LFE110:
+  83              		.section	.text.readyqueue_is_prio_onlyone,"ax",%progbits
+  84              		.align	1
+  85              		.global	readyqueue_is_prio_onlyone
+  86              		.syntax unified
+  87              		.thumb
+  88              		.thumb_func
+  89              		.fpu softvfp
+  91              	readyqueue_is_prio_onlyone:
+  92              	.LVL7:
+  93              	.LFB114:
+  35:..//kernel/core/tos_sched.c **** 
+  36:..//kernel/core/tos_sched.c **** __STATIC_INLINE__ void readyqueue_prio_insert(k_prio_t prio)
+  37:..//kernel/core/tos_sched.c **** {
+  38:..//kernel/core/tos_sched.c ****     k_rdyq.prio_mask[K_PRIO_NDX(prio)] |= K_PRIO_BIT(prio);
+  39:..//kernel/core/tos_sched.c **** }
+  40:..//kernel/core/tos_sched.c **** 
+  41:..//kernel/core/tos_sched.c **** __STATIC_INLINE__ void readyqueue_prio_remove(k_prio_t prio)
+  42:..//kernel/core/tos_sched.c **** {
+  43:..//kernel/core/tos_sched.c ****     k_rdyq.prio_mask[K_PRIO_NDX(prio)] &= ~K_PRIO_BIT(prio);
+  44:..//kernel/core/tos_sched.c **** }
+  45:..//kernel/core/tos_sched.c **** 
+  46:..//kernel/core/tos_sched.c **** __STATIC_INLINE__ void readyqueue_prio_mark(k_prio_t prio)
+  47:..//kernel/core/tos_sched.c **** {
+  48:..//kernel/core/tos_sched.c ****     readyqueue_prio_insert(prio);
+  49:..//kernel/core/tos_sched.c **** 
+  50:..//kernel/core/tos_sched.c ****     if (prio < k_rdyq.highest_prio) {
+  51:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+  52:..//kernel/core/tos_sched.c ****     }
+  53:..//kernel/core/tos_sched.c **** }
+  54:..//kernel/core/tos_sched.c **** 
+  55:..//kernel/core/tos_sched.c **** /**
+  56:..//kernel/core/tos_sched.c ****  * when this function involved, must be at least one task in the task list of the certain priority
+  57:..//kernel/core/tos_sched.c ****  */
+  58:..//kernel/core/tos_sched.c **** __KNL__ int readyqueue_is_prio_onlyone(k_prio_t prio)
+  59:..//kernel/core/tos_sched.c **** {
+  94              		.loc 1 59 1 is_stmt 1 view -0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              		@ link register save eliminated.
+  60:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+  99              		.loc 1 60 5 view .LVU22
+  61:..//kernel/core/tos_sched.c ****     k_task_t *task;
+ 100              		.loc 1 61 5 view .LVU23
+  62:..//kernel/core/tos_sched.c **** 
+  63:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[prio];
+ 101              		.loc 1 63 5 view .LVU24
+ 102              		.loc 1 63 15 is_stmt 0 view .LVU25
+ 103 0000 054B     		ldr	r3, .L9
+ 104 0002 03EBC002 		add	r2, r3, r0, lsl #3
+ 105              	.LVL8:
+  64:..//kernel/core/tos_sched.c ****     task = TOS_LIST_FIRST_ENTRY(task_list, k_task_t, pend_list);
+ 106              		.loc 1 64 5 is_stmt 1 view .LVU26
+ 107              		.loc 1 64 12 is_stmt 0 view .LVU27
+ 108 0006 53F83030 		ldr	r3, [r3, r0, lsl #3]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 4
+
+
+ 109              	.LVL9:
+  65:..//kernel/core/tos_sched.c ****     return task->pend_list.next == task_list;
+ 110              		.loc 1 65 5 is_stmt 1 view .LVU28
+ 111              		.loc 1 65 27 is_stmt 0 view .LVU29
+ 112 000a 1868     		ldr	r0, [r3]
+ 113              	.LVL10:
+  66:..//kernel/core/tos_sched.c **** }
+ 114              		.loc 1 66 1 view .LVU30
+ 115 000c 9042     		cmp	r0, r2
+ 116 000e 14BF     		ite	ne
+ 117 0010 0020     		movne	r0, #0
+ 118 0012 0120     		moveq	r0, #1
+ 119 0014 7047     		bx	lr
+ 120              	.L10:
+ 121 0016 00BF     		.align	2
+ 122              	.L9:
+ 123 0018 00000000 		.word	k_rdyq
+ 124              		.cfi_endproc
+ 125              	.LFE114:
+ 127              		.section	.text.readyqueue_first_task_get,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	readyqueue_first_task_get
+ 130              		.syntax unified
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.fpu softvfp
+ 135              	readyqueue_first_task_get:
+ 136              	.LVL11:
+ 137              	.LFB115:
+  67:..//kernel/core/tos_sched.c **** 
+  68:..//kernel/core/tos_sched.c **** __KNL__ k_task_t *readyqueue_first_task_get(k_prio_t prio)
+  69:..//kernel/core/tos_sched.c **** {
+ 138              		.loc 1 69 1 is_stmt 1 view -0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+  70:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 143              		.loc 1 70 5 view .LVU32
+  71:..//kernel/core/tos_sched.c **** 
+  72:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[prio];
+ 144              		.loc 1 72 5 view .LVU33
+ 145              		.loc 1 72 15 is_stmt 0 view .LVU34
+ 146 0000 054B     		ldr	r3, .L14
+ 147 0002 03EBC002 		add	r2, r3, r0, lsl #3
+ 148              	.LVL12:
+  73:..//kernel/core/tos_sched.c ****     return TOS_LIST_FIRST_ENTRY_OR_NULL(task_list, k_task_t, pend_list);
+ 149              		.loc 1 73 5 is_stmt 1 view .LVU35
+ 150              	.LBB64:
+ 151              	.LBI64:
+ 152              		.file 2 "..//kernel/core/include/tos_list.h"
+   1:..//kernel/core/include/tos_list.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_list.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_list.h ****  * available.
+   4:..//kernel/core/include/tos_list.h ****  *
+   5:..//kernel/core/include/tos_list.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_list.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 5
+
+
+   7:..//kernel/core/include/tos_list.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_list.h ****  *
+   9:..//kernel/core/include/tos_list.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_list.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_list.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_list.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_list.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_list.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_list.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_list.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_list.h **** 
+  18:..//kernel/core/include/tos_list.h **** #ifndef _TOS_LIST_H_
+  19:..//kernel/core/include/tos_list.h **** #define  _TOS_LIST_H_
+  20:..//kernel/core/include/tos_list.h **** 
+  21:..//kernel/core/include/tos_list.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_list.h **** 
+  23:..//kernel/core/include/tos_list.h **** typedef struct k_list_node_st {
+  24:..//kernel/core/include/tos_list.h ****     struct k_list_node_st *next;
+  25:..//kernel/core/include/tos_list.h ****     struct k_list_node_st *prev;
+  26:..//kernel/core/include/tos_list.h **** } k_list_t;
+  27:..//kernel/core/include/tos_list.h **** 
+  28:..//kernel/core/include/tos_list.h **** #define TOS_LIST_NODE(node) \
+  29:..//kernel/core/include/tos_list.h ****     { &(node), &(node) }
+  30:..//kernel/core/include/tos_list.h **** 
+  31:..//kernel/core/include/tos_list.h **** #define TOS_LIST_DEFINE(list) \
+  32:..//kernel/core/include/tos_list.h ****     k_list_t list = { &(list), &(list) }
+  33:..//kernel/core/include/tos_list.h **** 
+  34:..//kernel/core/include/tos_list.h **** #define TOS_LIST_ENTRY(node, type, field) \
+  35:..//kernel/core/include/tos_list.h ****     TOS_CONTAINER_OF_FIELD(node, type, field)
+  36:..//kernel/core/include/tos_list.h **** 
+  37:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FIRST_ENTRY(list, type, field) \
+  38:..//kernel/core/include/tos_list.h ****     TOS_LIST_ENTRY((list)->next, type, field)
+  39:..//kernel/core/include/tos_list.h **** 
+  40:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FIRST_ENTRY_OR_NULL(list, type, field) \
+  41:..//kernel/core/include/tos_list.h ****     (tos_list_empty(list) ? K_NULL : TOS_LIST_FIRST_ENTRY(list, type, field))
+  42:..//kernel/core/include/tos_list.h **** 
+  43:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH(curr, list) \
+  44:..//kernel/core/include/tos_list.h ****     for (curr = (list)->next; curr != (list); curr = curr->next)
+  45:..//kernel/core/include/tos_list.h **** 
+  46:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_PREV(curr, list) \
+  47:..//kernel/core/include/tos_list.h ****     for (curr = (list)->prev; curr != (list); curr = curr->prev)
+  48:..//kernel/core/include/tos_list.h **** 
+  49:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_SAFE(curr, next, list) \
+  50:..//kernel/core/include/tos_list.h ****     for (curr = (list)->next, next = curr->next; curr != (list); \
+  51:..//kernel/core/include/tos_list.h ****             curr = next, next = curr->next)
+  52:..//kernel/core/include/tos_list.h **** 
+  53:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_PREV_SAFE(curr, next, list) \
+  54:..//kernel/core/include/tos_list.h ****     for (curr = (list)->prev, next = curr->prev; \
+  55:..//kernel/core/include/tos_list.h ****             curr != (list); \
+  56:..//kernel/core/include/tos_list.h ****             curr = next, next = curr->prev)
+  57:..//kernel/core/include/tos_list.h **** 
+  58:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY(entry, type, field, list) \
+  59:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->next, type, field); \
+  60:..//kernel/core/include/tos_list.h ****         &entry->field != (list); \
+  61:..//kernel/core/include/tos_list.h ****         entry = TOS_LIST_ENTRY(entry->field.next, type, field))
+  62:..//kernel/core/include/tos_list.h **** 
+  63:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_REVERSE(entry, type, field, list) \
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 6
+
+
+  64:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->prev, type, field); \
+  65:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
+  66:..//kernel/core/include/tos_list.h ****             entry = TOS_LIST_ENTRY(entry->field.prev, type, field))
+  67:..//kernel/core/include/tos_list.h **** 
+  68:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_SAFE(entry, tmp, type, field, list) \
+  69:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->next, type, field), \
+  70:..//kernel/core/include/tos_list.h ****             tmp = TOS_LIST_ENTRY(entry->field.next, type, field); \
+  71:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
+  72:..//kernel/core/include/tos_list.h ****             entry = tmp, tmp = TOS_LIST_ENTRY(entry->field.next, type, field))
+  73:..//kernel/core/include/tos_list.h **** 
+  74:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_SAFE_REVERSE(entry, tmp, type, field, list) \
+  75:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->prev, type, field), \
+  76:..//kernel/core/include/tos_list.h ****             tmp = TOS_LIST_ENTRY(entry->field.prev, type, field); \
+  77:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
+  78:..//kernel/core/include/tos_list.h ****             entry = tmp, tmp = TOS_LIST_ENTRY(entry->field.prev, type, field))
+  79:..//kernel/core/include/tos_list.h **** 
+  80:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_add(k_list_t *node, k_list_t *prev, k_list_t *next)
+  81:..//kernel/core/include/tos_list.h **** {
+  82:..//kernel/core/include/tos_list.h ****     next->prev = node;
+  83:..//kernel/core/include/tos_list.h ****     node->next = next;
+  84:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+  85:..//kernel/core/include/tos_list.h ****     prev->next = node;
+  86:..//kernel/core/include/tos_list.h **** }
+  87:..//kernel/core/include/tos_list.h **** 
+  88:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_del(k_list_t *prev, k_list_t *next)
+  89:..//kernel/core/include/tos_list.h **** {
+  90:..//kernel/core/include/tos_list.h ****     next->prev = prev;
+  91:..//kernel/core/include/tos_list.h ****     prev->next = next;
+  92:..//kernel/core/include/tos_list.h **** }
+  93:..//kernel/core/include/tos_list.h **** 
+  94:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_del_node(k_list_t *node)
+  95:..//kernel/core/include/tos_list.h **** {
+  96:..//kernel/core/include/tos_list.h ****     _list_del(node->prev, node->next);
+  97:..//kernel/core/include/tos_list.h **** }
+  98:..//kernel/core/include/tos_list.h **** 
+  99:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_init(k_list_t *list)
+ 100:..//kernel/core/include/tos_list.h **** {
+ 101:..//kernel/core/include/tos_list.h ****     list->next = list;
+ 102:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 103:..//kernel/core/include/tos_list.h **** }
+ 104:..//kernel/core/include/tos_list.h **** 
+ 105:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_add(k_list_t *node, k_list_t *list)
+ 106:..//kernel/core/include/tos_list.h **** {
+ 107:..//kernel/core/include/tos_list.h ****     _list_add(node, list, list->next);
+ 108:..//kernel/core/include/tos_list.h **** }
+ 109:..//kernel/core/include/tos_list.h **** 
+ 110:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_add_tail(k_list_t *node, k_list_t *list)
+ 111:..//kernel/core/include/tos_list.h **** {
+ 112:..//kernel/core/include/tos_list.h ****     _list_add(node, list->prev, list);
+ 113:..//kernel/core/include/tos_list.h **** }
+ 114:..//kernel/core/include/tos_list.h **** 
+ 115:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_del(k_list_t *node)
+ 116:..//kernel/core/include/tos_list.h **** {
+ 117:..//kernel/core/include/tos_list.h ****     _list_del(node->prev, node->next);
+ 118:..//kernel/core/include/tos_list.h **** }
+ 119:..//kernel/core/include/tos_list.h **** 
+ 120:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_del_init(k_list_t *node)
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 7
+
+
+ 121:..//kernel/core/include/tos_list.h **** {
+ 122:..//kernel/core/include/tos_list.h ****     _list_del_node(node);
+ 123:..//kernel/core/include/tos_list.h ****     tos_list_init(node);
+ 124:..//kernel/core/include/tos_list.h **** }
+ 125:..//kernel/core/include/tos_list.h **** 
+ 126:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_move(k_list_t *node, k_list_t *list)
+ 127:..//kernel/core/include/tos_list.h **** {
+ 128:..//kernel/core/include/tos_list.h ****     _list_del_node(node);
+ 129:..//kernel/core/include/tos_list.h ****     tos_list_add(node, list);
+ 130:..//kernel/core/include/tos_list.h **** }
+ 131:..//kernel/core/include/tos_list.h **** 
+ 132:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_move_tail(k_list_t *node, k_list_t *list)
+ 133:..//kernel/core/include/tos_list.h **** {
+ 134:..//kernel/core/include/tos_list.h ****     _list_del_node(node);
+ 135:..//kernel/core/include/tos_list.h ****     tos_list_add_tail(node, list);
+ 136:..//kernel/core/include/tos_list.h **** }
+ 137:..//kernel/core/include/tos_list.h **** 
+ 138:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ int tos_list_empty(const k_list_t *list)
+ 153              		.loc 2 138 31 view .LVU36
+ 154              	.LBB65:
+ 139:..//kernel/core/include/tos_list.h **** {
+ 140:..//kernel/core/include/tos_list.h ****     return list->next == list;
+ 155              		.loc 2 140 5 view .LVU37
+ 156              		.loc 2 140 16 is_stmt 0 view .LVU38
+ 157 0006 53F83000 		ldr	r0, [r3, r0, lsl #3]
+ 158              	.LVL13:
+ 159              		.loc 2 140 16 view .LVU39
+ 160              	.LBE65:
+ 161              	.LBE64:
+ 162              		.loc 1 73 12 view .LVU40
+ 163 000a 8242     		cmp	r2, r0
+ 164 000c 01D0     		beq	.L13
+ 165              		.loc 1 73 12 discriminator 1 view .LVU41
+ 166 000e 5038     		subs	r0, r0, #80
+ 167 0010 7047     		bx	lr
+ 168              	.L13:
+ 169              		.loc 1 73 12 view .LVU42
+ 170 0012 0020     		movs	r0, #0
+  74:..//kernel/core/tos_sched.c **** }
+ 171              		.loc 1 74 1 view .LVU43
+ 172 0014 7047     		bx	lr
+ 173              	.L15:
+ 174 0016 00BF     		.align	2
+ 175              	.L14:
+ 176 0018 00000000 		.word	k_rdyq
+ 177              		.cfi_endproc
+ 178              	.LFE115:
+ 180              		.section	.text.readyqueue_highest_ready_task_get,"ax",%progbits
+ 181              		.align	1
+ 182              		.global	readyqueue_highest_ready_task_get
+ 183              		.syntax unified
+ 184              		.thumb
+ 185              		.thumb_func
+ 186              		.fpu softvfp
+ 188              	readyqueue_highest_ready_task_get:
+ 189              	.LFB116:
+  75:..//kernel/core/tos_sched.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 8
+
+
+  76:..//kernel/core/tos_sched.c **** __KNL__ k_task_t *readyqueue_highest_ready_task_get(void)
+  77:..//kernel/core/tos_sched.c **** {
+ 190              		.loc 1 77 1 is_stmt 1 view -0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+  78:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 195              		.loc 1 78 5 view .LVU45
+  79:..//kernel/core/tos_sched.c **** 
+  80:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[k_rdyq.highest_prio];
+ 196              		.loc 1 80 5 view .LVU46
+ 197              		.loc 1 80 46 is_stmt 0 view .LVU47
+ 198 0000 034B     		ldr	r3, .L17
+ 199 0002 93F85420 		ldrb	r2, [r3, #84]	@ zero_extendqisi2
+ 200              	.LVL14:
+  81:..//kernel/core/tos_sched.c ****     return TOS_LIST_FIRST_ENTRY(task_list, k_task_t, pend_list);
+ 201              		.loc 1 81 5 is_stmt 1 view .LVU48
+ 202              		.loc 1 81 12 is_stmt 0 view .LVU49
+ 203 0006 53F83200 		ldr	r0, [r3, r2, lsl #3]
+  82:..//kernel/core/tos_sched.c **** }
+ 204              		.loc 1 82 1 view .LVU50
+ 205 000a 5038     		subs	r0, r0, #80
+ 206 000c 7047     		bx	lr
+ 207              	.L18:
+ 208 000e 00BF     		.align	2
+ 209              	.L17:
+ 210 0010 00000000 		.word	k_rdyq
+ 211              		.cfi_endproc
+ 212              	.LFE116:
+ 214              		.section	.text.readyqueue_init,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	readyqueue_init
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ 220              		.fpu softvfp
+ 222              	readyqueue_init:
+ 223              	.LFB117:
+  83:..//kernel/core/tos_sched.c **** 
+  84:..//kernel/core/tos_sched.c **** __KNL__ void readyqueue_init(void)
+  85:..//kernel/core/tos_sched.c **** {
+ 224              		.loc 1 85 1 is_stmt 1 view -0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              		@ link register save eliminated.
+  86:..//kernel/core/tos_sched.c ****     uint8_t i;
+ 229              		.loc 1 86 5 view .LVU52
+  87:..//kernel/core/tos_sched.c **** 
+  88:..//kernel/core/tos_sched.c ****     k_rdyq.highest_prio = TOS_CFG_TASK_PRIO_MAX;
+ 230              		.loc 1 88 5 view .LVU53
+ 231              		.loc 1 88 25 is_stmt 0 view .LVU54
+ 232 0000 0E4B     		ldr	r3, .L25
+ 233 0002 0A22     		movs	r2, #10
+ 234 0004 83F85420 		strb	r2, [r3, #84]
+  89:..//kernel/core/tos_sched.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 9
+
+
+  90:..//kernel/core/tos_sched.c ****     for (i = 0; i < TOS_CFG_TASK_PRIO_MAX; ++i) {
+ 235              		.loc 1 90 5 is_stmt 1 view .LVU55
+ 236              	.LVL15:
+ 237              		.loc 1 90 12 is_stmt 0 view .LVU56
+ 238 0008 0023     		movs	r3, #0
+ 239              	.LVL16:
+ 240              	.L20:
+ 241              		.loc 1 90 5 discriminator 1 view .LVU57
+ 242 000a 092B     		cmp	r3, #9
+ 243 000c 08D8     		bhi	.L24
+  91:..//kernel/core/tos_sched.c ****         tos_list_init(&k_rdyq.task_list_head[i]);
+ 244              		.loc 1 91 9 is_stmt 1 discriminator 3 view .LVU58
+ 245 000e 0B49     		ldr	r1, .L25
+ 246 0010 01EBC302 		add	r2, r1, r3, lsl #3
+ 247              	.LVL17:
+ 248              	.LBB66:
+ 249              	.LBI66:
+  99:..//kernel/core/include/tos_list.h **** {
+ 250              		.loc 2 99 32 discriminator 3 view .LVU59
+ 251              	.LBB67:
+ 101:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 252              		.loc 2 101 5 discriminator 3 view .LVU60
+ 101:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 253              		.loc 2 101 16 is_stmt 0 discriminator 3 view .LVU61
+ 254 0014 41F83320 		str	r2, [r1, r3, lsl #3]
+ 102:..//kernel/core/include/tos_list.h **** }
+ 255              		.loc 2 102 5 is_stmt 1 discriminator 3 view .LVU62
+ 102:..//kernel/core/include/tos_list.h **** }
+ 256              		.loc 2 102 16 is_stmt 0 discriminator 3 view .LVU63
+ 257 0018 5260     		str	r2, [r2, #4]
+ 258              	.LVL18:
+ 102:..//kernel/core/include/tos_list.h **** }
+ 259              		.loc 2 102 16 discriminator 3 view .LVU64
+ 260              	.LBE67:
+ 261              	.LBE66:
+  90:..//kernel/core/tos_sched.c ****         tos_list_init(&k_rdyq.task_list_head[i]);
+ 262              		.loc 1 90 44 discriminator 3 view .LVU65
+ 263 001a 0133     		adds	r3, r3, #1
+ 264              	.LVL19:
+  90:..//kernel/core/tos_sched.c ****         tos_list_init(&k_rdyq.task_list_head[i]);
+ 265              		.loc 1 90 44 discriminator 3 view .LVU66
+ 266 001c DBB2     		uxtb	r3, r3
+ 267              	.LVL20:
+  90:..//kernel/core/tos_sched.c ****         tos_list_init(&k_rdyq.task_list_head[i]);
+ 268              		.loc 1 90 44 discriminator 3 view .LVU67
+ 269 001e F4E7     		b	.L20
+ 270              	.L24:
+  92:..//kernel/core/tos_sched.c ****     }
+  93:..//kernel/core/tos_sched.c **** 
+  94:..//kernel/core/tos_sched.c ****     for (i = 0; i < K_PRIO_TBL_SIZE; ++i) {
+ 271              		.loc 1 94 12 view .LVU68
+ 272 0020 0023     		movs	r3, #0
+ 273              	.LVL21:
+ 274              		.loc 1 94 12 view .LVU69
+ 275 0022 07E0     		b	.L22
+ 276              	.LVL22:
+ 277              	.L23:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 10
+
+
+  95:..//kernel/core/tos_sched.c ****         k_rdyq.prio_mask[i] = 0;
+ 278              		.loc 1 95 9 is_stmt 1 discriminator 3 view .LVU70
+ 279              		.loc 1 95 29 is_stmt 0 discriminator 3 view .LVU71
+ 280 0024 03F11401 		add	r1, r3, #20
+ 281 0028 044A     		ldr	r2, .L25
+ 282 002a 0020     		movs	r0, #0
+ 283 002c 42F82100 		str	r0, [r2, r1, lsl #2]
+  94:..//kernel/core/tos_sched.c ****         k_rdyq.prio_mask[i] = 0;
+ 284              		.loc 1 94 38 discriminator 3 view .LVU72
+ 285 0030 0133     		adds	r3, r3, #1
+ 286              	.LVL23:
+  94:..//kernel/core/tos_sched.c ****         k_rdyq.prio_mask[i] = 0;
+ 287              		.loc 1 94 38 discriminator 3 view .LVU73
+ 288 0032 DBB2     		uxtb	r3, r3
+ 289              	.LVL24:
+ 290              	.L22:
+  94:..//kernel/core/tos_sched.c ****         k_rdyq.prio_mask[i] = 0;
+ 291              		.loc 1 94 5 discriminator 1 view .LVU74
+ 292 0034 002B     		cmp	r3, #0
+ 293 0036 F5D0     		beq	.L23
+  96:..//kernel/core/tos_sched.c ****     }
+  97:..//kernel/core/tos_sched.c **** }
+ 294              		.loc 1 97 1 view .LVU75
+ 295 0038 7047     		bx	lr
+ 296              	.L26:
+ 297 003a 00BF     		.align	2
+ 298              	.L25:
+ 299 003c 00000000 		.word	k_rdyq
+ 300              		.cfi_endproc
+ 301              	.LFE117:
+ 303              		.section	.text.readyqueue_add_head,"ax",%progbits
+ 304              		.align	1
+ 305              		.global	readyqueue_add_head
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.fpu softvfp
+ 311              	readyqueue_add_head:
+ 312              	.LVL25:
+ 313              	.LFB118:
+  98:..//kernel/core/tos_sched.c **** 
+  99:..//kernel/core/tos_sched.c **** __KNL__ void readyqueue_add_head(k_task_t *task)
+ 100:..//kernel/core/tos_sched.c **** {
+ 314              		.loc 1 100 1 is_stmt 1 view -0
+ 315              		.cfi_startproc
+ 316              		@ args = 0, pretend = 0, frame = 0
+ 317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 318              		@ link register save eliminated.
+ 319              		.loc 1 100 1 is_stmt 0 view .LVU77
+ 320 0000 F0B4     		push	{r4, r5, r6, r7}
+ 321              	.LCFI1:
+ 322              		.cfi_def_cfa_offset 16
+ 323              		.cfi_offset 4, -16
+ 324              		.cfi_offset 5, -12
+ 325              		.cfi_offset 6, -8
+ 326              		.cfi_offset 7, -4
+ 101:..//kernel/core/tos_sched.c ****     k_prio_t task_prio;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 11
+
+
+ 327              		.loc 1 101 5 is_stmt 1 view .LVU78
+ 102:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 328              		.loc 1 102 5 view .LVU79
+ 103:..//kernel/core/tos_sched.c **** 
+ 104:..//kernel/core/tos_sched.c ****     task_prio = task->prio;
+ 329              		.loc 1 104 5 view .LVU80
+ 330              		.loc 1 104 15 is_stmt 0 view .LVU81
+ 331 0002 90F82130 		ldrb	r3, [r0, #33]	@ zero_extendqisi2
+ 332              	.LVL26:
+ 105:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[task_prio];
+ 333              		.loc 1 105 5 is_stmt 1 view .LVU82
+ 334              		.loc 1 105 15 is_stmt 0 view .LVU83
+ 335 0006 134A     		ldr	r2, .L31
+ 336 0008 02EBC304 		add	r4, r2, r3, lsl #3
+ 337              	.LVL27:
+ 106:..//kernel/core/tos_sched.c **** 
+ 107:..//kernel/core/tos_sched.c ****     if (tos_list_empty(task_list)) {
+ 338              		.loc 1 107 5 is_stmt 1 view .LVU84
+ 339              	.LBB68:
+ 340              	.LBI68:
+ 138:..//kernel/core/include/tos_list.h **** {
+ 341              		.loc 2 138 31 view .LVU85
+ 342              	.LBB69:
+ 343              		.loc 2 140 5 view .LVU86
+ 344              		.loc 2 140 16 is_stmt 0 view .LVU87
+ 345 000c 52F83320 		ldr	r2, [r2, r3, lsl #3]
+ 346              	.LVL28:
+ 347              		.loc 2 140 16 view .LVU88
+ 348              	.LBE69:
+ 349              	.LBE68:
+ 350              		.loc 1 107 8 view .LVU89
+ 351 0010 9442     		cmp	r4, r2
+ 352 0012 09D0     		beq	.L30
+ 353              	.L28:
+ 108:..//kernel/core/tos_sched.c ****         readyqueue_prio_mark(task_prio);
+ 109:..//kernel/core/tos_sched.c ****     }
+ 110:..//kernel/core/tos_sched.c **** 
+ 111:..//kernel/core/tos_sched.c ****     tos_list_add(&task->pend_list, task_list);
+ 354              		.loc 1 111 5 is_stmt 1 view .LVU90
+ 355 0014 00F15001 		add	r1, r0, #80
+ 356              	.LVL29:
+ 357              	.LBB70:
+ 358              	.LBI70:
+ 105:..//kernel/core/include/tos_list.h **** {
+ 359              		.loc 2 105 32 view .LVU91
+ 360              	.LBE70:
+ 107:..//kernel/core/include/tos_list.h **** }
+ 361              		.loc 2 107 5 view .LVU92
+ 362              	.LBB73:
+ 363              	.LBB71:
+ 364              	.LBI71:
+  80:..//kernel/core/include/tos_list.h **** {
+ 365              		.loc 2 80 24 view .LVU93
+ 366              	.LBB72:
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ 367              		.loc 2 82 5 view .LVU94
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 12
+
+
+ 368              		.loc 2 82 16 is_stmt 0 view .LVU95
+ 369 0018 5160     		str	r1, [r2, #4]
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+ 370              		.loc 2 83 5 is_stmt 1 view .LVU96
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+ 371              		.loc 2 83 16 is_stmt 0 view .LVU97
+ 372 001a 0265     		str	r2, [r0, #80]
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+ 373              		.loc 2 84 5 is_stmt 1 view .LVU98
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+ 374              		.loc 2 84 16 is_stmt 0 view .LVU99
+ 375 001c 4465     		str	r4, [r0, #84]
+  85:..//kernel/core/include/tos_list.h **** }
+ 376              		.loc 2 85 5 is_stmt 1 view .LVU100
+  85:..//kernel/core/include/tos_list.h **** }
+ 377              		.loc 2 85 16 is_stmt 0 view .LVU101
+ 378 001e 0D4A     		ldr	r2, .L31
+ 379              	.LVL30:
+  85:..//kernel/core/include/tos_list.h **** }
+ 380              		.loc 2 85 16 view .LVU102
+ 381 0020 42F83310 		str	r1, [r2, r3, lsl #3]
+ 382              	.LVL31:
+  85:..//kernel/core/include/tos_list.h **** }
+ 383              		.loc 2 85 16 view .LVU103
+ 384              	.LBE72:
+ 385              	.LBE71:
+ 386              	.LBE73:
+ 112:..//kernel/core/tos_sched.c **** }
+ 387              		.loc 1 112 1 view .LVU104
+ 388 0024 F0BC     		pop	{r4, r5, r6, r7}
+ 389              	.LCFI2:
+ 390              		.cfi_remember_state
+ 391              		.cfi_restore 7
+ 392              		.cfi_restore 6
+ 393              		.cfi_restore 5
+ 394              		.cfi_restore 4
+ 395              		.cfi_def_cfa_offset 0
+ 396              	.LVL32:
+ 397              		.loc 1 112 1 view .LVU105
+ 398 0026 7047     		bx	lr
+ 399              	.LVL33:
+ 400              	.L30:
+ 401              	.LCFI3:
+ 402              		.cfi_restore_state
+ 108:..//kernel/core/tos_sched.c ****     }
+ 403              		.loc 1 108 9 is_stmt 1 view .LVU106
+ 404              	.LBB74:
+ 405              	.LBI74:
+  46:..//kernel/core/tos_sched.c **** {
+ 406              		.loc 1 46 24 view .LVU107
+ 407              	.LBB75:
+  48:..//kernel/core/tos_sched.c **** 
+ 408              		.loc 1 48 5 view .LVU108
+ 409              	.LBB76:
+ 410              	.LBI76:
+  36:..//kernel/core/tos_sched.c **** {
+ 411              		.loc 1 36 24 view .LVU109
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 13
+
+
+ 412              	.LBB77:
+  38:..//kernel/core/tos_sched.c **** }
+ 413              		.loc 1 38 5 view .LVU110
+  38:..//kernel/core/tos_sched.c **** }
+ 414              		.loc 1 38 40 is_stmt 0 view .LVU111
+ 415 0028 5909     		lsrs	r1, r3, #5
+  38:..//kernel/core/tos_sched.c **** }
+ 416              		.loc 1 38 43 view .LVU112
+ 417 002a DF43     		mvns	r7, r3
+ 418 002c 07F01F07 		and	r7, r7, #31
+ 419 0030 0126     		movs	r6, #1
+ 420 0032 06FA07F7 		lsl	r7, r6, r7
+  38:..//kernel/core/tos_sched.c **** }
+ 421              		.loc 1 38 40 view .LVU113
+ 422 0036 074D     		ldr	r5, .L31
+ 423 0038 1431     		adds	r1, r1, #20
+ 424 003a 55F82160 		ldr	r6, [r5, r1, lsl #2]
+ 425 003e 3E43     		orrs	r6, r6, r7
+ 426 0040 45F82160 		str	r6, [r5, r1, lsl #2]
+ 427              	.LVL34:
+  38:..//kernel/core/tos_sched.c **** }
+ 428              		.loc 1 38 40 view .LVU114
+ 429              	.LBE77:
+ 430              	.LBE76:
+  50:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+ 431              		.loc 1 50 5 is_stmt 1 view .LVU115
+  50:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+ 432              		.loc 1 50 22 is_stmt 0 view .LVU116
+ 433 0044 95F85410 		ldrb	r1, [r5, #84]	@ zero_extendqisi2
+  50:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+ 434              		.loc 1 50 8 view .LVU117
+ 435 0048 8B42     		cmp	r3, r1
+ 436 004a E3D2     		bcs	.L28
+  51:..//kernel/core/tos_sched.c ****     }
+ 437              		.loc 1 51 9 is_stmt 1 view .LVU118
+  51:..//kernel/core/tos_sched.c ****     }
+ 438              		.loc 1 51 29 is_stmt 0 view .LVU119
+ 439 004c 85F85430 		strb	r3, [r5, #84]
+ 440 0050 E0E7     		b	.L28
+ 441              	.L32:
+ 442 0052 00BF     		.align	2
+ 443              	.L31:
+ 444 0054 00000000 		.word	k_rdyq
+ 445              	.LBE75:
+ 446              	.LBE74:
+ 447              		.cfi_endproc
+ 448              	.LFE118:
+ 450              		.section	.text.readyqueue_add_tail,"ax",%progbits
+ 451              		.align	1
+ 452              		.global	readyqueue_add_tail
+ 453              		.syntax unified
+ 454              		.thumb
+ 455              		.thumb_func
+ 456              		.fpu softvfp
+ 458              	readyqueue_add_tail:
+ 459              	.LVL35:
+ 460              	.LFB119:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 14
+
+
+ 113:..//kernel/core/tos_sched.c **** 
+ 114:..//kernel/core/tos_sched.c **** __KNL__ void readyqueue_add_tail(k_task_t *task)
+ 115:..//kernel/core/tos_sched.c **** {
+ 461              		.loc 1 115 1 is_stmt 1 view -0
+ 462              		.cfi_startproc
+ 463              		@ args = 0, pretend = 0, frame = 0
+ 464              		@ frame_needed = 0, uses_anonymous_args = 0
+ 465              		@ link register save eliminated.
+ 466              		.loc 1 115 1 is_stmt 0 view .LVU121
+ 467 0000 70B4     		push	{r4, r5, r6}
+ 468              	.LCFI4:
+ 469              		.cfi_def_cfa_offset 12
+ 470              		.cfi_offset 4, -12
+ 471              		.cfi_offset 5, -8
+ 472              		.cfi_offset 6, -4
+ 116:..//kernel/core/tos_sched.c ****     k_prio_t task_prio;
+ 473              		.loc 1 116 5 is_stmt 1 view .LVU122
+ 117:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 474              		.loc 1 117 5 view .LVU123
+ 118:..//kernel/core/tos_sched.c **** 
+ 119:..//kernel/core/tos_sched.c ****     task_prio = task->prio;
+ 475              		.loc 1 119 5 view .LVU124
+ 476              		.loc 1 119 15 is_stmt 0 view .LVU125
+ 477 0002 90F82130 		ldrb	r3, [r0, #33]	@ zero_extendqisi2
+ 478              	.LVL36:
+ 120:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[task_prio];
+ 479              		.loc 1 120 5 is_stmt 1 view .LVU126
+ 480              		.loc 1 120 15 is_stmt 0 view .LVU127
+ 481 0006 144A     		ldr	r2, .L37
+ 482 0008 02EBC304 		add	r4, r2, r3, lsl #3
+ 483              	.LVL37:
+ 121:..//kernel/core/tos_sched.c **** 
+ 122:..//kernel/core/tos_sched.c ****     if (tos_list_empty(task_list)) {
+ 484              		.loc 1 122 5 is_stmt 1 view .LVU128
+ 485              	.LBB78:
+ 486              	.LBI78:
+ 138:..//kernel/core/include/tos_list.h **** {
+ 487              		.loc 2 138 31 view .LVU129
+ 488              	.LBB79:
+ 489              		.loc 2 140 5 view .LVU130
+ 490              		.loc 2 140 16 is_stmt 0 view .LVU131
+ 491 000c 52F83320 		ldr	r2, [r2, r3, lsl #3]
+ 492              	.LVL38:
+ 493              		.loc 2 140 16 view .LVU132
+ 494              	.LBE79:
+ 495              	.LBE78:
+ 496              		.loc 1 122 8 view .LVU133
+ 497 0010 9442     		cmp	r4, r2
+ 498 0012 0BD0     		beq	.L36
+ 499              	.L34:
+ 123:..//kernel/core/tos_sched.c ****         readyqueue_prio_mark(task_prio);
+ 124:..//kernel/core/tos_sched.c ****     }
+ 125:..//kernel/core/tos_sched.c **** 
+ 126:..//kernel/core/tos_sched.c ****     tos_list_add_tail(&task->pend_list, task_list);
+ 500              		.loc 1 126 5 is_stmt 1 view .LVU134
+ 501 0014 00F15001 		add	r1, r0, #80
+ 502              	.LVL39:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 15
+
+
+ 503              	.LBB80:
+ 504              	.LBI80:
+ 110:..//kernel/core/include/tos_list.h **** {
+ 505              		.loc 2 110 32 view .LVU135
+ 506              	.LBB81:
+ 112:..//kernel/core/include/tos_list.h **** }
+ 507              		.loc 2 112 5 view .LVU136
+ 112:..//kernel/core/include/tos_list.h **** }
+ 508              		.loc 2 112 25 is_stmt 0 view .LVU137
+ 509 0018 0F4A     		ldr	r2, .L37
+ 510 001a 02EBC303 		add	r3, r2, r3, lsl #3
+ 511              	.LVL40:
+ 112:..//kernel/core/include/tos_list.h **** }
+ 512              		.loc 2 112 25 view .LVU138
+ 513 001e 5A68     		ldr	r2, [r3, #4]
+ 514              	.LVL41:
+ 515              	.LBB82:
+ 516              	.LBI82:
+  80:..//kernel/core/include/tos_list.h **** {
+ 517              		.loc 2 80 24 is_stmt 1 view .LVU139
+ 518              	.LBB83:
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ 519              		.loc 2 82 5 view .LVU140
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ 520              		.loc 2 82 16 is_stmt 0 view .LVU141
+ 521 0020 5960     		str	r1, [r3, #4]
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+ 522              		.loc 2 83 5 is_stmt 1 view .LVU142
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+ 523              		.loc 2 83 16 is_stmt 0 view .LVU143
+ 524 0022 0465     		str	r4, [r0, #80]
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+ 525              		.loc 2 84 5 is_stmt 1 view .LVU144
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+ 526              		.loc 2 84 16 is_stmt 0 view .LVU145
+ 527 0024 4265     		str	r2, [r0, #84]
+  85:..//kernel/core/include/tos_list.h **** }
+ 528              		.loc 2 85 5 is_stmt 1 view .LVU146
+  85:..//kernel/core/include/tos_list.h **** }
+ 529              		.loc 2 85 16 is_stmt 0 view .LVU147
+ 530 0026 1160     		str	r1, [r2]
+ 531              	.LVL42:
+  85:..//kernel/core/include/tos_list.h **** }
+ 532              		.loc 2 85 16 view .LVU148
+ 533              	.LBE83:
+ 534              	.LBE82:
+ 535              	.LBE81:
+ 536              	.LBE80:
+ 127:..//kernel/core/tos_sched.c **** }
+ 537              		.loc 1 127 1 view .LVU149
+ 538 0028 70BC     		pop	{r4, r5, r6}
+ 539              	.LCFI5:
+ 540              		.cfi_remember_state
+ 541              		.cfi_restore 6
+ 542              		.cfi_restore 5
+ 543              		.cfi_restore 4
+ 544              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 16
+
+
+ 545              	.LVL43:
+ 546              		.loc 1 127 1 view .LVU150
+ 547 002a 7047     		bx	lr
+ 548              	.LVL44:
+ 549              	.L36:
+ 550              	.LCFI6:
+ 551              		.cfi_restore_state
+ 123:..//kernel/core/tos_sched.c ****     }
+ 552              		.loc 1 123 9 is_stmt 1 view .LVU151
+ 553              	.LBB84:
+ 554              	.LBI84:
+  46:..//kernel/core/tos_sched.c **** {
+ 555              		.loc 1 46 24 view .LVU152
+ 556              	.LBB85:
+  48:..//kernel/core/tos_sched.c **** 
+ 557              		.loc 1 48 5 view .LVU153
+ 558              	.LBB86:
+ 559              	.LBI86:
+  36:..//kernel/core/tos_sched.c **** {
+ 560              		.loc 1 36 24 view .LVU154
+ 561              	.LBB87:
+  38:..//kernel/core/tos_sched.c **** }
+ 562              		.loc 1 38 5 view .LVU155
+  38:..//kernel/core/tos_sched.c **** }
+ 563              		.loc 1 38 40 is_stmt 0 view .LVU156
+ 564 002c 5A09     		lsrs	r2, r3, #5
+  38:..//kernel/core/tos_sched.c **** }
+ 565              		.loc 1 38 43 view .LVU157
+ 566 002e DE43     		mvns	r6, r3
+ 567 0030 06F01F06 		and	r6, r6, #31
+ 568 0034 0125     		movs	r5, #1
+ 569 0036 05FA06F6 		lsl	r6, r5, r6
+  38:..//kernel/core/tos_sched.c **** }
+ 570              		.loc 1 38 40 view .LVU158
+ 571 003a 0749     		ldr	r1, .L37
+ 572 003c 1432     		adds	r2, r2, #20
+ 573 003e 51F82250 		ldr	r5, [r1, r2, lsl #2]
+ 574 0042 3543     		orrs	r5, r5, r6
+ 575 0044 41F82250 		str	r5, [r1, r2, lsl #2]
+ 576              	.LVL45:
+  38:..//kernel/core/tos_sched.c **** }
+ 577              		.loc 1 38 40 view .LVU159
+ 578              	.LBE87:
+ 579              	.LBE86:
+  50:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+ 580              		.loc 1 50 5 is_stmt 1 view .LVU160
+  50:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+ 581              		.loc 1 50 22 is_stmt 0 view .LVU161
+ 582 0048 91F85420 		ldrb	r2, [r1, #84]	@ zero_extendqisi2
+  50:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = prio;
+ 583              		.loc 1 50 8 view .LVU162
+ 584 004c 9342     		cmp	r3, r2
+ 585 004e E1D2     		bcs	.L34
+  51:..//kernel/core/tos_sched.c ****     }
+ 586              		.loc 1 51 9 is_stmt 1 view .LVU163
+  51:..//kernel/core/tos_sched.c ****     }
+ 587              		.loc 1 51 29 is_stmt 0 view .LVU164
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 17
+
+
+ 588 0050 81F85430 		strb	r3, [r1, #84]
+ 589 0054 DEE7     		b	.L34
+ 590              	.L38:
+ 591 0056 00BF     		.align	2
+ 592              	.L37:
+ 593 0058 00000000 		.word	k_rdyq
+ 594              	.LBE85:
+ 595              	.LBE84:
+ 596              		.cfi_endproc
+ 597              	.LFE119:
+ 599              		.section	.text.readyqueue_add,"ax",%progbits
+ 600              		.align	1
+ 601              		.global	readyqueue_add
+ 602              		.syntax unified
+ 603              		.thumb
+ 604              		.thumb_func
+ 605              		.fpu softvfp
+ 607              	readyqueue_add:
+ 608              	.LVL46:
+ 609              	.LFB120:
+ 128:..//kernel/core/tos_sched.c **** 
+ 129:..//kernel/core/tos_sched.c **** __KNL__ void readyqueue_add(k_task_t *task)
+ 130:..//kernel/core/tos_sched.c **** {
+ 610              		.loc 1 130 1 is_stmt 1 view -0
+ 611              		.cfi_startproc
+ 612              		@ args = 0, pretend = 0, frame = 0
+ 613              		@ frame_needed = 0, uses_anonymous_args = 0
+ 614              		.loc 1 130 1 is_stmt 0 view .LVU166
+ 615 0000 08B5     		push	{r3, lr}
+ 616              	.LCFI7:
+ 617              		.cfi_def_cfa_offset 8
+ 618              		.cfi_offset 3, -8
+ 619              		.cfi_offset 14, -4
+ 131:..//kernel/core/tos_sched.c ****     if (task->prio == k_curr_task->prio) {
+ 620              		.loc 1 131 5 is_stmt 1 view .LVU167
+ 621              		.loc 1 131 13 is_stmt 0 view .LVU168
+ 622 0002 90F82120 		ldrb	r2, [r0, #33]	@ zero_extendqisi2
+ 623              		.loc 1 131 34 view .LVU169
+ 624 0006 064B     		ldr	r3, .L44
+ 625 0008 1B68     		ldr	r3, [r3]
+ 626 000a 93F82130 		ldrb	r3, [r3, #33]	@ zero_extendqisi2
+ 627              		.loc 1 131 8 view .LVU170
+ 628 000e 9A42     		cmp	r2, r3
+ 629 0010 02D0     		beq	.L43
+ 132:..//kernel/core/tos_sched.c ****         readyqueue_add_tail(task);
+ 133:..//kernel/core/tos_sched.c ****     } else {
+ 134:..//kernel/core/tos_sched.c ****         readyqueue_add_head(task);
+ 630              		.loc 1 134 9 is_stmt 1 view .LVU171
+ 631 0012 FFF7FEFF 		bl	readyqueue_add_head
+ 632              	.LVL47:
+ 633              	.L39:
+ 135:..//kernel/core/tos_sched.c ****     }
+ 136:..//kernel/core/tos_sched.c **** }
+ 634              		.loc 1 136 1 is_stmt 0 view .LVU172
+ 635 0016 08BD     		pop	{r3, pc}
+ 636              	.LVL48:
+ 637              	.L43:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 18
+
+
+ 132:..//kernel/core/tos_sched.c ****         readyqueue_add_tail(task);
+ 638              		.loc 1 132 9 is_stmt 1 view .LVU173
+ 639 0018 FFF7FEFF 		bl	readyqueue_add_tail
+ 640              	.LVL49:
+ 132:..//kernel/core/tos_sched.c ****         readyqueue_add_tail(task);
+ 641              		.loc 1 132 9 is_stmt 0 view .LVU174
+ 642 001c FBE7     		b	.L39
+ 643              	.L45:
+ 644 001e 00BF     		.align	2
+ 645              	.L44:
+ 646 0020 00000000 		.word	k_curr_task
+ 647              		.cfi_endproc
+ 648              	.LFE120:
+ 650              		.section	.text.readyqueue_remove,"ax",%progbits
+ 651              		.align	1
+ 652              		.global	readyqueue_remove
+ 653              		.syntax unified
+ 654              		.thumb
+ 655              		.thumb_func
+ 656              		.fpu softvfp
+ 658              	readyqueue_remove:
+ 659              	.LVL50:
+ 660              	.LFB121:
+ 137:..//kernel/core/tos_sched.c **** 
+ 138:..//kernel/core/tos_sched.c **** __KNL__ void readyqueue_remove(k_task_t *task)
+ 139:..//kernel/core/tos_sched.c **** {
+ 661              		.loc 1 139 1 is_stmt 1 view -0
+ 662              		.cfi_startproc
+ 663              		@ args = 0, pretend = 0, frame = 0
+ 664              		@ frame_needed = 0, uses_anonymous_args = 0
+ 665              		.loc 1 139 1 is_stmt 0 view .LVU176
+ 666 0000 10B5     		push	{r4, lr}
+ 667              	.LCFI8:
+ 668              		.cfi_def_cfa_offset 8
+ 669              		.cfi_offset 4, -8
+ 670              		.cfi_offset 14, -4
+ 140:..//kernel/core/tos_sched.c ****     k_prio_t task_prio;
+ 671              		.loc 1 140 5 is_stmt 1 view .LVU177
+ 141:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 672              		.loc 1 141 5 view .LVU178
+ 142:..//kernel/core/tos_sched.c **** 
+ 143:..//kernel/core/tos_sched.c ****     task_prio = task->prio;
+ 673              		.loc 1 143 5 view .LVU179
+ 674              		.loc 1 143 15 is_stmt 0 view .LVU180
+ 675 0002 90F82130 		ldrb	r3, [r0, #33]	@ zero_extendqisi2
+ 676              	.LVL51:
+ 144:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[task_prio];
+ 677              		.loc 1 144 5 is_stmt 1 view .LVU181
+ 678              		.loc 1 144 15 is_stmt 0 view .LVU182
+ 679 0006 134A     		ldr	r2, .L52
+ 680 0008 02EBC304 		add	r4, r2, r3, lsl #3
+ 681              	.LVL52:
+ 145:..//kernel/core/tos_sched.c **** 
+ 146:..//kernel/core/tos_sched.c ****     tos_list_del(&task->pend_list);
+ 682              		.loc 1 146 5 is_stmt 1 view .LVU183
+ 683              	.LBB88:
+ 684              	.LBI88:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 19
+
+
+ 115:..//kernel/core/include/tos_list.h **** {
+ 685              		.loc 2 115 32 view .LVU184
+ 686              	.LBB89:
+ 117:..//kernel/core/include/tos_list.h **** }
+ 687              		.loc 2 117 5 view .LVU185
+ 117:..//kernel/core/include/tos_list.h **** }
+ 688              		.loc 2 117 19 is_stmt 0 view .LVU186
+ 689 000c 416D     		ldr	r1, [r0, #84]
+ 117:..//kernel/core/include/tos_list.h **** }
+ 690              		.loc 2 117 31 view .LVU187
+ 691 000e 006D     		ldr	r0, [r0, #80]
+ 692              	.LVL53:
+ 693              	.LBB90:
+ 694              	.LBI90:
+  88:..//kernel/core/include/tos_list.h **** {
+ 695              		.loc 2 88 24 is_stmt 1 view .LVU188
+ 696              	.LBB91:
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 697              		.loc 2 90 5 view .LVU189
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 698              		.loc 2 90 16 is_stmt 0 view .LVU190
+ 699 0010 4160     		str	r1, [r0, #4]
+  91:..//kernel/core/include/tos_list.h **** }
+ 700              		.loc 2 91 5 is_stmt 1 view .LVU191
+  91:..//kernel/core/include/tos_list.h **** }
+ 701              		.loc 2 91 16 is_stmt 0 view .LVU192
+ 702 0012 0860     		str	r0, [r1]
+ 703              	.LVL54:
+  91:..//kernel/core/include/tos_list.h **** }
+ 704              		.loc 2 91 16 view .LVU193
+ 705              	.LBE91:
+ 706              	.LBE90:
+ 707              	.LBE89:
+ 708              	.LBE88:
+ 147:..//kernel/core/tos_sched.c **** 
+ 148:..//kernel/core/tos_sched.c ****     if (tos_list_empty(task_list)) {
+ 709              		.loc 1 148 5 is_stmt 1 view .LVU194
+ 710              	.LBB92:
+ 711              	.LBI92:
+ 138:..//kernel/core/include/tos_list.h **** {
+ 712              		.loc 2 138 31 view .LVU195
+ 713              	.LBB93:
+ 714              		.loc 2 140 5 view .LVU196
+ 715              		.loc 2 140 16 is_stmt 0 view .LVU197
+ 716 0014 52F83320 		ldr	r2, [r2, r3, lsl #3]
+ 717              	.LVL55:
+ 718              		.loc 2 140 16 view .LVU198
+ 719              	.LBE93:
+ 720              	.LBE92:
+ 721              		.loc 1 148 8 view .LVU199
+ 722 0018 9442     		cmp	r4, r2
+ 723 001a 05D0     		beq	.L50
+ 724              	.LVL56:
+ 725              	.L47:
+ 149:..//kernel/core/tos_sched.c ****         readyqueue_prio_remove(task_prio);
+ 150:..//kernel/core/tos_sched.c ****     }
+ 151:..//kernel/core/tos_sched.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 20
+
+
+ 152:..//kernel/core/tos_sched.c ****     if (task_prio == k_rdyq.highest_prio) {
+ 726              		.loc 1 152 5 is_stmt 1 view .LVU200
+ 727              		.loc 1 152 28 is_stmt 0 view .LVU201
+ 728 001c 0D4A     		ldr	r2, .L52
+ 729              	.LVL57:
+ 730              		.loc 1 152 28 view .LVU202
+ 731 001e 92F85420 		ldrb	r2, [r2, #84]	@ zero_extendqisi2
+ 732              	.LVL58:
+ 733              		.loc 1 152 8 view .LVU203
+ 734 0022 9A42     		cmp	r2, r3
+ 735 0024 10D0     		beq	.L51
+ 736              	.LVL59:
+ 737              	.L46:
+ 153:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = readyqueue_prio_highest_get();
+ 154:..//kernel/core/tos_sched.c ****     }
+ 155:..//kernel/core/tos_sched.c **** }
+ 738              		.loc 1 155 1 view .LVU204
+ 739 0026 10BD     		pop	{r4, pc}
+ 740              	.LVL60:
+ 741              	.L50:
+ 149:..//kernel/core/tos_sched.c ****         readyqueue_prio_remove(task_prio);
+ 742              		.loc 1 149 9 is_stmt 1 view .LVU205
+ 743              	.LBB94:
+ 744              	.LBI94:
+  41:..//kernel/core/tos_sched.c **** {
+ 745              		.loc 1 41 24 view .LVU206
+ 746              	.LBB95:
+  43:..//kernel/core/tos_sched.c **** }
+ 747              		.loc 1 43 5 view .LVU207
+  43:..//kernel/core/tos_sched.c **** }
+ 748              		.loc 1 43 40 is_stmt 0 view .LVU208
+ 749 0028 5A09     		lsrs	r2, r3, #5
+  43:..//kernel/core/tos_sched.c **** }
+ 750              		.loc 1 43 44 view .LVU209
+ 751 002a D843     		mvns	r0, r3
+ 752 002c 00F01F00 		and	r0, r0, #31
+ 753 0030 0121     		movs	r1, #1
+ 754 0032 01FA00F0 		lsl	r0, r1, r0
+  43:..//kernel/core/tos_sched.c **** }
+ 755              		.loc 1 43 40 view .LVU210
+ 756 0036 074C     		ldr	r4, .L52
+ 757              	.LVL61:
+  43:..//kernel/core/tos_sched.c **** }
+ 758              		.loc 1 43 40 view .LVU211
+ 759 0038 1432     		adds	r2, r2, #20
+ 760 003a 54F82210 		ldr	r1, [r4, r2, lsl #2]
+ 761 003e 21EA0001 		bic	r1, r1, r0
+ 762 0042 44F82210 		str	r1, [r4, r2, lsl #2]
+ 763 0046 E9E7     		b	.L47
+ 764              	.LVL62:
+ 765              	.L51:
+  43:..//kernel/core/tos_sched.c **** }
+ 766              		.loc 1 43 40 view .LVU212
+ 767              	.LBE95:
+ 768              	.LBE94:
+ 153:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = readyqueue_prio_highest_get();
+ 769              		.loc 1 153 9 is_stmt 1 view .LVU213
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 21
+
+
+ 153:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = readyqueue_prio_highest_get();
+ 770              		.loc 1 153 31 is_stmt 0 view .LVU214
+ 771 0048 FFF7FEFF 		bl	readyqueue_prio_highest_get
+ 772              	.LVL63:
+ 153:..//kernel/core/tos_sched.c ****         k_rdyq.highest_prio = readyqueue_prio_highest_get();
+ 773              		.loc 1 153 29 view .LVU215
+ 774 004c 014B     		ldr	r3, .L52
+ 775 004e 83F85400 		strb	r0, [r3, #84]
+ 776              		.loc 1 155 1 view .LVU216
+ 777 0052 E8E7     		b	.L46
+ 778              	.L53:
+ 779              		.align	2
+ 780              	.L52:
+ 781 0054 00000000 		.word	k_rdyq
+ 782              		.cfi_endproc
+ 783              	.LFE121:
+ 785              		.section	.text.readyqueue_move_head_to_tail,"ax",%progbits
+ 786              		.align	1
+ 787              		.global	readyqueue_move_head_to_tail
+ 788              		.syntax unified
+ 789              		.thumb
+ 790              		.thumb_func
+ 791              		.fpu softvfp
+ 793              	readyqueue_move_head_to_tail:
+ 794              	.LVL64:
+ 795              	.LFB122:
+ 156:..//kernel/core/tos_sched.c **** 
+ 157:..//kernel/core/tos_sched.c **** __KNL__ void readyqueue_move_head_to_tail(k_prio_t prio)
+ 158:..//kernel/core/tos_sched.c **** {
+ 796              		.loc 1 158 1 is_stmt 1 view -0
+ 797              		.cfi_startproc
+ 798              		@ args = 0, pretend = 0, frame = 0
+ 799              		@ frame_needed = 0, uses_anonymous_args = 0
+ 800              		@ link register save eliminated.
+ 159:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 801              		.loc 1 159 5 view .LVU218
+ 160:..//kernel/core/tos_sched.c **** 
+ 161:..//kernel/core/tos_sched.c ****     task_list = &k_rdyq.task_list_head[prio];
+ 802              		.loc 1 161 5 view .LVU219
+ 803              		.loc 1 161 15 is_stmt 0 view .LVU220
+ 804 0000 094B     		ldr	r3, .L60
+ 805 0002 03EBC001 		add	r1, r3, r0, lsl #3
+ 806              	.LVL65:
+ 162:..//kernel/core/tos_sched.c **** 
+ 163:..//kernel/core/tos_sched.c ****     if (!tos_list_empty(task_list)) {
+ 807              		.loc 1 163 5 is_stmt 1 view .LVU221
+ 808              	.LBB96:
+ 809              	.LBI96:
+ 138:..//kernel/core/include/tos_list.h **** {
+ 810              		.loc 2 138 31 view .LVU222
+ 811              	.LBB97:
+ 812              		.loc 2 140 5 view .LVU223
+ 813              		.loc 2 140 16 is_stmt 0 view .LVU224
+ 814 0006 53F83030 		ldr	r3, [r3, r0, lsl #3]
+ 815              	.LVL66:
+ 816              		.loc 2 140 16 view .LVU225
+ 817              	.LBE97:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 22
+
+
+ 818              	.LBE96:
+ 819              		.loc 1 163 8 view .LVU226
+ 820 000a 9942     		cmp	r1, r3
+ 821 000c 0BD0     		beq	.L57
+ 158:..//kernel/core/tos_sched.c ****     k_list_t *task_list;
+ 822              		.loc 1 158 1 view .LVU227
+ 823 000e 10B4     		push	{r4}
+ 824              	.LCFI9:
+ 825              		.cfi_def_cfa_offset 4
+ 826              		.cfi_offset 4, -4
+ 164:..//kernel/core/tos_sched.c ****         tos_list_move_tail(task_list->next, task_list);
+ 827              		.loc 1 164 9 is_stmt 1 view .LVU228
+ 828              	.LVL67:
+ 829              	.LBB98:
+ 830              	.LBI98:
+ 132:..//kernel/core/include/tos_list.h **** {
+ 831              		.loc 2 132 32 view .LVU229
+ 832              	.LBE98:
+ 134:..//kernel/core/include/tos_list.h ****     tos_list_add_tail(node, list);
+ 833              		.loc 2 134 5 view .LVU230
+ 834              	.LBB107:
+ 835              	.LBB99:
+ 836              	.LBI99:
+  94:..//kernel/core/include/tos_list.h **** {
+ 837              		.loc 2 94 24 view .LVU231
+ 838              	.LBB100:
+  96:..//kernel/core/include/tos_list.h **** }
+ 839              		.loc 2 96 5 view .LVU232
+  96:..//kernel/core/include/tos_list.h **** }
+ 840              		.loc 2 96 19 is_stmt 0 view .LVU233
+ 841 0010 5A68     		ldr	r2, [r3, #4]
+  96:..//kernel/core/include/tos_list.h **** }
+ 842              		.loc 2 96 31 view .LVU234
+ 843 0012 1C68     		ldr	r4, [r3]
+ 844              	.LVL68:
+ 845              	.LBB101:
+ 846              	.LBI101:
+  88:..//kernel/core/include/tos_list.h **** {
+ 847              		.loc 2 88 24 is_stmt 1 view .LVU235
+ 848              	.LBB102:
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 849              		.loc 2 90 5 view .LVU236
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 850              		.loc 2 90 16 is_stmt 0 view .LVU237
+ 851 0014 6260     		str	r2, [r4, #4]
+  91:..//kernel/core/include/tos_list.h **** }
+ 852              		.loc 2 91 5 is_stmt 1 view .LVU238
+  91:..//kernel/core/include/tos_list.h **** }
+ 853              		.loc 2 91 16 is_stmt 0 view .LVU239
+ 854 0016 1460     		str	r4, [r2]
+ 855              	.LVL69:
+  91:..//kernel/core/include/tos_list.h **** }
+ 856              		.loc 2 91 16 view .LVU240
+ 857              	.LBE102:
+ 858              	.LBE101:
+ 859              	.LBE100:
+ 860              	.LBE99:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 23
+
+
+ 861              	.LBE107:
+ 135:..//kernel/core/include/tos_list.h **** }
+ 862              		.loc 2 135 5 is_stmt 1 view .LVU241
+ 863              	.LBB108:
+ 864              	.LBB103:
+ 865              	.LBI103:
+ 110:..//kernel/core/include/tos_list.h **** {
+ 866              		.loc 2 110 32 view .LVU242
+ 867              	.LBB104:
+ 112:..//kernel/core/include/tos_list.h **** }
+ 868              		.loc 2 112 5 view .LVU243
+ 112:..//kernel/core/include/tos_list.h **** }
+ 869              		.loc 2 112 25 is_stmt 0 view .LVU244
+ 870 0018 4A68     		ldr	r2, [r1, #4]
+ 871              	.LVL70:
+ 872              	.LBB105:
+ 873              	.LBI105:
+  80:..//kernel/core/include/tos_list.h **** {
+ 874              		.loc 2 80 24 is_stmt 1 view .LVU245
+ 875              	.LBB106:
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ 876              		.loc 2 82 5 view .LVU246
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ 877              		.loc 2 82 16 is_stmt 0 view .LVU247
+ 878 001a 4B60     		str	r3, [r1, #4]
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+ 879              		.loc 2 83 5 is_stmt 1 view .LVU248
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+ 880              		.loc 2 83 16 is_stmt 0 view .LVU249
+ 881 001c 1960     		str	r1, [r3]
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+ 882              		.loc 2 84 5 is_stmt 1 view .LVU250
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+ 883              		.loc 2 84 16 is_stmt 0 view .LVU251
+ 884 001e 5A60     		str	r2, [r3, #4]
+  85:..//kernel/core/include/tos_list.h **** }
+ 885              		.loc 2 85 5 is_stmt 1 view .LVU252
+  85:..//kernel/core/include/tos_list.h **** }
+ 886              		.loc 2 85 16 is_stmt 0 view .LVU253
+ 887 0020 1360     		str	r3, [r2]
+ 888              	.LVL71:
+  85:..//kernel/core/include/tos_list.h **** }
+ 889              		.loc 2 85 16 view .LVU254
+ 890              	.LBE106:
+ 891              	.LBE105:
+ 892              	.LBE104:
+ 893              	.LBE103:
+ 894              	.LBE108:
+ 165:..//kernel/core/tos_sched.c ****     }
+ 166:..//kernel/core/tos_sched.c **** }
+ 895              		.loc 1 166 1 view .LVU255
+ 896 0022 10BC     		pop	{r4}
+ 897              	.LCFI10:
+ 898              		.cfi_restore 4
+ 899              		.cfi_def_cfa_offset 0
+ 900 0024 7047     		bx	lr
+ 901              	.LVL72:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 24
+
+
+ 902              	.L57:
+ 903              		.loc 1 166 1 view .LVU256
+ 904 0026 7047     		bx	lr
+ 905              	.L61:
+ 906              		.align	2
+ 907              	.L60:
+ 908 0028 00000000 		.word	k_rdyq
+ 909              		.cfi_endproc
+ 910              	.LFE122:
+ 912              		.text
+ 913              	.Letext0:
+ 914              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 915              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 916              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 917              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 918              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 919              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 920              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 921              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 922              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 923              		.file 12 "..//kernel/core/include/tos_ktypes.h"
+ 924              		.file 13 "..//kernel/core/include/tos_task.h"
+ 925              		.file 14 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 926              		.file 15 "..//kernel/core/include/tos_pend.h"
+ 927              		.file 16 "..//kernel/core/include/tos_sys.h"
+ 928              		.file 17 "..//kernel/core/include/tos_timer.h"
+ 929              		.file 18 "..//kernel/core/include/tos_mmheap.h"
+ 930              		.file 19 "..//kernel/core/include/tos_sched.h"
+ 931              		.file 20 "..//kernel/core/include/tos_global.h"
+ 932              		.file 21 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_sched.c
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:16     .text.readyqueue_prio_highest_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:23     .text.readyqueue_prio_highest_get:00000000 readyqueue_prio_highest_get
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:79     .text.readyqueue_prio_highest_get:0000001c $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:84     .text.readyqueue_is_prio_onlyone:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:91     .text.readyqueue_is_prio_onlyone:00000000 readyqueue_is_prio_onlyone
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:123    .text.readyqueue_is_prio_onlyone:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:128    .text.readyqueue_first_task_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:135    .text.readyqueue_first_task_get:00000000 readyqueue_first_task_get
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:176    .text.readyqueue_first_task_get:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:181    .text.readyqueue_highest_ready_task_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:188    .text.readyqueue_highest_ready_task_get:00000000 readyqueue_highest_ready_task_get
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:210    .text.readyqueue_highest_ready_task_get:00000010 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:215    .text.readyqueue_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:222    .text.readyqueue_init:00000000 readyqueue_init
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:299    .text.readyqueue_init:0000003c $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:304    .text.readyqueue_add_head:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:311    .text.readyqueue_add_head:00000000 readyqueue_add_head
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:444    .text.readyqueue_add_head:00000054 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:451    .text.readyqueue_add_tail:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:458    .text.readyqueue_add_tail:00000000 readyqueue_add_tail
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:593    .text.readyqueue_add_tail:00000058 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:600    .text.readyqueue_add:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:607    .text.readyqueue_add:00000000 readyqueue_add
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:646    .text.readyqueue_add:00000020 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:651    .text.readyqueue_remove:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:658    .text.readyqueue_remove:00000000 readyqueue_remove
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:781    .text.readyqueue_remove:00000054 $d
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:786    .text.readyqueue_move_head_to_tail:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:793    .text.readyqueue_move_head_to_tail:00000000 readyqueue_move_head_to_tail
+C:\Users\tianx\AppData\Local\Temp\ccj5F1Za.s:908    .text.readyqueue_move_head_to_tail:00000028 $d
+
+UNDEFINED SYMBOLS
+tos_cpu_clz
+k_rdyq
+k_curr_task

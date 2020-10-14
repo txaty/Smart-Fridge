@@ -1,0 +1,538 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_time.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_systick_get,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_systick_get
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_systick_get:
+  25              	.LFB110:
+  26              		.file 1 "..//kernel/core/tos_time.c"
+   1:..//kernel/core/tos_time.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_time.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_time.c ****  * available.
+   4:..//kernel/core/tos_time.c ****  *
+   5:..//kernel/core/tos_time.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_time.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_time.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_time.c ****  *
+   9:..//kernel/core/tos_time.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_time.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_time.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_time.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_time.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_time.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_time.c ****  * within TencentOS.
+  16:..//kernel/core/tos_time.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_time.c **** 
+  18:..//kernel/core/tos_time.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_time.c **** 
+  20:..//kernel/core/tos_time.c **** __API__ k_tick_t tos_systick_get(void)
+  21:..//kernel/core/tos_time.c **** {
+  27              		.loc 1 21 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 38B5     		push	{r3, r4, r5, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 3, -16
+  35              		.cfi_offset 4, -12
+  36              		.cfi_offset 5, -8
+  37              		.cfi_offset 14, -4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 2
+
+
+  22:..//kernel/core/tos_time.c ****     TOS_CPU_CPSR_ALLOC();
+  38              		.loc 1 22 5 view .LVU1
+  39              	.LVL0:
+  23:..//kernel/core/tos_time.c ****     k_tick_t tick;
+  40              		.loc 1 23 5 view .LVU2
+  24:..//kernel/core/tos_time.c **** 
+  25:..//kernel/core/tos_time.c ****     TOS_CPU_INT_DISABLE();
+  41              		.loc 1 25 5 view .LVU3
+  42              		.loc 1 25 5 view .LVU4
+  43 0002 FFF7FEFF 		bl	tos_cpu_cpsr_save
+  44              	.LVL1:
+  26:..//kernel/core/tos_time.c ****     tick = k_tick_count;
+  45              		.loc 1 26 5 view .LVU5
+  46              		.loc 1 26 10 is_stmt 0 view .LVU6
+  47 0006 044B     		ldr	r3, .L3
+  48 0008 D3E90045 		ldrd	r4, [r3]
+  49              	.LVL2:
+  27:..//kernel/core/tos_time.c ****     TOS_CPU_INT_ENABLE();
+  50              		.loc 1 27 5 is_stmt 1 view .LVU7
+  51              		.loc 1 27 5 view .LVU8
+  52 000c FFF7FEFF 		bl	tos_cpu_cpsr_restore
+  53              	.LVL3:
+  28:..//kernel/core/tos_time.c ****     return tick;
+  54              		.loc 1 28 5 view .LVU9
+  29:..//kernel/core/tos_time.c **** }
+  55              		.loc 1 29 1 is_stmt 0 view .LVU10
+  56 0010 2046     		mov	r0, r4
+  57 0012 2946     		mov	r1, r5
+  58 0014 38BD     		pop	{r3, r4, r5, pc}
+  59              	.LVL4:
+  60              	.L4:
+  61              		.loc 1 29 1 view .LVU11
+  62 0016 00BF     		.align	2
+  63              	.L3:
+  64 0018 00000000 		.word	k_tick_count
+  65              		.cfi_endproc
+  66              	.LFE110:
+  68              		.section	.text.tos_systick_set,"ax",%progbits
+  69              		.align	1
+  70              		.global	tos_systick_set
+  71              		.syntax unified
+  72              		.thumb
+  73              		.thumb_func
+  74              		.fpu softvfp
+  76              	tos_systick_set:
+  77              	.LVL5:
+  78              	.LFB111:
+  30:..//kernel/core/tos_time.c **** 
+  31:..//kernel/core/tos_time.c **** __API__ void tos_systick_set(k_tick_t tick)
+  32:..//kernel/core/tos_time.c **** {
+  79              		.loc 1 32 1 is_stmt 1 view -0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		.loc 1 32 1 is_stmt 0 view .LVU13
+  84 0000 38B5     		push	{r3, r4, r5, lr}
+  85              	.LCFI1:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 3
+
+
+  86              		.cfi_def_cfa_offset 16
+  87              		.cfi_offset 3, -16
+  88              		.cfi_offset 4, -12
+  89              		.cfi_offset 5, -8
+  90              		.cfi_offset 14, -4
+  91 0002 0446     		mov	r4, r0
+  92 0004 0D46     		mov	r5, r1
+  33:..//kernel/core/tos_time.c ****     TOS_CPU_CPSR_ALLOC();
+  93              		.loc 1 33 5 is_stmt 1 view .LVU14
+  94              	.LVL6:
+  34:..//kernel/core/tos_time.c **** 
+  35:..//kernel/core/tos_time.c ****     TOS_CPU_INT_DISABLE();
+  95              		.loc 1 35 5 view .LVU15
+  96              		.loc 1 35 5 view .LVU16
+  97 0006 FFF7FEFF 		bl	tos_cpu_cpsr_save
+  98              	.LVL7:
+  36:..//kernel/core/tos_time.c ****     k_tick_count = tick;
+  99              		.loc 1 36 5 view .LVU17
+ 100              		.loc 1 36 18 is_stmt 0 view .LVU18
+ 101 000a 034B     		ldr	r3, .L7
+ 102 000c C3E90045 		strd	r4, [r3]
+  37:..//kernel/core/tos_time.c ****     TOS_CPU_INT_ENABLE();
+ 103              		.loc 1 37 5 is_stmt 1 view .LVU19
+ 104              		.loc 1 37 5 view .LVU20
+ 105 0010 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 106              	.LVL8:
+  38:..//kernel/core/tos_time.c **** }
+ 107              		.loc 1 38 1 is_stmt 0 view .LVU21
+ 108 0014 38BD     		pop	{r3, r4, r5, pc}
+ 109              	.L8:
+ 110 0016 00BF     		.align	2
+ 111              	.L7:
+ 112 0018 00000000 		.word	k_tick_count
+ 113              		.cfi_endproc
+ 114              	.LFE111:
+ 116              		.global	__aeabi_uldivmod
+ 117              		.section	.text.tos_tick2millisec,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	tos_tick2millisec
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.fpu softvfp
+ 125              	tos_tick2millisec:
+ 126              	.LVL9:
+ 127              	.LFB112:
+  39:..//kernel/core/tos_time.c **** 
+  40:..//kernel/core/tos_time.c **** __API__ k_time_t tos_tick2millisec(k_tick_t tick)
+  41:..//kernel/core/tos_time.c **** {
+ 128              		.loc 1 41 1 is_stmt 1 view -0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		.loc 1 41 1 is_stmt 0 view .LVU23
+ 133 0000 38B5     		push	{r3, r4, r5, lr}
+ 134              	.LCFI2:
+ 135              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 4
+
+
+ 136              		.cfi_offset 3, -16
+ 137              		.cfi_offset 4, -12
+ 138              		.cfi_offset 5, -8
+ 139              		.cfi_offset 14, -4
+  42:..//kernel/core/tos_time.c ****     return (k_time_t)(tick * K_TIME_MILLISEC_PER_SEC / TOS_CFG_CPU_TICK_PER_SECOND);
+ 140              		.loc 1 42 5 is_stmt 1 view .LVU24
+ 141              		.loc 1 42 28 is_stmt 0 view .LVU25
+ 142 0002 4C01     		lsls	r4, r1, #5
+ 143 0004 4301     		lsls	r3, r0, #5
+ 144 0006 44EAD062 		orr	r2, r4, r0, lsr #27
+ 145 000a 1B1A     		subs	r3, r3, r0
+ 146 000c 62EB0102 		sbc	r2, r2, r1
+ 147 0010 9400     		lsls	r4, r2, #2
+ 148 0012 44EA9374 		orr	r4, r4, r3, lsr #30
+ 149 0016 9D00     		lsls	r5, r3, #2
+ 150 0018 2818     		adds	r0, r5, r0
+ 151              	.LVL10:
+ 152              		.loc 1 42 28 view .LVU26
+ 153 001a 44EB0101 		adc	r1, r4, r1
+ 154 001e CB00     		lsls	r3, r1, #3
+ 155 0020 43EA5073 		orr	r3, r3, r0, lsr #29
+ 156 0024 C200     		lsls	r2, r0, #3
+ 157 0026 1046     		mov	r0, r2
+ 158 0028 1946     		mov	r1, r3
+ 159              		.loc 1 42 54 view .LVU27
+ 160 002a 4FF47A72 		mov	r2, #1000
+ 161 002e 0023     		movs	r3, #0
+ 162 0030 FFF7FEFF 		bl	__aeabi_uldivmod
+ 163              	.LVL11:
+  43:..//kernel/core/tos_time.c **** }
+ 164              		.loc 1 43 1 view .LVU28
+ 165 0034 38BD     		pop	{r3, r4, r5, pc}
+ 166              		.cfi_endproc
+ 167              	.LFE112:
+ 169              		.section	.text.tos_millisec2tick,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	tos_millisec2tick
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.fpu softvfp
+ 177              	tos_millisec2tick:
+ 178              	.LVL12:
+ 179              	.LFB113:
+  44:..//kernel/core/tos_time.c **** 
+  45:..//kernel/core/tos_time.c **** __API__ k_tick_t tos_millisec2tick(k_time_t ms)
+  46:..//kernel/core/tos_time.c **** {
+ 180              		.loc 1 46 1 is_stmt 1 view -0
+ 181              		.cfi_startproc
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184              		.loc 1 46 1 is_stmt 0 view .LVU30
+ 185 0000 38B5     		push	{r3, r4, r5, lr}
+ 186              	.LCFI3:
+ 187              		.cfi_def_cfa_offset 16
+ 188              		.cfi_offset 3, -16
+ 189              		.cfi_offset 4, -12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 5
+
+
+ 190              		.cfi_offset 5, -8
+ 191              		.cfi_offset 14, -4
+  47:..//kernel/core/tos_time.c ****     return ((k_tick_t)ms * TOS_CFG_CPU_TICK_PER_SECOND / K_TIME_MILLISEC_PER_SEC);
+ 192              		.loc 1 47 5 is_stmt 1 view .LVU31
+ 193              		.loc 1 47 13 is_stmt 0 view .LVU32
+ 194 0002 0246     		mov	r2, r0
+ 195 0004 0024     		movs	r4, #0
+ 196              		.loc 1 47 26 view .LVU33
+ 197 0006 4301     		lsls	r3, r0, #5
+ 198 0008 C10E     		lsrs	r1, r0, #27
+ 199 000a 181A     		subs	r0, r3, r0
+ 200              	.LVL13:
+ 201              		.loc 1 47 26 view .LVU34
+ 202 000c 61EB0401 		sbc	r1, r1, r4
+ 203 0010 8B00     		lsls	r3, r1, #2
+ 204 0012 43EA9073 		orr	r3, r3, r0, lsr #30
+ 205 0016 8500     		lsls	r5, r0, #2
+ 206 0018 1946     		mov	r1, r3
+ 207 001a A818     		adds	r0, r5, r2
+ 208 001c 44EB0101 		adc	r1, r4, r1
+ 209 0020 CB00     		lsls	r3, r1, #3
+ 210 0022 43EA5073 		orr	r3, r3, r0, lsr #29
+ 211 0026 C200     		lsls	r2, r0, #3
+ 212              	.LVL14:
+ 213              		.loc 1 47 26 view .LVU35
+ 214 0028 1046     		mov	r0, r2
+ 215 002a 1946     		mov	r1, r3
+ 216              		.loc 1 47 56 view .LVU36
+ 217 002c 4FF47A72 		mov	r2, #1000
+ 218 0030 0023     		movs	r3, #0
+ 219 0032 FFF7FEFF 		bl	__aeabi_uldivmod
+ 220              	.LVL15:
+  48:..//kernel/core/tos_time.c **** }
+ 221              		.loc 1 48 1 view .LVU37
+ 222 0036 38BD     		pop	{r3, r4, r5, pc}
+ 223              		.cfi_endproc
+ 224              	.LFE113:
+ 226              		.section	.text.tos_sleep_ms,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	tos_sleep_ms
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu softvfp
+ 234              	tos_sleep_ms:
+ 235              	.LVL16:
+ 236              	.LFB114:
+  49:..//kernel/core/tos_time.c **** 
+  50:..//kernel/core/tos_time.c **** __API__ k_err_t tos_sleep_ms(k_time_t ms)
+  51:..//kernel/core/tos_time.c **** {
+ 237              		.loc 1 51 1 is_stmt 1 view -0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241              		.loc 1 51 1 is_stmt 0 view .LVU39
+ 242 0000 08B5     		push	{r3, lr}
+ 243              	.LCFI4:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 6
+
+
+ 244              		.cfi_def_cfa_offset 8
+ 245              		.cfi_offset 3, -8
+ 246              		.cfi_offset 14, -4
+  52:..//kernel/core/tos_time.c ****     return tos_task_delay(tos_millisec2tick(ms));
+ 247              		.loc 1 52 5 is_stmt 1 view .LVU40
+ 248              		.loc 1 52 12 is_stmt 0 view .LVU41
+ 249 0002 FFF7FEFF 		bl	tos_millisec2tick
+ 250              	.LVL17:
+ 251              		.loc 1 52 12 view .LVU42
+ 252 0006 FFF7FEFF 		bl	tos_task_delay
+ 253              	.LVL18:
+  53:..//kernel/core/tos_time.c **** }
+ 254              		.loc 1 53 1 view .LVU43
+ 255 000a 08BD     		pop	{r3, pc}
+ 256              		.cfi_endproc
+ 257              	.LFE114:
+ 259              		.section	.text.tos_sleep_hmsm,"ax",%progbits
+ 260              		.align	1
+ 261              		.global	tos_sleep_hmsm
+ 262              		.syntax unified
+ 263              		.thumb
+ 264              		.thumb_func
+ 265              		.fpu softvfp
+ 267              	tos_sleep_hmsm:
+ 268              	.LVL19:
+ 269              	.LFB116:
+  54:..//kernel/core/tos_time.c **** 
+  55:..//kernel/core/tos_time.c **** __STATIC_INLINE__ k_tick_t time_hmsm2tick(k_time_t hour, k_time_t minute, k_time_t second, k_time_t
+  56:..//kernel/core/tos_time.c **** {
+  57:..//kernel/core/tos_time.c ****     return ((k_tick_t)hour * (k_tick_t)3600u + (k_tick_t)minute * (k_tick_t)60u +
+  58:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+  59:..//kernel/core/tos_time.c ****             (TOS_CFG_CPU_TICK_PER_SECOND * ((k_tick_t)millisec + (k_tick_t)500u / TOS_CFG_CPU_TICK_
+  60:..//kernel/core/tos_time.c **** }
+  61:..//kernel/core/tos_time.c **** 
+  62:..//kernel/core/tos_time.c **** __API__ k_err_t tos_sleep_hmsm(k_time_t hour, k_time_t minute, k_time_t second, k_time_t millisec)
+  63:..//kernel/core/tos_time.c **** {
+ 270              		.loc 1 63 1 is_stmt 1 view -0
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 0
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274              		.loc 1 63 1 is_stmt 0 view .LVU45
+ 275 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 276              	.LCFI5:
+ 277              		.cfi_def_cfa_offset 32
+ 278              		.cfi_offset 3, -32
+ 279              		.cfi_offset 4, -28
+ 280              		.cfi_offset 5, -24
+ 281              		.cfi_offset 6, -20
+ 282              		.cfi_offset 7, -16
+ 283              		.cfi_offset 8, -12
+ 284              		.cfi_offset 9, -8
+ 285              		.cfi_offset 14, -4
+  64:..//kernel/core/tos_time.c ****     return tos_task_delay(time_hmsm2tick(hour, minute, second, millisec));
+ 286              		.loc 1 64 5 is_stmt 1 view .LVU46
+ 287              	.LVL20:
+ 288              	.LBB4:
+ 289              	.LBI4:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 7
+
+
+  55:..//kernel/core/tos_time.c **** {
+ 290              		.loc 1 55 28 view .LVU47
+ 291              	.LBB5:
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 292              		.loc 1 57 5 view .LVU48
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 293              		.loc 1 57 13 is_stmt 0 view .LVU49
+ 294 0004 8446     		mov	ip, r0
+ 295 0006 4FF0000E 		mov	lr, #0
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 296              		.loc 1 57 28 view .LVU50
+ 297 000a C500     		lsls	r5, r0, #3
+ 298 000c 440F     		lsrs	r4, r0, #29
+ 299 000e 281A     		subs	r0, r5, r0
+ 300              	.LVL21:
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 301              		.loc 1 57 28 view .LVU51
+ 302 0010 64EB0E04 		sbc	r4, r4, lr
+ 303 0014 6501     		lsls	r5, r4, #5
+ 304 0016 45EAD065 		orr	r5, r5, r0, lsr #27
+ 305 001a 4FEA4018 		lsl	r8, r0, #5
+ 306 001e 18EB0C00 		adds	r0, r8, ip
+ 307 0022 45EB0E04 		adc	r4, r5, lr
+ 308 0026 2501     		lsls	r5, r4, #4
+ 309 0028 45EA1075 		orr	r5, r5, r0, lsr #28
+ 310 002c 4FEA001C 		lsl	ip, r0, #4
+ 311              	.LVL22:
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 312              		.loc 1 57 28 view .LVU52
+ 313 0030 6046     		mov	r0, ip
+ 314 0032 2C46     		mov	r4, r5
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 315              		.loc 1 57 65 view .LVU53
+ 316 0034 0D01     		lsls	r5, r1, #4
+ 317 0036 4FEA117C 		lsr	ip, r1, #28
+ 318 003a 691A     		subs	r1, r5, r1
+ 319              	.LVL23:
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 320              		.loc 1 57 65 view .LVU54
+ 321 003c 4FF00005 		mov	r5, #0
+ 322 0040 6CEB0505 		sbc	r5, ip, r5
+ 323 0044 4FEA850C 		lsl	ip, r5, #2
+ 324 0048 4CEA917C 		orr	ip, ip, r1, lsr #30
+ 325 004c 4FEA810E 		lsl	lr, r1, #2
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 326              		.loc 1 57 46 view .LVU55
+ 327 0050 10EB0E06 		adds	r6, r0, lr
+ 328 0054 44EB0C07 		adc	r7, r4, ip
+  57:..//kernel/core/tos_time.c ****             (k_tick_t)second) * TOS_CFG_CPU_TICK_PER_SECOND +
+ 329              		.loc 1 57 81 view .LVU56
+ 330 0058 16EB0208 		adds	r8, r6, r2
+ 331 005c 47F10009 		adc	r9, r7, #0
+  58:..//kernel/core/tos_time.c ****             (TOS_CFG_CPU_TICK_PER_SECOND * ((k_tick_t)millisec + (k_tick_t)500u / TOS_CFG_CPU_TICK_
+ 332              		.loc 1 58 31 view .LVU57
+ 333 0060 4FEA4912 		lsl	r2, r9, #5
+ 334              	.LVL24:
+  58:..//kernel/core/tos_time.c ****             (TOS_CFG_CPU_TICK_PER_SECOND * ((k_tick_t)millisec + (k_tick_t)500u / TOS_CFG_CPU_TICK_
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 8
+
+
+ 335              		.loc 1 58 31 view .LVU58
+ 336 0064 4FEA4814 		lsl	r4, r8, #5
+ 337 0068 42EAD865 		orr	r5, r2, r8, lsr #27
+ 338 006c B4EB0804 		subs	r4, r4, r8
+ 339 0070 65EB0905 		sbc	r5, r5, r9
+ 340 0074 AA00     		lsls	r2, r5, #2
+ 341 0076 42EA9472 		orr	r2, r2, r4, lsr #30
+ 342 007a A100     		lsls	r1, r4, #2
+ 343 007c 11EB0804 		adds	r4, r1, r8
+ 344 0080 49EB0205 		adc	r5, r9, r2
+ 345 0084 EA00     		lsls	r2, r5, #3
+ 346 0086 42EA5472 		orr	r2, r2, r4, lsr #29
+ 347 008a E100     		lsls	r1, r4, #3
+ 348 008c 0C46     		mov	r4, r1
+ 349 008e 1546     		mov	r5, r2
+  59:..//kernel/core/tos_time.c **** }
+ 350              		.loc 1 59 64 view .LVU59
+ 351 0090 1A46     		mov	r2, r3
+ 352 0092 0026     		movs	r6, #0
+  59:..//kernel/core/tos_time.c **** }
+ 353              		.loc 1 59 42 view .LVU60
+ 354 0094 5801     		lsls	r0, r3, #5
+ 355 0096 D90E     		lsrs	r1, r3, #27
+ 356 0098 C01A     		subs	r0, r0, r3
+ 357 009a 61EB0601 		sbc	r1, r1, r6
+ 358 009e 8B00     		lsls	r3, r1, #2
+ 359              	.LVL25:
+  59:..//kernel/core/tos_time.c **** }
+ 360              		.loc 1 59 42 view .LVU61
+ 361 00a0 43EA9073 		orr	r3, r3, r0, lsr #30
+ 362 00a4 8700     		lsls	r7, r0, #2
+ 363 00a6 1946     		mov	r1, r3
+ 364 00a8 B818     		adds	r0, r7, r2
+ 365 00aa 46EB0101 		adc	r1, r6, r1
+ 366 00ae CB00     		lsls	r3, r1, #3
+ 367 00b0 43EA5073 		orr	r3, r3, r0, lsr #29
+ 368 00b4 C200     		lsls	r2, r0, #3
+ 369              	.LVL26:
+  59:..//kernel/core/tos_time.c **** }
+ 370              		.loc 1 59 42 view .LVU62
+ 371 00b6 1046     		mov	r0, r2
+ 372 00b8 1946     		mov	r1, r3
+  59:..//kernel/core/tos_time.c **** }
+ 373              		.loc 1 59 113 view .LVU63
+ 374 00ba 4FF47A72 		mov	r2, #1000
+ 375 00be 0023     		movs	r3, #0
+ 376 00c0 FFF7FEFF 		bl	__aeabi_uldivmod
+ 377              	.LVL27:
+  59:..//kernel/core/tos_time.c **** }
+ 378              		.loc 1 59 113 view .LVU64
+ 379              	.LBE5:
+ 380              	.LBE4:
+ 381              		.loc 1 64 12 view .LVU65
+ 382 00c4 2018     		adds	r0, r4, r0
+ 383 00c6 45EB0101 		adc	r1, r5, r1
+ 384 00ca FFF7FEFF 		bl	tos_task_delay
+ 385              	.LVL28:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 9
+
+
+  65:..//kernel/core/tos_time.c **** }
+ 386              		.loc 1 65 1 view .LVU66
+ 387 00ce BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 388              		.cfi_endproc
+ 389              	.LFE116:
+ 391              		.text
+ 392              	.Letext0:
+ 393              		.file 2 "..//kernel/core/include/tos_kerr.h"
+ 394              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 395              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 396              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 397              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 398              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 399              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 400              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 401              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 402              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 403              		.file 12 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 404              		.file 13 "..//kernel/core/include/tos_ktypes.h"
+ 405              		.file 14 "..//kernel/core/include/tos_task.h"
+ 406              		.file 15 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 407              		.file 16 "..//kernel/core/include/tos_list.h"
+ 408              		.file 17 "..//kernel/core/include/tos_pend.h"
+ 409              		.file 18 "..//kernel/core/include/tos_sys.h"
+ 410              		.file 19 "..//kernel/core/include/tos_timer.h"
+ 411              		.file 20 "..//kernel/core/include/tos_mmheap.h"
+ 412              		.file 21 "..//kernel/core/include/tos_sched.h"
+ 413              		.file 22 "..//kernel/core/include/tos_global.h"
+ 414              		.file 23 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccisuEja.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_time.c
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:16     .text.tos_systick_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:24     .text.tos_systick_get:00000000 tos_systick_get
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:64     .text.tos_systick_get:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:69     .text.tos_systick_set:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:76     .text.tos_systick_set:00000000 tos_systick_set
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:112    .text.tos_systick_set:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:118    .text.tos_tick2millisec:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:125    .text.tos_tick2millisec:00000000 tos_tick2millisec
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:170    .text.tos_millisec2tick:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:177    .text.tos_millisec2tick:00000000 tos_millisec2tick
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:227    .text.tos_sleep_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:234    .text.tos_sleep_ms:00000000 tos_sleep_ms
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:260    .text.tos_sleep_hmsm:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccisuEja.s:267    .text.tos_sleep_hmsm:00000000 tos_sleep_hmsm
+
+UNDEFINED SYMBOLS
+tos_cpu_cpsr_save
+tos_cpu_cpsr_restore
+k_tick_count
+__aeabi_uldivmod
+tos_task_delay

@@ -1,0 +1,1195 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_stopwatch.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_stopwatch_create,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_stopwatch_create
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_stopwatch_create:
+  25              	.LVL0:
+  26              	.LFB110:
+  27              		.file 1 "..//kernel/core/tos_stopwatch.c"
+   1:..//kernel/core/tos_stopwatch.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_stopwatch.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_stopwatch.c ****  * available.
+   4:..//kernel/core/tos_stopwatch.c ****  *
+   5:..//kernel/core/tos_stopwatch.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_stopwatch.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_stopwatch.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_stopwatch.c ****  *
+   9:..//kernel/core/tos_stopwatch.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_stopwatch.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_stopwatch.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_stopwatch.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_stopwatch.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_stopwatch.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_stopwatch.c ****  * within TencentOS.
+  16:..//kernel/core/tos_stopwatch.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_stopwatch.c **** 
+  18:..//kernel/core/tos_stopwatch.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_stopwatch.c **** 
+  20:..//kernel/core/tos_stopwatch.c **** __API__ k_err_t tos_stopwatch_create(k_stopwatch_t *stopwatch)
+  21:..//kernel/core/tos_stopwatch.c **** {
+  28              		.loc 1 21 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  22:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK(stopwatch);
+  33              		.loc 1 22 5 view .LVU1
+  34              		.loc 1 22 5 view .LVU2
+  35 0000 0346     		mov	r3, r0
+  36 0002 38B1     		cbz	r0, .L3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 2
+
+
+  23:..//kernel/core/tos_stopwatch.c **** 
+  24:..//kernel/core/tos_stopwatch.c ****     stopwatch->until = 0u;
+  37              		.loc 1 24 5 view .LVU3
+  38              		.loc 1 24 22 is_stmt 0 view .LVU4
+  39 0004 0020     		movs	r0, #0
+  40              	.LVL1:
+  41              		.loc 1 24 22 view .LVU5
+  42 0006 0021     		movs	r1, #0
+  43 0008 C3E90201 		strd	r0, [r3, #8]
+  25:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_INIT(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+  44              		.loc 1 25 5 is_stmt 1 view .LVU6
+  45              	.LVL2:
+  46              	.LBB18:
+  47              	.LBI18:
+  48              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 3
+
+
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 4
+
+
+ 100:..//kernel/core/include/tos_sys.h **** 
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 5
+
+
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+  49              		.loc 2 187 32 view .LVU7
+  50              	.LBB19:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+  51              		.loc 2 189 5 view .LVU8
+  52              		.loc 2 189 19 is_stmt 0 view .LVU9
+  53 000c 4DF6D722 		movw	r2, #56023
+  54 0010 5A80     		strh	r2, [r3, #2]	@ movhi
+  55              	.LVL3:
+  56              		.loc 2 189 19 view .LVU10
+  57              	.LBE19:
+  58              	.LBE18:
+  26:..//kernel/core/tos_stopwatch.c **** 
+  27:..//kernel/core/tos_stopwatch.c ****     return K_ERR_NONE;
+  59              		.loc 1 27 5 is_stmt 1 view .LVU11
+  60              		.loc 1 27 12 is_stmt 0 view .LVU12
+  61 0012 7047     		bx	lr
+  62              	.LVL4:
+  63              	.L3:
+  22:..//kernel/core/tos_stopwatch.c **** 
+  64              		.loc 1 22 5 view .LVU13
+  65 0014 40F24C40 		movw	r0, #1100
+  66              	.LVL5:
+  28:..//kernel/core/tos_stopwatch.c **** }
+  67              		.loc 1 28 1 view .LVU14
+  68 0018 7047     		bx	lr
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 6
+
+
+  69              		.cfi_endproc
+  70              	.LFE110:
+  72              		.section	.text.tos_stopwatch_destroy,"ax",%progbits
+  73              		.align	1
+  74              		.global	tos_stopwatch_destroy
+  75              		.syntax unified
+  76              		.thumb
+  77              		.thumb_func
+  78              		.fpu softvfp
+  80              	tos_stopwatch_destroy:
+  81              	.LVL6:
+  82              	.LFB111:
+  29:..//kernel/core/tos_stopwatch.c **** 
+  30:..//kernel/core/tos_stopwatch.c **** __API__ k_err_t tos_stopwatch_destroy(k_stopwatch_t *stopwatch)
+  31:..//kernel/core/tos_stopwatch.c **** {
+  83              		.loc 1 31 1 is_stmt 1 view -0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  32:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK(stopwatch);
+  88              		.loc 1 32 5 view .LVU16
+  89              		.loc 1 32 5 view .LVU17
+  90 0000 0346     		mov	r3, r0
+  91 0002 50B1     		cbz	r0, .L6
+  33:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+  92              		.loc 1 33 5 view .LVU18
+  93              		.loc 1 33 5 view .LVU19
+  94              	.LVL7:
+  95              	.LBB20:
+  96              	.LBI20:
+ 182:..//kernel/core/include/tos_sys.h **** {
+  97              		.loc 2 182 31 view .LVU20
+  98              	.LBB21:
+ 184:..//kernel/core/include/tos_sys.h **** }
+  99              		.loc 2 184 5 view .LVU21
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 100              		.loc 2 184 19 is_stmt 0 view .LVU22
+ 101 0004 4188     		ldrh	r1, [r0, #2]
+ 102              	.LVL8:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 103              		.loc 2 184 19 view .LVU23
+ 104              	.LBE21:
+ 105              	.LBE20:
+ 106              		.loc 1 33 5 view .LVU24
+ 107 0006 4DF6D722 		movw	r2, #56023
+ 108 000a 9142     		cmp	r1, r2
+ 109 000c 08D1     		bne	.L7
+  34:..//kernel/core/tos_stopwatch.c **** 
+  35:..//kernel/core/tos_stopwatch.c ****     stopwatch->until = 0u;
+ 110              		.loc 1 35 5 is_stmt 1 view .LVU25
+ 111              		.loc 1 35 22 is_stmt 0 view .LVU26
+ 112 000e 0020     		movs	r0, #0
+ 113              	.LVL9:
+ 114              		.loc 1 35 22 view .LVU27
+ 115 0010 0021     		movs	r1, #0
+ 116 0012 C3E90201 		strd	r0, [r3, #8]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 7
+
+
+  36:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_DEINIT(stopwatch);
+ 117              		.loc 1 36 5 is_stmt 1 view .LVU28
+ 118              	.LVL10:
+ 119              	.LBB22:
+ 120              	.LBI22:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 121              		.loc 2 192 32 view .LVU29
+ 122              	.LBB23:
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 123              		.loc 2 194 5 view .LVU30
+ 124              		.loc 2 194 19 is_stmt 0 view .LVU31
+ 125 0016 5880     		strh	r0, [r3, #2]	@ movhi
+ 126              	.LVL11:
+ 127              		.loc 2 194 19 view .LVU32
+ 128              	.LBE23:
+ 129              	.LBE22:
+  37:..//kernel/core/tos_stopwatch.c **** 
+  38:..//kernel/core/tos_stopwatch.c ****     return K_ERR_NONE;
+ 130              		.loc 1 38 5 is_stmt 1 view .LVU33
+ 131              		.loc 1 38 12 is_stmt 0 view .LVU34
+ 132 0018 7047     		bx	lr
+ 133              	.LVL12:
+ 134              	.L6:
+  32:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+ 135              		.loc 1 32 5 view .LVU35
+ 136 001a 40F24C40 		movw	r0, #1100
+ 137              	.LVL13:
+  32:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+ 138              		.loc 1 32 5 view .LVU36
+ 139 001e 7047     		bx	lr
+ 140              	.LVL14:
+ 141              	.L7:
+  33:..//kernel/core/tos_stopwatch.c **** 
+ 142              		.loc 1 33 5 view .LVU37
+ 143 0020 40F24D40 		movw	r0, #1101
+ 144              	.LVL15:
+  39:..//kernel/core/tos_stopwatch.c **** }
+ 145              		.loc 1 39 1 view .LVU38
+ 146 0024 7047     		bx	lr
+ 147              		.cfi_endproc
+ 148              	.LFE111:
+ 150              		.section	.text.tos_stopwatch_countdown,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	tos_stopwatch_countdown
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 156              		.fpu softvfp
+ 158              	tos_stopwatch_countdown:
+ 159              	.LVL16:
+ 160              	.LFB112:
+  40:..//kernel/core/tos_stopwatch.c **** 
+  41:..//kernel/core/tos_stopwatch.c **** __API__ k_err_t tos_stopwatch_countdown(k_stopwatch_t *stopwatch, k_tick_t tick)
+  42:..//kernel/core/tos_stopwatch.c **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 8
+
+
+ 161              		.loc 1 42 1 is_stmt 1 view -0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+  43:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 165              		.loc 1 43 5 view .LVU40
+  44:..//kernel/core/tos_stopwatch.c **** 
+  45:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK(stopwatch);
+ 166              		.loc 1 45 5 view .LVU41
+ 167              		.loc 1 45 5 view .LVU42
+ 168 0000 A0B1     		cbz	r0, .L10
+  42:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 169              		.loc 1 42 1 is_stmt 0 view .LVU43
+ 170 0002 70B5     		push	{r4, r5, r6, lr}
+ 171              	.LCFI0:
+ 172              		.cfi_def_cfa_offset 16
+ 173              		.cfi_offset 4, -16
+ 174              		.cfi_offset 5, -12
+ 175              		.cfi_offset 6, -8
+ 176              		.cfi_offset 14, -4
+ 177 0004 0446     		mov	r4, r0
+  46:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+ 178              		.loc 1 46 5 is_stmt 1 view .LVU44
+ 179              		.loc 1 46 5 view .LVU45
+ 180              	.LVL17:
+ 181              	.LBB24:
+ 182              	.LBI24:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 183              		.loc 2 182 31 view .LVU46
+ 184              	.LBB25:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 185              		.loc 2 184 5 view .LVU47
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 186              		.loc 2 184 19 is_stmt 0 view .LVU48
+ 187 0006 4088     		ldrh	r0, [r0, #2]
+ 188              	.LVL18:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 189              		.loc 2 184 19 view .LVU49
+ 190              	.LBE25:
+ 191              	.LBE24:
+ 192              		.loc 1 46 5 view .LVU50
+ 193 0008 4DF6D721 		movw	r1, #56023
+ 194 000c 8842     		cmp	r0, r1
+ 195 000e 02D0     		beq	.L16
+ 196 0010 40F24D40 		movw	r0, #1101
+ 197              	.LVL19:
+ 198              	.L9:
+  47:..//kernel/core/tos_stopwatch.c **** 
+  48:..//kernel/core/tos_stopwatch.c ****     now = tos_systick_get();
+  49:..//kernel/core/tos_stopwatch.c ****     stopwatch->until = now + tick;
+  50:..//kernel/core/tos_stopwatch.c **** 
+  51:..//kernel/core/tos_stopwatch.c ****     return K_ERR_NONE;
+  52:..//kernel/core/tos_stopwatch.c **** }
+ 199              		.loc 1 52 1 view .LVU51
+ 200 0014 70BD     		pop	{r4, r5, r6, pc}
+ 201              	.LVL20:
+ 202              	.L16:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 9
+
+
+ 203              		.loc 1 52 1 view .LVU52
+ 204 0016 1E46     		mov	r6, r3
+ 205 0018 1546     		mov	r5, r2
+  48:..//kernel/core/tos_stopwatch.c ****     stopwatch->until = now + tick;
+ 206              		.loc 1 48 5 is_stmt 1 view .LVU53
+  48:..//kernel/core/tos_stopwatch.c ****     stopwatch->until = now + tick;
+ 207              		.loc 1 48 11 is_stmt 0 view .LVU54
+ 208 001a FFF7FEFF 		bl	tos_systick_get
+ 209              	.LVL21:
+  49:..//kernel/core/tos_stopwatch.c **** 
+ 210              		.loc 1 49 5 is_stmt 1 view .LVU55
+  49:..//kernel/core/tos_stopwatch.c **** 
+ 211              		.loc 1 49 28 is_stmt 0 view .LVU56
+ 212 001e 4019     		adds	r0, r0, r5
+ 213              	.LVL22:
+  49:..//kernel/core/tos_stopwatch.c **** 
+ 214              		.loc 1 49 28 view .LVU57
+ 215 0020 46EB0101 		adc	r1, r6, r1
+  49:..//kernel/core/tos_stopwatch.c **** 
+ 216              		.loc 1 49 22 view .LVU58
+ 217 0024 A060     		str	r0, [r4, #8]
+ 218 0026 E160     		str	r1, [r4, #12]
+  51:..//kernel/core/tos_stopwatch.c **** }
+ 219              		.loc 1 51 5 is_stmt 1 view .LVU59
+  51:..//kernel/core/tos_stopwatch.c **** }
+ 220              		.loc 1 51 12 is_stmt 0 view .LVU60
+ 221 0028 0020     		movs	r0, #0
+ 222 002a F3E7     		b	.L9
+ 223              	.LVL23:
+ 224              	.L10:
+ 225              	.LCFI1:
+ 226              		.cfi_def_cfa_offset 0
+ 227              		.cfi_restore 4
+ 228              		.cfi_restore 5
+ 229              		.cfi_restore 6
+ 230              		.cfi_restore 14
+  45:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+ 231              		.loc 1 45 5 view .LVU61
+ 232 002c 40F24C40 		movw	r0, #1100
+ 233              	.LVL24:
+ 234              		.loc 1 52 1 view .LVU62
+ 235 0030 7047     		bx	lr
+ 236              		.cfi_endproc
+ 237              	.LFE112:
+ 239              		.section	.text.tos_stopwatch_countdown_ms,"ax",%progbits
+ 240              		.align	1
+ 241              		.global	tos_stopwatch_countdown_ms
+ 242              		.syntax unified
+ 243              		.thumb
+ 244              		.thumb_func
+ 245              		.fpu softvfp
+ 247              	tos_stopwatch_countdown_ms:
+ 248              	.LVL25:
+ 249              	.LFB113:
+  53:..//kernel/core/tos_stopwatch.c **** 
+  54:..//kernel/core/tos_stopwatch.c **** __API__ k_err_t tos_stopwatch_countdown_ms(k_stopwatch_t *stopwatch, k_time_t millisec)
+  55:..//kernel/core/tos_stopwatch.c **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 10
+
+
+ 250              		.loc 1 55 1 is_stmt 1 view -0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+  56:..//kernel/core/tos_stopwatch.c ****     k_tick_t tick;
+ 254              		.loc 1 56 5 view .LVU64
+  57:..//kernel/core/tos_stopwatch.c **** 
+  58:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK(stopwatch);
+ 255              		.loc 1 58 5 view .LVU65
+ 256              		.loc 1 58 5 view .LVU66
+ 257 0000 90B1     		cbz	r0, .L19
+  55:..//kernel/core/tos_stopwatch.c ****     k_tick_t tick;
+ 258              		.loc 1 55 1 is_stmt 0 view .LVU67
+ 259 0002 10B5     		push	{r4, lr}
+ 260              	.LCFI2:
+ 261              		.cfi_def_cfa_offset 8
+ 262              		.cfi_offset 4, -8
+ 263              		.cfi_offset 14, -4
+ 264 0004 0446     		mov	r4, r0
+  59:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+ 265              		.loc 1 59 5 is_stmt 1 view .LVU68
+ 266              		.loc 1 59 5 view .LVU69
+ 267              	.LVL26:
+ 268              	.LBB26:
+ 269              	.LBI26:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 270              		.loc 2 182 31 view .LVU70
+ 271              	.LBB27:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 272              		.loc 2 184 5 view .LVU71
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 273              		.loc 2 184 19 is_stmt 0 view .LVU72
+ 274 0006 4088     		ldrh	r0, [r0, #2]
+ 275              	.LVL27:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 276              		.loc 2 184 19 view .LVU73
+ 277              	.LBE27:
+ 278              	.LBE26:
+ 279              		.loc 1 59 5 view .LVU74
+ 280 0008 4DF6D722 		movw	r2, #56023
+ 281 000c 9042     		cmp	r0, r2
+ 282 000e 02D0     		beq	.L25
+ 283 0010 40F24D40 		movw	r0, #1101
+ 284              	.LVL28:
+ 285              	.L18:
+  60:..//kernel/core/tos_stopwatch.c **** 
+  61:..//kernel/core/tos_stopwatch.c ****     tick = tos_millisec2tick(millisec);
+  62:..//kernel/core/tos_stopwatch.c ****     return tos_stopwatch_countdown(stopwatch, tick);
+  63:..//kernel/core/tos_stopwatch.c **** }
+ 286              		.loc 1 63 1 view .LVU75
+ 287 0014 10BD     		pop	{r4, pc}
+ 288              	.LVL29:
+ 289              	.L25:
+ 290              		.loc 1 63 1 view .LVU76
+ 291 0016 0846     		mov	r0, r1
+  61:..//kernel/core/tos_stopwatch.c ****     return tos_stopwatch_countdown(stopwatch, tick);
+ 292              		.loc 1 61 5 is_stmt 1 view .LVU77
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 11
+
+
+  61:..//kernel/core/tos_stopwatch.c ****     return tos_stopwatch_countdown(stopwatch, tick);
+ 293              		.loc 1 61 12 is_stmt 0 view .LVU78
+ 294 0018 FFF7FEFF 		bl	tos_millisec2tick
+ 295              	.LVL30:
+  62:..//kernel/core/tos_stopwatch.c **** }
+ 296              		.loc 1 62 5 is_stmt 1 view .LVU79
+  62:..//kernel/core/tos_stopwatch.c **** }
+ 297              		.loc 1 62 12 is_stmt 0 view .LVU80
+ 298 001c 0246     		mov	r2, r0
+ 299 001e 0B46     		mov	r3, r1
+ 300 0020 2046     		mov	r0, r4
+ 301              	.LVL31:
+  62:..//kernel/core/tos_stopwatch.c **** }
+ 302              		.loc 1 62 12 view .LVU81
+ 303 0022 FFF7FEFF 		bl	tos_stopwatch_countdown
+ 304              	.LVL32:
+ 305 0026 F5E7     		b	.L18
+ 306              	.LVL33:
+ 307              	.L19:
+ 308              	.LCFI3:
+ 309              		.cfi_def_cfa_offset 0
+ 310              		.cfi_restore 4
+ 311              		.cfi_restore 14
+  58:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY(stopwatch, KNL_OBJ_TYPE_STOPWATCH);
+ 312              		.loc 1 58 5 view .LVU82
+ 313 0028 40F24C40 		movw	r0, #1100
+ 314              	.LVL34:
+ 315              		.loc 1 63 1 view .LVU83
+ 316 002c 7047     		bx	lr
+ 317              		.cfi_endproc
+ 318              	.LFE113:
+ 320              		.section	.text.tos_stopwatch_delay,"ax",%progbits
+ 321              		.align	1
+ 322              		.global	tos_stopwatch_delay
+ 323              		.syntax unified
+ 324              		.thumb
+ 325              		.thumb_func
+ 326              		.fpu softvfp
+ 328              	tos_stopwatch_delay:
+ 329              	.LVL35:
+ 330              	.LFB114:
+  64:..//kernel/core/tos_stopwatch.c **** 
+  65:..//kernel/core/tos_stopwatch.c **** __API__ void tos_stopwatch_delay(k_tick_t tick)
+  66:..//kernel/core/tos_stopwatch.c **** {
+ 331              		.loc 1 66 1 is_stmt 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335              		.loc 1 66 1 is_stmt 0 view .LVU85
+ 336 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 337              	.LCFI4:
+ 338              		.cfi_def_cfa_offset 32
+ 339              		.cfi_offset 3, -32
+ 340              		.cfi_offset 4, -28
+ 341              		.cfi_offset 5, -24
+ 342              		.cfi_offset 6, -20
+ 343              		.cfi_offset 7, -16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 12
+
+
+ 344              		.cfi_offset 8, -12
+ 345              		.cfi_offset 9, -8
+ 346              		.cfi_offset 14, -4
+ 347 0004 8046     		mov	r8, r0
+ 348 0006 8946     		mov	r9, r1
+  67:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 349              		.loc 1 67 5 is_stmt 1 view .LVU86
+  68:..//kernel/core/tos_stopwatch.c **** 
+  69:..//kernel/core/tos_stopwatch.c ****     now = tos_systick_get();
+ 350              		.loc 1 69 5 view .LVU87
+ 351              		.loc 1 69 11 is_stmt 0 view .LVU88
+ 352 0008 FFF7FEFF 		bl	tos_systick_get
+ 353              	.LVL36:
+ 354              		.loc 1 69 11 view .LVU89
+ 355 000c 0646     		mov	r6, r0
+ 356 000e 0F46     		mov	r7, r1
+ 357              	.LVL37:
+  70:..//kernel/core/tos_stopwatch.c ****     while ((tos_systick_get() - now) < tick) {
+ 358              		.loc 1 70 5 is_stmt 1 view .LVU90
+ 359              	.L27:
+  71:..//kernel/core/tos_stopwatch.c ****         ;
+ 360              		.loc 1 71 9 discriminator 1 view .LVU91
+  70:..//kernel/core/tos_stopwatch.c ****     while ((tos_systick_get() - now) < tick) {
+ 361              		.loc 1 70 13 is_stmt 0 discriminator 1 view .LVU92
+ 362 0010 FFF7FEFF 		bl	tos_systick_get
+ 363              	.LVL38:
+  70:..//kernel/core/tos_stopwatch.c ****     while ((tos_systick_get() - now) < tick) {
+ 364              		.loc 1 70 31 discriminator 1 view .LVU93
+ 365 0014 841B     		subs	r4, r0, r6
+ 366 0016 61EB0705 		sbc	r5, r1, r7
+  70:..//kernel/core/tos_stopwatch.c ****     while ((tos_systick_get() - now) < tick) {
+ 367              		.loc 1 70 11 discriminator 1 view .LVU94
+ 368 001a 4D45     		cmp	r5, r9
+ 369 001c 08BF     		it	eq
+ 370 001e 4445     		cmpeq	r4, r8
+ 371 0020 F6D3     		bcc	.L27
+  72:..//kernel/core/tos_stopwatch.c ****     }
+  73:..//kernel/core/tos_stopwatch.c **** }
+ 372              		.loc 1 73 1 view .LVU95
+ 373 0022 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 374              		.loc 1 73 1 view .LVU96
+ 375              		.cfi_endproc
+ 376              	.LFE114:
+ 378              		.section	.text.tos_stopwatch_delay_ms,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	tos_stopwatch_delay_ms
+ 381              		.syntax unified
+ 382              		.thumb
+ 383              		.thumb_func
+ 384              		.fpu softvfp
+ 386              	tos_stopwatch_delay_ms:
+ 387              	.LVL39:
+ 388              	.LFB115:
+  74:..//kernel/core/tos_stopwatch.c **** 
+  75:..//kernel/core/tos_stopwatch.c **** __API__ void tos_stopwatch_delay_ms(k_time_t millisec)
+  76:..//kernel/core/tos_stopwatch.c **** {
+ 389              		.loc 1 76 1 is_stmt 1 view -0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 13
+
+
+ 390              		.cfi_startproc
+ 391              		@ args = 0, pretend = 0, frame = 0
+ 392              		@ frame_needed = 0, uses_anonymous_args = 0
+ 393              		.loc 1 76 1 is_stmt 0 view .LVU98
+ 394 0000 08B5     		push	{r3, lr}
+ 395              	.LCFI5:
+ 396              		.cfi_def_cfa_offset 8
+ 397              		.cfi_offset 3, -8
+ 398              		.cfi_offset 14, -4
+  77:..//kernel/core/tos_stopwatch.c ****     k_tick_t tick;
+ 399              		.loc 1 77 5 is_stmt 1 view .LVU99
+  78:..//kernel/core/tos_stopwatch.c **** 
+  79:..//kernel/core/tos_stopwatch.c ****     tick = tos_millisec2tick(millisec);
+ 400              		.loc 1 79 5 view .LVU100
+ 401              		.loc 1 79 12 is_stmt 0 view .LVU101
+ 402 0002 FFF7FEFF 		bl	tos_millisec2tick
+ 403              	.LVL40:
+  80:..//kernel/core/tos_stopwatch.c ****     tos_stopwatch_delay(tick);
+ 404              		.loc 1 80 5 is_stmt 1 view .LVU102
+ 405 0006 FFF7FEFF 		bl	tos_stopwatch_delay
+ 406              	.LVL41:
+  81:..//kernel/core/tos_stopwatch.c **** }
+ 407              		.loc 1 81 1 is_stmt 0 view .LVU103
+ 408 000a 08BD     		pop	{r3, pc}
+ 409              		.cfi_endproc
+ 410              	.LFE115:
+ 412              		.section	.text.tos_stopwatch_is_expired,"ax",%progbits
+ 413              		.align	1
+ 414              		.global	tos_stopwatch_is_expired
+ 415              		.syntax unified
+ 416              		.thumb
+ 417              		.thumb_func
+ 418              		.fpu softvfp
+ 420              	tos_stopwatch_is_expired:
+ 421              	.LVL42:
+ 422              	.LFB118:
+  82:..//kernel/core/tos_stopwatch.c **** 
+  83:..//kernel/core/tos_stopwatch.c **** __API__ k_tick_t tos_stopwatch_remain(k_stopwatch_t *stopwatch)
+  84:..//kernel/core/tos_stopwatch.c **** {
+  85:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+  86:..//kernel/core/tos_stopwatch.c **** 
+  87:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK_RC(stopwatch, (k_tick_t)-1);
+  88:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_tick_t)-1);
+  89:..//kernel/core/tos_stopwatch.c **** 
+  90:..//kernel/core/tos_stopwatch.c ****     if (tos_stopwatch_is_expired(stopwatch)) {
+  91:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+  92:..//kernel/core/tos_stopwatch.c ****     }
+  93:..//kernel/core/tos_stopwatch.c **** 
+  94:..//kernel/core/tos_stopwatch.c ****     now = tos_systick_get();
+  95:..//kernel/core/tos_stopwatch.c ****     return stopwatch->until - now;
+  96:..//kernel/core/tos_stopwatch.c **** }
+  97:..//kernel/core/tos_stopwatch.c **** 
+  98:..//kernel/core/tos_stopwatch.c **** __API__ k_time_t tos_stopwatch_remain_ms(k_stopwatch_t *stopwatch)
+  99:..//kernel/core/tos_stopwatch.c **** {
+ 100:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 101:..//kernel/core/tos_stopwatch.c **** 
+ 102:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK_RC(stopwatch, (k_time_t)-1);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 14
+
+
+ 103:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_time_t)-1);
+ 104:..//kernel/core/tos_stopwatch.c **** 
+ 105:..//kernel/core/tos_stopwatch.c ****     if (tos_stopwatch_is_expired(stopwatch)) {
+ 106:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 107:..//kernel/core/tos_stopwatch.c ****     }
+ 108:..//kernel/core/tos_stopwatch.c **** 
+ 109:..//kernel/core/tos_stopwatch.c ****     now = tos_systick_get();
+ 110:..//kernel/core/tos_stopwatch.c ****     return (k_time_t)(((stopwatch->until) - now + TOS_CFG_CPU_TICK_PER_SECOND - 1) / TOS_CFG_CPU_TI
+ 111:..//kernel/core/tos_stopwatch.c **** }
+ 112:..//kernel/core/tos_stopwatch.c **** 
+ 113:..//kernel/core/tos_stopwatch.c **** __API__ int tos_stopwatch_is_expired(k_stopwatch_t *stopwatch)
+ 114:..//kernel/core/tos_stopwatch.c **** {
+ 423              		.loc 1 114 1 is_stmt 1 view -0
+ 424              		.cfi_startproc
+ 425              		@ args = 0, pretend = 0, frame = 0
+ 426              		@ frame_needed = 0, uses_anonymous_args = 0
+ 427              		.loc 1 114 1 is_stmt 0 view .LVU105
+ 428 0000 10B5     		push	{r4, lr}
+ 429              	.LCFI6:
+ 430              		.cfi_def_cfa_offset 8
+ 431              		.cfi_offset 4, -8
+ 432              		.cfi_offset 14, -4
+ 115:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 433              		.loc 1 115 5 is_stmt 1 view .LVU106
+ 116:..//kernel/core/tos_stopwatch.c **** 
+ 117:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK_RC(stopwatch, K_FALSE);
+ 434              		.loc 1 117 5 view .LVU107
+ 435              		.loc 1 117 5 view .LVU108
+ 436 0002 0446     		mov	r4, r0
+ 437 0004 B0FA80F0 		clz	r0, r0
+ 438              	.LVL43:
+ 439              		.loc 1 117 5 is_stmt 0 view .LVU109
+ 440 0008 4009     		lsrs	r0, r0, #5
+ 441 000a 80B9     		cbnz	r0, .L33
+ 118:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, K_FALSE);
+ 442              		.loc 1 118 5 is_stmt 1 view .LVU110
+ 443              		.loc 1 118 5 view .LVU111
+ 444              	.LVL44:
+ 445              	.LBB28:
+ 446              	.LBI28:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 447              		.loc 2 182 31 view .LVU112
+ 448              	.LBB29:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 449              		.loc 2 184 5 view .LVU113
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 450              		.loc 2 184 19 is_stmt 0 view .LVU114
+ 451 000c 6188     		ldrh	r1, [r4, #2]
+ 452              	.LVL45:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 453              		.loc 2 184 19 view .LVU115
+ 454              	.LBE29:
+ 455              	.LBE28:
+ 456              		.loc 1 118 5 view .LVU116
+ 457 000e 4DF6D722 		movw	r2, #56023
+ 458 0012 9142     		cmp	r1, r2
+ 459 0014 00D0     		beq	.L35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 15
+
+
+ 460              	.L31:
+ 119:..//kernel/core/tos_stopwatch.c **** 
+ 120:..//kernel/core/tos_stopwatch.c ****     now = tos_systick_get();
+ 121:..//kernel/core/tos_stopwatch.c ****     return now >= stopwatch->until ? K_TRUE : K_FALSE;
+ 122:..//kernel/core/tos_stopwatch.c **** }
+ 461              		.loc 1 122 1 view .LVU117
+ 462 0016 10BD     		pop	{r4, pc}
+ 463              	.LVL46:
+ 464              	.L35:
+ 120:..//kernel/core/tos_stopwatch.c ****     return now >= stopwatch->until ? K_TRUE : K_FALSE;
+ 465              		.loc 1 120 5 is_stmt 1 view .LVU118
+ 120:..//kernel/core/tos_stopwatch.c ****     return now >= stopwatch->until ? K_TRUE : K_FALSE;
+ 466              		.loc 1 120 11 is_stmt 0 view .LVU119
+ 467 0018 FFF7FEFF 		bl	tos_systick_get
+ 468              	.LVL47:
+ 121:..//kernel/core/tos_stopwatch.c **** }
+ 469              		.loc 1 121 5 is_stmt 1 view .LVU120
+ 121:..//kernel/core/tos_stopwatch.c **** }
+ 470              		.loc 1 121 28 is_stmt 0 view .LVU121
+ 471 001c D4E90223 		ldrd	r2, [r4, #8]
+ 121:..//kernel/core/tos_stopwatch.c **** }
+ 472              		.loc 1 121 45 view .LVU122
+ 473 0020 9942     		cmp	r1, r3
+ 474 0022 08BF     		it	eq
+ 475 0024 9042     		cmpeq	r0, r2
+ 476 0026 2CBF     		ite	cs
+ 477 0028 0120     		movcs	r0, #1
+ 478              	.LVL48:
+ 121:..//kernel/core/tos_stopwatch.c **** }
+ 479              		.loc 1 121 45 view .LVU123
+ 480 002a 0020     		movcc	r0, #0
+ 481 002c F3E7     		b	.L31
+ 482              	.L33:
+ 117:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, K_FALSE);
+ 483              		.loc 1 117 5 view .LVU124
+ 484 002e 0020     		movs	r0, #0
+ 485 0030 F1E7     		b	.L31
+ 486              		.cfi_endproc
+ 487              	.LFE118:
+ 489              		.section	.text.tos_stopwatch_remain,"ax",%progbits
+ 490              		.align	1
+ 491              		.global	tos_stopwatch_remain
+ 492              		.syntax unified
+ 493              		.thumb
+ 494              		.thumb_func
+ 495              		.fpu softvfp
+ 497              	tos_stopwatch_remain:
+ 498              	.LVL49:
+ 499              	.LFB116:
+  84:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 500              		.loc 1 84 1 is_stmt 1 view -0
+ 501              		.cfi_startproc
+ 502              		@ args = 0, pretend = 0, frame = 0
+ 503              		@ frame_needed = 0, uses_anonymous_args = 0
+  85:..//kernel/core/tos_stopwatch.c **** 
+ 504              		.loc 1 85 5 view .LVU126
+  87:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_tick_t)-1);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 16
+
+
+ 505              		.loc 1 87 5 view .LVU127
+  87:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_tick_t)-1);
+ 506              		.loc 1 87 5 view .LVU128
+ 507 0000 C0B1     		cbz	r0, .L38
+  84:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 508              		.loc 1 84 1 is_stmt 0 view .LVU129
+ 509 0002 10B5     		push	{r4, lr}
+ 510              	.LCFI7:
+ 511              		.cfi_def_cfa_offset 8
+ 512              		.cfi_offset 4, -8
+ 513              		.cfi_offset 14, -4
+ 514 0004 0446     		mov	r4, r0
+  88:..//kernel/core/tos_stopwatch.c **** 
+ 515              		.loc 1 88 5 is_stmt 1 view .LVU130
+  88:..//kernel/core/tos_stopwatch.c **** 
+ 516              		.loc 1 88 5 view .LVU131
+ 517              	.LVL50:
+ 518              	.LBB30:
+ 519              	.LBI30:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 520              		.loc 2 182 31 view .LVU132
+ 521              	.LBB31:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 522              		.loc 2 184 5 view .LVU133
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 523              		.loc 2 184 19 is_stmt 0 view .LVU134
+ 524 0006 4188     		ldrh	r1, [r0, #2]
+ 525              	.LVL51:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 526              		.loc 2 184 19 view .LVU135
+ 527              	.LBE31:
+ 528              	.LBE30:
+  88:..//kernel/core/tos_stopwatch.c **** 
+ 529              		.loc 1 88 5 view .LVU136
+ 530 0008 4DF6D722 		movw	r2, #56023
+ 531 000c 9142     		cmp	r1, r2
+ 532 000e 03D0     		beq	.L45
+ 533 0010 4FF0FF30 		mov	r0, #-1
+ 534              	.LVL52:
+  88:..//kernel/core/tos_stopwatch.c **** 
+ 535              		.loc 1 88 5 view .LVU137
+ 536 0014 0146     		mov	r1, r0
+ 537              	.L36:
+  96:..//kernel/core/tos_stopwatch.c **** 
+ 538              		.loc 1 96 1 view .LVU138
+ 539 0016 10BD     		pop	{r4, pc}
+ 540              	.LVL53:
+ 541              	.L45:
+  90:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 542              		.loc 1 90 5 is_stmt 1 view .LVU139
+  90:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 543              		.loc 1 90 9 is_stmt 0 view .LVU140
+ 544 0018 FFF7FEFF 		bl	tos_stopwatch_is_expired
+ 545              	.LVL54:
+  90:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 546              		.loc 1 90 8 view .LVU141
+ 547 001c 10B1     		cbz	r0, .L46
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 17
+
+
+  91:..//kernel/core/tos_stopwatch.c ****     }
+ 548              		.loc 1 91 16 view .LVU142
+ 549 001e 0020     		movs	r0, #0
+ 550 0020 0146     		mov	r1, r0
+ 551 0022 F8E7     		b	.L36
+ 552              	.L46:
+  94:..//kernel/core/tos_stopwatch.c ****     return stopwatch->until - now;
+ 553              		.loc 1 94 5 is_stmt 1 view .LVU143
+  94:..//kernel/core/tos_stopwatch.c ****     return stopwatch->until - now;
+ 554              		.loc 1 94 11 is_stmt 0 view .LVU144
+ 555 0024 FFF7FEFF 		bl	tos_systick_get
+ 556              	.LVL55:
+  95:..//kernel/core/tos_stopwatch.c **** }
+ 557              		.loc 1 95 5 is_stmt 1 view .LVU145
+  95:..//kernel/core/tos_stopwatch.c **** }
+ 558              		.loc 1 95 21 is_stmt 0 view .LVU146
+ 559 0028 A368     		ldr	r3, [r4, #8]
+ 560 002a E268     		ldr	r2, [r4, #12]
+  95:..//kernel/core/tos_stopwatch.c **** }
+ 561              		.loc 1 95 29 view .LVU147
+ 562 002c 181A     		subs	r0, r3, r0
+ 563              	.LVL56:
+  95:..//kernel/core/tos_stopwatch.c **** }
+ 564              		.loc 1 95 29 view .LVU148
+ 565 002e 62EB0101 		sbc	r1, r2, r1
+ 566 0032 F0E7     		b	.L36
+ 567              	.LVL57:
+ 568              	.L38:
+ 569              	.LCFI8:
+ 570              		.cfi_def_cfa_offset 0
+ 571              		.cfi_restore 4
+ 572              		.cfi_restore 14
+  87:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_tick_t)-1);
+ 573              		.loc 1 87 5 view .LVU149
+ 574 0034 4FF0FF30 		mov	r0, #-1
+ 575              	.LVL58:
+  87:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_tick_t)-1);
+ 576              		.loc 1 87 5 view .LVU150
+ 577 0038 0146     		mov	r1, r0
+  96:..//kernel/core/tos_stopwatch.c **** 
+ 578              		.loc 1 96 1 view .LVU151
+ 579 003a 7047     		bx	lr
+ 580              		.cfi_endproc
+ 581              	.LFE116:
+ 583              		.global	__aeabi_uldivmod
+ 584              		.section	.text.tos_stopwatch_remain_ms,"ax",%progbits
+ 585              		.align	1
+ 586              		.global	tos_stopwatch_remain_ms
+ 587              		.syntax unified
+ 588              		.thumb
+ 589              		.thumb_func
+ 590              		.fpu softvfp
+ 592              	tos_stopwatch_remain_ms:
+ 593              	.LVL59:
+ 594              	.LFB117:
+  99:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 595              		.loc 1 99 1 is_stmt 1 view -0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 18
+
+
+ 596              		.cfi_startproc
+ 597              		@ args = 0, pretend = 0, frame = 0
+ 598              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100:..//kernel/core/tos_stopwatch.c **** 
+ 599              		.loc 1 100 5 view .LVU153
+ 102:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_time_t)-1);
+ 600              		.loc 1 102 5 view .LVU154
+ 102:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_time_t)-1);
+ 601              		.loc 1 102 5 view .LVU155
+ 602 0000 10B3     		cbz	r0, .L49
+  99:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
+ 603              		.loc 1 99 1 is_stmt 0 view .LVU156
+ 604 0002 10B5     		push	{r4, lr}
+ 605              	.LCFI9:
+ 606              		.cfi_def_cfa_offset 8
+ 607              		.cfi_offset 4, -8
+ 608              		.cfi_offset 14, -4
+ 609 0004 0446     		mov	r4, r0
+ 103:..//kernel/core/tos_stopwatch.c **** 
+ 610              		.loc 1 103 5 is_stmt 1 view .LVU157
+ 103:..//kernel/core/tos_stopwatch.c **** 
+ 611              		.loc 1 103 5 view .LVU158
+ 612              	.LVL60:
+ 613              	.LBB32:
+ 614              	.LBI32:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 615              		.loc 2 182 31 view .LVU159
+ 616              	.LBB33:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 617              		.loc 2 184 5 view .LVU160
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 618              		.loc 2 184 19 is_stmt 0 view .LVU161
+ 619 0006 4188     		ldrh	r1, [r0, #2]
+ 620              	.LVL61:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 621              		.loc 2 184 19 view .LVU162
+ 622              	.LBE33:
+ 623              	.LBE32:
+ 103:..//kernel/core/tos_stopwatch.c **** 
+ 624              		.loc 1 103 5 view .LVU163
+ 625 0008 4DF6D722 		movw	r2, #56023
+ 626 000c 9142     		cmp	r1, r2
+ 627 000e 02D0     		beq	.L56
+ 628 0010 4FF0FF30 		mov	r0, #-1
+ 629              	.LVL62:
+ 630              	.L47:
+ 111:..//kernel/core/tos_stopwatch.c **** 
+ 631              		.loc 1 111 1 view .LVU164
+ 632 0014 10BD     		pop	{r4, pc}
+ 633              	.LVL63:
+ 634              	.L56:
+ 105:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 635              		.loc 1 105 5 is_stmt 1 view .LVU165
+ 105:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 636              		.loc 1 105 9 is_stmt 0 view .LVU166
+ 637 0016 FFF7FEFF 		bl	tos_stopwatch_is_expired
+ 638              	.LVL64:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 19
+
+
+ 105:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
+ 639              		.loc 1 105 8 view .LVU167
+ 640 001a 08B1     		cbz	r0, .L57
+ 106:..//kernel/core/tos_stopwatch.c ****     }
+ 641              		.loc 1 106 16 view .LVU168
+ 642 001c 0020     		movs	r0, #0
+ 643 001e F9E7     		b	.L47
+ 644              	.L57:
+ 109:..//kernel/core/tos_stopwatch.c ****     return (k_time_t)(((stopwatch->until) - now + TOS_CFG_CPU_TICK_PER_SECOND - 1) / TOS_CFG_CPU_TI
+ 645              		.loc 1 109 5 is_stmt 1 view .LVU169
+ 109:..//kernel/core/tos_stopwatch.c ****     return (k_time_t)(((stopwatch->until) - now + TOS_CFG_CPU_TICK_PER_SECOND - 1) / TOS_CFG_CPU_TI
+ 646              		.loc 1 109 11 is_stmt 0 view .LVU170
+ 647 0020 FFF7FEFF 		bl	tos_systick_get
+ 648              	.LVL65:
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 649              		.loc 1 110 5 is_stmt 1 view .LVU171
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 650              		.loc 1 110 34 is_stmt 0 view .LVU172
+ 651 0024 A368     		ldr	r3, [r4, #8]
+ 652 0026 E268     		ldr	r2, [r4, #12]
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 653              		.loc 1 110 43 view .LVU173
+ 654 0028 181A     		subs	r0, r3, r0
+ 655              	.LVL66:
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 656              		.loc 1 110 43 view .LVU174
+ 657 002a 62EB0101 		sbc	r1, r2, r1
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 658              		.loc 1 110 79 view .LVU175
+ 659 002e 40F2E734 		movw	r4, #999
+ 660              	.LVL67:
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 661              		.loc 1 110 84 view .LVU176
+ 662 0032 4FF47A72 		mov	r2, #1000
+ 663 0036 0023     		movs	r3, #0
+ 664 0038 0019     		adds	r0, r0, r4
+ 665 003a 4FF00004 		mov	r4, #0
+ 666 003e 44EB0101 		adc	r1, r4, r1
+ 667 0042 FFF7FEFF 		bl	__aeabi_uldivmod
+ 668              	.LVL68:
+ 110:..//kernel/core/tos_stopwatch.c **** }
+ 669              		.loc 1 110 12 view .LVU177
+ 670 0046 E5E7     		b	.L47
+ 671              	.LVL69:
+ 672              	.L49:
+ 673              	.LCFI10:
+ 674              		.cfi_def_cfa_offset 0
+ 675              		.cfi_restore 4
+ 676              		.cfi_restore 14
+ 102:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_time_t)-1);
+ 677              		.loc 1 102 5 view .LVU178
+ 678 0048 4FF0FF30 		mov	r0, #-1
+ 679              	.LVL70:
+ 111:..//kernel/core/tos_stopwatch.c **** 
+ 680              		.loc 1 111 1 view .LVU179
+ 681 004c 7047     		bx	lr
+ 682              		.cfi_endproc
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 20
+
+
+ 683              	.LFE117:
+ 685              		.text
+ 686              	.Letext0:
+ 687              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ 688              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 689              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 690              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 691              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 692              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 693              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 694              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 695              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 696              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 697              		.file 13 "..//kernel/core/include/tos_ktypes.h"
+ 698              		.file 14 "..//kernel/core/include/tos_task.h"
+ 699              		.file 15 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 700              		.file 16 "..//kernel/core/include/tos_list.h"
+ 701              		.file 17 "..//kernel/core/include/tos_pend.h"
+ 702              		.file 18 "..//kernel/core/include/tos_timer.h"
+ 703              		.file 19 "..//kernel/core/include/tos_stopwatch.h"
+ 704              		.file 20 "..//kernel/core/include/tos_mmheap.h"
+ 705              		.file 21 "..//kernel/core/include/tos_sched.h"
+ 706              		.file 22 "..//kernel/core/include/tos_global.h"
+ 707              		.file 23 "..//kernel/core/include/tos_time.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s 			page 21
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_stopwatch.c
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:16     .text.tos_stopwatch_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:24     .text.tos_stopwatch_create:00000000 tos_stopwatch_create
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:73     .text.tos_stopwatch_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:80     .text.tos_stopwatch_destroy:00000000 tos_stopwatch_destroy
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:151    .text.tos_stopwatch_countdown:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:158    .text.tos_stopwatch_countdown:00000000 tos_stopwatch_countdown
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:240    .text.tos_stopwatch_countdown_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:247    .text.tos_stopwatch_countdown_ms:00000000 tos_stopwatch_countdown_ms
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:321    .text.tos_stopwatch_delay:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:328    .text.tos_stopwatch_delay:00000000 tos_stopwatch_delay
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:379    .text.tos_stopwatch_delay_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:386    .text.tos_stopwatch_delay_ms:00000000 tos_stopwatch_delay_ms
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:413    .text.tos_stopwatch_is_expired:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:420    .text.tos_stopwatch_is_expired:00000000 tos_stopwatch_is_expired
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:490    .text.tos_stopwatch_remain:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:497    .text.tos_stopwatch_remain:00000000 tos_stopwatch_remain
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:585    .text.tos_stopwatch_remain_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccxIbJ4L.s:592    .text.tos_stopwatch_remain_ms:00000000 tos_stopwatch_remain_ms
+
+UNDEFINED SYMBOLS
+tos_systick_get
+tos_millisec2tick
+__aeabi_uldivmod

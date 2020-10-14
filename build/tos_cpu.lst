@@ -1,0 +1,972 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_cpu.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_cpu_clz,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_cpu_clz
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_cpu_clz:
+  25              	.LVL0:
+  26              	.LFB110:
+  27              		.file 1 "..//arch/arm/arm-v7m/common/tos_cpu.c"
+   1:..//arch/arm/arm-v7m/common/tos_cpu.c **** /*----------------------------------------------------------------------------
+   2:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * available.
+   4:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *
+   5:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *
+   9:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * License, except for the third-party components listed below which are
+  12:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * as the other licenses applicable to the third-party components included
+  15:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * within TencentOS.
+  16:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *---------------------------------------------------------------------------*/
+  17:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  18:..//arch/arm/arm-v7m/common/tos_cpu.c **** #include "tos_k.h"
+  19:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  20:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ uint32_t tos_cpu_clz(uint32_t val)
+  21:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+  28              		.loc 1 21 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 21 1 is_stmt 0 view .LVU1
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 2
+
+
+  22:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if defined(TOS_CFG_CPU_LEAD_ZEROS_ASM_PRESENT) && (TOS_CFG_CPU_LEAD_ZEROS_ASM_PRESENT == 0u)
+  23:..//arch/arm/arm-v7m/common/tos_cpu.c ****     uint32_t nbr_lead_zeros = 0;
+  24:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  25:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (!(val & 0XFFFF0000)) {
+  26:..//arch/arm/arm-v7m/common/tos_cpu.c ****         val <<= 16;
+  27:..//arch/arm/arm-v7m/common/tos_cpu.c ****         nbr_lead_zeros += 16;
+  28:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+  29:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  30:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (!(val & 0XFF000000)) {
+  31:..//arch/arm/arm-v7m/common/tos_cpu.c ****         val <<= 8;
+  32:..//arch/arm/arm-v7m/common/tos_cpu.c ****         nbr_lead_zeros += 8;
+  33:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+  34:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  35:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (!(val & 0XF0000000)) {
+  36:..//arch/arm/arm-v7m/common/tos_cpu.c ****         val <<= 4;
+  37:..//arch/arm/arm-v7m/common/tos_cpu.c ****         nbr_lead_zeros += 4;
+  38:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+  39:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  40:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (!(val & 0XC0000000)) {
+  41:..//arch/arm/arm-v7m/common/tos_cpu.c ****         val <<= 2;
+  42:..//arch/arm/arm-v7m/common/tos_cpu.c ****         nbr_lead_zeros += 2;
+  43:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+  44:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  45:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (!(val & 0X80000000)) {
+  46:..//arch/arm/arm-v7m/common/tos_cpu.c ****         nbr_lead_zeros += 1;
+  47:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+  48:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  49:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (!val) {
+  50:..//arch/arm/arm-v7m/common/tos_cpu.c ****         nbr_lead_zeros += 1;
+  51:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+  52:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  53:..//arch/arm/arm-v7m/common/tos_cpu.c ****     return (nbr_lead_zeros);
+  54:..//arch/arm/arm-v7m/common/tos_cpu.c **** #else
+  55:..//arch/arm/arm-v7m/common/tos_cpu.c ****     return port_clz(val);
+  38              		.loc 1 55 5 is_stmt 1 view .LVU2
+  39              		.loc 1 55 12 is_stmt 0 view .LVU3
+  40 0002 FFF7FEFF 		bl	port_clz
+  41              	.LVL1:
+  56:..//arch/arm/arm-v7m/common/tos_cpu.c **** #endif
+  57:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+  42              		.loc 1 57 1 view .LVU4
+  43 0006 08BD     		pop	{r3, pc}
+  44              		.cfi_endproc
+  45              	.LFE110:
+  47              		.section	.text.tos_cpu_int_disable,"ax",%progbits
+  48              		.align	1
+  49              		.global	tos_cpu_int_disable
+  50              		.syntax unified
+  51              		.thumb
+  52              		.thumb_func
+  53              		.fpu softvfp
+  55              	tos_cpu_int_disable:
+  56              	.LFB111:
+  58:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  59:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ void tos_cpu_int_disable(void)
+  60:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+  57              		.loc 1 60 1 is_stmt 1 view -0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 3
+
+
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61 0000 08B5     		push	{r3, lr}
+  62              	.LCFI1:
+  63              		.cfi_def_cfa_offset 8
+  64              		.cfi_offset 3, -8
+  65              		.cfi_offset 14, -4
+  61:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_int_disable();
+  66              		.loc 1 61 5 view .LVU6
+  67 0002 FFF7FEFF 		bl	port_int_disable
+  68              	.LVL2:
+  62:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+  69              		.loc 1 62 1 is_stmt 0 view .LVU7
+  70 0006 08BD     		pop	{r3, pc}
+  71              		.cfi_endproc
+  72              	.LFE111:
+  74              		.section	.text.tos_cpu_int_enable,"ax",%progbits
+  75              		.align	1
+  76              		.global	tos_cpu_int_enable
+  77              		.syntax unified
+  78              		.thumb
+  79              		.thumb_func
+  80              		.fpu softvfp
+  82              	tos_cpu_int_enable:
+  83              	.LFB112:
+  63:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  64:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ void tos_cpu_int_enable(void)
+  65:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+  84              		.loc 1 65 1 is_stmt 1 view -0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88 0000 08B5     		push	{r3, lr}
+  89              	.LCFI2:
+  90              		.cfi_def_cfa_offset 8
+  91              		.cfi_offset 3, -8
+  92              		.cfi_offset 14, -4
+  66:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_int_enable();
+  93              		.loc 1 66 5 view .LVU9
+  94 0002 FFF7FEFF 		bl	port_int_enable
+  95              	.LVL3:
+  67:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+  96              		.loc 1 67 1 is_stmt 0 view .LVU10
+  97 0006 08BD     		pop	{r3, pc}
+  98              		.cfi_endproc
+  99              	.LFE112:
+ 101              		.section	.text.tos_cpu_cpsr_save,"ax",%progbits
+ 102              		.align	1
+ 103              		.global	tos_cpu_cpsr_save
+ 104              		.syntax unified
+ 105              		.thumb
+ 106              		.thumb_func
+ 107              		.fpu softvfp
+ 109              	tos_cpu_cpsr_save:
+ 110              	.LFB113:
+  68:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 4
+
+
+  69:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ cpu_cpsr_t tos_cpu_cpsr_save(void)
+  70:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 111              		.loc 1 70 1 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115 0000 08B5     		push	{r3, lr}
+ 116              	.LCFI3:
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 3, -8
+ 119              		.cfi_offset 14, -4
+  71:..//arch/arm/arm-v7m/common/tos_cpu.c ****     return port_cpsr_save();
+ 120              		.loc 1 71 5 view .LVU12
+ 121              		.loc 1 71 12 is_stmt 0 view .LVU13
+ 122 0002 FFF7FEFF 		bl	port_cpsr_save
+ 123              	.LVL4:
+  72:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 124              		.loc 1 72 1 view .LVU14
+ 125 0006 08BD     		pop	{r3, pc}
+ 126              		.cfi_endproc
+ 127              	.LFE113:
+ 129              		.section	.text.tos_cpu_cpsr_restore,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	tos_cpu_cpsr_restore
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.fpu softvfp
+ 137              	tos_cpu_cpsr_restore:
+ 138              	.LVL5:
+ 139              	.LFB114:
+  73:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  74:..//arch/arm/arm-v7m/common/tos_cpu.c **** __API__ void tos_cpu_cpsr_restore(cpu_cpsr_t cpsr)
+  75:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 140              		.loc 1 75 1 is_stmt 1 view -0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		.loc 1 75 1 is_stmt 0 view .LVU16
+ 145 0000 08B5     		push	{r3, lr}
+ 146              	.LCFI4:
+ 147              		.cfi_def_cfa_offset 8
+ 148              		.cfi_offset 3, -8
+ 149              		.cfi_offset 14, -4
+  76:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_cpsr_restore(cpsr);
+ 150              		.loc 1 76 5 is_stmt 1 view .LVU17
+ 151 0002 FFF7FEFF 		bl	port_cpsr_restore
+ 152              	.LVL6:
+  77:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 153              		.loc 1 77 1 is_stmt 0 view .LVU18
+ 154 0006 08BD     		pop	{r3, pc}
+ 155              		.cfi_endproc
+ 156              	.LFE114:
+ 158              		.section	.text.cpu_reset,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	cpu_reset
+ 161              		.syntax unified
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 5
+
+
+ 162              		.thumb
+ 163              		.thumb_func
+ 164              		.fpu softvfp
+ 166              	cpu_reset:
+ 167              	.LFB116:
+  78:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  79:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_init(void)
+  80:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+  81:..//arch/arm/arm-v7m/common/tos_cpu.c ****     k_cpu_cycle_per_tick = TOS_CFG_CPU_CLOCK / k_cpu_tick_per_second;
+  82:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_init(k_cpu_cycle_per_tick);
+  83:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  84:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if (TOS_CFG_CPU_HRTIMER_EN > 0)
+  85:..//arch/arm/arm-v7m/common/tos_cpu.c ****     tos_cpu_hrtimer_init();
+  86:..//arch/arm/arm-v7m/common/tos_cpu.c **** #endif
+  87:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+  88:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  89:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_reset(void)
+  90:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 168              		.loc 1 90 1 is_stmt 1 view -0
+ 169              		.cfi_startproc
+ 170              		@ args = 0, pretend = 0, frame = 0
+ 171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172 0000 08B5     		push	{r3, lr}
+ 173              	.LCFI5:
+ 174              		.cfi_def_cfa_offset 8
+ 175              		.cfi_offset 3, -8
+ 176              		.cfi_offset 14, -4
+  91:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_cpu_reset();
+ 177              		.loc 1 91 5 view .LVU20
+ 178 0002 FFF7FEFF 		bl	port_cpu_reset
+ 179              	.LVL7:
+  92:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 180              		.loc 1 92 1 is_stmt 0 view .LVU21
+ 181 0006 08BD     		pop	{r3, pc}
+ 182              		.cfi_endproc
+ 183              	.LFE116:
+ 185              		.section	.text.cpu_sched_start,"ax",%progbits
+ 186              		.align	1
+ 187              		.global	cpu_sched_start
+ 188              		.syntax unified
+ 189              		.thumb
+ 190              		.thumb_func
+ 191              		.fpu softvfp
+ 193              	cpu_sched_start:
+ 194              	.LFB117:
+  93:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  94:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_sched_start(void)
+  95:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 195              		.loc 1 95 1 is_stmt 1 view -0
+ 196              		.cfi_startproc
+ 197              		@ Volatile: function does not return.
+ 198              		@ args = 0, pretend = 0, frame = 0
+ 199              		@ frame_needed = 0, uses_anonymous_args = 0
+ 200 0000 08B5     		push	{r3, lr}
+ 201              	.LCFI6:
+ 202              		.cfi_def_cfa_offset 8
+ 203              		.cfi_offset 3, -8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 6
+
+
+ 204              		.cfi_offset 14, -4
+  96:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_sched_start();
+ 205              		.loc 1 96 5 view .LVU23
+ 206 0002 FFF7FEFF 		bl	port_sched_start
+ 207              	.LVL8:
+ 208              		.cfi_endproc
+ 209              	.LFE117:
+ 211              		.section	.text.cpu_context_switch,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	cpu_context_switch
+ 214              		.syntax unified
+ 215              		.thumb
+ 216              		.thumb_func
+ 217              		.fpu softvfp
+ 219              	cpu_context_switch:
+ 220              	.LFB118:
+  97:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+  98:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+  99:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_context_switch(void)
+ 100:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 221              		.loc 1 100 1 view -0
+ 222              		.cfi_startproc
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225 0000 08B5     		push	{r3, lr}
+ 226              	.LCFI7:
+ 227              		.cfi_def_cfa_offset 8
+ 228              		.cfi_offset 3, -8
+ 229              		.cfi_offset 14, -4
+ 101:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_context_switch();
+ 230              		.loc 1 101 5 view .LVU25
+ 231 0002 FFF7FEFF 		bl	port_context_switch
+ 232              	.LVL9:
+ 102:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 233              		.loc 1 102 1 is_stmt 0 view .LVU26
+ 234 0006 08BD     		pop	{r3, pc}
+ 235              		.cfi_endproc
+ 236              	.LFE118:
+ 238              		.section	.text.cpu_irq_context_switch,"ax",%progbits
+ 239              		.align	1
+ 240              		.global	cpu_irq_context_switch
+ 241              		.syntax unified
+ 242              		.thumb
+ 243              		.thumb_func
+ 244              		.fpu softvfp
+ 246              	cpu_irq_context_switch:
+ 247              	.LFB119:
+ 103:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 104:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_irq_context_switch(void)
+ 105:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 248              		.loc 1 105 1 is_stmt 1 view -0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252 0000 08B5     		push	{r3, lr}
+ 253              	.LCFI8:
+ 254              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 7
+
+
+ 255              		.cfi_offset 3, -8
+ 256              		.cfi_offset 14, -4
+ 106:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_irq_context_switch();
+ 257              		.loc 1 106 5 view .LVU28
+ 258 0002 FFF7FEFF 		bl	port_irq_context_switch
+ 259              	.LVL10:
+ 107:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 260              		.loc 1 107 1 is_stmt 0 view .LVU29
+ 261 0006 08BD     		pop	{r3, pc}
+ 262              		.cfi_endproc
+ 263              	.LFE119:
+ 265              		.section	.text.cpu_systick_init,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	cpu_systick_init
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 271              		.fpu softvfp
+ 273              	cpu_systick_init:
+ 274              	.LVL11:
+ 275              	.LFB120:
+ 108:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 109:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_systick_init(k_cycle_t cycle_per_tick)
+ 110:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 276              		.loc 1 110 1 is_stmt 1 view -0
+ 277              		.cfi_startproc
+ 278              		@ args = 0, pretend = 0, frame = 0
+ 279              		@ frame_needed = 0, uses_anonymous_args = 0
+ 280              		.loc 1 110 1 is_stmt 0 view .LVU31
+ 281 0000 10B5     		push	{r4, lr}
+ 282              	.LCFI9:
+ 283              		.cfi_def_cfa_offset 8
+ 284              		.cfi_offset 4, -8
+ 285              		.cfi_offset 14, -4
+ 286 0002 0446     		mov	r4, r0
+ 111:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_systick_priority_set(TOS_CFG_CPU_SYSTICK_PRIO);
+ 287              		.loc 1 111 5 is_stmt 1 view .LVU32
+ 288 0004 0020     		movs	r0, #0
+ 289              	.LVL12:
+ 290              		.loc 1 111 5 is_stmt 0 view .LVU33
+ 291 0006 FFF7FEFF 		bl	port_systick_priority_set
+ 292              	.LVL13:
+ 112:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_systick_config(cycle_per_tick);
+ 293              		.loc 1 112 5 is_stmt 1 view .LVU34
+ 294 000a 2046     		mov	r0, r4
+ 295 000c FFF7FEFF 		bl	port_systick_config
+ 296              	.LVL14:
+ 113:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 297              		.loc 1 113 1 is_stmt 0 view .LVU35
+ 298 0010 10BD     		pop	{r4, pc}
+ 299              		.loc 1 113 1 view .LVU36
+ 300              		.cfi_endproc
+ 301              	.LFE120:
+ 303              		.global	__aeabi_uldivmod
+ 304              		.section	.text.cpu_init,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	cpu_init
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 8
+
+
+ 307              		.syntax unified
+ 308              		.thumb
+ 309              		.thumb_func
+ 310              		.fpu softvfp
+ 312              	cpu_init:
+ 313              	.LFB115:
+  80:..//arch/arm/arm-v7m/common/tos_cpu.c ****     k_cpu_cycle_per_tick = TOS_CFG_CPU_CLOCK / k_cpu_tick_per_second;
+ 314              		.loc 1 80 1 is_stmt 1 view -0
+ 315              		.cfi_startproc
+ 316              		@ args = 0, pretend = 0, frame = 0
+ 317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 318 0000 08B5     		push	{r3, lr}
+ 319              	.LCFI10:
+ 320              		.cfi_def_cfa_offset 8
+ 321              		.cfi_offset 3, -8
+ 322              		.cfi_offset 14, -4
+  81:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_init(k_cpu_cycle_per_tick);
+ 323              		.loc 1 81 5 view .LVU38
+  81:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_init(k_cpu_cycle_per_tick);
+ 324              		.loc 1 81 46 is_stmt 0 view .LVU39
+ 325 0002 064B     		ldr	r3, .L23
+ 326 0004 D3E90023 		ldrd	r2, [r3]
+ 327 0008 0549     		ldr	r1, .L23+4
+ 328 000a 0868     		ldr	r0, [r1]
+ 329 000c 0021     		movs	r1, #0
+ 330 000e FFF7FEFF 		bl	__aeabi_uldivmod
+ 331              	.LVL15:
+  81:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_init(k_cpu_cycle_per_tick);
+ 332              		.loc 1 81 26 view .LVU40
+ 333 0012 044B     		ldr	r3, .L23+8
+ 334 0014 1860     		str	r0, [r3]
+  82:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 335              		.loc 1 82 5 is_stmt 1 view .LVU41
+ 336 0016 FFF7FEFF 		bl	cpu_systick_init
+ 337              	.LVL16:
+  87:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 338              		.loc 1 87 1 is_stmt 0 view .LVU42
+ 339 001a 08BD     		pop	{r3, pc}
+ 340              	.L24:
+ 341              		.align	2
+ 342              	.L23:
+ 343 001c 00000000 		.word	k_cpu_tick_per_second
+ 344 0020 00000000 		.word	SystemCoreClock
+ 345 0024 00000000 		.word	k_cpu_cycle_per_tick
+ 346              		.cfi_endproc
+ 347              	.LFE115:
+ 349              		.section	.text.cpu_task_stk_init,"ax",%progbits
+ 350              		.align	1
+ 351              		.global	cpu_task_stk_init
+ 352              		.syntax unified
+ 353              		.thumb
+ 354              		.thumb_func
+ 355              		.fpu softvfp
+ 357              	cpu_task_stk_init:
+ 358              	.LVL17:
+ 359              	.LFB121:
+ 114:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 9
+
+
+ 115:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if TOS_CFG_TICKLESS_EN > 0u
+ 116:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 117:..//arch/arm/arm-v7m/common/tos_cpu.c **** /**
+ 118:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @brief Set value to systick reload value register
+ 119:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *
+ 120:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @param cycles The value set to register
+ 121:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *
+ 122:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @return None
+ 123:..//arch/arm/arm-v7m/common/tos_cpu.c ****  */
+ 124:..//arch/arm/arm-v7m/common/tos_cpu.c **** __STATIC_INLINE__ void cpu_systick_reload(k_cycle_t cycle_per_tick)
+ 125:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 126:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_systick_reload(cycle_per_tick);
+ 127:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 128:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 129:..//arch/arm/arm-v7m/common/tos_cpu.c **** /**
+ 130:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @brief Enable systick interrupt
+ 131:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *
+ 132:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @return None
+ 133:..//arch/arm/arm-v7m/common/tos_cpu.c ****  */
+ 134:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_systick_resume(void)
+ 135:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 136:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_systick_resume();
+ 137:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 138:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 139:..//arch/arm/arm-v7m/common/tos_cpu.c **** /**
+ 140:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @brief Disable systick interrupt
+ 141:..//arch/arm/arm-v7m/common/tos_cpu.c ****  *
+ 142:..//arch/arm/arm-v7m/common/tos_cpu.c ****  * @return None
+ 143:..//arch/arm/arm-v7m/common/tos_cpu.c ****  */
+ 144:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_systick_suspend(void)
+ 145:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 146:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_systick_suspend();
+ 147:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 148:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 149:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ k_time_t cpu_systick_max_delay_millisecond(void)
+ 150:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 151:..//arch/arm/arm-v7m/common/tos_cpu.c ****     return port_systick_max_delay_millisecond();
+ 152:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 153:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 154:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_systick_expires_set(k_time_t millisecond)
+ 155:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 156:..//arch/arm/arm-v7m/common/tos_cpu.c ****     k_cycle_t cycles;
+ 157:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 158:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cycles = (k_cycle_t)((uint64_t)millisecond * TOS_CFG_CPU_CLOCK / K_TIME_MILLISEC_PER_SEC); /* C
+ 159:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 160:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_reload(cycles - 12); /* interrupt delay */
+ 161:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 162:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 163:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_systick_pending_reset(void)
+ 164:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 165:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_systick_pending_reset();
+ 166:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 167:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 168:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_systick_reset(void)
+ 169:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 170:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_systick_reload(k_cpu_cycle_per_tick);
+ 171:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 10
+
+
+ 172:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 173:..//arch/arm/arm-v7m/common/tos_cpu.c **** #endif /* TOS_CFG_TICKLESS_EN */
+ 174:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 175:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if TOS_CFG_PWR_MGR_EN > 0u
+ 176:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 177:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_sleep_mode_enter(void)
+ 178:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 179:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_sleep_mode_enter();
+ 180:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 181:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 182:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_stop_mode_enter(void)
+ 183:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 184:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_stop_mode_enter();
+ 185:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 186:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 187:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ void cpu_standby_mode_enter(void)
+ 188:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 189:..//arch/arm/arm-v7m/common/tos_cpu.c ****     port_standby_mode_enter();
+ 190:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 191:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 192:..//arch/arm/arm-v7m/common/tos_cpu.c **** #endif /* TOS_CFG_PWR_MGR_EN */
+ 193:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 194:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ k_stack_t *cpu_task_stk_init(void *entry,
+ 195:..//arch/arm/arm-v7m/common/tos_cpu.c ****                                               void *arg,
+ 196:..//arch/arm/arm-v7m/common/tos_cpu.c ****                                               void *exit,
+ 197:..//arch/arm/arm-v7m/common/tos_cpu.c ****                                               k_stack_t *stk_base,
+ 198:..//arch/arm/arm-v7m/common/tos_cpu.c ****                                               size_t stk_size)
+ 199:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 360              		.loc 1 199 1 is_stmt 1 view -0
+ 361              		.cfi_startproc
+ 362              		@ args = 4, pretend = 0, frame = 0
+ 363              		@ frame_needed = 0, uses_anonymous_args = 0
+ 364              		@ link register save eliminated.
+ 365              		.loc 1 199 1 is_stmt 0 view .LVU44
+ 366 0000 30B4     		push	{r4, r5}
+ 367              	.LCFI11:
+ 368              		.cfi_def_cfa_offset 8
+ 369              		.cfi_offset 4, -8
+ 370              		.cfi_offset 5, -4
+ 200:..//arch/arm/arm-v7m/common/tos_cpu.c ****     cpu_data_t *sp;
+ 371              		.loc 1 200 5 is_stmt 1 view .LVU45
+ 201:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 202:..//arch/arm/arm-v7m/common/tos_cpu.c ****     sp = (cpu_data_t *)&stk_base[stk_size];
+ 372              		.loc 1 202 5 view .LVU46
+ 373              		.loc 1 202 8 is_stmt 0 view .LVU47
+ 374 0002 029C     		ldr	r4, [sp, #8]
+ 375 0004 1C44     		add	r4, r4, r3
+ 376              	.LVL18:
+ 203:..//arch/arm/arm-v7m/common/tos_cpu.c ****     sp = (cpu_data_t *)((cpu_addr_t)sp & 0xFFFFFFF8);
+ 377              		.loc 1 203 5 is_stmt 1 view .LVU48
+ 378              		.loc 1 203 40 is_stmt 0 view .LVU49
+ 379 0006 24F00704 		bic	r4, r4, #7
+ 380              	.LVL19:
+ 204:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 205:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if TOS_CFG_TASK_STACK_DRAUGHT_DEPTH_DETACT_EN > 0u
+ 206:..//arch/arm/arm-v7m/common/tos_cpu.c ****     uint8_t *slot = (uint8_t *)&stk_base[0];
+ 381              		.loc 1 206 5 is_stmt 1 view .LVU50
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 11
+
+
+ 207:..//arch/arm/arm-v7m/common/tos_cpu.c ****     for (; slot < (uint8_t *)sp; ++slot) {
+ 382              		.loc 1 207 5 view .LVU51
+ 383              	.L26:
+ 384              		.loc 1 207 5 is_stmt 0 discriminator 1 view .LVU52
+ 385 000a A342     		cmp	r3, r4
+ 386 000c 03D2     		bcs	.L29
+ 208:..//arch/arm/arm-v7m/common/tos_cpu.c ****         *slot = 0xCC;
+ 387              		.loc 1 208 9 is_stmt 1 discriminator 2 view .LVU53
+ 388              		.loc 1 208 15 is_stmt 0 discriminator 2 view .LVU54
+ 389 000e CC25     		movs	r5, #204
+ 390 0010 03F8015B 		strb	r5, [r3], #1
+ 391              	.LVL20:
+ 392              		.loc 1 208 15 discriminator 2 view .LVU55
+ 393 0014 F9E7     		b	.L26
+ 394              	.L29:
+ 209:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+ 210:..//arch/arm/arm-v7m/common/tos_cpu.c **** #endif
+ 211:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 212:..//arch/arm/arm-v7m/common/tos_cpu.c ****     /* auto-saved on exception(pendSV) by hardware */
+ 213:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x01000000u;    /* xPSR     */
+ 395              		.loc 1 213 5 is_stmt 1 view .LVU56
+ 396              	.LVL21:
+ 397              		.loc 1 213 11 is_stmt 0 view .LVU57
+ 398 0016 4FF08073 		mov	r3, #16777216
+ 399              	.LVL22:
+ 400              		.loc 1 213 11 view .LVU58
+ 401 001a 44F8043C 		str	r3, [r4, #-4]
+ 214:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)entry;          /* entry    */
+ 402              		.loc 1 214 5 is_stmt 1 view .LVU59
+ 403              	.LVL23:
+ 404              		.loc 1 214 11 is_stmt 0 view .LVU60
+ 405 001e 44F8080C 		str	r0, [r4, #-8]
+ 215:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)exit;           /* R14 (LR) */
+ 406              		.loc 1 215 5 is_stmt 1 view .LVU61
+ 407              	.LVL24:
+ 408              		.loc 1 215 11 is_stmt 0 view .LVU62
+ 409 0022 44F80C2C 		str	r2, [r4, #-12]
+ 216:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x12121212u;    /* R12      */
+ 410              		.loc 1 216 5 is_stmt 1 view .LVU63
+ 411              	.LVL25:
+ 412              		.loc 1 216 11 is_stmt 0 view .LVU64
+ 413 0026 4FF01233 		mov	r3, #303174162
+ 414 002a 44F8103C 		str	r3, [r4, #-16]
+ 217:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x03030303u;    /* R3       */
+ 415              		.loc 1 217 5 is_stmt 1 view .LVU65
+ 416              	.LVL26:
+ 417              		.loc 1 217 11 is_stmt 0 view .LVU66
+ 418 002e 4FF00333 		mov	r3, #50529027
+ 419 0032 44F8143C 		str	r3, [r4, #-20]
+ 218:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x02020202u;    /* R2       */
+ 420              		.loc 1 218 5 is_stmt 1 view .LVU67
+ 421              	.LVL27:
+ 422              		.loc 1 218 11 is_stmt 0 view .LVU68
+ 423 0036 4FF00233 		mov	r3, #33686018
+ 424 003a 44F8183C 		str	r3, [r4, #-24]
+ 219:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x01010101u;    /* R1       */
+ 425              		.loc 1 219 5 is_stmt 1 view .LVU69
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 12
+
+
+ 426              	.LVL28:
+ 427              		.loc 1 219 11 is_stmt 0 view .LVU70
+ 428 003e 4FF00133 		mov	r3, #16843009
+ 429 0042 44F81C3C 		str	r3, [r4, #-28]
+ 220:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)arg;            /* R0: arg  */
+ 430              		.loc 1 220 5 is_stmt 1 view .LVU71
+ 431              	.LVL29:
+ 432              		.loc 1 220 11 is_stmt 0 view .LVU72
+ 433 0046 44F8201C 		str	r1, [r4, #-32]
+ 221:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 222:..//arch/arm/arm-v7m/common/tos_cpu.c ****     /* Remaining registers saved on process stack */
+ 223:..//arch/arm/arm-v7m/common/tos_cpu.c ****     /* EXC_RETURN = 0xFFFFFFFDL
+ 224:..//arch/arm/arm-v7m/common/tos_cpu.c ****        Initial state: Thread mode +  non-floating-point state + PSP
+ 225:..//arch/arm/arm-v7m/common/tos_cpu.c ****        31 - 28 : EXC_RETURN flag, 0xF
+ 226:..//arch/arm/arm-v7m/common/tos_cpu.c ****        27 -  5 : reserved, 0xFFFFFE
+ 227:..//arch/arm/arm-v7m/common/tos_cpu.c ****        4       : 1, basic stack frame; 0, extended stack frame
+ 228:..//arch/arm/arm-v7m/common/tos_cpu.c ****        3       : 1, return to Thread mode; 0, return to Handler mode
+ 229:..//arch/arm/arm-v7m/common/tos_cpu.c ****        2       : 1, return to PSP; 0, return to MSP
+ 230:..//arch/arm/arm-v7m/common/tos_cpu.c ****        1       : reserved, 0
+ 231:..//arch/arm/arm-v7m/common/tos_cpu.c ****        0       : reserved, 1
+ 232:..//arch/arm/arm-v7m/common/tos_cpu.c ****      */
+ 233:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if defined (TOS_CFG_CPU_ARM_FPU_EN) && (TOS_CFG_CPU_ARM_FPU_EN == 1U)
+ 234:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0xFFFFFFFDL;
+ 235:..//arch/arm/arm-v7m/common/tos_cpu.c **** #endif
+ 236:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 237:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x11111111u;    /* R11      */
+ 434              		.loc 1 237 5 is_stmt 1 view .LVU73
+ 435              	.LVL30:
+ 436              		.loc 1 237 11 is_stmt 0 view .LVU74
+ 437 004a 4FF01133 		mov	r3, #286331153
+ 438 004e 44F8243C 		str	r3, [r4, #-36]
+ 238:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x10101010u;    /* R10      */
+ 439              		.loc 1 238 5 is_stmt 1 view .LVU75
+ 440              	.LVL31:
+ 441              		.loc 1 238 11 is_stmt 0 view .LVU76
+ 442 0052 4FF01033 		mov	r3, #269488144
+ 443 0056 44F8283C 		str	r3, [r4, #-40]
+ 239:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x09090909u;    /* R9       */
+ 444              		.loc 1 239 5 is_stmt 1 view .LVU77
+ 445              	.LVL32:
+ 446              		.loc 1 239 11 is_stmt 0 view .LVU78
+ 447 005a 4FF00933 		mov	r3, #151587081
+ 448 005e 44F82C3C 		str	r3, [r4, #-44]
+ 240:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x08080808u;    /* R8       */
+ 449              		.loc 1 240 5 is_stmt 1 view .LVU79
+ 450              	.LVL33:
+ 451              		.loc 1 240 11 is_stmt 0 view .LVU80
+ 452 0062 4FF00833 		mov	r3, #134744072
+ 453 0066 44F8303C 		str	r3, [r4, #-48]
+ 241:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x07070707u;    /* R7       */
+ 454              		.loc 1 241 5 is_stmt 1 view .LVU81
+ 455              	.LVL34:
+ 456              		.loc 1 241 11 is_stmt 0 view .LVU82
+ 457 006a 4FF00733 		mov	r3, #117901063
+ 458 006e 44F8343C 		str	r3, [r4, #-52]
+ 242:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x06060606u;    /* R6       */
+ 459              		.loc 1 242 5 is_stmt 1 view .LVU83
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 13
+
+
+ 460              	.LVL35:
+ 461              		.loc 1 242 11 is_stmt 0 view .LVU84
+ 462 0072 4FF00633 		mov	r3, #101058054
+ 463 0076 44F8383C 		str	r3, [r4, #-56]
+ 243:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x05050505u;    /* R5       */
+ 464              		.loc 1 243 5 is_stmt 1 view .LVU85
+ 465              	.LVL36:
+ 466              		.loc 1 243 11 is_stmt 0 view .LVU86
+ 467 007a 4FF00533 		mov	r3, #84215045
+ 468 007e 44F83C3C 		str	r3, [r4, #-60]
+ 244:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *--sp = (cpu_data_t)0x04040404u;    /* R4       */
+ 469              		.loc 1 244 5 is_stmt 1 view .LVU87
+ 470              	.LVL37:
+ 471              		.loc 1 244 11 is_stmt 0 view .LVU88
+ 472 0082 4FF00433 		mov	r3, #67372036
+ 473 0086 44F8403C 		str	r3, [r4, #-64]
+ 245:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 246:..//arch/arm/arm-v7m/common/tos_cpu.c ****     return (k_stack_t *)sp;
+ 474              		.loc 1 246 5 is_stmt 1 view .LVU89
+ 247:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 475              		.loc 1 247 1 is_stmt 0 view .LVU90
+ 476 008a A4F14000 		sub	r0, r4, #64
+ 477              	.LVL38:
+ 478              		.loc 1 247 1 view .LVU91
+ 479 008e 30BC     		pop	{r4, r5}
+ 480              	.LCFI12:
+ 481              		.cfi_restore 5
+ 482              		.cfi_restore 4
+ 483              		.cfi_def_cfa_offset 0
+ 484              	.LVL39:
+ 485              		.loc 1 247 1 view .LVU92
+ 486 0090 7047     		bx	lr
+ 487              		.cfi_endproc
+ 488              	.LFE121:
+ 490              		.section	.text.cpu_task_stack_draught_depth,"ax",%progbits
+ 491              		.align	1
+ 492              		.global	cpu_task_stack_draught_depth
+ 493              		.syntax unified
+ 494              		.thumb
+ 495              		.thumb_func
+ 496              		.fpu softvfp
+ 498              	cpu_task_stack_draught_depth:
+ 499              	.LVL40:
+ 500              	.LFB122:
+ 248:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 249:..//arch/arm/arm-v7m/common/tos_cpu.c **** #if TOS_CFG_TASK_STACK_DRAUGHT_DEPTH_DETACT_EN > 0u
+ 250:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 251:..//arch/arm/arm-v7m/common/tos_cpu.c **** __KNL__ k_err_t cpu_task_stack_draught_depth(k_stack_t *stk_base, size_t stk_size, int *depth)
+ 252:..//arch/arm/arm-v7m/common/tos_cpu.c **** {
+ 501              		.loc 1 252 1 is_stmt 1 view -0
+ 502              		.cfi_startproc
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505              		@ link register save eliminated.
+ 506              		.loc 1 252 1 is_stmt 0 view .LVU94
+ 507 0000 70B4     		push	{r4, r5, r6}
+ 508              	.LCFI13:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 14
+
+
+ 509              		.cfi_def_cfa_offset 12
+ 510              		.cfi_offset 4, -12
+ 511              		.cfi_offset 5, -8
+ 512              		.cfi_offset 6, -4
+ 253:..//arch/arm/arm-v7m/common/tos_cpu.c ****     uint8_t *slot;
+ 513              		.loc 1 253 5 is_stmt 1 view .LVU95
+ 254:..//arch/arm/arm-v7m/common/tos_cpu.c ****     uint8_t *sp, *bp;
+ 514              		.loc 1 254 5 view .LVU96
+ 255:..//arch/arm/arm-v7m/common/tos_cpu.c ****     int the_depth = 0;
+ 515              		.loc 1 255 5 view .LVU97
+ 516              	.LVL41:
+ 256:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 257:..//arch/arm/arm-v7m/common/tos_cpu.c ****     bp = (uint8_t *)&stk_base[0];
+ 517              		.loc 1 257 5 view .LVU98
+ 258:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 259:..//arch/arm/arm-v7m/common/tos_cpu.c ****     sp = &stk_base[stk_size];
+ 518              		.loc 1 259 5 view .LVU99
+ 519              		.loc 1 259 8 is_stmt 0 view .LVU100
+ 520 0002 4518     		adds	r5, r0, r1
+ 521              	.LVL42:
+ 260:..//arch/arm/arm-v7m/common/tos_cpu.c ****     sp = (uint8_t *)((cpu_addr_t)sp & 0xFFFFFFF8);
+ 522              		.loc 1 260 5 is_stmt 1 view .LVU101
+ 523              		.loc 1 260 37 is_stmt 0 view .LVU102
+ 524 0004 25F00705 		bic	r5, r5, #7
+ 525              	.LVL43:
+ 261:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 262:..//arch/arm/arm-v7m/common/tos_cpu.c ****     for (slot = sp - 1; slot >= bp; --slot) {
+ 526              		.loc 1 262 5 is_stmt 1 view .LVU103
+ 527              		.loc 1 262 15 is_stmt 0 view .LVU104
+ 528 0008 6B1E     		subs	r3, r5, #1
+ 529              	.LVL44:
+ 255:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 530              		.loc 1 255 9 view .LVU105
+ 531 000a 0026     		movs	r6, #0
+ 532              		.loc 1 262 5 view .LVU106
+ 533 000c 01E0     		b	.L31
+ 534              	.LVL45:
+ 535              	.L38:
+ 263:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
+ 264:..//arch/arm/arm-v7m/common/tos_cpu.c ****             the_depth = sp - slot;
+ 536              		.loc 1 264 13 is_stmt 1 view .LVU107
+ 537              		.loc 1 264 23 is_stmt 0 view .LVU108
+ 538 000e EE1A     		subs	r6, r5, r3
+ 539              	.LVL46:
+ 540              	.L32:
+ 262:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
+ 541              		.loc 1 262 37 discriminator 2 view .LVU109
+ 542 0010 013B     		subs	r3, r3, #1
+ 543              	.LVL47:
+ 544              	.L31:
+ 262:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
+ 545              		.loc 1 262 5 discriminator 1 view .LVU110
+ 546 0012 8342     		cmp	r3, r0
+ 547 0014 03D3     		bcc	.L37
+ 263:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
+ 548              		.loc 1 263 9 is_stmt 1 view .LVU111
+ 263:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 15
+
+
+ 549              		.loc 1 263 13 is_stmt 0 view .LVU112
+ 550 0016 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
+ 263:..//arch/arm/arm-v7m/common/tos_cpu.c ****         if (*slot != 0xCC) {
+ 551              		.loc 1 263 12 view .LVU113
+ 552 0018 CC2C     		cmp	r4, #204
+ 553 001a F8D1     		bne	.L38
+ 554 001c F8E7     		b	.L32
+ 555              	.L37:
+ 265:..//arch/arm/arm-v7m/common/tos_cpu.c ****         }
+ 266:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+ 267:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 268:..//arch/arm/arm-v7m/common/tos_cpu.c ****     *depth = the_depth;
+ 556              		.loc 1 268 5 is_stmt 1 view .LVU114
+ 557              		.loc 1 268 12 is_stmt 0 view .LVU115
+ 558 001e 1660     		str	r6, [r2]
+ 269:..//arch/arm/arm-v7m/common/tos_cpu.c ****     if (the_depth == stk_size) {
+ 559              		.loc 1 269 5 is_stmt 1 view .LVU116
+ 560              		.loc 1 269 8 is_stmt 0 view .LVU117
+ 561 0020 8E42     		cmp	r6, r1
+ 562 0022 02D0     		beq	.L35
+ 270:..//arch/arm/arm-v7m/common/tos_cpu.c ****         return K_ERR_TASK_STK_OVERFLOW;
+ 271:..//arch/arm/arm-v7m/common/tos_cpu.c ****     }
+ 272:..//arch/arm/arm-v7m/common/tos_cpu.c **** 
+ 273:..//arch/arm/arm-v7m/common/tos_cpu.c ****     return K_ERR_NONE;
+ 563              		.loc 1 273 12 view .LVU118
+ 564 0024 0020     		movs	r0, #0
+ 565              	.LVL48:
+ 566              	.L34:
+ 274:..//arch/arm/arm-v7m/common/tos_cpu.c **** }
+ 567              		.loc 1 274 1 view .LVU119
+ 568 0026 70BC     		pop	{r4, r5, r6}
+ 569              	.LCFI14:
+ 570              		.cfi_remember_state
+ 571              		.cfi_restore 6
+ 572              		.cfi_restore 5
+ 573              		.cfi_restore 4
+ 574              		.cfi_def_cfa_offset 0
+ 575              	.LVL49:
+ 576              		.loc 1 274 1 view .LVU120
+ 577 0028 7047     		bx	lr
+ 578              	.LVL50:
+ 579              	.L35:
+ 580              	.LCFI15:
+ 581              		.cfi_restore_state
+ 270:..//arch/arm/arm-v7m/common/tos_cpu.c ****         return K_ERR_TASK_STK_OVERFLOW;
+ 582              		.loc 1 270 16 view .LVU121
+ 583 002a 40F27370 		movw	r0, #1907
+ 584              	.LVL51:
+ 270:..//arch/arm/arm-v7m/common/tos_cpu.c ****         return K_ERR_TASK_STK_OVERFLOW;
+ 585              		.loc 1 270 16 view .LVU122
+ 586 002e FAE7     		b	.L34
+ 587              		.cfi_endproc
+ 588              	.LFE122:
+ 590              		.text
+ 591              	.Letext0:
+ 592              		.file 2 "..//kernel/core/include/tos_kerr.h"
+ 593              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 16
+
+
+ 594              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 595              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 596              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 597              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 598              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 599              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 600              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 601              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 602              		.file 12 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 603              		.file 13 "..//kernel/core/include/tos_ktypes.h"
+ 604              		.file 14 "..//kernel/core/include/tos_task.h"
+ 605              		.file 15 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 606              		.file 16 "..//kernel/core/include/tos_list.h"
+ 607              		.file 17 "..//kernel/core/include/tos_pend.h"
+ 608              		.file 18 "..//kernel/core/include/tos_sys.h"
+ 609              		.file 19 "..//kernel/core/include/tos_timer.h"
+ 610              		.file 20 "..//kernel/core/include/tos_mmheap.h"
+ 611              		.file 21 "..//kernel/core/include/tos_sched.h"
+ 612              		.file 22 "..//kernel/core/include/tos_global.h"
+ 613              		.file 23 "..//arch/arm/arm-v7m/cortex-m3/gcc/port.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_cpu.c
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:16     .text.tos_cpu_clz:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:24     .text.tos_cpu_clz:00000000 tos_cpu_clz
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:48     .text.tos_cpu_int_disable:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:55     .text.tos_cpu_int_disable:00000000 tos_cpu_int_disable
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:75     .text.tos_cpu_int_enable:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:82     .text.tos_cpu_int_enable:00000000 tos_cpu_int_enable
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:102    .text.tos_cpu_cpsr_save:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:109    .text.tos_cpu_cpsr_save:00000000 tos_cpu_cpsr_save
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:130    .text.tos_cpu_cpsr_restore:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:137    .text.tos_cpu_cpsr_restore:00000000 tos_cpu_cpsr_restore
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:159    .text.cpu_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:166    .text.cpu_reset:00000000 cpu_reset
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:186    .text.cpu_sched_start:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:193    .text.cpu_sched_start:00000000 cpu_sched_start
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:212    .text.cpu_context_switch:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:219    .text.cpu_context_switch:00000000 cpu_context_switch
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:239    .text.cpu_irq_context_switch:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:246    .text.cpu_irq_context_switch:00000000 cpu_irq_context_switch
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:266    .text.cpu_systick_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:273    .text.cpu_systick_init:00000000 cpu_systick_init
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:305    .text.cpu_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:312    .text.cpu_init:00000000 cpu_init
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:343    .text.cpu_init:0000001c $d
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:350    .text.cpu_task_stk_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:357    .text.cpu_task_stk_init:00000000 cpu_task_stk_init
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:491    .text.cpu_task_stack_draught_depth:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc73NGdk.s:498    .text.cpu_task_stack_draught_depth:00000000 cpu_task_stack_draught_depth
+
+UNDEFINED SYMBOLS
+port_clz
+port_int_disable
+port_int_enable
+port_cpsr_save
+port_cpsr_restore
+port_cpu_reset
+port_sched_start
+port_context_switch
+port_irq_context_switch
+port_systick_priority_set
+port_systick_config
+__aeabi_uldivmod
+k_cpu_tick_per_second
+SystemCoreClock
+k_cpu_cycle_per_tick

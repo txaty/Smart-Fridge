@@ -1,0 +1,1397 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_sys.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.knl_idle_entry,"ax",%progbits
+  16              		.align	1
+  17              		.arch armv7-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	knl_idle_entry:
+  24              	.LFB122:
+  25              		.file 1 "..//kernel/core/tos_sys.c"
+   1:..//kernel/core/tos_sys.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_sys.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_sys.c ****  * available.
+   4:..//kernel/core/tos_sys.c ****  *
+   5:..//kernel/core/tos_sys.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_sys.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_sys.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_sys.c ****  *
+   9:..//kernel/core/tos_sys.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_sys.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_sys.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_sys.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_sys.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_sys.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_sys.c ****  * within TencentOS.
+  16:..//kernel/core/tos_sys.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_sys.c **** 
+  18:..//kernel/core/tos_sys.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_sys.c **** 
+  20:..//kernel/core/tos_sys.c **** __API__ k_err_t tos_knl_init(void)
+  21:..//kernel/core/tos_sys.c **** {
+  22:..//kernel/core/tos_sys.c ****     k_err_t err;
+  23:..//kernel/core/tos_sys.c **** 
+  24:..//kernel/core/tos_sys.c ****     cpu_init();
+  25:..//kernel/core/tos_sys.c **** 
+  26:..//kernel/core/tos_sys.c ****     readyqueue_init();
+  27:..//kernel/core/tos_sys.c **** 
+  28:..//kernel/core/tos_sys.c **** #if TOS_CFG_MMHEAP_EN > 0
+  29:..//kernel/core/tos_sys.c **** #if TOS_CFG_MMHEAP_DEFAULT_POOL_EN > 0u
+  30:..//kernel/core/tos_sys.c ****     err = mmheap_init_with_pool(k_mmheap_default_pool, TOS_CFG_MMHEAP_DEFAULT_POOL_SIZE);
+  31:..//kernel/core/tos_sys.c **** #else
+  32:..//kernel/core/tos_sys.c ****     err = mmheap_init();
+  33:..//kernel/core/tos_sys.c **** #endif
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 2
+
+
+  34:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+  35:..//kernel/core/tos_sys.c ****         return err;
+  36:..//kernel/core/tos_sys.c ****     }
+  37:..//kernel/core/tos_sys.c **** #endif
+  38:..//kernel/core/tos_sys.c **** 
+  39:..//kernel/core/tos_sys.c ****     err = knl_idle_init();
+  40:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+  41:..//kernel/core/tos_sys.c ****         return err;
+  42:..//kernel/core/tos_sys.c ****     }
+  43:..//kernel/core/tos_sys.c **** 
+  44:..//kernel/core/tos_sys.c **** #if TOS_CFG_TIMER_EN > 0
+  45:..//kernel/core/tos_sys.c ****     err = timer_init();
+  46:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+  47:..//kernel/core/tos_sys.c ****         return err;
+  48:..//kernel/core/tos_sys.c ****     }
+  49:..//kernel/core/tos_sys.c **** #endif
+  50:..//kernel/core/tos_sys.c **** 
+  51:..//kernel/core/tos_sys.c **** #if TOS_CFG_PWR_MGR_EN > 0U
+  52:..//kernel/core/tos_sys.c ****     pm_init();
+  53:..//kernel/core/tos_sys.c **** #endif
+  54:..//kernel/core/tos_sys.c **** 
+  55:..//kernel/core/tos_sys.c **** #if TOS_CFG_TICKLESS_EN > 0u
+  56:..//kernel/core/tos_sys.c ****     tickless_init();
+  57:..//kernel/core/tos_sys.c **** #endif
+  58:..//kernel/core/tos_sys.c **** 
+  59:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+  60:..//kernel/core/tos_sys.c **** }
+  61:..//kernel/core/tos_sys.c **** 
+  62:..//kernel/core/tos_sys.c **** __API__ void tos_knl_irq_enter(void)
+  63:..//kernel/core/tos_sys.c **** {
+  64:..//kernel/core/tos_sys.c ****     if (!tos_knl_is_running()) {
+  65:..//kernel/core/tos_sys.c ****         return;
+  66:..//kernel/core/tos_sys.c ****     }
+  67:..//kernel/core/tos_sys.c **** 
+  68:..//kernel/core/tos_sys.c ****     if (unlikely(k_irq_nest_cnt >= K_NESTING_LIMIT_IRQ)) {
+  69:..//kernel/core/tos_sys.c ****         return;
+  70:..//kernel/core/tos_sys.c ****     }
+  71:..//kernel/core/tos_sys.c **** 
+  72:..//kernel/core/tos_sys.c ****     ++k_irq_nest_cnt;
+  73:..//kernel/core/tos_sys.c **** }
+  74:..//kernel/core/tos_sys.c **** 
+  75:..//kernel/core/tos_sys.c **** __API__ void tos_knl_irq_leave(void)
+  76:..//kernel/core/tos_sys.c **** {
+  77:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+  78:..//kernel/core/tos_sys.c **** 
+  79:..//kernel/core/tos_sys.c ****     if (!tos_knl_is_running()) {
+  80:..//kernel/core/tos_sys.c ****         return;
+  81:..//kernel/core/tos_sys.c ****     }
+  82:..//kernel/core/tos_sys.c **** 
+  83:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_DISABLE();
+  84:..//kernel/core/tos_sys.c ****     if (!knl_is_inirq()) {
+  85:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+  86:..//kernel/core/tos_sys.c ****         return;
+  87:..//kernel/core/tos_sys.c ****     }
+  88:..//kernel/core/tos_sys.c **** 
+  89:..//kernel/core/tos_sys.c ****     --k_irq_nest_cnt;
+  90:..//kernel/core/tos_sys.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 3
+
+
+  91:..//kernel/core/tos_sys.c ****     if (knl_is_inirq()) {
+  92:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+  93:..//kernel/core/tos_sys.c ****         return;
+  94:..//kernel/core/tos_sys.c ****     }
+  95:..//kernel/core/tos_sys.c **** 
+  96:..//kernel/core/tos_sys.c ****     if (knl_is_sched_locked()) {
+  97:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+  98:..//kernel/core/tos_sys.c ****         return;
+  99:..//kernel/core/tos_sys.c ****     }
+ 100:..//kernel/core/tos_sys.c **** 
+ 101:..//kernel/core/tos_sys.c ****     k_next_task = readyqueue_highest_ready_task_get();
+ 102:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 103:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 104:..//kernel/core/tos_sys.c ****         return;
+ 105:..//kernel/core/tos_sys.c ****     }
+ 106:..//kernel/core/tos_sys.c **** 
+ 107:..//kernel/core/tos_sys.c ****     cpu_irq_context_switch();
+ 108:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 109:..//kernel/core/tos_sys.c **** }
+ 110:..//kernel/core/tos_sys.c **** 
+ 111:..//kernel/core/tos_sys.c **** __API__ k_err_t tos_knl_sched_lock(void)
+ 112:..//kernel/core/tos_sys.c **** {
+ 113:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ 114:..//kernel/core/tos_sys.c **** 
+ 115:..//kernel/core/tos_sys.c ****     TOS_IN_IRQ_CHECK();
+ 116:..//kernel/core/tos_sys.c **** 
+ 117:..//kernel/core/tos_sys.c ****     if (!tos_knl_is_running()) {
+ 118:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 119:..//kernel/core/tos_sys.c ****     }
+ 120:..//kernel/core/tos_sys.c **** 
+ 121:..//kernel/core/tos_sys.c ****     if (k_sched_lock_nest_cnt >= K_NESTING_LIMIT_SCHED_LOCK) {
+ 122:..//kernel/core/tos_sys.c ****         return K_ERR_LOCK_NESTING_OVERFLOW;
+ 123:..//kernel/core/tos_sys.c ****     }
+ 124:..//kernel/core/tos_sys.c **** 
+ 125:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_DISABLE();
+ 126:..//kernel/core/tos_sys.c ****     ++k_sched_lock_nest_cnt;
+ 127:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 128:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+ 129:..//kernel/core/tos_sys.c **** }
+ 130:..//kernel/core/tos_sys.c **** 
+ 131:..//kernel/core/tos_sys.c **** __API__ k_err_t tos_knl_sched_unlock(void)
+ 132:..//kernel/core/tos_sys.c **** {
+ 133:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ 134:..//kernel/core/tos_sys.c **** 
+ 135:..//kernel/core/tos_sys.c ****     TOS_IN_IRQ_CHECK();
+ 136:..//kernel/core/tos_sys.c **** 
+ 137:..//kernel/core/tos_sys.c ****     if (!tos_knl_is_running()) {
+ 138:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 139:..//kernel/core/tos_sys.c ****     }
+ 140:..//kernel/core/tos_sys.c **** 
+ 141:..//kernel/core/tos_sys.c ****     if (!knl_is_sched_locked()) {
+ 142:..//kernel/core/tos_sys.c ****         return K_ERR_SCHED_NOT_LOCKED;
+ 143:..//kernel/core/tos_sys.c ****     }
+ 144:..//kernel/core/tos_sys.c **** 
+ 145:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_DISABLE();
+ 146:..//kernel/core/tos_sys.c ****     --k_sched_lock_nest_cnt;
+ 147:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 4
+
+
+ 148:..//kernel/core/tos_sys.c **** 
+ 149:..//kernel/core/tos_sys.c ****     knl_sched();
+ 150:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+ 151:..//kernel/core/tos_sys.c **** }
+ 152:..//kernel/core/tos_sys.c **** 
+ 153:..//kernel/core/tos_sys.c **** __API__ k_err_t tos_knl_start(void)
+ 154:..//kernel/core/tos_sys.c **** {
+ 155:..//kernel/core/tos_sys.c ****     if (unlikely(tos_knl_is_running())) {
+ 156:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_RUNNING;
+ 157:..//kernel/core/tos_sys.c ****     }
+ 158:..//kernel/core/tos_sys.c **** 
+ 159:..//kernel/core/tos_sys.c ****     k_next_task = readyqueue_highest_ready_task_get();
+ 160:..//kernel/core/tos_sys.c ****     k_curr_task = k_next_task;
+ 161:..//kernel/core/tos_sys.c ****     k_knl_state = KNL_STATE_RUNNING;
+ 162:..//kernel/core/tos_sys.c **** 
+ 163:..//kernel/core/tos_sys.c ****     cpu_sched_start();
+ 164:..//kernel/core/tos_sys.c **** 
+ 165:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+ 166:..//kernel/core/tos_sys.c **** }
+ 167:..//kernel/core/tos_sys.c **** 
+ 168:..//kernel/core/tos_sys.c **** __API__ int tos_knl_is_running(void)
+ 169:..//kernel/core/tos_sys.c **** {
+ 170:..//kernel/core/tos_sys.c ****     return k_knl_state == KNL_STATE_RUNNING;
+ 171:..//kernel/core/tos_sys.c **** }
+ 172:..//kernel/core/tos_sys.c **** 
+ 173:..//kernel/core/tos_sys.c **** #if TOS_CFG_TICKLESS_EN > 0u
+ 174:..//kernel/core/tos_sys.c **** 
+ 175:..//kernel/core/tos_sys.c **** /**
+ 176:..//kernel/core/tos_sys.c ****  * @brief Get the remain ticks of the first oncoming task.
+ 177:..//kernel/core/tos_sys.c ****  *
+ 178:..//kernel/core/tos_sys.c ****  * @return The remian ticks of the first oncoming task to be scheduled.
+ 179:..//kernel/core/tos_sys.c ****  */
+ 180:..//kernel/core/tos_sys.c **** __KNL__ k_tick_t knl_next_expires_get(void)
+ 181:..//kernel/core/tos_sys.c **** {
+ 182:..//kernel/core/tos_sys.c ****     k_tick_t tick_next_expires;
+ 183:..//kernel/core/tos_sys.c **** #if TOS_CFG_TIMER_EN > 0u
+ 184:..//kernel/core/tos_sys.c ****     k_tick_t timer_next_expires;
+ 185:..//kernel/core/tos_sys.c **** #endif
+ 186:..//kernel/core/tos_sys.c **** 
+ 187:..//kernel/core/tos_sys.c ****     tick_next_expires = tick_next_expires_get();
+ 188:..//kernel/core/tos_sys.c **** 
+ 189:..//kernel/core/tos_sys.c **** #if TOS_CFG_TIMER_EN > 0u
+ 190:..//kernel/core/tos_sys.c ****     timer_next_expires = timer_next_expires_get();
+ 191:..//kernel/core/tos_sys.c **** #endif
+ 192:..//kernel/core/tos_sys.c **** 
+ 193:..//kernel/core/tos_sys.c **** #if TOS_CFG_TIMER_EN > 0u
+ 194:..//kernel/core/tos_sys.c ****     return tick_next_expires < timer_next_expires ? tick_next_expires : timer_next_expires;
+ 195:..//kernel/core/tos_sys.c **** #else
+ 196:..//kernel/core/tos_sys.c ****     return tick_next_expires;
+ 197:..//kernel/core/tos_sys.c **** #endif
+ 198:..//kernel/core/tos_sys.c **** }
+ 199:..//kernel/core/tos_sys.c **** 
+ 200:..//kernel/core/tos_sys.c **** #endif
+ 201:..//kernel/core/tos_sys.c **** 
+ 202:..//kernel/core/tos_sys.c **** __KNL__ void knl_sched(void)
+ 203:..//kernel/core/tos_sys.c **** {
+ 204:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 5
+
+
+ 205:..//kernel/core/tos_sys.c **** 
+ 206:..//kernel/core/tos_sys.c ****     if (unlikely(!tos_knl_is_running())) {
+ 207:..//kernel/core/tos_sys.c ****         return;
+ 208:..//kernel/core/tos_sys.c ****     }
+ 209:..//kernel/core/tos_sys.c **** 
+ 210:..//kernel/core/tos_sys.c ****     if (knl_is_inirq()) {
+ 211:..//kernel/core/tos_sys.c ****         return;
+ 212:..//kernel/core/tos_sys.c ****     }
+ 213:..//kernel/core/tos_sys.c **** 
+ 214:..//kernel/core/tos_sys.c ****     if (knl_is_sched_locked()) {
+ 215:..//kernel/core/tos_sys.c ****         return;
+ 216:..//kernel/core/tos_sys.c ****     }
+ 217:..//kernel/core/tos_sys.c **** 
+ 218:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_DISABLE();
+ 219:..//kernel/core/tos_sys.c ****     k_next_task = readyqueue_highest_ready_task_get();
+ 220:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 221:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 222:..//kernel/core/tos_sys.c ****         return;
+ 223:..//kernel/core/tos_sys.c ****     }
+ 224:..//kernel/core/tos_sys.c **** 
+ 225:..//kernel/core/tos_sys.c ****     cpu_context_switch();
+ 226:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 227:..//kernel/core/tos_sys.c **** }
+ 228:..//kernel/core/tos_sys.c **** 
+ 229:..//kernel/core/tos_sys.c **** __KNL__ int knl_is_sched_locked(void)
+ 230:..//kernel/core/tos_sys.c **** {
+ 231:..//kernel/core/tos_sys.c ****     return k_sched_lock_nest_cnt > 0u;
+ 232:..//kernel/core/tos_sys.c **** }
+ 233:..//kernel/core/tos_sys.c **** 
+ 234:..//kernel/core/tos_sys.c **** __KNL__ int knl_is_inirq(void)
+ 235:..//kernel/core/tos_sys.c **** {
+ 236:..//kernel/core/tos_sys.c ****     return k_irq_nest_cnt > 0u;
+ 237:..//kernel/core/tos_sys.c **** }
+ 238:..//kernel/core/tos_sys.c **** 
+ 239:..//kernel/core/tos_sys.c **** __KNL__ int knl_is_idle(k_task_t *task)
+ 240:..//kernel/core/tos_sys.c **** {
+ 241:..//kernel/core/tos_sys.c ****     return task == &k_idle_task;
+ 242:..//kernel/core/tos_sys.c **** }
+ 243:..//kernel/core/tos_sys.c **** 
+ 244:..//kernel/core/tos_sys.c **** __KNL__ int knl_is_self(k_task_t *task)
+ 245:..//kernel/core/tos_sys.c **** {
+ 246:..//kernel/core/tos_sys.c ****     return task == k_curr_task;
+ 247:..//kernel/core/tos_sys.c **** }
+ 248:..//kernel/core/tos_sys.c **** 
+ 249:..//kernel/core/tos_sys.c **** __STATIC__ void knl_idle_entry(void *arg)
+ 250:..//kernel/core/tos_sys.c **** {
+  26              		.loc 1 250 1 view -0
+  27              		.cfi_startproc
+  28              		@ Volatile: function does not return.
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32              		.loc 1 250 1 is_stmt 0 view .LVU1
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 6
+
+
+  37              		.cfi_offset 14, -4
+  38              	.LVL1:
+  39              	.L2:
+ 251:..//kernel/core/tos_sys.c ****     arg = arg; // make compiler happy
+ 252:..//kernel/core/tos_sys.c **** 
+ 253:..//kernel/core/tos_sys.c ****     while (K_TRUE) {
+  40              		.loc 1 253 5 is_stmt 1 discriminator 1 view .LVU2
+ 254:..//kernel/core/tos_sys.c **** #if TOS_CFG_TASK_DYNAMIC_CREATE_EN > 0u
+ 255:..//kernel/core/tos_sys.c ****         task_free_all();
+  41              		.loc 1 255 9 discriminator 1 view .LVU3
+  42 0002 FFF7FEFF 		bl	task_free_all
+  43              	.LVL2:
+  44 0006 FCE7     		b	.L2
+  45              		.cfi_endproc
+  46              	.LFE122:
+  48              		.section	.text.tos_knl_is_running,"ax",%progbits
+  49              		.align	1
+  50              		.global	tos_knl_is_running
+  51              		.syntax unified
+  52              		.thumb
+  53              		.thumb_func
+  54              		.fpu softvfp
+  56              	tos_knl_is_running:
+  57              	.LFB116:
+ 169:..//kernel/core/tos_sys.c ****     return k_knl_state == KNL_STATE_RUNNING;
+  58              		.loc 1 169 1 view -0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+ 170:..//kernel/core/tos_sys.c **** }
+  63              		.loc 1 170 5 view .LVU5
+ 170:..//kernel/core/tos_sys.c **** }
+  64              		.loc 1 170 24 is_stmt 0 view .LVU6
+  65 0000 034B     		ldr	r3, .L5
+  66 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 171:..//kernel/core/tos_sys.c **** 
+  67              		.loc 1 171 1 view .LVU7
+  68 0004 0128     		cmp	r0, #1
+  69 0006 14BF     		ite	ne
+  70 0008 0020     		movne	r0, #0
+  71 000a 0120     		moveq	r0, #1
+  72 000c 7047     		bx	lr
+  73              	.L6:
+  74 000e 00BF     		.align	2
+  75              	.L5:
+  76 0010 00000000 		.word	k_knl_state
+  77              		.cfi_endproc
+  78              	.LFE116:
+  80              		.section	.text.tos_knl_irq_enter,"ax",%progbits
+  81              		.align	1
+  82              		.global	tos_knl_irq_enter
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+  86              		.fpu softvfp
+  88              	tos_knl_irq_enter:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 7
+
+
+  89              	.LFB111:
+  63:..//kernel/core/tos_sys.c ****     if (!tos_knl_is_running()) {
+  90              		.loc 1 63 1 is_stmt 1 view -0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94 0000 08B5     		push	{r3, lr}
+  95              	.LCFI1:
+  96              		.cfi_def_cfa_offset 8
+  97              		.cfi_offset 3, -8
+  98              		.cfi_offset 14, -4
+  64:..//kernel/core/tos_sys.c ****         return;
+  99              		.loc 1 64 5 view .LVU9
+  64:..//kernel/core/tos_sys.c ****         return;
+ 100              		.loc 1 64 10 is_stmt 0 view .LVU10
+ 101 0002 FFF7FEFF 		bl	tos_knl_is_running
+ 102              	.LVL3:
+  64:..//kernel/core/tos_sys.c ****         return;
+ 103              		.loc 1 64 8 view .LVU11
+ 104 0006 30B1     		cbz	r0, .L7
+  68:..//kernel/core/tos_sys.c ****         return;
+ 105              		.loc 1 68 5 is_stmt 1 view .LVU12
+  68:..//kernel/core/tos_sys.c ****         return;
+ 106              		.loc 1 68 9 is_stmt 0 view .LVU13
+ 107 0008 034B     		ldr	r3, .L10
+ 108 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  68:..//kernel/core/tos_sys.c ****         return;
+ 109              		.loc 1 68 8 view .LVU14
+ 110 000c F92B     		cmp	r3, #249
+ 111 000e 02D8     		bhi	.L7
+  72:..//kernel/core/tos_sys.c **** }
+ 112              		.loc 1 72 5 is_stmt 1 view .LVU15
+ 113 0010 0133     		adds	r3, r3, #1
+ 114 0012 014A     		ldr	r2, .L10
+ 115 0014 1370     		strb	r3, [r2]
+ 116              	.L7:
+  73:..//kernel/core/tos_sys.c **** 
+ 117              		.loc 1 73 1 is_stmt 0 view .LVU16
+ 118 0016 08BD     		pop	{r3, pc}
+ 119              	.L11:
+ 120              		.align	2
+ 121              	.L10:
+ 122 0018 00000000 		.word	k_irq_nest_cnt
+ 123              		.cfi_endproc
+ 124              	.LFE111:
+ 126              		.section	.text.tos_knl_start,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	tos_knl_start
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 132              		.fpu softvfp
+ 134              	tos_knl_start:
+ 135              	.LFB115:
+ 154:..//kernel/core/tos_sys.c ****     if (unlikely(tos_knl_is_running())) {
+ 136              		.loc 1 154 1 is_stmt 1 view -0
+ 137              		.cfi_startproc
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 8
+
+
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140 0000 08B5     		push	{r3, lr}
+ 141              	.LCFI2:
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 3, -8
+ 144              		.cfi_offset 14, -4
+ 155:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_RUNNING;
+ 145              		.loc 1 155 5 view .LVU18
+ 155:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_RUNNING;
+ 146              		.loc 1 155 9 is_stmt 0 view .LVU19
+ 147 0002 FFF7FEFF 		bl	tos_knl_is_running
+ 148              	.LVL4:
+ 155:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_RUNNING;
+ 149              		.loc 1 155 8 view .LVU20
+ 150 0006 60B9     		cbnz	r0, .L14
+ 159:..//kernel/core/tos_sys.c ****     k_curr_task = k_next_task;
+ 151              		.loc 1 159 5 is_stmt 1 view .LVU21
+ 159:..//kernel/core/tos_sys.c ****     k_curr_task = k_next_task;
+ 152              		.loc 1 159 19 is_stmt 0 view .LVU22
+ 153 0008 FFF7FEFF 		bl	readyqueue_highest_ready_task_get
+ 154              	.LVL5:
+ 159:..//kernel/core/tos_sys.c ****     k_curr_task = k_next_task;
+ 155              		.loc 1 159 17 view .LVU23
+ 156 000c 064B     		ldr	r3, .L16
+ 157 000e 1860     		str	r0, [r3]
+ 160:..//kernel/core/tos_sys.c ****     k_knl_state = KNL_STATE_RUNNING;
+ 158              		.loc 1 160 5 is_stmt 1 view .LVU24
+ 160:..//kernel/core/tos_sys.c ****     k_knl_state = KNL_STATE_RUNNING;
+ 159              		.loc 1 160 17 is_stmt 0 view .LVU25
+ 160 0010 064B     		ldr	r3, .L16+4
+ 161 0012 1860     		str	r0, [r3]
+ 161:..//kernel/core/tos_sys.c **** 
+ 162              		.loc 1 161 5 is_stmt 1 view .LVU26
+ 161:..//kernel/core/tos_sys.c **** 
+ 163              		.loc 1 161 17 is_stmt 0 view .LVU27
+ 164 0014 064B     		ldr	r3, .L16+8
+ 165 0016 0122     		movs	r2, #1
+ 166 0018 1A70     		strb	r2, [r3]
+ 163:..//kernel/core/tos_sys.c **** 
+ 167              		.loc 1 163 5 is_stmt 1 view .LVU28
+ 168 001a FFF7FEFF 		bl	cpu_sched_start
+ 169              	.LVL6:
+ 165:..//kernel/core/tos_sys.c **** }
+ 170              		.loc 1 165 5 view .LVU29
+ 165:..//kernel/core/tos_sys.c **** }
+ 171              		.loc 1 165 12 is_stmt 0 view .LVU30
+ 172 001e 0020     		movs	r0, #0
+ 173              	.L13:
+ 166:..//kernel/core/tos_sys.c **** 
+ 174              		.loc 1 166 1 view .LVU31
+ 175 0020 08BD     		pop	{r3, pc}
+ 176              	.L14:
+ 156:..//kernel/core/tos_sys.c ****     }
+ 177              		.loc 1 156 16 view .LVU32
+ 178 0022 40F2F510 		movw	r0, #501
+ 179 0026 FBE7     		b	.L13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 9
+
+
+ 180              	.L17:
+ 181              		.align	2
+ 182              	.L16:
+ 183 0028 00000000 		.word	k_next_task
+ 184 002c 00000000 		.word	k_curr_task
+ 185 0030 00000000 		.word	k_knl_state
+ 186              		.cfi_endproc
+ 187              	.LFE115:
+ 189              		.section	.text.knl_is_sched_locked,"ax",%progbits
+ 190              		.align	1
+ 191              		.global	knl_is_sched_locked
+ 192              		.syntax unified
+ 193              		.thumb
+ 194              		.thumb_func
+ 195              		.fpu softvfp
+ 197              	knl_is_sched_locked:
+ 198              	.LFB118:
+ 230:..//kernel/core/tos_sys.c ****     return k_sched_lock_nest_cnt > 0u;
+ 199              		.loc 1 230 1 is_stmt 1 view -0
+ 200              		.cfi_startproc
+ 201              		@ args = 0, pretend = 0, frame = 0
+ 202              		@ frame_needed = 0, uses_anonymous_args = 0
+ 203              		@ link register save eliminated.
+ 231:..//kernel/core/tos_sys.c **** }
+ 204              		.loc 1 231 5 view .LVU34
+ 231:..//kernel/core/tos_sys.c **** }
+ 205              		.loc 1 231 34 is_stmt 0 view .LVU35
+ 206 0000 024B     		ldr	r3, .L19
+ 207 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 232:..//kernel/core/tos_sys.c **** 
+ 208              		.loc 1 232 1 view .LVU36
+ 209 0004 0030     		adds	r0, r0, #0
+ 210 0006 18BF     		it	ne
+ 211 0008 0120     		movne	r0, #1
+ 212 000a 7047     		bx	lr
+ 213              	.L20:
+ 214              		.align	2
+ 215              	.L19:
+ 216 000c 00000000 		.word	k_sched_lock_nest_cnt
+ 217              		.cfi_endproc
+ 218              	.LFE118:
+ 220              		.section	.text.knl_is_inirq,"ax",%progbits
+ 221              		.align	1
+ 222              		.global	knl_is_inirq
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ 226              		.fpu softvfp
+ 228              	knl_is_inirq:
+ 229              	.LFB119:
+ 235:..//kernel/core/tos_sys.c ****     return k_irq_nest_cnt > 0u;
+ 230              		.loc 1 235 1 is_stmt 1 view -0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234              		@ link register save eliminated.
+ 236:..//kernel/core/tos_sys.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 10
+
+
+ 235              		.loc 1 236 5 view .LVU38
+ 236:..//kernel/core/tos_sys.c **** }
+ 236              		.loc 1 236 27 is_stmt 0 view .LVU39
+ 237 0000 024B     		ldr	r3, .L22
+ 238 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 237:..//kernel/core/tos_sys.c **** 
+ 239              		.loc 1 237 1 view .LVU40
+ 240 0004 0030     		adds	r0, r0, #0
+ 241 0006 18BF     		it	ne
+ 242 0008 0120     		movne	r0, #1
+ 243 000a 7047     		bx	lr
+ 244              	.L23:
+ 245              		.align	2
+ 246              	.L22:
+ 247 000c 00000000 		.word	k_irq_nest_cnt
+ 248              		.cfi_endproc
+ 249              	.LFE119:
+ 251              		.section	.text.tos_knl_sched_lock,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	tos_knl_sched_lock
+ 254              		.syntax unified
+ 255              		.thumb
+ 256              		.thumb_func
+ 257              		.fpu softvfp
+ 259              	tos_knl_sched_lock:
+ 260              	.LFB113:
+ 112:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ 261              		.loc 1 112 1 is_stmt 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 08B5     		push	{r3, lr}
+ 266              	.LCFI3:
+ 267              		.cfi_def_cfa_offset 8
+ 268              		.cfi_offset 3, -8
+ 269              		.cfi_offset 14, -4
+ 113:..//kernel/core/tos_sys.c **** 
+ 270              		.loc 1 113 5 view .LVU42
+ 271              	.LVL7:
+ 115:..//kernel/core/tos_sys.c **** 
+ 272              		.loc 1 115 5 view .LVU43
+ 115:..//kernel/core/tos_sys.c **** 
+ 273              		.loc 1 115 5 view .LVU44
+ 274 0002 FFF7FEFF 		bl	knl_is_inirq
+ 275              	.LVL8:
+ 276 0006 80B9     		cbnz	r0, .L26
+ 117:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 277              		.loc 1 117 5 view .LVU45
+ 117:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 278              		.loc 1 117 10 is_stmt 0 view .LVU46
+ 279 0008 FFF7FEFF 		bl	tos_knl_is_running
+ 280              	.LVL9:
+ 117:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 281              		.loc 1 117 8 view .LVU47
+ 282 000c 80B1     		cbz	r0, .L27
+ 121:..//kernel/core/tos_sys.c ****         return K_ERR_LOCK_NESTING_OVERFLOW;
+ 283              		.loc 1 121 5 is_stmt 1 view .LVU48
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 11
+
+
+ 121:..//kernel/core/tos_sys.c ****         return K_ERR_LOCK_NESTING_OVERFLOW;
+ 284              		.loc 1 121 31 is_stmt 0 view .LVU49
+ 285 000e 0B4B     		ldr	r3, .L30
+ 286 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 121:..//kernel/core/tos_sys.c ****         return K_ERR_LOCK_NESTING_OVERFLOW;
+ 287              		.loc 1 121 8 view .LVU50
+ 288 0012 F92B     		cmp	r3, #249
+ 289 0014 0FD8     		bhi	.L28
+ 125:..//kernel/core/tos_sys.c ****     ++k_sched_lock_nest_cnt;
+ 290              		.loc 1 125 5 is_stmt 1 view .LVU51
+ 125:..//kernel/core/tos_sys.c ****     ++k_sched_lock_nest_cnt;
+ 291              		.loc 1 125 5 view .LVU52
+ 292 0016 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 293              	.LVL10:
+ 126:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 294              		.loc 1 126 5 view .LVU53
+ 295 001a 084A     		ldr	r2, .L30
+ 296 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 297 001e 0133     		adds	r3, r3, #1
+ 298 0020 1370     		strb	r3, [r2]
+ 127:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+ 299              		.loc 1 127 5 view .LVU54
+ 127:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+ 300              		.loc 1 127 5 view .LVU55
+ 301 0022 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 302              	.LVL11:
+ 128:..//kernel/core/tos_sys.c **** }
+ 303              		.loc 1 128 5 view .LVU56
+ 128:..//kernel/core/tos_sys.c **** }
+ 304              		.loc 1 128 12 is_stmt 0 view .LVU57
+ 305 0026 0020     		movs	r0, #0
+ 306              	.L25:
+ 129:..//kernel/core/tos_sys.c **** 
+ 307              		.loc 1 129 1 view .LVU58
+ 308 0028 08BD     		pop	{r3, pc}
+ 309              	.LVL12:
+ 310              	.L26:
+ 115:..//kernel/core/tos_sys.c **** 
+ 311              		.loc 1 115 5 view .LVU59
+ 312 002a 4FF4C870 		mov	r0, #400
+ 313 002e FBE7     		b	.L25
+ 314              	.L27:
+ 118:..//kernel/core/tos_sys.c ****     }
+ 315              		.loc 1 118 16 view .LVU60
+ 316 0030 4FF4FA70 		mov	r0, #500
+ 317 0034 F8E7     		b	.L25
+ 318              	.L28:
+ 122:..//kernel/core/tos_sys.c ****     }
+ 319              		.loc 1 122 16 view .LVU61
+ 320 0036 4FF41670 		mov	r0, #600
+ 321 003a F5E7     		b	.L25
+ 322              	.L31:
+ 323              		.align	2
+ 324              	.L30:
+ 325 003c 00000000 		.word	k_sched_lock_nest_cnt
+ 326              		.cfi_endproc
+ 327              	.LFE113:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 12
+
+
+ 329              		.section	.text.knl_is_idle,"ax",%progbits
+ 330              		.align	1
+ 331              		.global	knl_is_idle
+ 332              		.syntax unified
+ 333              		.thumb
+ 334              		.thumb_func
+ 335              		.fpu softvfp
+ 337              	knl_is_idle:
+ 338              	.LVL13:
+ 339              	.LFB120:
+ 240:..//kernel/core/tos_sys.c ****     return task == &k_idle_task;
+ 340              		.loc 1 240 1 is_stmt 1 view -0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 0
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344              		@ link register save eliminated.
+ 241:..//kernel/core/tos_sys.c **** }
+ 345              		.loc 1 241 5 view .LVU63
+ 242:..//kernel/core/tos_sys.c **** 
+ 346              		.loc 1 242 1 is_stmt 0 view .LVU64
+ 347 0000 024B     		ldr	r3, .L33
+ 348 0002 8342     		cmp	r3, r0
+ 349 0004 14BF     		ite	ne
+ 350 0006 0020     		movne	r0, #0
+ 351              	.LVL14:
+ 242:..//kernel/core/tos_sys.c **** 
+ 352              		.loc 1 242 1 view .LVU65
+ 353 0008 0120     		moveq	r0, #1
+ 354 000a 7047     		bx	lr
+ 355              	.L34:
+ 356              		.align	2
+ 357              	.L33:
+ 358 000c 00000000 		.word	k_idle_task
+ 359              		.cfi_endproc
+ 360              	.LFE120:
+ 362              		.section	.text.knl_is_self,"ax",%progbits
+ 363              		.align	1
+ 364              		.global	knl_is_self
+ 365              		.syntax unified
+ 366              		.thumb
+ 367              		.thumb_func
+ 368              		.fpu softvfp
+ 370              	knl_is_self:
+ 371              	.LVL15:
+ 372              	.LFB121:
+ 245:..//kernel/core/tos_sys.c ****     return task == k_curr_task;
+ 373              		.loc 1 245 1 is_stmt 1 view -0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377              		@ link register save eliminated.
+ 246:..//kernel/core/tos_sys.c **** }
+ 378              		.loc 1 246 5 view .LVU67
+ 246:..//kernel/core/tos_sys.c **** }
+ 379              		.loc 1 246 17 is_stmt 0 view .LVU68
+ 380 0000 034B     		ldr	r3, .L36
+ 381 0002 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 13
+
+
+ 247:..//kernel/core/tos_sys.c **** 
+ 382              		.loc 1 247 1 view .LVU69
+ 383 0004 8342     		cmp	r3, r0
+ 384 0006 14BF     		ite	ne
+ 385 0008 0020     		movne	r0, #0
+ 386              	.LVL16:
+ 247:..//kernel/core/tos_sys.c **** 
+ 387              		.loc 1 247 1 view .LVU70
+ 388 000a 0120     		moveq	r0, #1
+ 389 000c 7047     		bx	lr
+ 390              	.L37:
+ 391 000e 00BF     		.align	2
+ 392              	.L36:
+ 393 0010 00000000 		.word	k_curr_task
+ 394              		.cfi_endproc
+ 395              	.LFE121:
+ 397              		.section	.text.tos_knl_irq_leave,"ax",%progbits
+ 398              		.align	1
+ 399              		.global	tos_knl_irq_leave
+ 400              		.syntax unified
+ 401              		.thumb
+ 402              		.thumb_func
+ 403              		.fpu softvfp
+ 405              	tos_knl_irq_leave:
+ 406              	.LFB112:
+  76:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ 407              		.loc 1 76 1 is_stmt 1 view -0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 0
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 411 0000 10B5     		push	{r4, lr}
+ 412              	.LCFI4:
+ 413              		.cfi_def_cfa_offset 8
+ 414              		.cfi_offset 4, -8
+ 415              		.cfi_offset 14, -4
+  77:..//kernel/core/tos_sys.c **** 
+ 416              		.loc 1 77 5 view .LVU72
+ 417              	.LVL17:
+  79:..//kernel/core/tos_sys.c ****         return;
+ 418              		.loc 1 79 5 view .LVU73
+  79:..//kernel/core/tos_sys.c ****         return;
+ 419              		.loc 1 79 10 is_stmt 0 view .LVU74
+ 420 0002 FFF7FEFF 		bl	tos_knl_is_running
+ 421              	.LVL18:
+  79:..//kernel/core/tos_sys.c ****         return;
+ 422              		.loc 1 79 8 view .LVU75
+ 423 0006 00B9     		cbnz	r0, .L45
+ 424              	.LVL19:
+ 425              	.L38:
+ 109:..//kernel/core/tos_sys.c **** 
+ 426              		.loc 1 109 1 view .LVU76
+ 427 0008 10BD     		pop	{r4, pc}
+ 428              	.LVL20:
+ 429              	.L45:
+  83:..//kernel/core/tos_sys.c ****     if (!knl_is_inirq()) {
+ 430              		.loc 1 83 5 is_stmt 1 view .LVU77
+  83:..//kernel/core/tos_sys.c ****     if (!knl_is_inirq()) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 14
+
+
+ 431              		.loc 1 83 5 view .LVU78
+ 432 000a FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 433              	.LVL21:
+ 434 000e 0446     		mov	r4, r0
+ 435              	.LVL22:
+  84:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 436              		.loc 1 84 5 view .LVU79
+  84:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 437              		.loc 1 84 10 is_stmt 0 view .LVU80
+ 438 0010 FFF7FEFF 		bl	knl_is_inirq
+ 439              	.LVL23:
+  84:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 440              		.loc 1 84 8 view .LVU81
+ 441 0014 B0B1     		cbz	r0, .L46
+  89:..//kernel/core/tos_sys.c **** 
+ 442              		.loc 1 89 5 is_stmt 1 view .LVU82
+ 443 0016 134A     		ldr	r2, .L50
+ 444 0018 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 445 001a 013B     		subs	r3, r3, #1
+ 446 001c 1370     		strb	r3, [r2]
+  91:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 447              		.loc 1 91 5 view .LVU83
+  91:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 448              		.loc 1 91 9 is_stmt 0 view .LVU84
+ 449 001e FFF7FEFF 		bl	knl_is_inirq
+ 450              	.LVL24:
+  91:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 451              		.loc 1 91 8 view .LVU85
+ 452 0022 98B9     		cbnz	r0, .L47
+  96:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 453              		.loc 1 96 5 is_stmt 1 view .LVU86
+  96:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 454              		.loc 1 96 9 is_stmt 0 view .LVU87
+ 455 0024 FFF7FEFF 		bl	knl_is_sched_locked
+ 456              	.LVL25:
+  96:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 457              		.loc 1 96 8 view .LVU88
+ 458 0028 A0B9     		cbnz	r0, .L48
+ 101:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 459              		.loc 1 101 5 is_stmt 1 view .LVU89
+ 101:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 460              		.loc 1 101 19 is_stmt 0 view .LVU90
+ 461 002a FFF7FEFF 		bl	readyqueue_highest_ready_task_get
+ 462              	.LVL26:
+ 101:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 463              		.loc 1 101 17 view .LVU91
+ 464 002e 0E4B     		ldr	r3, .L50+4
+ 465 0030 1860     		str	r0, [r3]
+ 102:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 466              		.loc 1 102 5 is_stmt 1 view .LVU92
+ 102:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 467              		.loc 1 102 9 is_stmt 0 view .LVU93
+ 468 0032 FFF7FEFF 		bl	knl_is_self
+ 469              	.LVL27:
+ 102:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 470              		.loc 1 102 8 view .LVU94
+ 471 0036 88B9     		cbnz	r0, .L49
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 15
+
+
+ 107:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 472              		.loc 1 107 5 is_stmt 1 view .LVU95
+ 473 0038 FFF7FEFF 		bl	cpu_irq_context_switch
+ 474              	.LVL28:
+ 108:..//kernel/core/tos_sys.c **** }
+ 475              		.loc 1 108 5 view .LVU96
+ 108:..//kernel/core/tos_sys.c **** }
+ 476              		.loc 1 108 5 view .LVU97
+ 477 003c 2046     		mov	r0, r4
+ 478 003e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 479              	.LVL29:
+ 480 0042 E1E7     		b	.L38
+ 481              	.L46:
+  85:..//kernel/core/tos_sys.c ****         return;
+ 482              		.loc 1 85 9 view .LVU98
+  85:..//kernel/core/tos_sys.c ****         return;
+ 483              		.loc 1 85 9 view .LVU99
+ 484 0044 2046     		mov	r0, r4
+ 485 0046 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 486              	.LVL30:
+  86:..//kernel/core/tos_sys.c ****     }
+ 487              		.loc 1 86 9 view .LVU100
+ 488 004a DDE7     		b	.L38
+ 489              	.L47:
+  92:..//kernel/core/tos_sys.c ****         return;
+ 490              		.loc 1 92 9 view .LVU101
+  92:..//kernel/core/tos_sys.c ****         return;
+ 491              		.loc 1 92 9 view .LVU102
+ 492 004c 2046     		mov	r0, r4
+ 493 004e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 494              	.LVL31:
+  93:..//kernel/core/tos_sys.c ****     }
+ 495              		.loc 1 93 9 view .LVU103
+ 496 0052 D9E7     		b	.L38
+ 497              	.L48:
+  97:..//kernel/core/tos_sys.c ****         return;
+ 498              		.loc 1 97 9 view .LVU104
+  97:..//kernel/core/tos_sys.c ****         return;
+ 499              		.loc 1 97 9 view .LVU105
+ 500 0054 2046     		mov	r0, r4
+ 501 0056 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 502              	.LVL32:
+  98:..//kernel/core/tos_sys.c ****     }
+ 503              		.loc 1 98 9 view .LVU106
+ 504 005a D5E7     		b	.L38
+ 505              	.L49:
+ 103:..//kernel/core/tos_sys.c ****         return;
+ 506              		.loc 1 103 9 view .LVU107
+ 103:..//kernel/core/tos_sys.c ****         return;
+ 507              		.loc 1 103 9 view .LVU108
+ 508 005c 2046     		mov	r0, r4
+ 509 005e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 510              	.LVL33:
+ 104:..//kernel/core/tos_sys.c ****     }
+ 511              		.loc 1 104 9 view .LVU109
+ 512 0062 D1E7     		b	.L38
+ 513              	.L51:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 16
+
+
+ 514              		.align	2
+ 515              	.L50:
+ 516 0064 00000000 		.word	k_irq_nest_cnt
+ 517 0068 00000000 		.word	k_next_task
+ 518              		.cfi_endproc
+ 519              	.LFE112:
+ 521              		.section	.text.knl_sched,"ax",%progbits
+ 522              		.align	1
+ 523              		.global	knl_sched
+ 524              		.syntax unified
+ 525              		.thumb
+ 526              		.thumb_func
+ 527              		.fpu softvfp
+ 529              	knl_sched:
+ 530              	.LFB117:
+ 203:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ 531              		.loc 1 203 1 view -0
+ 532              		.cfi_startproc
+ 533              		@ args = 0, pretend = 0, frame = 0
+ 534              		@ frame_needed = 0, uses_anonymous_args = 0
+ 535 0000 10B5     		push	{r4, lr}
+ 536              	.LCFI5:
+ 537              		.cfi_def_cfa_offset 8
+ 538              		.cfi_offset 4, -8
+ 539              		.cfi_offset 14, -4
+ 204:..//kernel/core/tos_sys.c **** 
+ 540              		.loc 1 204 5 view .LVU111
+ 541              	.LVL34:
+ 206:..//kernel/core/tos_sys.c ****         return;
+ 542              		.loc 1 206 5 view .LVU112
+ 206:..//kernel/core/tos_sys.c ****         return;
+ 543              		.loc 1 206 9 is_stmt 0 view .LVU113
+ 544 0002 FFF7FEFF 		bl	tos_knl_is_running
+ 545              	.LVL35:
+ 206:..//kernel/core/tos_sys.c ****         return;
+ 546              		.loc 1 206 8 view .LVU114
+ 547 0006 28B1     		cbz	r0, .L52
+ 210:..//kernel/core/tos_sys.c ****         return;
+ 548              		.loc 1 210 5 is_stmt 1 view .LVU115
+ 210:..//kernel/core/tos_sys.c ****         return;
+ 549              		.loc 1 210 9 is_stmt 0 view .LVU116
+ 550 0008 FFF7FEFF 		bl	knl_is_inirq
+ 551              	.LVL36:
+ 210:..//kernel/core/tos_sys.c ****         return;
+ 552              		.loc 1 210 8 view .LVU117
+ 553 000c 10B9     		cbnz	r0, .L52
+ 214:..//kernel/core/tos_sys.c ****         return;
+ 554              		.loc 1 214 5 is_stmt 1 view .LVU118
+ 214:..//kernel/core/tos_sys.c ****         return;
+ 555              		.loc 1 214 9 is_stmt 0 view .LVU119
+ 556 000e FFF7FEFF 		bl	knl_is_sched_locked
+ 557              	.LVL37:
+ 214:..//kernel/core/tos_sys.c ****         return;
+ 558              		.loc 1 214 8 view .LVU120
+ 559 0012 00B1     		cbz	r0, .L56
+ 560              	.LVL38:
+ 561              	.L52:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 17
+
+
+ 227:..//kernel/core/tos_sys.c **** 
+ 562              		.loc 1 227 1 view .LVU121
+ 563 0014 10BD     		pop	{r4, pc}
+ 564              	.LVL39:
+ 565              	.L56:
+ 218:..//kernel/core/tos_sys.c ****     k_next_task = readyqueue_highest_ready_task_get();
+ 566              		.loc 1 218 5 is_stmt 1 view .LVU122
+ 218:..//kernel/core/tos_sys.c ****     k_next_task = readyqueue_highest_ready_task_get();
+ 567              		.loc 1 218 5 view .LVU123
+ 568 0016 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 569              	.LVL40:
+ 570 001a 0446     		mov	r4, r0
+ 571              	.LVL41:
+ 219:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 572              		.loc 1 219 5 view .LVU124
+ 219:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 573              		.loc 1 219 19 is_stmt 0 view .LVU125
+ 574 001c FFF7FEFF 		bl	readyqueue_highest_ready_task_get
+ 575              	.LVL42:
+ 219:..//kernel/core/tos_sys.c ****     if (knl_is_self(k_next_task)) {
+ 576              		.loc 1 219 17 view .LVU126
+ 577 0020 074B     		ldr	r3, .L58
+ 578 0022 1860     		str	r0, [r3]
+ 220:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 579              		.loc 1 220 5 is_stmt 1 view .LVU127
+ 220:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 580              		.loc 1 220 9 is_stmt 0 view .LVU128
+ 581 0024 FFF7FEFF 		bl	knl_is_self
+ 582              	.LVL43:
+ 220:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
+ 583              		.loc 1 220 8 view .LVU129
+ 584 0028 28B9     		cbnz	r0, .L57
+ 225:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 585              		.loc 1 225 5 is_stmt 1 view .LVU130
+ 586 002a FFF7FEFF 		bl	cpu_context_switch
+ 587              	.LVL44:
+ 226:..//kernel/core/tos_sys.c **** }
+ 588              		.loc 1 226 5 view .LVU131
+ 226:..//kernel/core/tos_sys.c **** }
+ 589              		.loc 1 226 5 view .LVU132
+ 590 002e 2046     		mov	r0, r4
+ 591 0030 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 592              	.LVL45:
+ 593 0034 EEE7     		b	.L52
+ 594              	.L57:
+ 221:..//kernel/core/tos_sys.c ****         return;
+ 595              		.loc 1 221 9 view .LVU133
+ 221:..//kernel/core/tos_sys.c ****         return;
+ 596              		.loc 1 221 9 view .LVU134
+ 597 0036 2046     		mov	r0, r4
+ 598 0038 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 599              	.LVL46:
+ 222:..//kernel/core/tos_sys.c ****     }
+ 600              		.loc 1 222 9 view .LVU135
+ 601 003c EAE7     		b	.L52
+ 602              	.L59:
+ 603 003e 00BF     		.align	2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 18
+
+
+ 604              	.L58:
+ 605 0040 00000000 		.word	k_next_task
+ 606              		.cfi_endproc
+ 607              	.LFE117:
+ 609              		.section	.text.tos_knl_sched_unlock,"ax",%progbits
+ 610              		.align	1
+ 611              		.global	tos_knl_sched_unlock
+ 612              		.syntax unified
+ 613              		.thumb
+ 614              		.thumb_func
+ 615              		.fpu softvfp
+ 617              	tos_knl_sched_unlock:
+ 618              	.LFB114:
+ 132:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
+ 619              		.loc 1 132 1 view -0
+ 620              		.cfi_startproc
+ 621              		@ args = 0, pretend = 0, frame = 0
+ 622              		@ frame_needed = 0, uses_anonymous_args = 0
+ 623 0000 08B5     		push	{r3, lr}
+ 624              	.LCFI6:
+ 625              		.cfi_def_cfa_offset 8
+ 626              		.cfi_offset 3, -8
+ 627              		.cfi_offset 14, -4
+ 133:..//kernel/core/tos_sys.c **** 
+ 628              		.loc 1 133 5 view .LVU137
+ 629              	.LVL47:
+ 135:..//kernel/core/tos_sys.c **** 
+ 630              		.loc 1 135 5 view .LVU138
+ 135:..//kernel/core/tos_sys.c **** 
+ 631              		.loc 1 135 5 view .LVU139
+ 632 0002 FFF7FEFF 		bl	knl_is_inirq
+ 633              	.LVL48:
+ 634 0006 88B9     		cbnz	r0, .L62
+ 137:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 635              		.loc 1 137 5 view .LVU140
+ 137:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 636              		.loc 1 137 10 is_stmt 0 view .LVU141
+ 637 0008 FFF7FEFF 		bl	tos_knl_is_running
+ 638              	.LVL49:
+ 137:..//kernel/core/tos_sys.c ****         return K_ERR_KNL_NOT_RUNNING;
+ 639              		.loc 1 137 8 view .LVU142
+ 640 000c 88B1     		cbz	r0, .L63
+ 141:..//kernel/core/tos_sys.c ****         return K_ERR_SCHED_NOT_LOCKED;
+ 641              		.loc 1 141 5 is_stmt 1 view .LVU143
+ 141:..//kernel/core/tos_sys.c ****         return K_ERR_SCHED_NOT_LOCKED;
+ 642              		.loc 1 141 10 is_stmt 0 view .LVU144
+ 643 000e FFF7FEFF 		bl	knl_is_sched_locked
+ 644              	.LVL50:
+ 141:..//kernel/core/tos_sys.c ****         return K_ERR_SCHED_NOT_LOCKED;
+ 645              		.loc 1 141 8 view .LVU145
+ 646 0012 88B1     		cbz	r0, .L64
+ 145:..//kernel/core/tos_sys.c ****     --k_sched_lock_nest_cnt;
+ 647              		.loc 1 145 5 is_stmt 1 view .LVU146
+ 145:..//kernel/core/tos_sys.c ****     --k_sched_lock_nest_cnt;
+ 648              		.loc 1 145 5 view .LVU147
+ 649 0014 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 650              	.LVL51:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 19
+
+
+ 146:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
+ 651              		.loc 1 146 5 view .LVU148
+ 652 0018 094A     		ldr	r2, .L66
+ 653 001a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 654 001c 013B     		subs	r3, r3, #1
+ 655 001e 1370     		strb	r3, [r2]
+ 147:..//kernel/core/tos_sys.c **** 
+ 656              		.loc 1 147 5 view .LVU149
+ 147:..//kernel/core/tos_sys.c **** 
+ 657              		.loc 1 147 5 view .LVU150
+ 658 0020 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 659              	.LVL52:
+ 149:..//kernel/core/tos_sys.c ****     return K_ERR_NONE;
+ 660              		.loc 1 149 5 view .LVU151
+ 661 0024 FFF7FEFF 		bl	knl_sched
+ 662              	.LVL53:
+ 150:..//kernel/core/tos_sys.c **** }
+ 663              		.loc 1 150 5 view .LVU152
+ 150:..//kernel/core/tos_sys.c **** }
+ 664              		.loc 1 150 12 is_stmt 0 view .LVU153
+ 665 0028 0020     		movs	r0, #0
+ 666              	.L61:
+ 151:..//kernel/core/tos_sys.c **** 
+ 667              		.loc 1 151 1 view .LVU154
+ 668 002a 08BD     		pop	{r3, pc}
+ 669              	.LVL54:
+ 670              	.L62:
+ 135:..//kernel/core/tos_sys.c **** 
+ 671              		.loc 1 135 5 view .LVU155
+ 672 002c 4FF4C870 		mov	r0, #400
+ 673 0030 FBE7     		b	.L61
+ 674              	.L63:
+ 138:..//kernel/core/tos_sys.c ****     }
+ 675              		.loc 1 138 16 view .LVU156
+ 676 0032 4FF4FA70 		mov	r0, #500
+ 677 0036 F8E7     		b	.L61
+ 678              	.L64:
+ 142:..//kernel/core/tos_sys.c ****     }
+ 679              		.loc 1 142 16 view .LVU157
+ 680 0038 40F2A560 		movw	r0, #1701
+ 681 003c F5E7     		b	.L61
+ 682              	.L67:
+ 683 003e 00BF     		.align	2
+ 684              	.L66:
+ 685 0040 00000000 		.word	k_sched_lock_nest_cnt
+ 686              		.cfi_endproc
+ 687              	.LFE114:
+ 689              		.section	.text.knl_idle_init,"ax",%progbits
+ 690              		.align	1
+ 691              		.global	knl_idle_init
+ 692              		.syntax unified
+ 693              		.thumb
+ 694              		.thumb_func
+ 695              		.fpu softvfp
+ 697              	knl_idle_init:
+ 698              	.LFB123:
+ 256:..//kernel/core/tos_sys.c **** #endif
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 20
+
+
+ 257:..//kernel/core/tos_sys.c **** 
+ 258:..//kernel/core/tos_sys.c **** #if TOS_CFG_PWR_MGR_EN > 0u
+ 259:..//kernel/core/tos_sys.c ****         pm_power_manager();
+ 260:..//kernel/core/tos_sys.c **** #endif
+ 261:..//kernel/core/tos_sys.c ****     }
+ 262:..//kernel/core/tos_sys.c **** }
+ 263:..//kernel/core/tos_sys.c **** 
+ 264:..//kernel/core/tos_sys.c **** __KNL__ k_err_t knl_idle_init(void)
+ 265:..//kernel/core/tos_sys.c **** {
+ 699              		.loc 1 265 1 is_stmt 1 view -0
+ 700              		.cfi_startproc
+ 701              		@ args = 0, pretend = 0, frame = 0
+ 702              		@ frame_needed = 0, uses_anonymous_args = 0
+ 703 0000 00B5     		push	{lr}
+ 704              	.LCFI7:
+ 705              		.cfi_def_cfa_offset 4
+ 706              		.cfi_offset 14, -4
+ 707 0002 85B0     		sub	sp, sp, #20
+ 708              	.LCFI8:
+ 709              		.cfi_def_cfa_offset 24
+ 266:..//kernel/core/tos_sys.c ****     return tos_task_create(&k_idle_task, "idle",
+ 710              		.loc 1 266 5 view .LVU159
+ 711              		.loc 1 266 12 is_stmt 0 view .LVU160
+ 712 0004 0023     		movs	r3, #0
+ 713 0006 0393     		str	r3, [sp, #12]
+ 714 0008 074A     		ldr	r2, .L70
+ 715 000a 1268     		ldr	r2, [r2]
+ 716 000c 0292     		str	r2, [sp, #8]
+ 717 000e 074A     		ldr	r2, .L70+4
+ 718 0010 1268     		ldr	r2, [r2]
+ 719 0012 0192     		str	r2, [sp, #4]
+ 720 0014 0922     		movs	r2, #9
+ 721 0016 0092     		str	r2, [sp]
+ 722 0018 054A     		ldr	r2, .L70+8
+ 723 001a 0649     		ldr	r1, .L70+12
+ 724 001c 0648     		ldr	r0, .L70+16
+ 725 001e FFF7FEFF 		bl	tos_task_create
+ 726              	.LVL55:
+ 267:..//kernel/core/tos_sys.c ****             knl_idle_entry, K_NULL,
+ 268:..//kernel/core/tos_sys.c ****             K_TASK_PRIO_IDLE,
+ 269:..//kernel/core/tos_sys.c ****             k_idle_task_stk_addr,
+ 270:..//kernel/core/tos_sys.c ****             k_idle_task_stk_size,
+ 271:..//kernel/core/tos_sys.c ****             0);
+ 272:..//kernel/core/tos_sys.c **** }
+ 727              		.loc 1 272 1 view .LVU161
+ 728 0022 05B0     		add	sp, sp, #20
+ 729              	.LCFI9:
+ 730              		.cfi_def_cfa_offset 4
+ 731              		@ sp needed
+ 732 0024 5DF804FB 		ldr	pc, [sp], #4
+ 733              	.L71:
+ 734              		.align	2
+ 735              	.L70:
+ 736 0028 00000000 		.word	k_idle_task_stk_size
+ 737 002c 00000000 		.word	k_idle_task_stk_addr
+ 738 0030 00000000 		.word	knl_idle_entry
+ 739 0034 00000000 		.word	.LC0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 21
+
+
+ 740 0038 00000000 		.word	k_idle_task
+ 741              		.cfi_endproc
+ 742              	.LFE123:
+ 744              		.section	.text.tos_knl_init,"ax",%progbits
+ 745              		.align	1
+ 746              		.global	tos_knl_init
+ 747              		.syntax unified
+ 748              		.thumb
+ 749              		.thumb_func
+ 750              		.fpu softvfp
+ 752              	tos_knl_init:
+ 753              	.LFB110:
+  21:..//kernel/core/tos_sys.c ****     k_err_t err;
+ 754              		.loc 1 21 1 is_stmt 1 view -0
+ 755              		.cfi_startproc
+ 756              		@ args = 0, pretend = 0, frame = 0
+ 757              		@ frame_needed = 0, uses_anonymous_args = 0
+ 758 0000 08B5     		push	{r3, lr}
+ 759              	.LCFI10:
+ 760              		.cfi_def_cfa_offset 8
+ 761              		.cfi_offset 3, -8
+ 762              		.cfi_offset 14, -4
+  22:..//kernel/core/tos_sys.c **** 
+ 763              		.loc 1 22 5 view .LVU163
+  24:..//kernel/core/tos_sys.c **** 
+ 764              		.loc 1 24 5 view .LVU164
+ 765 0002 FFF7FEFF 		bl	cpu_init
+ 766              	.LVL56:
+  26:..//kernel/core/tos_sys.c **** 
+ 767              		.loc 1 26 5 view .LVU165
+ 768 0006 FFF7FEFF 		bl	readyqueue_init
+ 769              	.LVL57:
+  30:..//kernel/core/tos_sys.c **** #else
+ 770              		.loc 1 30 5 view .LVU166
+  30:..//kernel/core/tos_sys.c **** #else
+ 771              		.loc 1 30 11 is_stmt 0 view .LVU167
+ 772 000a 4FF48071 		mov	r1, #256
+ 773 000e 0848     		ldr	r0, .L76
+ 774 0010 FFF7FEFF 		bl	mmheap_init_with_pool
+ 775              	.LVL58:
+  34:..//kernel/core/tos_sys.c ****         return err;
+ 776              		.loc 1 34 5 is_stmt 1 view .LVU168
+  34:..//kernel/core/tos_sys.c ****         return err;
+ 777              		.loc 1 34 8 is_stmt 0 view .LVU169
+ 778 0014 0346     		mov	r3, r0
+ 779 0016 08B1     		cbz	r0, .L75
+ 780              	.LVL59:
+ 781              	.L73:
+  60:..//kernel/core/tos_sys.c **** 
+ 782              		.loc 1 60 1 view .LVU170
+ 783 0018 1846     		mov	r0, r3
+ 784 001a 08BD     		pop	{r3, pc}
+ 785              	.LVL60:
+ 786              	.L75:
+  39:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+ 787              		.loc 1 39 5 is_stmt 1 view .LVU171
+  39:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 22
+
+
+ 788              		.loc 1 39 11 is_stmt 0 view .LVU172
+ 789 001c FFF7FEFF 		bl	knl_idle_init
+ 790              	.LVL61:
+  40:..//kernel/core/tos_sys.c ****         return err;
+ 791              		.loc 1 40 5 is_stmt 1 view .LVU173
+  40:..//kernel/core/tos_sys.c ****         return err;
+ 792              		.loc 1 40 8 is_stmt 0 view .LVU174
+ 793 0020 0346     		mov	r3, r0
+ 794 0022 0028     		cmp	r0, #0
+ 795 0024 F8D1     		bne	.L73
+  45:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+ 796              		.loc 1 45 5 is_stmt 1 view .LVU175
+  45:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+ 797              		.loc 1 45 11 is_stmt 0 view .LVU176
+ 798 0026 FFF7FEFF 		bl	timer_init
+ 799              	.LVL62:
+  45:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
+ 800              		.loc 1 45 11 view .LVU177
+ 801 002a 0346     		mov	r3, r0
+ 802              	.LVL63:
+  46:..//kernel/core/tos_sys.c ****         return err;
+ 803              		.loc 1 46 5 is_stmt 1 view .LVU178
+ 804 002c F4E7     		b	.L73
+ 805              	.L77:
+ 806 002e 00BF     		.align	2
+ 807              	.L76:
+ 808 0030 00000000 		.word	k_mmheap_default_pool
+ 809              		.cfi_endproc
+ 810              	.LFE110:
+ 812              		.section	.rodata.knl_idle_init.str1.4,"aMS",%progbits,1
+ 813              		.align	2
+ 814              	.LC0:
+ 815 0000 69646C65 		.ascii	"idle\000"
+ 815      00
+ 816              		.text
+ 817              	.Letext0:
+ 818              		.file 2 "..//kernel/core/include/tos_kerr.h"
+ 819              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 820              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 821              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 822              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 823              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 824              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 825              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 826              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 827              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 828              		.file 12 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 829              		.file 13 "..//kernel/core/include/tos_ktypes.h"
+ 830              		.file 14 "..//kernel/core/include/tos_task.h"
+ 831              		.file 15 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 832              		.file 16 "..//kernel/core/include/tos_list.h"
+ 833              		.file 17 "..//kernel/core/include/tos_pend.h"
+ 834              		.file 18 "..//kernel/core/include/tos_sys.h"
+ 835              		.file 19 "..//kernel/core/include/tos_timer.h"
+ 836              		.file 20 "..//kernel/core/include/tos_mmheap.h"
+ 837              		.file 21 "..//kernel/core/include/tos_sched.h"
+ 838              		.file 22 "..//kernel/core/include/tos_global.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 23
+
+
+ 839              		.file 23 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 24
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_sys.c
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:16     .text.knl_idle_entry:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:23     .text.knl_idle_entry:00000000 knl_idle_entry
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:49     .text.tos_knl_is_running:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:56     .text.tos_knl_is_running:00000000 tos_knl_is_running
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:76     .text.tos_knl_is_running:00000010 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:81     .text.tos_knl_irq_enter:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:88     .text.tos_knl_irq_enter:00000000 tos_knl_irq_enter
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:122    .text.tos_knl_irq_enter:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:127    .text.tos_knl_start:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:134    .text.tos_knl_start:00000000 tos_knl_start
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:183    .text.tos_knl_start:00000028 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:190    .text.knl_is_sched_locked:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:197    .text.knl_is_sched_locked:00000000 knl_is_sched_locked
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:216    .text.knl_is_sched_locked:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:221    .text.knl_is_inirq:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:228    .text.knl_is_inirq:00000000 knl_is_inirq
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:247    .text.knl_is_inirq:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:252    .text.tos_knl_sched_lock:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:259    .text.tos_knl_sched_lock:00000000 tos_knl_sched_lock
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:325    .text.tos_knl_sched_lock:0000003c $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:330    .text.knl_is_idle:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:337    .text.knl_is_idle:00000000 knl_is_idle
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:358    .text.knl_is_idle:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:363    .text.knl_is_self:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:370    .text.knl_is_self:00000000 knl_is_self
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:393    .text.knl_is_self:00000010 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:398    .text.tos_knl_irq_leave:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:405    .text.tos_knl_irq_leave:00000000 tos_knl_irq_leave
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:516    .text.tos_knl_irq_leave:00000064 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:522    .text.knl_sched:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:529    .text.knl_sched:00000000 knl_sched
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:605    .text.knl_sched:00000040 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:610    .text.tos_knl_sched_unlock:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:617    .text.tos_knl_sched_unlock:00000000 tos_knl_sched_unlock
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:685    .text.tos_knl_sched_unlock:00000040 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:690    .text.knl_idle_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:697    .text.knl_idle_init:00000000 knl_idle_init
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:736    .text.knl_idle_init:00000028 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:745    .text.tos_knl_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:752    .text.tos_knl_init:00000000 tos_knl_init
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:808    .text.tos_knl_init:00000030 $d
+C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s:813    .rodata.knl_idle_init.str1.4:00000000 $d
+
+UNDEFINED SYMBOLS
+task_free_all
+k_knl_state
+k_irq_nest_cnt
+readyqueue_highest_ready_task_get
+cpu_sched_start
+k_next_task
+k_curr_task
+k_sched_lock_nest_cnt
+tos_cpu_cpsr_save
+tos_cpu_cpsr_restore
+k_idle_task
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpSwEME.s 			page 25
+
+
+cpu_irq_context_switch
+cpu_context_switch
+tos_task_create
+k_idle_task_stk_size
+k_idle_task_stk_addr
+cpu_init
+readyqueue_init
+mmheap_init_with_pool
+timer_init
+k_mmheap_default_pool

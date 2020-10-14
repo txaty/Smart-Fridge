@@ -1,0 +1,1977 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_mail_queue.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.mail_task_recv,"ax",%progbits
+  16              		.align	1
+  17              		.arch armv7-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	mail_task_recv:
+  24              	.LVL0:
+  25              	.LFB116:
+  26              		.file 1 "..//kernel/core/tos_mail_queue.c"
+   1:..//kernel/core/tos_mail_queue.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_mail_queue.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_mail_queue.c ****  * available.
+   4:..//kernel/core/tos_mail_queue.c ****  *
+   5:..//kernel/core/tos_mail_queue.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_mail_queue.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_mail_queue.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_mail_queue.c ****  *
+   9:..//kernel/core/tos_mail_queue.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_mail_queue.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_mail_queue.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_mail_queue.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_mail_queue.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_mail_queue.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_mail_queue.c ****  * within TencentOS.
+  16:..//kernel/core/tos_mail_queue.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_mail_queue.c **** 
+  18:..//kernel/core/tos_mail_queue.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_mail_queue.c **** 
+  20:..//kernel/core/tos_mail_queue.c **** #if TOS_CFG_MAIL_QUEUE_EN > 0u
+  21:..//kernel/core/tos_mail_queue.c **** 
+  22:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_create(k_mail_q_t *mail_q, void *pool, size_t mail_cnt, size_t mail_size
+  23:..//kernel/core/tos_mail_queue.c **** {
+  24:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+  25:..//kernel/core/tos_mail_queue.c **** 
+  26:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+  27:..//kernel/core/tos_mail_queue.c **** 
+  28:..//kernel/core/tos_mail_queue.c ****     err = tos_ring_q_create(&mail_q->ring_q, pool, mail_cnt, mail_size);
+  29:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+  30:..//kernel/core/tos_mail_queue.c ****         return err;
+  31:..//kernel/core/tos_mail_queue.c ****     }
+  32:..//kernel/core/tos_mail_queue.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 2
+
+
+  33:..//kernel/core/tos_mail_queue.c ****     pend_object_init(&mail_q->pend_obj);
+  34:..//kernel/core/tos_mail_queue.c **** 
+  35:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_INIT(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+  36:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_set_static(&mail_q->knl_obj);
+  37:..//kernel/core/tos_mail_queue.c **** 
+  38:..//kernel/core/tos_mail_queue.c ****     return K_ERR_NONE;
+  39:..//kernel/core/tos_mail_queue.c **** }
+  40:..//kernel/core/tos_mail_queue.c **** 
+  41:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_destroy(k_mail_q_t *mail_q)
+  42:..//kernel/core/tos_mail_queue.c **** {
+  43:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+  44:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+  45:..//kernel/core/tos_mail_queue.c **** 
+  46:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+  47:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+  48:..//kernel/core/tos_mail_queue.c **** 
+  49:..//kernel/core/tos_mail_queue.c ****     if (!knl_object_alloc_is_static(&mail_q->knl_obj)) {
+  50:..//kernel/core/tos_mail_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+  51:..//kernel/core/tos_mail_queue.c ****     }
+  52:..//kernel/core/tos_mail_queue.c **** 
+  53:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_DISABLE();
+  54:..//kernel/core/tos_mail_queue.c **** 
+  55:..//kernel/core/tos_mail_queue.c ****     err = tos_ring_q_destroy(&mail_q->ring_q);
+  56:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+  57:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+  58:..//kernel/core/tos_mail_queue.c ****         return err;
+  59:..//kernel/core/tos_mail_queue.c ****     }
+  60:..//kernel/core/tos_mail_queue.c **** 
+  61:..//kernel/core/tos_mail_queue.c ****     pend_wakeup_all(&mail_q->pend_obj, PEND_STATE_DESTROY);
+  62:..//kernel/core/tos_mail_queue.c **** 
+  63:..//kernel/core/tos_mail_queue.c ****     pend_object_deinit(&mail_q->pend_obj);
+  64:..//kernel/core/tos_mail_queue.c **** 
+  65:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_DEINIT(mail_q);
+  66:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_reset(&mail_q->knl_obj);
+  67:..//kernel/core/tos_mail_queue.c **** 
+  68:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_ENABLE();
+  69:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+  70:..//kernel/core/tos_mail_queue.c **** 
+  71:..//kernel/core/tos_mail_queue.c ****     return K_ERR_NONE;
+  72:..//kernel/core/tos_mail_queue.c **** }
+  73:..//kernel/core/tos_mail_queue.c **** 
+  74:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_create_dyn(k_mail_q_t *mail_q, size_t mail_cnt, size_t mail_size)
+  75:..//kernel/core/tos_mail_queue.c **** {
+  76:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+  77:..//kernel/core/tos_mail_queue.c **** 
+  78:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+  79:..//kernel/core/tos_mail_queue.c **** 
+  80:..//kernel/core/tos_mail_queue.c ****     err = tos_ring_q_create_dyn(&mail_q->ring_q, mail_cnt, mail_size);
+  81:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+  82:..//kernel/core/tos_mail_queue.c ****         return err;
+  83:..//kernel/core/tos_mail_queue.c ****     }
+  84:..//kernel/core/tos_mail_queue.c **** 
+  85:..//kernel/core/tos_mail_queue.c ****     pend_object_init(&mail_q->pend_obj);
+  86:..//kernel/core/tos_mail_queue.c **** 
+  87:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_INIT(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+  88:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_set_dynamic(&mail_q->knl_obj);
+  89:..//kernel/core/tos_mail_queue.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 3
+
+
+  90:..//kernel/core/tos_mail_queue.c ****     return K_ERR_NONE;
+  91:..//kernel/core/tos_mail_queue.c **** }
+  92:..//kernel/core/tos_mail_queue.c **** 
+  93:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_destroy_dyn(k_mail_q_t *mail_q)
+  94:..//kernel/core/tos_mail_queue.c **** {
+  95:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+  96:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+  97:..//kernel/core/tos_mail_queue.c **** 
+  98:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+  99:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 100:..//kernel/core/tos_mail_queue.c **** 
+ 101:..//kernel/core/tos_mail_queue.c ****     if (!knl_object_alloc_is_dynamic(&mail_q->knl_obj)) {
+ 102:..//kernel/core/tos_mail_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 103:..//kernel/core/tos_mail_queue.c ****     }
+ 104:..//kernel/core/tos_mail_queue.c **** 
+ 105:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_DISABLE();
+ 106:..//kernel/core/tos_mail_queue.c **** 
+ 107:..//kernel/core/tos_mail_queue.c ****     err = tos_ring_q_destroy_dyn(&mail_q->ring_q);
+ 108:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 109:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 110:..//kernel/core/tos_mail_queue.c ****         return err;
+ 111:..//kernel/core/tos_mail_queue.c ****     }
+ 112:..//kernel/core/tos_mail_queue.c **** 
+ 113:..//kernel/core/tos_mail_queue.c ****     pend_wakeup_all(&mail_q->pend_obj, PEND_STATE_DESTROY);
+ 114:..//kernel/core/tos_mail_queue.c **** 
+ 115:..//kernel/core/tos_mail_queue.c ****     pend_object_deinit(&mail_q->pend_obj);
+ 116:..//kernel/core/tos_mail_queue.c **** 
+ 117:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_DEINIT(mail_q);
+ 118:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_reset(&mail_q->knl_obj);
+ 119:..//kernel/core/tos_mail_queue.c **** 
+ 120:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_ENABLE();
+ 121:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 122:..//kernel/core/tos_mail_queue.c **** 
+ 123:..//kernel/core/tos_mail_queue.c ****     return K_ERR_NONE;
+ 124:..//kernel/core/tos_mail_queue.c **** }
+ 125:..//kernel/core/tos_mail_queue.c **** 
+ 126:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_flush(k_mail_q_t *mail_q)
+ 127:..//kernel/core/tos_mail_queue.c **** {
+ 128:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 129:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 130:..//kernel/core/tos_mail_queue.c **** 
+ 131:..//kernel/core/tos_mail_queue.c ****     return tos_ring_q_flush(&mail_q->ring_q);
+ 132:..//kernel/core/tos_mail_queue.c **** }
+ 133:..//kernel/core/tos_mail_queue.c **** 
+ 134:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_pend(k_mail_q_t *mail_q, void *mail_buf, size_t *mail_size, k_tick_t tim
+ 135:..//kernel/core/tos_mail_queue.c **** {
+ 136:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 137:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 138:..//kernel/core/tos_mail_queue.c **** 
+ 139:..//kernel/core/tos_mail_queue.c ****     TOS_IN_IRQ_CHECK();
+ 140:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 141:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_buf);
+ 142:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 143:..//kernel/core/tos_mail_queue.c **** 
+ 144:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_DISABLE();
+ 145:..//kernel/core/tos_mail_queue.c **** 
+ 146:..//kernel/core/tos_mail_queue.c ****     if (tos_ring_q_dequeue(&mail_q->ring_q, mail_buf, mail_size) == K_ERR_NONE) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 4
+
+
+ 147:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 148:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 149:..//kernel/core/tos_mail_queue.c ****     }
+ 150:..//kernel/core/tos_mail_queue.c **** 
+ 151:..//kernel/core/tos_mail_queue.c ****     if (timeout == TOS_TIME_NOWAIT) {
+ 152:..//kernel/core/tos_mail_queue.c ****         *mail_size = 0;
+ 153:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 154:..//kernel/core/tos_mail_queue.c ****         return K_ERR_PEND_NOWAIT;
+ 155:..//kernel/core/tos_mail_queue.c ****     }
+ 156:..//kernel/core/tos_mail_queue.c **** 
+ 157:..//kernel/core/tos_mail_queue.c ****     if (knl_is_sched_locked()) {
+ 158:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 159:..//kernel/core/tos_mail_queue.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 160:..//kernel/core/tos_mail_queue.c ****     }
+ 161:..//kernel/core/tos_mail_queue.c **** 
+ 162:..//kernel/core/tos_mail_queue.c ****     k_curr_task->mail = mail_buf;
+ 163:..//kernel/core/tos_mail_queue.c ****     pend_task_block(k_curr_task, &mail_q->pend_obj, timeout);
+ 164:..//kernel/core/tos_mail_queue.c **** 
+ 165:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_ENABLE();
+ 166:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 167:..//kernel/core/tos_mail_queue.c **** 
+ 168:..//kernel/core/tos_mail_queue.c ****     err = pend_state2errno(k_curr_task->pend_state);
+ 169:..//kernel/core/tos_mail_queue.c ****     if (err == K_ERR_NONE) {
+ 170:..//kernel/core/tos_mail_queue.c ****         *mail_size              = k_curr_task->mail_size;
+ 171:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail       = K_NULL;
+ 172:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail_size  = 0;
+ 173:..//kernel/core/tos_mail_queue.c ****     }
+ 174:..//kernel/core/tos_mail_queue.c **** 
+ 175:..//kernel/core/tos_mail_queue.c ****     return err;
+ 176:..//kernel/core/tos_mail_queue.c **** }
+ 177:..//kernel/core/tos_mail_queue.c **** 
+ 178:..//kernel/core/tos_mail_queue.c **** __STATIC__ void mail_task_recv(k_task_t *task, void *mail_buf, size_t mail_size)
+ 179:..//kernel/core/tos_mail_queue.c **** {
+  27              		.loc 1 179 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		.loc 1 179 1 is_stmt 0 view .LVU1
+  32 0000 38B5     		push	{r3, r4, r5, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 3, -16
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+  39 0002 0446     		mov	r4, r0
+  40 0004 1546     		mov	r5, r2
+ 180:..//kernel/core/tos_mail_queue.c ****     memcpy(task->mail, mail_buf, mail_size);
+  41              		.loc 1 180 5 is_stmt 1 view .LVU2
+  42 0006 006F     		ldr	r0, [r0, #112]
+  43              	.LVL1:
+  44              		.loc 1 180 5 is_stmt 0 view .LVU3
+  45 0008 FFF7FEFF 		bl	memcpy
+  46              	.LVL2:
+ 181:..//kernel/core/tos_mail_queue.c ****     task->mail_size = mail_size;
+  47              		.loc 1 181 5 is_stmt 1 view .LVU4
+  48              		.loc 1 181 21 is_stmt 0 view .LVU5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 5
+
+
+  49 000c 6567     		str	r5, [r4, #116]
+ 182:..//kernel/core/tos_mail_queue.c ****     pend_task_wakeup(task, PEND_STATE_POST);
+  50              		.loc 1 182 5 is_stmt 1 view .LVU6
+  51 000e 0121     		movs	r1, #1
+  52 0010 2046     		mov	r0, r4
+  53 0012 FFF7FEFF 		bl	pend_task_wakeup
+  54              	.LVL3:
+ 183:..//kernel/core/tos_mail_queue.c **** }
+  55              		.loc 1 183 1 is_stmt 0 view .LVU7
+  56 0016 38BD     		pop	{r3, r4, r5, pc}
+  57              		.loc 1 183 1 view .LVU8
+  58              		.cfi_endproc
+  59              	.LFE116:
+  61              		.section	.text.mail_q_do_post,"ax",%progbits
+  62              		.align	1
+  63              		.syntax unified
+  64              		.thumb
+  65              		.thumb_func
+  66              		.fpu softvfp
+  68              	mail_q_do_post:
+  69              	.LVL4:
+  70              	.LFB117:
+ 184:..//kernel/core/tos_mail_queue.c **** 
+ 185:..//kernel/core/tos_mail_queue.c **** __STATIC__ k_err_t mail_q_do_post(k_mail_q_t *mail_q, void *mail_buf, size_t mail_size, opt_post_t 
+ 186:..//kernel/core/tos_mail_queue.c **** {
+  71              		.loc 1 186 1 is_stmt 1 view -0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		.loc 1 186 1 is_stmt 0 view .LVU10
+  76 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  77              	.LCFI1:
+  78              		.cfi_def_cfa_offset 24
+  79              		.cfi_offset 4, -24
+  80              		.cfi_offset 5, -20
+  81              		.cfi_offset 6, -16
+  82              		.cfi_offset 7, -12
+  83              		.cfi_offset 8, -8
+  84              		.cfi_offset 14, -4
+ 187:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+  85              		.loc 1 187 5 is_stmt 1 view .LVU11
+  86              	.LVL5:
+ 188:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+  87              		.loc 1 188 5 view .LVU12
+ 189:..//kernel/core/tos_mail_queue.c ****     k_task_t *task, *tmp;
+  88              		.loc 1 189 5 view .LVU13
+ 190:..//kernel/core/tos_mail_queue.c **** 
+ 191:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+  89              		.loc 1 191 5 view .LVU14
+  90              		.loc 1 191 5 view .LVU15
+  91 0004 0028     		cmp	r0, #0
+  92 0006 46D0     		beq	.L11
+  93 0008 0446     		mov	r4, r0
+ 192:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_buf);
+  94              		.loc 1 192 5 view .LVU16
+  95              		.loc 1 192 5 view .LVU17
+  96 000a 0029     		cmp	r1, #0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 6
+
+
+  97 000c 46D0     		beq	.L12
+ 193:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+  98              		.loc 1 193 5 view .LVU18
+  99              		.loc 1 193 5 view .LVU19
+ 100              	.LVL6:
+ 101              	.LBB32:
+ 102              	.LBI32:
+ 103              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 7
+
+
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ 100:..//kernel/core/include/tos_sys.h **** 
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 8
+
+
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 9
+
+
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 104              		.loc 2 182 31 view .LVU20
+ 105              	.LBB33:
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 106              		.loc 2 184 5 view .LVU21
+ 107              		.loc 2 184 19 is_stmt 0 view .LVU22
+ 108 000e 4588     		ldrh	r5, [r0, #2]
+ 109              	.LVL7:
+ 110              		.loc 2 184 19 view .LVU23
+ 111              	.LBE33:
+ 112              	.LBE32:
+ 113              		.loc 1 193 5 view .LVU24
+ 114 0010 44F6EE30 		movw	r0, #19438
+ 115              	.LVL8:
+ 116              		.loc 1 193 5 view .LVU25
+ 117 0014 8542     		cmp	r5, r0
+ 118 0016 04D0     		beq	.L15
+ 119 0018 40F24D44 		movw	r4, #1101
+ 120              	.LVL9:
+ 121              	.L4:
+ 194:..//kernel/core/tos_mail_queue.c **** 
+ 195:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_DISABLE();
+ 196:..//kernel/core/tos_mail_queue.c **** 
+ 197:..//kernel/core/tos_mail_queue.c ****     if (pend_is_nopending(&mail_q->pend_obj)) {
+ 198:..//kernel/core/tos_mail_queue.c ****         err = tos_ring_q_enqueue(&mail_q->ring_q, mail_buf, mail_size);
+ 199:..//kernel/core/tos_mail_queue.c ****         if (err != K_ERR_NONE) {
+ 200:..//kernel/core/tos_mail_queue.c ****             TOS_CPU_INT_ENABLE();
+ 201:..//kernel/core/tos_mail_queue.c ****             return err;
+ 202:..//kernel/core/tos_mail_queue.c ****         }
+ 203:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 204:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 205:..//kernel/core/tos_mail_queue.c ****     }
+ 206:..//kernel/core/tos_mail_queue.c **** 
+ 207:..//kernel/core/tos_mail_queue.c ****     if (opt == OPT_POST_ONE) {
+ 208:..//kernel/core/tos_mail_queue.c ****         mail_task_recv(TOS_LIST_FIRST_ENTRY(&mail_q->pend_obj.list, k_task_t, pend_list),
+ 209:..//kernel/core/tos_mail_queue.c ****                             mail_buf, mail_size);
+ 210:..//kernel/core/tos_mail_queue.c ****     } else { // OPT_POST_ALL
+ 211:..//kernel/core/tos_mail_queue.c ****         TOS_LIST_FOR_EACH_ENTRY_SAFE(task, tmp, k_task_t, pend_list, &mail_q->pend_obj.list) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 10
+
+
+ 212:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 213:..//kernel/core/tos_mail_queue.c ****         }
+ 214:..//kernel/core/tos_mail_queue.c ****     }
+ 215:..//kernel/core/tos_mail_queue.c **** 
+ 216:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_INT_ENABLE();
+ 217:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 218:..//kernel/core/tos_mail_queue.c **** 
+ 219:..//kernel/core/tos_mail_queue.c ****     return K_ERR_NONE;
+ 220:..//kernel/core/tos_mail_queue.c **** }
+ 122              		.loc 1 220 1 view .LVU26
+ 123 001c 2046     		mov	r0, r4
+ 124 001e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 125              	.LVL10:
+ 126              	.L15:
+ 127              		.loc 1 220 1 view .LVU27
+ 128 0022 1D46     		mov	r5, r3
+ 129 0024 1746     		mov	r7, r2
+ 130 0026 0E46     		mov	r6, r1
+ 195:..//kernel/core/tos_mail_queue.c **** 
+ 131              		.loc 1 195 5 is_stmt 1 view .LVU28
+ 195:..//kernel/core/tos_mail_queue.c **** 
+ 132              		.loc 1 195 5 view .LVU29
+ 133 0028 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 134              	.LVL11:
+ 195:..//kernel/core/tos_mail_queue.c **** 
+ 135              		.loc 1 195 5 is_stmt 0 view .LVU30
+ 136 002c 8046     		mov	r8, r0
+ 137              	.LVL12:
+ 197:..//kernel/core/tos_mail_queue.c ****         err = tos_ring_q_enqueue(&mail_q->ring_q, mail_buf, mail_size);
+ 138              		.loc 1 197 5 is_stmt 1 view .LVU31
+ 197:..//kernel/core/tos_mail_queue.c ****         err = tos_ring_q_enqueue(&mail_q->ring_q, mail_buf, mail_size);
+ 139              		.loc 1 197 9 is_stmt 0 view .LVU32
+ 140 002e 201D     		adds	r0, r4, #4
+ 141              	.LVL13:
+ 197:..//kernel/core/tos_mail_queue.c ****         err = tos_ring_q_enqueue(&mail_q->ring_q, mail_buf, mail_size);
+ 142              		.loc 1 197 9 view .LVU33
+ 143 0030 FFF7FEFF 		bl	pend_is_nopending
+ 144              	.LVL14:
+ 197:..//kernel/core/tos_mail_queue.c ****         err = tos_ring_q_enqueue(&mail_q->ring_q, mail_buf, mail_size);
+ 145              		.loc 1 197 8 view .LVU34
+ 146 0034 90B9     		cbnz	r0, .L16
+ 207:..//kernel/core/tos_mail_queue.c ****         mail_task_recv(TOS_LIST_FIRST_ENTRY(&mail_q->pend_obj.list, k_task_t, pend_list),
+ 147              		.loc 1 207 5 is_stmt 1 view .LVU35
+ 207:..//kernel/core/tos_mail_queue.c ****         mail_task_recv(TOS_LIST_FIRST_ENTRY(&mail_q->pend_obj.list, k_task_t, pend_list),
+ 148              		.loc 1 207 8 is_stmt 0 view .LVU36
+ 149 0036 0DB3     		cbz	r5, .L17
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 150              		.loc 1 211 9 is_stmt 1 view .LVU37
+ 151 0038 6068     		ldr	r0, [r4, #4]
+ 152              	.LVL15:
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 153              		.loc 1 211 9 is_stmt 0 view .LVU38
+ 154 003a 50F85059 		ldr	r5, [r0], #-80
+ 155              	.LVL16:
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 156              		.loc 1 211 9 view .LVU39
+ 157 003e 503D     		subs	r5, r5, #80
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 11
+
+
+ 158              	.LVL17:
+ 159              	.L9:
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 160              		.loc 1 211 9 discriminator 1 view .LVU40
+ 161 0040 00F15003 		add	r3, r0, #80
+ 162 0044 221D     		adds	r2, r4, #4
+ 163 0046 9342     		cmp	r3, r2
+ 164 0048 1ED0     		beq	.L8
+ 212:..//kernel/core/tos_mail_queue.c ****         }
+ 165              		.loc 1 212 13 is_stmt 1 discriminator 3 view .LVU41
+ 166 004a 3A46     		mov	r2, r7
+ 167 004c 3146     		mov	r1, r6
+ 168 004e FFF7FEFF 		bl	mail_task_recv
+ 169              	.LVL18:
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 170              		.loc 1 211 9 is_stmt 0 discriminator 3 view .LVU42
+ 171 0052 2B6D     		ldr	r3, [r5, #80]
+ 172              	.LVL19:
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 173              		.loc 1 211 9 discriminator 3 view .LVU43
+ 174 0054 2846     		mov	r0, r5
+ 175 0056 A3F15005 		sub	r5, r3, #80
+ 176              	.LVL20:
+ 211:..//kernel/core/tos_mail_queue.c ****             mail_task_recv(task, mail_buf, mail_size);
+ 177              		.loc 1 211 9 discriminator 3 view .LVU44
+ 178 005a F1E7     		b	.L9
+ 179              	.LVL21:
+ 180              	.L16:
+ 198:..//kernel/core/tos_mail_queue.c ****         if (err != K_ERR_NONE) {
+ 181              		.loc 1 198 9 is_stmt 1 view .LVU45
+ 198:..//kernel/core/tos_mail_queue.c ****         if (err != K_ERR_NONE) {
+ 182              		.loc 1 198 15 is_stmt 0 view .LVU46
+ 183 005c 3A46     		mov	r2, r7
+ 184 005e 3146     		mov	r1, r6
+ 185 0060 04F10C00 		add	r0, r4, #12
+ 186 0064 FFF7FEFF 		bl	tos_ring_q_enqueue
+ 187              	.LVL22:
+ 199:..//kernel/core/tos_mail_queue.c ****             TOS_CPU_INT_ENABLE();
+ 188              		.loc 1 199 9 is_stmt 1 view .LVU47
+ 199:..//kernel/core/tos_mail_queue.c ****             TOS_CPU_INT_ENABLE();
+ 189              		.loc 1 199 12 is_stmt 0 view .LVU48
+ 190 0068 0446     		mov	r4, r0
+ 191              	.LVL23:
+ 199:..//kernel/core/tos_mail_queue.c ****             TOS_CPU_INT_ENABLE();
+ 192              		.loc 1 199 12 view .LVU49
+ 193 006a 18B1     		cbz	r0, .L6
+ 200:..//kernel/core/tos_mail_queue.c ****             return err;
+ 194              		.loc 1 200 13 is_stmt 1 view .LVU50
+ 200:..//kernel/core/tos_mail_queue.c ****             return err;
+ 195              		.loc 1 200 13 view .LVU51
+ 196 006c 4046     		mov	r0, r8
+ 197              	.LVL24:
+ 200:..//kernel/core/tos_mail_queue.c ****             return err;
+ 198              		.loc 1 200 13 is_stmt 0 view .LVU52
+ 199 006e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 200              	.LVL25:
+ 201:..//kernel/core/tos_mail_queue.c ****         }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 12
+
+
+ 201              		.loc 1 201 13 is_stmt 1 view .LVU53
+ 201:..//kernel/core/tos_mail_queue.c ****         }
+ 202              		.loc 1 201 20 is_stmt 0 view .LVU54
+ 203 0072 D3E7     		b	.L4
+ 204              	.LVL26:
+ 205              	.L6:
+ 203:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 206              		.loc 1 203 9 is_stmt 1 view .LVU55
+ 203:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 207              		.loc 1 203 9 view .LVU56
+ 208 0074 4046     		mov	r0, r8
+ 209              	.LVL27:
+ 203:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 210              		.loc 1 203 9 is_stmt 0 view .LVU57
+ 211 0076 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 212              	.LVL28:
+ 204:..//kernel/core/tos_mail_queue.c ****     }
+ 213              		.loc 1 204 9 is_stmt 1 view .LVU58
+ 204:..//kernel/core/tos_mail_queue.c ****     }
+ 214              		.loc 1 204 16 is_stmt 0 view .LVU59
+ 215 007a CFE7     		b	.L4
+ 216              	.LVL29:
+ 217              	.L17:
+ 208:..//kernel/core/tos_mail_queue.c ****                             mail_buf, mail_size);
+ 218              		.loc 1 208 9 is_stmt 1 view .LVU60
+ 208:..//kernel/core/tos_mail_queue.c ****                             mail_buf, mail_size);
+ 219              		.loc 1 208 24 is_stmt 0 view .LVU61
+ 220 007c 6068     		ldr	r0, [r4, #4]
+ 208:..//kernel/core/tos_mail_queue.c ****                             mail_buf, mail_size);
+ 221              		.loc 1 208 9 view .LVU62
+ 222 007e 3A46     		mov	r2, r7
+ 223 0080 3146     		mov	r1, r6
+ 224 0082 5038     		subs	r0, r0, #80
+ 225 0084 FFF7FEFF 		bl	mail_task_recv
+ 226              	.LVL30:
+ 227              	.L8:
+ 216:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 228              		.loc 1 216 5 is_stmt 1 view .LVU63
+ 216:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 229              		.loc 1 216 5 view .LVU64
+ 230 0088 4046     		mov	r0, r8
+ 231 008a FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 232              	.LVL31:
+ 217:..//kernel/core/tos_mail_queue.c **** 
+ 233              		.loc 1 217 5 view .LVU65
+ 234 008e FFF7FEFF 		bl	knl_sched
+ 235              	.LVL32:
+ 219:..//kernel/core/tos_mail_queue.c **** }
+ 236              		.loc 1 219 5 view .LVU66
+ 219:..//kernel/core/tos_mail_queue.c **** }
+ 237              		.loc 1 219 12 is_stmt 0 view .LVU67
+ 238 0092 0024     		movs	r4, #0
+ 239              	.LVL33:
+ 219:..//kernel/core/tos_mail_queue.c **** }
+ 240              		.loc 1 219 12 view .LVU68
+ 241 0094 C2E7     		b	.L4
+ 242              	.LVL34:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 13
+
+
+ 243              	.L11:
+ 191:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_buf);
+ 244              		.loc 1 191 5 view .LVU69
+ 245 0096 40F24C44 		movw	r4, #1100
+ 246 009a BFE7     		b	.L4
+ 247              	.L12:
+ 192:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 248              		.loc 1 192 5 view .LVU70
+ 249 009c 40F24C44 		movw	r4, #1100
+ 250 00a0 BCE7     		b	.L4
+ 251              		.cfi_endproc
+ 252              	.LFE117:
+ 254              		.section	.text.tos_mail_q_create,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	tos_mail_q_create
+ 257              		.syntax unified
+ 258              		.thumb
+ 259              		.thumb_func
+ 260              		.fpu softvfp
+ 262              	tos_mail_q_create:
+ 263              	.LVL35:
+ 264              	.LFB110:
+  23:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 265              		.loc 1 23 1 is_stmt 1 view -0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+  23:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 269              		.loc 1 23 1 is_stmt 0 view .LVU72
+ 270 0000 38B5     		push	{r3, r4, r5, lr}
+ 271              	.LCFI2:
+ 272              		.cfi_def_cfa_offset 16
+ 273              		.cfi_offset 3, -16
+ 274              		.cfi_offset 4, -12
+ 275              		.cfi_offset 5, -8
+ 276              		.cfi_offset 14, -4
+  24:..//kernel/core/tos_mail_queue.c **** 
+ 277              		.loc 1 24 5 is_stmt 1 view .LVU73
+  26:..//kernel/core/tos_mail_queue.c **** 
+ 278              		.loc 1 26 5 view .LVU74
+  26:..//kernel/core/tos_mail_queue.c **** 
+ 279              		.loc 1 26 5 view .LVU75
+ 280 0002 80B1     		cbz	r0, .L20
+ 281 0004 0446     		mov	r4, r0
+  28:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 282              		.loc 1 28 5 view .LVU76
+  28:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 283              		.loc 1 28 11 is_stmt 0 view .LVU77
+ 284 0006 0C30     		adds	r0, r0, #12
+ 285              	.LVL36:
+  28:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 286              		.loc 1 28 11 view .LVU78
+ 287 0008 FFF7FEFF 		bl	tos_ring_q_create
+ 288              	.LVL37:
+  29:..//kernel/core/tos_mail_queue.c ****         return err;
+ 289              		.loc 1 29 5 is_stmt 1 view .LVU79
+  29:..//kernel/core/tos_mail_queue.c ****         return err;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 14
+
+
+ 290              		.loc 1 29 8 is_stmt 0 view .LVU80
+ 291 000c 0546     		mov	r5, r0
+ 292 000e 08B1     		cbz	r0, .L22
+ 293              	.LVL38:
+ 294              	.L19:
+  39:..//kernel/core/tos_mail_queue.c **** 
+ 295              		.loc 1 39 1 view .LVU81
+ 296 0010 2846     		mov	r0, r5
+ 297 0012 38BD     		pop	{r3, r4, r5, pc}
+ 298              	.LVL39:
+ 299              	.L22:
+  33:..//kernel/core/tos_mail_queue.c **** 
+ 300              		.loc 1 33 5 is_stmt 1 view .LVU82
+ 301 0014 201D     		adds	r0, r4, #4
+ 302              	.LVL40:
+  33:..//kernel/core/tos_mail_queue.c **** 
+ 303              		.loc 1 33 5 is_stmt 0 view .LVU83
+ 304 0016 FFF7FEFF 		bl	pend_object_init
+ 305              	.LVL41:
+  35:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_set_static(&mail_q->knl_obj);
+ 306              		.loc 1 35 5 is_stmt 1 view .LVU84
+ 307              	.LBB34:
+ 308              	.LBI34:
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 309              		.loc 2 187 32 view .LVU85
+ 310              	.LBB35:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+ 311              		.loc 2 189 5 view .LVU86
+ 312              		.loc 2 189 19 is_stmt 0 view .LVU87
+ 313 001a 44F6EE33 		movw	r3, #19438
+ 314 001e 6380     		strh	r3, [r4, #2]	@ movhi
+ 315              	.LVL42:
+ 316              		.loc 2 189 19 view .LVU88
+ 317              	.LBE35:
+ 318              	.LBE34:
+  36:..//kernel/core/tos_mail_queue.c **** 
+ 319              		.loc 1 36 5 is_stmt 1 view .LVU89
+ 320              	.LBB36:
+ 321              	.LBI36:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 195:..//kernel/core/include/tos_sys.h **** }
+ 196:..//kernel/core/include/tos_sys.h **** 
+ 197:..//kernel/core/include/tos_sys.h **** #endif
+ 198:..//kernel/core/include/tos_sys.h **** 
+ 199:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_reset(knl_obj_t *knl_obj)
+ 200:..//kernel/core/include/tos_sys.h **** {
+ 201:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_NONE;
+ 202:..//kernel/core/include/tos_sys.h **** }
+ 203:..//kernel/core/include/tos_sys.h **** 
+ 204:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_dynamic(knl_obj_t *knl_obj)
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 15
+
+
+ 205:..//kernel/core/include/tos_sys.h **** {
+ 206:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_DYNAMIC;
+ 207:..//kernel/core/include/tos_sys.h **** }
+ 208:..//kernel/core/include/tos_sys.h **** 
+ 209:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_static(knl_obj_t *knl_obj)
+ 322              		.loc 2 209 32 view .LVU90
+ 323              	.LBB37:
+ 210:..//kernel/core/include/tos_sys.h **** {
+ 211:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_STATIC;
+ 324              		.loc 2 211 5 view .LVU91
+ 325              		.loc 2 211 25 is_stmt 0 view .LVU92
+ 326 0020 0123     		movs	r3, #1
+ 327 0022 2370     		strb	r3, [r4]
+ 328              	.LVL43:
+ 329              		.loc 2 211 25 view .LVU93
+ 330              	.LBE37:
+ 331              	.LBE36:
+  38:..//kernel/core/tos_mail_queue.c **** }
+ 332              		.loc 1 38 5 is_stmt 1 view .LVU94
+  38:..//kernel/core/tos_mail_queue.c **** }
+ 333              		.loc 1 38 12 is_stmt 0 view .LVU95
+ 334 0024 F4E7     		b	.L19
+ 335              	.LVL44:
+ 336              	.L20:
+  26:..//kernel/core/tos_mail_queue.c **** 
+ 337              		.loc 1 26 5 view .LVU96
+ 338 0026 40F24C45 		movw	r5, #1100
+ 339 002a F1E7     		b	.L19
+ 340              		.cfi_endproc
+ 341              	.LFE110:
+ 343              		.section	.text.tos_mail_q_destroy,"ax",%progbits
+ 344              		.align	1
+ 345              		.global	tos_mail_q_destroy
+ 346              		.syntax unified
+ 347              		.thumb
+ 348              		.thumb_func
+ 349              		.fpu softvfp
+ 351              	tos_mail_q_destroy:
+ 352              	.LVL45:
+ 353              	.LFB111:
+  42:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 354              		.loc 1 42 1 is_stmt 1 view -0
+ 355              		.cfi_startproc
+ 356              		@ args = 0, pretend = 0, frame = 0
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+  42:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 358              		.loc 1 42 1 is_stmt 0 view .LVU98
+ 359 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 360              	.LCFI3:
+ 361              		.cfi_def_cfa_offset 24
+ 362              		.cfi_offset 3, -24
+ 363              		.cfi_offset 4, -20
+ 364              		.cfi_offset 5, -16
+ 365              		.cfi_offset 6, -12
+ 366              		.cfi_offset 7, -8
+ 367              		.cfi_offset 14, -4
+  43:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 16
+
+
+ 368              		.loc 1 43 5 is_stmt 1 view .LVU99
+ 369              	.LVL46:
+  44:..//kernel/core/tos_mail_queue.c **** 
+ 370              		.loc 1 44 5 view .LVU100
+  46:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 371              		.loc 1 46 5 view .LVU101
+  46:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 372              		.loc 1 46 5 view .LVU102
+ 373 0002 48B3     		cbz	r0, .L26
+ 374 0004 0446     		mov	r4, r0
+  47:..//kernel/core/tos_mail_queue.c **** 
+ 375              		.loc 1 47 5 view .LVU103
+  47:..//kernel/core/tos_mail_queue.c **** 
+ 376              		.loc 1 47 5 view .LVU104
+ 377              	.LVL47:
+ 378              	.LBB38:
+ 379              	.LBI38:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 380              		.loc 2 182 31 view .LVU105
+ 381              	.LBB39:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 382              		.loc 2 184 5 view .LVU106
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 383              		.loc 2 184 19 is_stmt 0 view .LVU107
+ 384 0006 4188     		ldrh	r1, [r0, #2]
+ 385              	.LVL48:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 386              		.loc 2 184 19 view .LVU108
+ 387              	.LBE39:
+ 388              	.LBE38:
+  47:..//kernel/core/tos_mail_queue.c **** 
+ 389              		.loc 1 47 5 view .LVU109
+ 390 0008 44F6EE32 		movw	r2, #19438
+ 391 000c 9142     		cmp	r1, r2
+ 392 000e 26D1     		bne	.L27
+  49:..//kernel/core/tos_mail_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 393              		.loc 1 49 5 is_stmt 1 view .LVU110
+ 394              	.LVL49:
+ 395              	.LBB40:
+ 396              	.LBI40:
+ 212:..//kernel/core/include/tos_sys.h **** }
+ 213:..//kernel/core/include/tos_sys.h **** 
+ 214:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_dynamic(knl_obj_t *knl_obj)
+ 215:..//kernel/core/include/tos_sys.h **** {
+ 216:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_DYNAMIC;
+ 217:..//kernel/core/include/tos_sys.h **** }
+ 218:..//kernel/core/include/tos_sys.h **** 
+ 219:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_static(knl_obj_t *knl_obj)
+ 397              		.loc 2 219 31 view .LVU111
+ 398              	.LBB41:
+ 220:..//kernel/core/include/tos_sys.h **** {
+ 221:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_STATIC;
+ 399              		.loc 2 221 5 view .LVU112
+ 400              		.loc 2 221 19 is_stmt 0 view .LVU113
+ 401 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 402              	.LVL50:
+ 403              		.loc 2 221 19 view .LVU114
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 17
+
+
+ 404              	.LBE41:
+ 405              	.LBE40:
+  49:..//kernel/core/tos_mail_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 406              		.loc 1 49 8 view .LVU115
+ 407 0012 012A     		cmp	r2, #1
+ 408 0014 02D0     		beq	.L30
+  50:..//kernel/core/tos_mail_queue.c ****     }
+ 409              		.loc 1 50 16 view .LVU116
+ 410 0016 40F24E45 		movw	r5, #1102
+ 411 001a 22E0     		b	.L24
+ 412              	.L30:
+  53:..//kernel/core/tos_mail_queue.c **** 
+ 413              		.loc 1 53 5 is_stmt 1 view .LVU117
+  53:..//kernel/core/tos_mail_queue.c **** 
+ 414              		.loc 1 53 5 view .LVU118
+ 415 001c FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 416              	.LVL51:
+  53:..//kernel/core/tos_mail_queue.c **** 
+ 417              		.loc 1 53 5 is_stmt 0 view .LVU119
+ 418 0020 0646     		mov	r6, r0
+ 419              	.LVL52:
+  55:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 420              		.loc 1 55 5 is_stmt 1 view .LVU120
+  55:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 421              		.loc 1 55 11 is_stmt 0 view .LVU121
+ 422 0022 04F10C00 		add	r0, r4, #12
+ 423              	.LVL53:
+  55:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 424              		.loc 1 55 11 view .LVU122
+ 425 0026 FFF7FEFF 		bl	tos_ring_q_destroy
+ 426              	.LVL54:
+  56:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 427              		.loc 1 56 5 is_stmt 1 view .LVU123
+  56:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 428              		.loc 1 56 8 is_stmt 0 view .LVU124
+ 429 002a 0546     		mov	r5, r0
+ 430 002c 80B9     		cbnz	r0, .L31
+  61:..//kernel/core/tos_mail_queue.c **** 
+ 431              		.loc 1 61 5 is_stmt 1 view .LVU125
+ 432 002e 271D     		adds	r7, r4, #4
+ 433 0030 0321     		movs	r1, #3
+ 434 0032 3846     		mov	r0, r7
+ 435              	.LVL55:
+  61:..//kernel/core/tos_mail_queue.c **** 
+ 436              		.loc 1 61 5 is_stmt 0 view .LVU126
+ 437 0034 FFF7FEFF 		bl	pend_wakeup_all
+ 438              	.LVL56:
+  63:..//kernel/core/tos_mail_queue.c **** 
+ 439              		.loc 1 63 5 is_stmt 1 view .LVU127
+ 440 0038 3846     		mov	r0, r7
+ 441 003a FFF7FEFF 		bl	pend_object_deinit
+ 442              	.LVL57:
+  65:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_reset(&mail_q->knl_obj);
+ 443              		.loc 1 65 5 view .LVU128
+ 444              	.LBB42:
+ 445              	.LBI42:
+ 192:..//kernel/core/include/tos_sys.h **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 18
+
+
+ 446              		.loc 2 192 32 view .LVU129
+ 447              	.LBB43:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 448              		.loc 2 194 5 view .LVU130
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 449              		.loc 2 194 19 is_stmt 0 view .LVU131
+ 450 003e 0023     		movs	r3, #0
+ 451 0040 6380     		strh	r3, [r4, #2]	@ movhi
+ 452              	.LVL58:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 453              		.loc 2 194 19 view .LVU132
+ 454              	.LBE43:
+ 455              	.LBE42:
+  66:..//kernel/core/tos_mail_queue.c **** 
+ 456              		.loc 1 66 5 is_stmt 1 view .LVU133
+ 457              	.LBB44:
+ 458              	.LBI44:
+ 199:..//kernel/core/include/tos_sys.h **** {
+ 459              		.loc 2 199 32 view .LVU134
+ 460              	.LBB45:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 461              		.loc 2 201 5 view .LVU135
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 462              		.loc 2 201 25 is_stmt 0 view .LVU136
+ 463 0042 2370     		strb	r3, [r4]
+ 464              	.LVL59:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 465              		.loc 2 201 25 view .LVU137
+ 466              	.LBE45:
+ 467              	.LBE44:
+  68:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 468              		.loc 1 68 5 is_stmt 1 view .LVU138
+  68:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 469              		.loc 1 68 5 view .LVU139
+ 470 0044 3046     		mov	r0, r6
+ 471 0046 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 472              	.LVL60:
+  69:..//kernel/core/tos_mail_queue.c **** 
+ 473              		.loc 1 69 5 view .LVU140
+ 474 004a FFF7FEFF 		bl	knl_sched
+ 475              	.LVL61:
+  71:..//kernel/core/tos_mail_queue.c **** }
+ 476              		.loc 1 71 5 view .LVU141
+  71:..//kernel/core/tos_mail_queue.c **** }
+ 477              		.loc 1 71 12 is_stmt 0 view .LVU142
+ 478 004e 08E0     		b	.L24
+ 479              	.LVL62:
+ 480              	.L31:
+  57:..//kernel/core/tos_mail_queue.c ****         return err;
+ 481              		.loc 1 57 9 is_stmt 1 view .LVU143
+  57:..//kernel/core/tos_mail_queue.c ****         return err;
+ 482              		.loc 1 57 9 view .LVU144
+ 483 0050 3046     		mov	r0, r6
+ 484              	.LVL63:
+  57:..//kernel/core/tos_mail_queue.c ****         return err;
+ 485              		.loc 1 57 9 is_stmt 0 view .LVU145
+ 486 0052 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 19
+
+
+ 487              	.LVL64:
+  58:..//kernel/core/tos_mail_queue.c ****     }
+ 488              		.loc 1 58 9 is_stmt 1 view .LVU146
+  58:..//kernel/core/tos_mail_queue.c ****     }
+ 489              		.loc 1 58 16 is_stmt 0 view .LVU147
+ 490 0056 04E0     		b	.L24
+ 491              	.LVL65:
+ 492              	.L26:
+  46:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 493              		.loc 1 46 5 view .LVU148
+ 494 0058 40F24C45 		movw	r5, #1100
+ 495 005c 01E0     		b	.L24
+ 496              	.L27:
+  47:..//kernel/core/tos_mail_queue.c **** 
+ 497              		.loc 1 47 5 view .LVU149
+ 498 005e 40F24D45 		movw	r5, #1101
+ 499              	.LVL66:
+ 500              	.L24:
+  72:..//kernel/core/tos_mail_queue.c **** 
+ 501              		.loc 1 72 1 view .LVU150
+ 502 0062 2846     		mov	r0, r5
+ 503 0064 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 504              		.cfi_endproc
+ 505              	.LFE111:
+ 507              		.section	.text.tos_mail_q_create_dyn,"ax",%progbits
+ 508              		.align	1
+ 509              		.global	tos_mail_q_create_dyn
+ 510              		.syntax unified
+ 511              		.thumb
+ 512              		.thumb_func
+ 513              		.fpu softvfp
+ 515              	tos_mail_q_create_dyn:
+ 516              	.LVL67:
+ 517              	.LFB112:
+  75:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 518              		.loc 1 75 1 is_stmt 1 view -0
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 0
+ 521              		@ frame_needed = 0, uses_anonymous_args = 0
+  75:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 522              		.loc 1 75 1 is_stmt 0 view .LVU152
+ 523 0000 38B5     		push	{r3, r4, r5, lr}
+ 524              	.LCFI4:
+ 525              		.cfi_def_cfa_offset 16
+ 526              		.cfi_offset 3, -16
+ 527              		.cfi_offset 4, -12
+ 528              		.cfi_offset 5, -8
+ 529              		.cfi_offset 14, -4
+  76:..//kernel/core/tos_mail_queue.c **** 
+ 530              		.loc 1 76 5 is_stmt 1 view .LVU153
+  78:..//kernel/core/tos_mail_queue.c **** 
+ 531              		.loc 1 78 5 view .LVU154
+  78:..//kernel/core/tos_mail_queue.c **** 
+ 532              		.loc 1 78 5 view .LVU155
+ 533 0002 80B1     		cbz	r0, .L34
+ 534 0004 0446     		mov	r4, r0
+  80:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 20
+
+
+ 535              		.loc 1 80 5 view .LVU156
+  80:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 536              		.loc 1 80 11 is_stmt 0 view .LVU157
+ 537 0006 0C30     		adds	r0, r0, #12
+ 538              	.LVL68:
+  80:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 539              		.loc 1 80 11 view .LVU158
+ 540 0008 FFF7FEFF 		bl	tos_ring_q_create_dyn
+ 541              	.LVL69:
+  81:..//kernel/core/tos_mail_queue.c ****         return err;
+ 542              		.loc 1 81 5 is_stmt 1 view .LVU159
+  81:..//kernel/core/tos_mail_queue.c ****         return err;
+ 543              		.loc 1 81 8 is_stmt 0 view .LVU160
+ 544 000c 0546     		mov	r5, r0
+ 545 000e 08B1     		cbz	r0, .L36
+ 546              	.LVL70:
+ 547              	.L33:
+  91:..//kernel/core/tos_mail_queue.c **** 
+ 548              		.loc 1 91 1 view .LVU161
+ 549 0010 2846     		mov	r0, r5
+ 550 0012 38BD     		pop	{r3, r4, r5, pc}
+ 551              	.LVL71:
+ 552              	.L36:
+  85:..//kernel/core/tos_mail_queue.c **** 
+ 553              		.loc 1 85 5 is_stmt 1 view .LVU162
+ 554 0014 201D     		adds	r0, r4, #4
+ 555              	.LVL72:
+  85:..//kernel/core/tos_mail_queue.c **** 
+ 556              		.loc 1 85 5 is_stmt 0 view .LVU163
+ 557 0016 FFF7FEFF 		bl	pend_object_init
+ 558              	.LVL73:
+  87:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_set_dynamic(&mail_q->knl_obj);
+ 559              		.loc 1 87 5 is_stmt 1 view .LVU164
+ 560              	.LBB46:
+ 561              	.LBI46:
+ 187:..//kernel/core/include/tos_sys.h **** {
+ 562              		.loc 2 187 32 view .LVU165
+ 563              	.LBB47:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 564              		.loc 2 189 5 view .LVU166
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 565              		.loc 2 189 19 is_stmt 0 view .LVU167
+ 566 001a 44F6EE33 		movw	r3, #19438
+ 567 001e 6380     		strh	r3, [r4, #2]	@ movhi
+ 568              	.LVL74:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 569              		.loc 2 189 19 view .LVU168
+ 570              	.LBE47:
+ 571              	.LBE46:
+  88:..//kernel/core/tos_mail_queue.c **** 
+ 572              		.loc 1 88 5 is_stmt 1 view .LVU169
+ 573              	.LBB48:
+ 574              	.LBI48:
+ 204:..//kernel/core/include/tos_sys.h **** {
+ 575              		.loc 2 204 32 view .LVU170
+ 576              	.LBB49:
+ 206:..//kernel/core/include/tos_sys.h **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 21
+
+
+ 577              		.loc 2 206 5 view .LVU171
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 578              		.loc 2 206 25 is_stmt 0 view .LVU172
+ 579 0020 0223     		movs	r3, #2
+ 580 0022 2370     		strb	r3, [r4]
+ 581              	.LVL75:
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 582              		.loc 2 206 25 view .LVU173
+ 583              	.LBE49:
+ 584              	.LBE48:
+  90:..//kernel/core/tos_mail_queue.c **** }
+ 585              		.loc 1 90 5 is_stmt 1 view .LVU174
+  90:..//kernel/core/tos_mail_queue.c **** }
+ 586              		.loc 1 90 12 is_stmt 0 view .LVU175
+ 587 0024 F4E7     		b	.L33
+ 588              	.LVL76:
+ 589              	.L34:
+  78:..//kernel/core/tos_mail_queue.c **** 
+ 590              		.loc 1 78 5 view .LVU176
+ 591 0026 40F24C45 		movw	r5, #1100
+ 592 002a F1E7     		b	.L33
+ 593              		.cfi_endproc
+ 594              	.LFE112:
+ 596              		.section	.text.tos_mail_q_destroy_dyn,"ax",%progbits
+ 597              		.align	1
+ 598              		.global	tos_mail_q_destroy_dyn
+ 599              		.syntax unified
+ 600              		.thumb
+ 601              		.thumb_func
+ 602              		.fpu softvfp
+ 604              	tos_mail_q_destroy_dyn:
+ 605              	.LVL77:
+ 606              	.LFB113:
+  94:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 607              		.loc 1 94 1 is_stmt 1 view -0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 0
+ 610              		@ frame_needed = 0, uses_anonymous_args = 0
+  94:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 611              		.loc 1 94 1 is_stmt 0 view .LVU178
+ 612 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 613              	.LCFI5:
+ 614              		.cfi_def_cfa_offset 24
+ 615              		.cfi_offset 3, -24
+ 616              		.cfi_offset 4, -20
+ 617              		.cfi_offset 5, -16
+ 618              		.cfi_offset 6, -12
+ 619              		.cfi_offset 7, -8
+ 620              		.cfi_offset 14, -4
+  95:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 621              		.loc 1 95 5 is_stmt 1 view .LVU179
+ 622              	.LVL78:
+  96:..//kernel/core/tos_mail_queue.c **** 
+ 623              		.loc 1 96 5 view .LVU180
+  98:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 624              		.loc 1 98 5 view .LVU181
+  98:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 22
+
+
+ 625              		.loc 1 98 5 view .LVU182
+ 626 0002 48B3     		cbz	r0, .L40
+ 627 0004 0446     		mov	r4, r0
+  99:..//kernel/core/tos_mail_queue.c **** 
+ 628              		.loc 1 99 5 view .LVU183
+  99:..//kernel/core/tos_mail_queue.c **** 
+ 629              		.loc 1 99 5 view .LVU184
+ 630              	.LVL79:
+ 631              	.LBB50:
+ 632              	.LBI50:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 633              		.loc 2 182 31 view .LVU185
+ 634              	.LBB51:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 635              		.loc 2 184 5 view .LVU186
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 636              		.loc 2 184 19 is_stmt 0 view .LVU187
+ 637 0006 4188     		ldrh	r1, [r0, #2]
+ 638              	.LVL80:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 639              		.loc 2 184 19 view .LVU188
+ 640              	.LBE51:
+ 641              	.LBE50:
+  99:..//kernel/core/tos_mail_queue.c **** 
+ 642              		.loc 1 99 5 view .LVU189
+ 643 0008 44F6EE32 		movw	r2, #19438
+ 644 000c 9142     		cmp	r1, r2
+ 645 000e 26D1     		bne	.L41
+ 101:..//kernel/core/tos_mail_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 646              		.loc 1 101 5 is_stmt 1 view .LVU190
+ 647              	.LVL81:
+ 648              	.LBB52:
+ 649              	.LBI52:
+ 214:..//kernel/core/include/tos_sys.h **** {
+ 650              		.loc 2 214 31 view .LVU191
+ 651              	.LBB53:
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 652              		.loc 2 216 5 view .LVU192
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 653              		.loc 2 216 19 is_stmt 0 view .LVU193
+ 654 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 655              	.LVL82:
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 656              		.loc 2 216 19 view .LVU194
+ 657              	.LBE53:
+ 658              	.LBE52:
+ 101:..//kernel/core/tos_mail_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 659              		.loc 1 101 8 view .LVU195
+ 660 0012 022A     		cmp	r2, #2
+ 661 0014 02D0     		beq	.L44
+ 102:..//kernel/core/tos_mail_queue.c ****     }
+ 662              		.loc 1 102 16 view .LVU196
+ 663 0016 40F24E45 		movw	r5, #1102
+ 664 001a 22E0     		b	.L38
+ 665              	.L44:
+ 105:..//kernel/core/tos_mail_queue.c **** 
+ 666              		.loc 1 105 5 is_stmt 1 view .LVU197
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 23
+
+
+ 105:..//kernel/core/tos_mail_queue.c **** 
+ 667              		.loc 1 105 5 view .LVU198
+ 668 001c FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 669              	.LVL83:
+ 105:..//kernel/core/tos_mail_queue.c **** 
+ 670              		.loc 1 105 5 is_stmt 0 view .LVU199
+ 671 0020 0646     		mov	r6, r0
+ 672              	.LVL84:
+ 107:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 673              		.loc 1 107 5 is_stmt 1 view .LVU200
+ 107:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 674              		.loc 1 107 11 is_stmt 0 view .LVU201
+ 675 0022 04F10C00 		add	r0, r4, #12
+ 676              	.LVL85:
+ 107:..//kernel/core/tos_mail_queue.c ****     if (err != K_ERR_NONE) {
+ 677              		.loc 1 107 11 view .LVU202
+ 678 0026 FFF7FEFF 		bl	tos_ring_q_destroy_dyn
+ 679              	.LVL86:
+ 108:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 680              		.loc 1 108 5 is_stmt 1 view .LVU203
+ 108:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 681              		.loc 1 108 8 is_stmt 0 view .LVU204
+ 682 002a 0546     		mov	r5, r0
+ 683 002c 80B9     		cbnz	r0, .L45
+ 113:..//kernel/core/tos_mail_queue.c **** 
+ 684              		.loc 1 113 5 is_stmt 1 view .LVU205
+ 685 002e 271D     		adds	r7, r4, #4
+ 686 0030 0321     		movs	r1, #3
+ 687 0032 3846     		mov	r0, r7
+ 688              	.LVL87:
+ 113:..//kernel/core/tos_mail_queue.c **** 
+ 689              		.loc 1 113 5 is_stmt 0 view .LVU206
+ 690 0034 FFF7FEFF 		bl	pend_wakeup_all
+ 691              	.LVL88:
+ 115:..//kernel/core/tos_mail_queue.c **** 
+ 692              		.loc 1 115 5 is_stmt 1 view .LVU207
+ 693 0038 3846     		mov	r0, r7
+ 694 003a FFF7FEFF 		bl	pend_object_deinit
+ 695              	.LVL89:
+ 117:..//kernel/core/tos_mail_queue.c ****     knl_object_alloc_reset(&mail_q->knl_obj);
+ 696              		.loc 1 117 5 view .LVU208
+ 697              	.LBB54:
+ 698              	.LBI54:
+ 192:..//kernel/core/include/tos_sys.h **** {
+ 699              		.loc 2 192 32 view .LVU209
+ 700              	.LBB55:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 701              		.loc 2 194 5 view .LVU210
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 702              		.loc 2 194 19 is_stmt 0 view .LVU211
+ 703 003e 0023     		movs	r3, #0
+ 704 0040 6380     		strh	r3, [r4, #2]	@ movhi
+ 705              	.LVL90:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 706              		.loc 2 194 19 view .LVU212
+ 707              	.LBE55:
+ 708              	.LBE54:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 24
+
+
+ 118:..//kernel/core/tos_mail_queue.c **** 
+ 709              		.loc 1 118 5 is_stmt 1 view .LVU213
+ 710              	.LBB56:
+ 711              	.LBI56:
+ 199:..//kernel/core/include/tos_sys.h **** {
+ 712              		.loc 2 199 32 view .LVU214
+ 713              	.LBB57:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 714              		.loc 2 201 5 view .LVU215
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 715              		.loc 2 201 25 is_stmt 0 view .LVU216
+ 716 0042 2370     		strb	r3, [r4]
+ 717              	.LVL91:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 718              		.loc 2 201 25 view .LVU217
+ 719              	.LBE57:
+ 720              	.LBE56:
+ 120:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 721              		.loc 1 120 5 is_stmt 1 view .LVU218
+ 120:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 722              		.loc 1 120 5 view .LVU219
+ 723 0044 3046     		mov	r0, r6
+ 724 0046 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 725              	.LVL92:
+ 121:..//kernel/core/tos_mail_queue.c **** 
+ 726              		.loc 1 121 5 view .LVU220
+ 727 004a FFF7FEFF 		bl	knl_sched
+ 728              	.LVL93:
+ 123:..//kernel/core/tos_mail_queue.c **** }
+ 729              		.loc 1 123 5 view .LVU221
+ 123:..//kernel/core/tos_mail_queue.c **** }
+ 730              		.loc 1 123 12 is_stmt 0 view .LVU222
+ 731 004e 08E0     		b	.L38
+ 732              	.LVL94:
+ 733              	.L45:
+ 109:..//kernel/core/tos_mail_queue.c ****         return err;
+ 734              		.loc 1 109 9 is_stmt 1 view .LVU223
+ 109:..//kernel/core/tos_mail_queue.c ****         return err;
+ 735              		.loc 1 109 9 view .LVU224
+ 736 0050 3046     		mov	r0, r6
+ 737              	.LVL95:
+ 109:..//kernel/core/tos_mail_queue.c ****         return err;
+ 738              		.loc 1 109 9 is_stmt 0 view .LVU225
+ 739 0052 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 740              	.LVL96:
+ 110:..//kernel/core/tos_mail_queue.c ****     }
+ 741              		.loc 1 110 9 is_stmt 1 view .LVU226
+ 110:..//kernel/core/tos_mail_queue.c ****     }
+ 742              		.loc 1 110 16 is_stmt 0 view .LVU227
+ 743 0056 04E0     		b	.L38
+ 744              	.LVL97:
+ 745              	.L40:
+  98:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 746              		.loc 1 98 5 view .LVU228
+ 747 0058 40F24C45 		movw	r5, #1100
+ 748 005c 01E0     		b	.L38
+ 749              	.L41:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 25
+
+
+  99:..//kernel/core/tos_mail_queue.c **** 
+ 750              		.loc 1 99 5 view .LVU229
+ 751 005e 40F24D45 		movw	r5, #1101
+ 752              	.LVL98:
+ 753              	.L38:
+ 124:..//kernel/core/tos_mail_queue.c **** 
+ 754              		.loc 1 124 1 view .LVU230
+ 755 0062 2846     		mov	r0, r5
+ 756 0064 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 757              		.cfi_endproc
+ 758              	.LFE113:
+ 760              		.section	.text.tos_mail_q_flush,"ax",%progbits
+ 761              		.align	1
+ 762              		.global	tos_mail_q_flush
+ 763              		.syntax unified
+ 764              		.thumb
+ 765              		.thumb_func
+ 766              		.fpu softvfp
+ 768              	tos_mail_q_flush:
+ 769              	.LVL99:
+ 770              	.LFB114:
+ 127:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 771              		.loc 1 127 1 is_stmt 1 view -0
+ 772              		.cfi_startproc
+ 773              		@ args = 0, pretend = 0, frame = 0
+ 774              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 775              		.loc 1 128 5 view .LVU232
+ 128:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 776              		.loc 1 128 5 view .LVU233
+ 777 0000 60B1     		cbz	r0, .L48
+ 127:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 778              		.loc 1 127 1 is_stmt 0 view .LVU234
+ 779 0002 08B5     		push	{r3, lr}
+ 780              	.LCFI6:
+ 781              		.cfi_def_cfa_offset 8
+ 782              		.cfi_offset 3, -8
+ 783              		.cfi_offset 14, -4
+ 129:..//kernel/core/tos_mail_queue.c **** 
+ 784              		.loc 1 129 5 is_stmt 1 view .LVU235
+ 129:..//kernel/core/tos_mail_queue.c **** 
+ 785              		.loc 1 129 5 view .LVU236
+ 786              	.LVL100:
+ 787              	.LBB58:
+ 788              	.LBI58:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 789              		.loc 2 182 31 view .LVU237
+ 790              	.LBB59:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 791              		.loc 2 184 5 view .LVU238
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 792              		.loc 2 184 19 is_stmt 0 view .LVU239
+ 793 0004 4188     		ldrh	r1, [r0, #2]
+ 794              	.LVL101:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 795              		.loc 2 184 19 view .LVU240
+ 796              	.LBE59:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 26
+
+
+ 797              	.LBE58:
+ 129:..//kernel/core/tos_mail_queue.c **** 
+ 798              		.loc 1 129 5 view .LVU241
+ 799 0006 44F6EE32 		movw	r2, #19438
+ 800 000a 9142     		cmp	r1, r2
+ 801 000c 02D0     		beq	.L54
+ 802 000e 40F24D40 		movw	r0, #1101
+ 803              	.LVL102:
+ 804              	.L47:
+ 132:..//kernel/core/tos_mail_queue.c **** 
+ 805              		.loc 1 132 1 view .LVU242
+ 806 0012 08BD     		pop	{r3, pc}
+ 807              	.LVL103:
+ 808              	.L54:
+ 131:..//kernel/core/tos_mail_queue.c **** }
+ 809              		.loc 1 131 5 is_stmt 1 view .LVU243
+ 131:..//kernel/core/tos_mail_queue.c **** }
+ 810              		.loc 1 131 12 is_stmt 0 view .LVU244
+ 811 0014 0C30     		adds	r0, r0, #12
+ 812              	.LVL104:
+ 131:..//kernel/core/tos_mail_queue.c **** }
+ 813              		.loc 1 131 12 view .LVU245
+ 814 0016 FFF7FEFF 		bl	tos_ring_q_flush
+ 815              	.LVL105:
+ 131:..//kernel/core/tos_mail_queue.c **** }
+ 816              		.loc 1 131 12 view .LVU246
+ 817 001a FAE7     		b	.L47
+ 818              	.LVL106:
+ 819              	.L48:
+ 820              	.LCFI7:
+ 821              		.cfi_def_cfa_offset 0
+ 822              		.cfi_restore 3
+ 823              		.cfi_restore 14
+ 128:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 824              		.loc 1 128 5 view .LVU247
+ 825 001c 40F24C40 		movw	r0, #1100
+ 826              	.LVL107:
+ 132:..//kernel/core/tos_mail_queue.c **** 
+ 827              		.loc 1 132 1 view .LVU248
+ 828 0020 7047     		bx	lr
+ 829              		.cfi_endproc
+ 830              	.LFE114:
+ 832              		.section	.text.tos_mail_q_pend,"ax",%progbits
+ 833              		.align	1
+ 834              		.global	tos_mail_q_pend
+ 835              		.syntax unified
+ 836              		.thumb
+ 837              		.thumb_func
+ 838              		.fpu softvfp
+ 840              	tos_mail_q_pend:
+ 841              	.LVL108:
+ 842              	.LFB115:
+ 135:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 843              		.loc 1 135 1 is_stmt 1 view -0
+ 844              		.cfi_startproc
+ 845              		@ args = 8, pretend = 0, frame = 0
+ 846              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 27
+
+
+ 135:..//kernel/core/tos_mail_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 847              		.loc 1 135 1 is_stmt 0 view .LVU250
+ 848 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 849              	.LCFI8:
+ 850              		.cfi_def_cfa_offset 24
+ 851              		.cfi_offset 4, -24
+ 852              		.cfi_offset 5, -20
+ 853              		.cfi_offset 6, -16
+ 854              		.cfi_offset 7, -12
+ 855              		.cfi_offset 8, -8
+ 856              		.cfi_offset 14, -4
+ 857 0004 0446     		mov	r4, r0
+ 858 0006 0D46     		mov	r5, r1
+ 859 0008 1746     		mov	r7, r2
+ 136:..//kernel/core/tos_mail_queue.c ****     k_err_t err;
+ 860              		.loc 1 136 5 is_stmt 1 view .LVU251
+ 861              	.LVL109:
+ 137:..//kernel/core/tos_mail_queue.c **** 
+ 862              		.loc 1 137 5 view .LVU252
+ 139:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 863              		.loc 1 139 5 view .LVU253
+ 139:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 864              		.loc 1 139 5 view .LVU254
+ 865 000a FFF7FEFF 		bl	knl_is_inirq
+ 866              	.LVL110:
+ 139:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 867              		.loc 1 139 5 is_stmt 0 view .LVU255
+ 868 000e 0028     		cmp	r0, #0
+ 869 0010 4FD1     		bne	.L60
+ 140:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_buf);
+ 870              		.loc 1 140 5 is_stmt 1 view .LVU256
+ 140:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_buf);
+ 871              		.loc 1 140 5 view .LVU257
+ 872 0012 002C     		cmp	r4, #0
+ 873 0014 50D0     		beq	.L61
+ 141:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 874              		.loc 1 141 5 view .LVU258
+ 141:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 875              		.loc 1 141 5 view .LVU259
+ 876 0016 002D     		cmp	r5, #0
+ 877 0018 51D0     		beq	.L62
+ 142:..//kernel/core/tos_mail_queue.c **** 
+ 878              		.loc 1 142 5 view .LVU260
+ 142:..//kernel/core/tos_mail_queue.c **** 
+ 879              		.loc 1 142 5 view .LVU261
+ 880              	.LVL111:
+ 881              	.LBB60:
+ 882              	.LBI60:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 883              		.loc 2 182 31 view .LVU262
+ 884              	.LBB61:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 885              		.loc 2 184 5 view .LVU263
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 886              		.loc 2 184 19 is_stmt 0 view .LVU264
+ 887 001a 6288     		ldrh	r2, [r4, #2]
+ 888              	.LVL112:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 28
+
+
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 889              		.loc 2 184 19 view .LVU265
+ 890              	.LBE61:
+ 891              	.LBE60:
+ 142:..//kernel/core/tos_mail_queue.c **** 
+ 892              		.loc 1 142 5 view .LVU266
+ 893 001c 44F6EE33 		movw	r3, #19438
+ 894 0020 9A42     		cmp	r2, r3
+ 895 0022 04D0     		beq	.L65
+ 896 0024 40F24D46 		movw	r6, #1101
+ 897              	.LVL113:
+ 898              	.L56:
+ 176:..//kernel/core/tos_mail_queue.c **** 
+ 899              		.loc 1 176 1 view .LVU267
+ 900 0028 3046     		mov	r0, r6
+ 901 002a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 902              	.LVL114:
+ 903              	.L65:
+ 144:..//kernel/core/tos_mail_queue.c **** 
+ 904              		.loc 1 144 5 is_stmt 1 view .LVU268
+ 144:..//kernel/core/tos_mail_queue.c **** 
+ 905              		.loc 1 144 5 view .LVU269
+ 906 002e FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 907              	.LVL115:
+ 908 0032 8046     		mov	r8, r0
+ 909              	.LVL116:
+ 146:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 910              		.loc 1 146 5 view .LVU270
+ 146:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 911              		.loc 1 146 9 is_stmt 0 view .LVU271
+ 912 0034 3A46     		mov	r2, r7
+ 913 0036 2946     		mov	r1, r5
+ 914 0038 04F10C00 		add	r0, r4, #12
+ 915              	.LVL117:
+ 146:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 916              		.loc 1 146 9 view .LVU272
+ 917 003c FFF7FEFF 		bl	tos_ring_q_dequeue
+ 918              	.LVL118:
+ 146:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 919              		.loc 1 146 8 view .LVU273
+ 920 0040 0646     		mov	r6, r0
+ 921 0042 20B3     		cbz	r0, .L66
+ 151:..//kernel/core/tos_mail_queue.c ****         *mail_size = 0;
+ 922              		.loc 1 151 5 is_stmt 1 view .LVU274
+ 151:..//kernel/core/tos_mail_queue.c ****         *mail_size = 0;
+ 923              		.loc 1 151 8 is_stmt 0 view .LVU275
+ 924 0044 DDE90623 		ldrd	r2, [sp, #24]
+ 925 0048 1343     		orrs	r3, r2, r3
+ 926 004a 24D0     		beq	.L67
+ 157:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 927              		.loc 1 157 5 is_stmt 1 view .LVU276
+ 157:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 928              		.loc 1 157 9 is_stmt 0 view .LVU277
+ 929 004c FFF7FEFF 		bl	knl_is_sched_locked
+ 930              	.LVL119:
+ 157:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 931              		.loc 1 157 8 view .LVU278
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 29
+
+
+ 932 0050 48BB     		cbnz	r0, .L68
+ 162:..//kernel/core/tos_mail_queue.c ****     pend_task_block(k_curr_task, &mail_q->pend_obj, timeout);
+ 933              		.loc 1 162 5 is_stmt 1 view .LVU279
+ 162:..//kernel/core/tos_mail_queue.c ****     pend_task_block(k_curr_task, &mail_q->pend_obj, timeout);
+ 934              		.loc 1 162 16 is_stmt 0 view .LVU280
+ 935 0052 1C4E     		ldr	r6, .L69
+ 936 0054 3068     		ldr	r0, [r6]
+ 162:..//kernel/core/tos_mail_queue.c ****     pend_task_block(k_curr_task, &mail_q->pend_obj, timeout);
+ 937              		.loc 1 162 23 view .LVU281
+ 938 0056 0567     		str	r5, [r0, #112]
+ 163:..//kernel/core/tos_mail_queue.c **** 
+ 939              		.loc 1 163 5 is_stmt 1 view .LVU282
+ 940 0058 DDE90623 		ldrd	r2, [sp, #24]
+ 941 005c 211D     		adds	r1, r4, #4
+ 942 005e FFF7FEFF 		bl	pend_task_block
+ 943              	.LVL120:
+ 165:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 944              		.loc 1 165 5 view .LVU283
+ 165:..//kernel/core/tos_mail_queue.c ****     knl_sched();
+ 945              		.loc 1 165 5 view .LVU284
+ 946 0062 4046     		mov	r0, r8
+ 947 0064 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 948              	.LVL121:
+ 166:..//kernel/core/tos_mail_queue.c **** 
+ 949              		.loc 1 166 5 view .LVU285
+ 950 0068 FFF7FEFF 		bl	knl_sched
+ 951              	.LVL122:
+ 168:..//kernel/core/tos_mail_queue.c ****     if (err == K_ERR_NONE) {
+ 952              		.loc 1 168 5 view .LVU286
+ 168:..//kernel/core/tos_mail_queue.c ****     if (err == K_ERR_NONE) {
+ 953              		.loc 1 168 39 is_stmt 0 view .LVU287
+ 954 006c 3368     		ldr	r3, [r6]
+ 168:..//kernel/core/tos_mail_queue.c ****     if (err == K_ERR_NONE) {
+ 955              		.loc 1 168 11 view .LVU288
+ 956 006e 93F86800 		ldrb	r0, [r3, #104]	@ zero_extendqisi2
+ 957 0072 FFF7FEFF 		bl	pend_state2errno
+ 958              	.LVL123:
+ 169:..//kernel/core/tos_mail_queue.c ****         *mail_size              = k_curr_task->mail_size;
+ 959              		.loc 1 169 5 is_stmt 1 view .LVU289
+ 169:..//kernel/core/tos_mail_queue.c ****         *mail_size              = k_curr_task->mail_size;
+ 960              		.loc 1 169 8 is_stmt 0 view .LVU290
+ 961 0076 0646     		mov	r6, r0
+ 962 0078 0028     		cmp	r0, #0
+ 963 007a D5D1     		bne	.L56
+ 170:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail       = K_NULL;
+ 964              		.loc 1 170 9 is_stmt 1 view .LVU291
+ 170:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail       = K_NULL;
+ 965              		.loc 1 170 46 is_stmt 0 view .LVU292
+ 966 007c 114B     		ldr	r3, .L69
+ 967 007e 1A68     		ldr	r2, [r3]
+ 968 0080 526F     		ldr	r2, [r2, #116]
+ 170:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail       = K_NULL;
+ 969              		.loc 1 170 33 view .LVU293
+ 970 0082 3A60     		str	r2, [r7]
+ 171:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail_size  = 0;
+ 971              		.loc 1 171 9 is_stmt 1 view .LVU294
+ 171:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail_size  = 0;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 30
+
+
+ 972              		.loc 1 171 20 is_stmt 0 view .LVU295
+ 973 0084 1B68     		ldr	r3, [r3]
+ 171:..//kernel/core/tos_mail_queue.c ****         k_curr_task->mail_size  = 0;
+ 974              		.loc 1 171 33 view .LVU296
+ 975 0086 0022     		movs	r2, #0
+ 976 0088 1A67     		str	r2, [r3, #112]
+ 172:..//kernel/core/tos_mail_queue.c ****     }
+ 977              		.loc 1 172 9 is_stmt 1 view .LVU297
+ 172:..//kernel/core/tos_mail_queue.c ****     }
+ 978              		.loc 1 172 33 is_stmt 0 view .LVU298
+ 979 008a 5A67     		str	r2, [r3, #116]
+ 980 008c CCE7     		b	.L56
+ 981              	.LVL124:
+ 982              	.L66:
+ 147:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 983              		.loc 1 147 9 is_stmt 1 view .LVU299
+ 147:..//kernel/core/tos_mail_queue.c ****         return K_ERR_NONE;
+ 984              		.loc 1 147 9 view .LVU300
+ 985 008e 4046     		mov	r0, r8
+ 986 0090 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 987              	.LVL125:
+ 148:..//kernel/core/tos_mail_queue.c ****     }
+ 988              		.loc 1 148 9 view .LVU301
+ 148:..//kernel/core/tos_mail_queue.c ****     }
+ 989              		.loc 1 148 16 is_stmt 0 view .LVU302
+ 990 0094 C8E7     		b	.L56
+ 991              	.L67:
+ 152:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 992              		.loc 1 152 9 is_stmt 1 view .LVU303
+ 152:..//kernel/core/tos_mail_queue.c ****         TOS_CPU_INT_ENABLE();
+ 993              		.loc 1 152 20 is_stmt 0 view .LVU304
+ 994 0096 0023     		movs	r3, #0
+ 995 0098 3B60     		str	r3, [r7]
+ 153:..//kernel/core/tos_mail_queue.c ****         return K_ERR_PEND_NOWAIT;
+ 996              		.loc 1 153 9 is_stmt 1 view .LVU305
+ 153:..//kernel/core/tos_mail_queue.c ****         return K_ERR_PEND_NOWAIT;
+ 997              		.loc 1 153 9 view .LVU306
+ 998 009a 4046     		mov	r0, r8
+ 999 009c FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 1000              	.LVL126:
+ 154:..//kernel/core/tos_mail_queue.c ****     }
+ 1001              		.loc 1 154 9 view .LVU307
+ 154:..//kernel/core/tos_mail_queue.c ****     }
+ 1002              		.loc 1 154 16 is_stmt 0 view .LVU308
+ 1003 00a0 4FF49666 		mov	r6, #1200
+ 1004 00a4 C0E7     		b	.L56
+ 1005              	.L68:
+ 158:..//kernel/core/tos_mail_queue.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 1006              		.loc 1 158 9 is_stmt 1 view .LVU309
+ 158:..//kernel/core/tos_mail_queue.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 1007              		.loc 1 158 9 view .LVU310
+ 1008 00a6 4046     		mov	r0, r8
+ 1009 00a8 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 1010              	.LVL127:
+ 159:..//kernel/core/tos_mail_queue.c ****     }
+ 1011              		.loc 1 159 9 view .LVU311
+ 159:..//kernel/core/tos_mail_queue.c ****     }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 31
+
+
+ 1012              		.loc 1 159 16 is_stmt 0 view .LVU312
+ 1013 00ac 40F2B146 		movw	r6, #1201
+ 1014 00b0 BAE7     		b	.L56
+ 1015              	.LVL128:
+ 1016              	.L60:
+ 139:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_q);
+ 1017              		.loc 1 139 5 view .LVU313
+ 1018 00b2 4FF4C876 		mov	r6, #400
+ 1019 00b6 B7E7     		b	.L56
+ 1020              	.L61:
+ 140:..//kernel/core/tos_mail_queue.c ****     TOS_PTR_SANITY_CHECK(mail_buf);
+ 1021              		.loc 1 140 5 view .LVU314
+ 1022 00b8 40F24C46 		movw	r6, #1100
+ 1023 00bc B4E7     		b	.L56
+ 1024              	.L62:
+ 141:..//kernel/core/tos_mail_queue.c ****     TOS_OBJ_VERIFY(mail_q, KNL_OBJ_TYPE_MAIL_QUEUE);
+ 1025              		.loc 1 141 5 view .LVU315
+ 1026 00be 40F24C46 		movw	r6, #1100
+ 1027 00c2 B1E7     		b	.L56
+ 1028              	.L70:
+ 1029              		.align	2
+ 1030              	.L69:
+ 1031 00c4 00000000 		.word	k_curr_task
+ 1032              		.cfi_endproc
+ 1033              	.LFE115:
+ 1035              		.section	.text.tos_mail_q_post,"ax",%progbits
+ 1036              		.align	1
+ 1037              		.global	tos_mail_q_post
+ 1038              		.syntax unified
+ 1039              		.thumb
+ 1040              		.thumb_func
+ 1041              		.fpu softvfp
+ 1043              	tos_mail_q_post:
+ 1044              	.LVL129:
+ 1045              	.LFB118:
+ 221:..//kernel/core/tos_mail_queue.c **** 
+ 222:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_post(k_mail_q_t *mail_q, void *mail_buf, size_t mail_size)
+ 223:..//kernel/core/tos_mail_queue.c **** {
+ 1046              		.loc 1 223 1 is_stmt 1 view -0
+ 1047              		.cfi_startproc
+ 1048              		@ args = 0, pretend = 0, frame = 0
+ 1049              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1050              		.loc 1 223 1 is_stmt 0 view .LVU317
+ 1051 0000 08B5     		push	{r3, lr}
+ 1052              	.LCFI9:
+ 1053              		.cfi_def_cfa_offset 8
+ 1054              		.cfi_offset 3, -8
+ 1055              		.cfi_offset 14, -4
+ 224:..//kernel/core/tos_mail_queue.c ****     return mail_q_do_post(mail_q, mail_buf, mail_size, OPT_POST_ONE);
+ 1056              		.loc 1 224 5 is_stmt 1 view .LVU318
+ 1057              		.loc 1 224 12 is_stmt 0 view .LVU319
+ 1058 0002 0023     		movs	r3, #0
+ 1059 0004 FFF7FEFF 		bl	mail_q_do_post
+ 1060              	.LVL130:
+ 225:..//kernel/core/tos_mail_queue.c **** }
+ 1061              		.loc 1 225 1 view .LVU320
+ 1062 0008 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 32
+
+
+ 1063              		.cfi_endproc
+ 1064              	.LFE118:
+ 1066              		.section	.text.tos_mail_q_post_all,"ax",%progbits
+ 1067              		.align	1
+ 1068              		.global	tos_mail_q_post_all
+ 1069              		.syntax unified
+ 1070              		.thumb
+ 1071              		.thumb_func
+ 1072              		.fpu softvfp
+ 1074              	tos_mail_q_post_all:
+ 1075              	.LVL131:
+ 1076              	.LFB119:
+ 226:..//kernel/core/tos_mail_queue.c **** 
+ 227:..//kernel/core/tos_mail_queue.c **** __API__ k_err_t tos_mail_q_post_all(k_mail_q_t *mail_q, void *mail_buf, size_t mail_size)
+ 228:..//kernel/core/tos_mail_queue.c **** {
+ 1077              		.loc 1 228 1 is_stmt 1 view -0
+ 1078              		.cfi_startproc
+ 1079              		@ args = 0, pretend = 0, frame = 0
+ 1080              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1081              		.loc 1 228 1 is_stmt 0 view .LVU322
+ 1082 0000 08B5     		push	{r3, lr}
+ 1083              	.LCFI10:
+ 1084              		.cfi_def_cfa_offset 8
+ 1085              		.cfi_offset 3, -8
+ 1086              		.cfi_offset 14, -4
+ 229:..//kernel/core/tos_mail_queue.c ****     return mail_q_do_post(mail_q, mail_buf, mail_size, OPT_POST_ALL);
+ 1087              		.loc 1 229 5 is_stmt 1 view .LVU323
+ 1088              		.loc 1 229 12 is_stmt 0 view .LVU324
+ 1089 0002 0123     		movs	r3, #1
+ 1090 0004 FFF7FEFF 		bl	mail_q_do_post
+ 1091              	.LVL132:
+ 230:..//kernel/core/tos_mail_queue.c **** }
+ 1092              		.loc 1 230 1 view .LVU325
+ 1093 0008 08BD     		pop	{r3, pc}
+ 1094              		.cfi_endproc
+ 1095              	.LFE119:
+ 1097              		.text
+ 1098              	.Letext0:
+ 1099              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ 1100              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1101              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1102              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 1103              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1104              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 1105              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 1106              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 1107              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 1108              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1109              		.file 13 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 1110              		.file 14 "..//kernel/core/include/tos_ktypes.h"
+ 1111              		.file 15 "..//kernel/core/include/tos_task.h"
+ 1112              		.file 16 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 1113              		.file 17 "..//kernel/core/include/tos_list.h"
+ 1114              		.file 18 "..//kernel/core/include/tos_pend.h"
+ 1115              		.file 19 "..//kernel/core/include/tos_ring_queue.h"
+ 1116              		.file 20 "..//kernel/core/include/tos_mail_queue.h"
+ 1117              		.file 21 "..//kernel/core/include/tos_timer.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 33
+
+
+ 1118              		.file 22 "..//kernel/core/include/tos_mmheap.h"
+ 1119              		.file 23 "..//kernel/core/include/tos_sched.h"
+ 1120              		.file 24 "..//kernel/core/include/tos_global.h"
+ 1121              		.file 25 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ 1122              		.file 26 "<built-in>"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cciuptfd.s 			page 34
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_mail_queue.c
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:16     .text.mail_task_recv:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:23     .text.mail_task_recv:00000000 mail_task_recv
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:62     .text.mail_q_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:68     .text.mail_q_do_post:00000000 mail_q_do_post
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:255    .text.tos_mail_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:262    .text.tos_mail_q_create:00000000 tos_mail_q_create
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:344    .text.tos_mail_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:351    .text.tos_mail_q_destroy:00000000 tos_mail_q_destroy
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:508    .text.tos_mail_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:515    .text.tos_mail_q_create_dyn:00000000 tos_mail_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:597    .text.tos_mail_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:604    .text.tos_mail_q_destroy_dyn:00000000 tos_mail_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:761    .text.tos_mail_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:768    .text.tos_mail_q_flush:00000000 tos_mail_q_flush
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:833    .text.tos_mail_q_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:840    .text.tos_mail_q_pend:00000000 tos_mail_q_pend
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1031   .text.tos_mail_q_pend:000000c4 $d
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1036   .text.tos_mail_q_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1043   .text.tos_mail_q_post:00000000 tos_mail_q_post
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1067   .text.tos_mail_q_post_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cciuptfd.s:1074   .text.tos_mail_q_post_all:00000000 tos_mail_q_post_all
+
+UNDEFINED SYMBOLS
+memcpy
+pend_task_wakeup
+tos_cpu_cpsr_save
+pend_is_nopending
+tos_ring_q_enqueue
+tos_cpu_cpsr_restore
+knl_sched
+tos_ring_q_create
+pend_object_init
+tos_ring_q_destroy
+pend_wakeup_all
+pend_object_deinit
+tos_ring_q_create_dyn
+tos_ring_q_destroy_dyn
+tos_ring_q_flush
+knl_is_inirq
+tos_ring_q_dequeue
+knl_is_sched_locked
+pend_task_block
+pend_state2errno
+k_curr_task

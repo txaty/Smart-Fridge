@@ -1,0 +1,1344 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_event.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.event_is_match,"ax",%progbits
+  16              		.align	1
+  17              		.arch armv7-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	event_is_match:
+  24              	.LVL0:
+  25              	.LFB112:
+  26              		.file 1 "..//kernel/core/tos_event.c"
+   1:..//kernel/core/tos_event.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_event.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_event.c ****  * available.
+   4:..//kernel/core/tos_event.c ****  *
+   5:..//kernel/core/tos_event.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_event.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_event.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_event.c ****  *
+   9:..//kernel/core/tos_event.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_event.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_event.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_event.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_event.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_event.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_event.c ****  * within TencentOS.
+  16:..//kernel/core/tos_event.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_event.c **** 
+  18:..//kernel/core/tos_event.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_event.c **** 
+  20:..//kernel/core/tos_event.c **** #if TOS_CFG_EVENT_EN > 0
+  21:..//kernel/core/tos_event.c **** 
+  22:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_create(k_event_t *event, k_event_flag_t init_flag)
+  23:..//kernel/core/tos_event.c **** {
+  24:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+  25:..//kernel/core/tos_event.c **** 
+  26:..//kernel/core/tos_event.c ****     event->flag = init_flag;
+  27:..//kernel/core/tos_event.c ****     pend_object_init(&event->pend_obj);
+  28:..//kernel/core/tos_event.c ****     TOS_OBJ_INIT(event, KNL_OBJ_TYPE_EVENT);
+  29:..//kernel/core/tos_event.c **** 
+  30:..//kernel/core/tos_event.c ****     return K_ERR_NONE;
+  31:..//kernel/core/tos_event.c **** }
+  32:..//kernel/core/tos_event.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 2
+
+
+  33:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_destroy(k_event_t *event)
+  34:..//kernel/core/tos_event.c **** {
+  35:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+  36:..//kernel/core/tos_event.c **** 
+  37:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+  38:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+  39:..//kernel/core/tos_event.c **** 
+  40:..//kernel/core/tos_event.c ****     TOS_CPU_INT_DISABLE();
+  41:..//kernel/core/tos_event.c **** 
+  42:..//kernel/core/tos_event.c ****     pend_wakeup_all(&event->pend_obj, PEND_STATE_DESTROY);
+  43:..//kernel/core/tos_event.c **** 
+  44:..//kernel/core/tos_event.c ****     event->flag = (k_event_flag_t)0u;
+  45:..//kernel/core/tos_event.c **** 
+  46:..//kernel/core/tos_event.c ****     pend_object_deinit(&event->pend_obj);
+  47:..//kernel/core/tos_event.c **** 
+  48:..//kernel/core/tos_event.c ****     TOS_OBJ_DEINIT(event);
+  49:..//kernel/core/tos_event.c **** 
+  50:..//kernel/core/tos_event.c ****     TOS_CPU_INT_ENABLE();
+  51:..//kernel/core/tos_event.c ****     knl_sched();
+  52:..//kernel/core/tos_event.c **** 
+  53:..//kernel/core/tos_event.c ****     return K_ERR_NONE;
+  54:..//kernel/core/tos_event.c **** }
+  55:..//kernel/core/tos_event.c **** 
+  56:..//kernel/core/tos_event.c **** __STATIC__ int event_is_match(k_event_flag_t event, k_event_flag_t flag_expect, k_event_flag_t *fla
+  57:..//kernel/core/tos_event.c **** {
+  27              		.loc 1 57 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  58:..//kernel/core/tos_event.c ****     if (opt_pend & TOS_OPT_EVENT_PEND_ALL) {
+  32              		.loc 1 58 5 view .LVU1
+  33              		.loc 1 58 8 is_stmt 0 view .LVU2
+  34 0000 13F0020F 		tst	r3, #2
+  35 0004 07D0     		beq	.L2
+  59:..//kernel/core/tos_event.c ****         if ((event & flag_expect) == flag_expect) {
+  36              		.loc 1 59 9 is_stmt 1 view .LVU3
+  37              		.loc 1 59 12 is_stmt 0 view .LVU4
+  38 0006 31EA0003 		bics	r3, r1, r0
+  39              	.LVL1:
+  40              		.loc 1 59 12 view .LVU5
+  41 000a 01D0     		beq	.L7
+  60:..//kernel/core/tos_event.c ****             *flag_match = flag_expect;
+  61:..//kernel/core/tos_event.c ****             return K_TRUE;
+  62:..//kernel/core/tos_event.c ****         }
+  63:..//kernel/core/tos_event.c ****     } else if (opt_pend & TOS_OPT_EVENT_PEND_ANY) {
+  64:..//kernel/core/tos_event.c ****         if (event & flag_expect) {
+  65:..//kernel/core/tos_event.c ****             *flag_match = event & flag_expect;
+  66:..//kernel/core/tos_event.c ****             return K_TRUE;
+  67:..//kernel/core/tos_event.c ****         }
+  68:..//kernel/core/tos_event.c ****     }
+  69:..//kernel/core/tos_event.c ****     return K_FALSE;
+  42              		.loc 1 69 12 view .LVU6
+  43 000c 0020     		movs	r0, #0
+  44              	.LVL2:
+  45              		.loc 1 69 12 view .LVU7
+  46 000e 7047     		bx	lr
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 3
+
+
+  47              	.LVL3:
+  48              	.L7:
+  60:..//kernel/core/tos_event.c ****             *flag_match = flag_expect;
+  49              		.loc 1 60 13 is_stmt 1 view .LVU8
+  60:..//kernel/core/tos_event.c ****             *flag_match = flag_expect;
+  50              		.loc 1 60 25 is_stmt 0 view .LVU9
+  51 0010 1160     		str	r1, [r2]
+  61:..//kernel/core/tos_event.c ****         }
+  52              		.loc 1 61 13 is_stmt 1 view .LVU10
+  61:..//kernel/core/tos_event.c ****         }
+  53              		.loc 1 61 20 is_stmt 0 view .LVU11
+  54 0012 0120     		movs	r0, #1
+  55              	.LVL4:
+  61:..//kernel/core/tos_event.c ****         }
+  56              		.loc 1 61 20 view .LVU12
+  57 0014 7047     		bx	lr
+  58              	.LVL5:
+  59              	.L2:
+  63:..//kernel/core/tos_event.c ****         if (event & flag_expect) {
+  60              		.loc 1 63 12 is_stmt 1 view .LVU13
+  63:..//kernel/core/tos_event.c ****         if (event & flag_expect) {
+  61              		.loc 1 63 15 is_stmt 0 view .LVU14
+  62 0016 13F0010F 		tst	r3, #1
+  63 001a 06D0     		beq	.L5
+  64:..//kernel/core/tos_event.c ****             *flag_match = event & flag_expect;
+  64              		.loc 1 64 9 is_stmt 1 view .LVU15
+  64:..//kernel/core/tos_event.c ****             *flag_match = event & flag_expect;
+  65              		.loc 1 64 12 is_stmt 0 view .LVU16
+  66 001c 0840     		ands	r0, r0, r1
+  67              	.LVL6:
+  64:..//kernel/core/tos_event.c ****             *flag_match = event & flag_expect;
+  68              		.loc 1 64 12 view .LVU17
+  69 001e 01D1     		bne	.L8
+  70              		.loc 1 69 12 view .LVU18
+  71 0020 0020     		movs	r0, #0
+  70:..//kernel/core/tos_event.c **** }
+  72              		.loc 1 70 1 view .LVU19
+  73 0022 7047     		bx	lr
+  74              	.L8:
+  65:..//kernel/core/tos_event.c ****             return K_TRUE;
+  75              		.loc 1 65 13 is_stmt 1 view .LVU20
+  65:..//kernel/core/tos_event.c ****             return K_TRUE;
+  76              		.loc 1 65 25 is_stmt 0 view .LVU21
+  77 0024 1060     		str	r0, [r2]
+  66:..//kernel/core/tos_event.c ****         }
+  78              		.loc 1 66 13 is_stmt 1 view .LVU22
+  66:..//kernel/core/tos_event.c ****         }
+  79              		.loc 1 66 20 is_stmt 0 view .LVU23
+  80 0026 0120     		movs	r0, #1
+  81 0028 7047     		bx	lr
+  82              	.LVL7:
+  83              	.L5:
+  69:..//kernel/core/tos_event.c **** }
+  84              		.loc 1 69 12 view .LVU24
+  85 002a 0020     		movs	r0, #0
+  86              	.LVL8:
+  69:..//kernel/core/tos_event.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 4
+
+
+  87              		.loc 1 69 12 view .LVU25
+  88 002c 7047     		bx	lr
+  89              		.cfi_endproc
+  90              	.LFE112:
+  92              		.section	.text.event_do_post,"ax",%progbits
+  93              		.align	1
+  94              		.syntax unified
+  95              		.thumb
+  96              		.thumb_func
+  97              		.fpu softvfp
+  99              	event_do_post:
+ 100              	.LVL9:
+ 101              	.LFB114:
+  71:..//kernel/core/tos_event.c **** 
+  72:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_pend(k_event_t *event, k_event_flag_t flag_expect, k_event_flag_t *flag_m
+  73:..//kernel/core/tos_event.c **** {
+  74:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+  75:..//kernel/core/tos_event.c **** 
+  76:..//kernel/core/tos_event.c ****     TOS_IN_IRQ_CHECK();
+  77:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+  78:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(flag_match);
+  79:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+  80:..//kernel/core/tos_event.c **** 
+  81:..//kernel/core/tos_event.c ****     if (!(opt_pend & TOS_OPT_EVENT_PEND_ALL) && !(opt_pend & TOS_OPT_EVENT_PEND_ANY)) {
+  82:..//kernel/core/tos_event.c ****         return K_ERR_EVENT_PEND_OPT_INVALID;
+  83:..//kernel/core/tos_event.c ****     }
+  84:..//kernel/core/tos_event.c **** 
+  85:..//kernel/core/tos_event.c ****     if ((opt_pend & TOS_OPT_EVENT_PEND_ALL) && (opt_pend & TOS_OPT_EVENT_PEND_ANY)) {
+  86:..//kernel/core/tos_event.c ****         return K_ERR_EVENT_PEND_OPT_INVALID;
+  87:..//kernel/core/tos_event.c ****     }
+  88:..//kernel/core/tos_event.c **** 
+  89:..//kernel/core/tos_event.c ****     TOS_CPU_INT_DISABLE();
+  90:..//kernel/core/tos_event.c **** 
+  91:..//kernel/core/tos_event.c ****     if (event_is_match(event->flag, flag_expect, flag_match, opt_pend)) {
+  92:..//kernel/core/tos_event.c ****         if (opt_pend & TOS_OPT_EVENT_PEND_CLR) { // destroy the bridge after get across the river
+  93:..//kernel/core/tos_event.c ****             event->flag = (k_event_flag_t)0u;
+  94:..//kernel/core/tos_event.c ****         }
+  95:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+  96:..//kernel/core/tos_event.c ****         return K_ERR_NONE;
+  97:..//kernel/core/tos_event.c ****     }
+  98:..//kernel/core/tos_event.c **** 
+  99:..//kernel/core/tos_event.c ****     if (timeout == TOS_TIME_NOWAIT) {
+ 100:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 101:..//kernel/core/tos_event.c ****         return K_ERR_PEND_NOWAIT;
+ 102:..//kernel/core/tos_event.c ****     }
+ 103:..//kernel/core/tos_event.c **** 
+ 104:..//kernel/core/tos_event.c ****     if (knl_is_sched_locked()) {
+ 105:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 106:..//kernel/core/tos_event.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 107:..//kernel/core/tos_event.c ****     }
+ 108:..//kernel/core/tos_event.c **** 
+ 109:..//kernel/core/tos_event.c ****     k_curr_task->flag_expect      = flag_expect;
+ 110:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = flag_match;
+ 111:..//kernel/core/tos_event.c ****     k_curr_task->opt_event_pend   = opt_pend;
+ 112:..//kernel/core/tos_event.c **** 
+ 113:..//kernel/core/tos_event.c ****     pend_task_block(k_curr_task, &event->pend_obj, timeout);
+ 114:..//kernel/core/tos_event.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 5
+
+
+ 115:..//kernel/core/tos_event.c ****     TOS_CPU_INT_ENABLE();
+ 116:..//kernel/core/tos_event.c ****     knl_sched();
+ 117:..//kernel/core/tos_event.c **** 
+ 118:..//kernel/core/tos_event.c ****     k_curr_task->flag_expect      = (k_event_flag_t)0u;
+ 119:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = (k_event_flag_t *)K_NULL;
+ 120:..//kernel/core/tos_event.c ****     k_curr_task->opt_event_pend   = (k_opt_t)0u;
+ 121:..//kernel/core/tos_event.c **** 
+ 122:..//kernel/core/tos_event.c ****     return pend_state2errno(k_curr_task->pend_state);
+ 123:..//kernel/core/tos_event.c **** }
+ 124:..//kernel/core/tos_event.c **** 
+ 125:..//kernel/core/tos_event.c **** __STATIC__ k_err_t event_do_post(k_event_t *event, k_event_flag_t flag, opt_event_post_t opt_post)
+ 126:..//kernel/core/tos_event.c **** {
+ 102              		.loc 1 126 1 is_stmt 1 view -0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+ 106              		.loc 1 127 5 view .LVU27
+ 128:..//kernel/core/tos_event.c ****     k_task_t *task, *tmp;
+ 107              		.loc 1 128 5 view .LVU28
+ 129:..//kernel/core/tos_event.c **** 
+ 130:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 108              		.loc 1 130 5 view .LVU29
+ 109              		.loc 1 130 5 view .LVU30
+ 110 0000 0028     		cmp	r0, #0
+ 111 0002 39D0     		beq	.L17
+ 126:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+ 112              		.loc 1 126 1 is_stmt 0 view .LVU31
+ 113 0004 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 114              	.LCFI0:
+ 115              		.cfi_def_cfa_offset 24
+ 116              		.cfi_offset 3, -24
+ 117              		.cfi_offset 4, -20
+ 118              		.cfi_offset 5, -16
+ 119              		.cfi_offset 6, -12
+ 120              		.cfi_offset 7, -8
+ 121              		.cfi_offset 14, -4
+ 122 0006 0646     		mov	r6, r0
+ 131:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 123              		.loc 1 131 5 is_stmt 1 view .LVU32
+ 124              		.loc 1 131 5 view .LVU33
+ 125              	.LVL10:
+ 126              	.LBB12:
+ 127              	.LBI12:
+ 128              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 6
+
+
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 7
+
+
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ 100:..//kernel/core/include/tos_sys.h **** 
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 8
+
+
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 129              		.loc 2 182 31 view .LVU34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 9
+
+
+ 130              	.LBB13:
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 131              		.loc 2 184 5 view .LVU35
+ 132              		.loc 2 184 19 is_stmt 0 view .LVU36
+ 133 0008 4088     		ldrh	r0, [r0, #2]
+ 134              	.LVL11:
+ 135              		.loc 2 184 19 view .LVU37
+ 136              	.LBE13:
+ 137              	.LBE12:
+ 138              		.loc 1 131 5 view .LVU38
+ 139 000a 43F6EE33 		movw	r3, #15342
+ 140 000e 9842     		cmp	r0, r3
+ 141 0010 35D1     		bne	.L18
+ 132:..//kernel/core/tos_event.c **** 
+ 133:..//kernel/core/tos_event.c ****     if (opt_post == OPT_EVENT_POST_KEP) {
+ 142              		.loc 1 133 5 is_stmt 1 view .LVU39
+ 143              		.loc 1 133 8 is_stmt 0 view .LVU40
+ 144 0012 52B9     		cbnz	r2, .L11
+ 134:..//kernel/core/tos_event.c ****         event->flag |= flag;
+ 145              		.loc 1 134 9 is_stmt 1 view .LVU41
+ 146              		.loc 1 134 21 is_stmt 0 view .LVU42
+ 147 0014 F368     		ldr	r3, [r6, #12]
+ 148 0016 1943     		orrs	r1, r1, r3
+ 149              	.LVL12:
+ 150              		.loc 1 134 21 view .LVU43
+ 151 0018 F160     		str	r1, [r6, #12]
+ 152              	.L12:
+ 135:..//kernel/core/tos_event.c ****     } else {
+ 136:..//kernel/core/tos_event.c ****         event->flag = flag;
+ 137:..//kernel/core/tos_event.c ****     }
+ 138:..//kernel/core/tos_event.c **** 
+ 139:..//kernel/core/tos_event.c ****     TOS_CPU_INT_DISABLE();
+ 153              		.loc 1 139 5 is_stmt 1 view .LVU44
+ 154              		.loc 1 139 5 view .LVU45
+ 155 001a FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 156              	.LVL13:
+ 157              		.loc 1 139 5 is_stmt 0 view .LVU46
+ 158 001e 0746     		mov	r7, r0
+ 159              	.LVL14:
+ 140:..//kernel/core/tos_event.c **** 
+ 141:..//kernel/core/tos_event.c ****     TOS_LIST_FOR_EACH_ENTRY_SAFE(task, tmp, k_task_t, pend_list, &event->pend_obj.list) {
+ 160              		.loc 1 141 5 is_stmt 1 view .LVU47
+ 161 0020 7468     		ldr	r4, [r6, #4]
+ 162              	.LVL15:
+ 163              		.loc 1 141 5 is_stmt 0 view .LVU48
+ 164 0022 54F85059 		ldr	r5, [r4], #-80
+ 165              	.LVL16:
+ 166              		.loc 1 141 5 view .LVU49
+ 167 0026 503D     		subs	r5, r5, #80
+ 168              	.LVL17:
+ 169              		.loc 1 141 5 view .LVU50
+ 170 0028 05E0     		b	.L13
+ 171              	.LVL18:
+ 172              	.L11:
+ 136:..//kernel/core/tos_event.c ****     }
+ 173              		.loc 1 136 9 is_stmt 1 view .LVU51
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 10
+
+
+ 136:..//kernel/core/tos_event.c ****     }
+ 174              		.loc 1 136 21 is_stmt 0 view .LVU52
+ 175 002a F160     		str	r1, [r6, #12]
+ 176 002c F5E7     		b	.L12
+ 177              	.LVL19:
+ 178              	.L14:
+ 179              		.loc 1 141 5 discriminator 2 view .LVU53
+ 180 002e 2B6D     		ldr	r3, [r5, #80]
+ 181              	.LVL20:
+ 182              		.loc 1 141 5 discriminator 2 view .LVU54
+ 183 0030 2C46     		mov	r4, r5
+ 184 0032 A3F15005 		sub	r5, r3, #80
+ 185              	.LVL21:
+ 186              	.L13:
+ 187              		.loc 1 141 5 discriminator 1 view .LVU55
+ 188 0036 04F15003 		add	r3, r4, #80
+ 189 003a 321D     		adds	r2, r6, #4
+ 190 003c 9342     		cmp	r3, r2
+ 191 003e 14D0     		beq	.L15
+ 142:..//kernel/core/tos_event.c ****         if (event_is_match(event->flag, task->flag_expect, task->flag_match, task->opt_event_pend))
+ 192              		.loc 1 142 9 is_stmt 1 view .LVU56
+ 193              		.loc 1 142 13 is_stmt 0 view .LVU57
+ 194 0040 B4F87830 		ldrh	r3, [r4, #120]
+ 195 0044 D4F88020 		ldr	r2, [r4, #128]
+ 196 0048 E16F     		ldr	r1, [r4, #124]
+ 197 004a F068     		ldr	r0, [r6, #12]
+ 198 004c FFF7FEFF 		bl	event_is_match
+ 199              	.LVL22:
+ 200              		.loc 1 142 12 view .LVU58
+ 201 0050 0028     		cmp	r0, #0
+ 202 0052 ECD0     		beq	.L14
+ 143:..//kernel/core/tos_event.c ****             pend_task_wakeup(task, PEND_STATE_POST);
+ 203              		.loc 1 143 13 is_stmt 1 view .LVU59
+ 204 0054 0121     		movs	r1, #1
+ 205 0056 2046     		mov	r0, r4
+ 206 0058 FFF7FEFF 		bl	pend_task_wakeup
+ 207              	.LVL23:
+ 144:..//kernel/core/tos_event.c **** 
+ 145:..//kernel/core/tos_event.c ****             // if anyone pending the event has set the TOS_OPT_EVENT_PEND_CLR, then no wakeup for t
+ 146:..//kernel/core/tos_event.c ****             if (task->opt_event_pend & TOS_OPT_EVENT_PEND_CLR) {
+ 208              		.loc 1 146 13 view .LVU60
+ 209              		.loc 1 146 21 is_stmt 0 view .LVU61
+ 210 005c B4F87830 		ldrh	r3, [r4, #120]
+ 211              		.loc 1 146 16 view .LVU62
+ 212 0060 13F0040F 		tst	r3, #4
+ 213 0064 E3D0     		beq	.L14
+ 147:..//kernel/core/tos_event.c ****                 event->flag = (k_event_flag_t)0u;
+ 214              		.loc 1 147 17 is_stmt 1 view .LVU63
+ 215              		.loc 1 147 29 is_stmt 0 view .LVU64
+ 216 0066 0023     		movs	r3, #0
+ 217 0068 F360     		str	r3, [r6, #12]
+ 148:..//kernel/core/tos_event.c ****                 break;
+ 218              		.loc 1 148 17 is_stmt 1 view .LVU65
+ 219              	.L15:
+ 149:..//kernel/core/tos_event.c ****             }
+ 150:..//kernel/core/tos_event.c ****         }
+ 151:..//kernel/core/tos_event.c ****     }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 11
+
+
+ 152:..//kernel/core/tos_event.c **** 
+ 153:..//kernel/core/tos_event.c ****     TOS_CPU_INT_ENABLE();
+ 220              		.loc 1 153 5 view .LVU66
+ 221              		.loc 1 153 5 view .LVU67
+ 222 006a 3846     		mov	r0, r7
+ 223 006c FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 224              	.LVL24:
+ 154:..//kernel/core/tos_event.c ****     knl_sched();
+ 225              		.loc 1 154 5 view .LVU68
+ 226 0070 FFF7FEFF 		bl	knl_sched
+ 227              	.LVL25:
+ 155:..//kernel/core/tos_event.c **** 
+ 156:..//kernel/core/tos_event.c ****     return K_ERR_NONE;
+ 228              		.loc 1 156 5 view .LVU69
+ 229              		.loc 1 156 12 is_stmt 0 view .LVU70
+ 230 0074 0020     		movs	r0, #0
+ 231              	.LVL26:
+ 232              	.L10:
+ 157:..//kernel/core/tos_event.c **** }
+ 233              		.loc 1 157 1 view .LVU71
+ 234 0076 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 235              	.LVL27:
+ 236              	.L17:
+ 237              	.LCFI1:
+ 238              		.cfi_def_cfa_offset 0
+ 239              		.cfi_restore 3
+ 240              		.cfi_restore 4
+ 241              		.cfi_restore 5
+ 242              		.cfi_restore 6
+ 243              		.cfi_restore 7
+ 244              		.cfi_restore 14
+ 130:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 245              		.loc 1 130 5 view .LVU72
+ 246 0078 40F24C40 		movw	r0, #1100
+ 247              	.LVL28:
+ 248              		.loc 1 157 1 view .LVU73
+ 249 007c 7047     		bx	lr
+ 250              	.LVL29:
+ 251              	.L18:
+ 252              	.LCFI2:
+ 253              		.cfi_def_cfa_offset 24
+ 254              		.cfi_offset 3, -24
+ 255              		.cfi_offset 4, -20
+ 256              		.cfi_offset 5, -16
+ 257              		.cfi_offset 6, -12
+ 258              		.cfi_offset 7, -8
+ 259              		.cfi_offset 14, -4
+ 131:..//kernel/core/tos_event.c **** 
+ 260              		.loc 1 131 5 view .LVU74
+ 261 007e 40F24D40 		movw	r0, #1101
+ 262 0082 F8E7     		b	.L10
+ 263              		.cfi_endproc
+ 264              	.LFE114:
+ 266              		.section	.text.tos_event_create,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	tos_event_create
+ 269              		.syntax unified
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 12
+
+
+ 270              		.thumb
+ 271              		.thumb_func
+ 272              		.fpu softvfp
+ 274              	tos_event_create:
+ 275              	.LVL30:
+ 276              	.LFB110:
+  23:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 277              		.loc 1 23 1 is_stmt 1 view -0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 0
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+  24:..//kernel/core/tos_event.c **** 
+ 281              		.loc 1 24 5 view .LVU76
+  24:..//kernel/core/tos_event.c **** 
+ 282              		.loc 1 24 5 view .LVU77
+ 283 0000 50B1     		cbz	r0, .L25
+  23:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 284              		.loc 1 23 1 is_stmt 0 view .LVU78
+ 285 0002 10B5     		push	{r4, lr}
+ 286              	.LCFI3:
+ 287              		.cfi_def_cfa_offset 8
+ 288              		.cfi_offset 4, -8
+ 289              		.cfi_offset 14, -4
+ 290 0004 0446     		mov	r4, r0
+  26:..//kernel/core/tos_event.c ****     pend_object_init(&event->pend_obj);
+ 291              		.loc 1 26 5 is_stmt 1 view .LVU79
+  26:..//kernel/core/tos_event.c ****     pend_object_init(&event->pend_obj);
+ 292              		.loc 1 26 17 is_stmt 0 view .LVU80
+ 293 0006 C160     		str	r1, [r0, #12]
+  27:..//kernel/core/tos_event.c ****     TOS_OBJ_INIT(event, KNL_OBJ_TYPE_EVENT);
+ 294              		.loc 1 27 5 is_stmt 1 view .LVU81
+ 295 0008 0430     		adds	r0, r0, #4
+ 296              	.LVL31:
+  27:..//kernel/core/tos_event.c ****     TOS_OBJ_INIT(event, KNL_OBJ_TYPE_EVENT);
+ 297              		.loc 1 27 5 is_stmt 0 view .LVU82
+ 298 000a FFF7FEFF 		bl	pend_object_init
+ 299              	.LVL32:
+  28:..//kernel/core/tos_event.c **** 
+ 300              		.loc 1 28 5 is_stmt 1 view .LVU83
+ 301              	.LBB14:
+ 302              	.LBI14:
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 303              		.loc 2 187 32 view .LVU84
+ 304              	.LBB15:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+ 305              		.loc 2 189 5 view .LVU85
+ 306              		.loc 2 189 19 is_stmt 0 view .LVU86
+ 307 000e 43F6EE33 		movw	r3, #15342
+ 308 0012 6380     		strh	r3, [r4, #2]	@ movhi
+ 309              	.LVL33:
+ 310              		.loc 2 189 19 view .LVU87
+ 311              	.LBE15:
+ 312              	.LBE14:
+  30:..//kernel/core/tos_event.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 13
+
+
+ 313              		.loc 1 30 5 is_stmt 1 view .LVU88
+  30:..//kernel/core/tos_event.c **** }
+ 314              		.loc 1 30 12 is_stmt 0 view .LVU89
+ 315 0014 0020     		movs	r0, #0
+  31:..//kernel/core/tos_event.c **** 
+ 316              		.loc 1 31 1 view .LVU90
+ 317 0016 10BD     		pop	{r4, pc}
+ 318              	.LVL34:
+ 319              	.L25:
+ 320              	.LCFI4:
+ 321              		.cfi_def_cfa_offset 0
+ 322              		.cfi_restore 4
+ 323              		.cfi_restore 14
+  24:..//kernel/core/tos_event.c **** 
+ 324              		.loc 1 24 5 view .LVU91
+ 325 0018 40F24C40 		movw	r0, #1100
+ 326              	.LVL35:
+  31:..//kernel/core/tos_event.c **** 
+ 327              		.loc 1 31 1 view .LVU92
+ 328 001c 7047     		bx	lr
+ 329              		.cfi_endproc
+ 330              	.LFE110:
+ 332              		.section	.text.tos_event_destroy,"ax",%progbits
+ 333              		.align	1
+ 334              		.global	tos_event_destroy
+ 335              		.syntax unified
+ 336              		.thumb
+ 337              		.thumb_func
+ 338              		.fpu softvfp
+ 340              	tos_event_destroy:
+ 341              	.LVL36:
+ 342              	.LFB111:
+  34:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+ 343              		.loc 1 34 1 is_stmt 1 view -0
+ 344              		.cfi_startproc
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+  35:..//kernel/core/tos_event.c **** 
+ 347              		.loc 1 35 5 view .LVU94
+  37:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 348              		.loc 1 37 5 view .LVU95
+  37:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 349              		.loc 1 37 5 view .LVU96
+ 350 0000 F0B1     		cbz	r0, .L32
+  34:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+ 351              		.loc 1 34 1 is_stmt 0 view .LVU97
+ 352 0002 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 353              	.LCFI5:
+ 354              		.cfi_def_cfa_offset 24
+ 355              		.cfi_offset 3, -24
+ 356              		.cfi_offset 4, -20
+ 357              		.cfi_offset 5, -16
+ 358              		.cfi_offset 6, -12
+ 359              		.cfi_offset 7, -8
+ 360              		.cfi_offset 14, -4
+ 361 0004 0446     		mov	r4, r0
+  38:..//kernel/core/tos_event.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 14
+
+
+ 362              		.loc 1 38 5 is_stmt 1 view .LVU98
+  38:..//kernel/core/tos_event.c **** 
+ 363              		.loc 1 38 5 view .LVU99
+ 364              	.LVL37:
+ 365              	.LBB16:
+ 366              	.LBI16:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 367              		.loc 2 182 31 view .LVU100
+ 368              	.LBB17:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 369              		.loc 2 184 5 view .LVU101
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 370              		.loc 2 184 19 is_stmt 0 view .LVU102
+ 371 0006 4188     		ldrh	r1, [r0, #2]
+ 372              	.LVL38:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 373              		.loc 2 184 19 view .LVU103
+ 374              	.LBE17:
+ 375              	.LBE16:
+  38:..//kernel/core/tos_event.c **** 
+ 376              		.loc 1 38 5 view .LVU104
+ 377 0008 43F6EE32 		movw	r2, #15342
+ 378 000c 9142     		cmp	r1, r2
+ 379 000e 02D0     		beq	.L38
+ 380 0010 40F24D40 		movw	r0, #1101
+ 381              	.LVL39:
+ 382              	.L31:
+  54:..//kernel/core/tos_event.c **** 
+ 383              		.loc 1 54 1 view .LVU105
+ 384 0014 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 385              	.LVL40:
+ 386              	.L38:
+  40:..//kernel/core/tos_event.c **** 
+ 387              		.loc 1 40 5 is_stmt 1 view .LVU106
+  40:..//kernel/core/tos_event.c **** 
+ 388              		.loc 1 40 5 view .LVU107
+ 389 0016 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 390              	.LVL41:
+  40:..//kernel/core/tos_event.c **** 
+ 391              		.loc 1 40 5 is_stmt 0 view .LVU108
+ 392 001a 0746     		mov	r7, r0
+ 393              	.LVL42:
+  42:..//kernel/core/tos_event.c **** 
+ 394              		.loc 1 42 5 is_stmt 1 view .LVU109
+ 395 001c 261D     		adds	r6, r4, #4
+ 396 001e 0321     		movs	r1, #3
+ 397 0020 3046     		mov	r0, r6
+ 398              	.LVL43:
+  42:..//kernel/core/tos_event.c **** 
+ 399              		.loc 1 42 5 is_stmt 0 view .LVU110
+ 400 0022 FFF7FEFF 		bl	pend_wakeup_all
+ 401              	.LVL44:
+  44:..//kernel/core/tos_event.c **** 
+ 402              		.loc 1 44 5 is_stmt 1 view .LVU111
+  44:..//kernel/core/tos_event.c **** 
+ 403              		.loc 1 44 17 is_stmt 0 view .LVU112
+ 404 0026 0025     		movs	r5, #0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 15
+
+
+ 405 0028 E560     		str	r5, [r4, #12]
+  46:..//kernel/core/tos_event.c **** 
+ 406              		.loc 1 46 5 is_stmt 1 view .LVU113
+ 407 002a 3046     		mov	r0, r6
+ 408 002c FFF7FEFF 		bl	pend_object_deinit
+ 409              	.LVL45:
+  48:..//kernel/core/tos_event.c **** 
+ 410              		.loc 1 48 5 view .LVU114
+ 411              	.LBB18:
+ 412              	.LBI18:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 413              		.loc 2 192 32 view .LVU115
+ 414              	.LBB19:
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 415              		.loc 2 194 5 view .LVU116
+ 416              		.loc 2 194 19 is_stmt 0 view .LVU117
+ 417 0030 6580     		strh	r5, [r4, #2]	@ movhi
+ 418              	.LVL46:
+ 419              		.loc 2 194 19 view .LVU118
+ 420              	.LBE19:
+ 421              	.LBE18:
+  50:..//kernel/core/tos_event.c ****     knl_sched();
+ 422              		.loc 1 50 5 is_stmt 1 view .LVU119
+  50:..//kernel/core/tos_event.c ****     knl_sched();
+ 423              		.loc 1 50 5 view .LVU120
+ 424 0032 3846     		mov	r0, r7
+ 425 0034 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 426              	.LVL47:
+  51:..//kernel/core/tos_event.c **** 
+ 427              		.loc 1 51 5 view .LVU121
+ 428 0038 FFF7FEFF 		bl	knl_sched
+ 429              	.LVL48:
+  53:..//kernel/core/tos_event.c **** }
+ 430              		.loc 1 53 5 view .LVU122
+  53:..//kernel/core/tos_event.c **** }
+ 431              		.loc 1 53 12 is_stmt 0 view .LVU123
+ 432 003c 2846     		mov	r0, r5
+ 433 003e E9E7     		b	.L31
+ 434              	.LVL49:
+ 435              	.L32:
+ 436              	.LCFI6:
+ 437              		.cfi_def_cfa_offset 0
+ 438              		.cfi_restore 3
+ 439              		.cfi_restore 4
+ 440              		.cfi_restore 5
+ 441              		.cfi_restore 6
+ 442              		.cfi_restore 7
+ 443              		.cfi_restore 14
+  37:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 444              		.loc 1 37 5 view .LVU124
+ 445 0040 40F24C40 		movw	r0, #1100
+ 446              	.LVL50:
+  54:..//kernel/core/tos_event.c **** 
+ 447              		.loc 1 54 1 view .LVU125
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 16
+
+
+ 448 0044 7047     		bx	lr
+ 449              		.cfi_endproc
+ 450              	.LFE111:
+ 452              		.section	.text.tos_event_pend,"ax",%progbits
+ 453              		.align	1
+ 454              		.global	tos_event_pend
+ 455              		.syntax unified
+ 456              		.thumb
+ 457              		.thumb_func
+ 458              		.fpu softvfp
+ 460              	tos_event_pend:
+ 461              	.LVL51:
+ 462              	.LFB113:
+  73:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+ 463              		.loc 1 73 1 is_stmt 1 view -0
+ 464              		.cfi_startproc
+ 465              		@ args = 12, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+  73:..//kernel/core/tos_event.c ****     TOS_CPU_CPSR_ALLOC();
+ 467              		.loc 1 73 1 is_stmt 0 view .LVU127
+ 468 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 469              	.LCFI7:
+ 470              		.cfi_def_cfa_offset 32
+ 471              		.cfi_offset 3, -32
+ 472              		.cfi_offset 4, -28
+ 473              		.cfi_offset 5, -24
+ 474              		.cfi_offset 6, -20
+ 475              		.cfi_offset 7, -16
+ 476              		.cfi_offset 8, -12
+ 477              		.cfi_offset 9, -8
+ 478              		.cfi_offset 14, -4
+ 479 0004 0446     		mov	r4, r0
+ 480 0006 0F46     		mov	r7, r1
+ 481 0008 1646     		mov	r6, r2
+ 482 000a BDF82850 		ldrh	r5, [sp, #40]
+  74:..//kernel/core/tos_event.c **** 
+ 483              		.loc 1 74 5 is_stmt 1 view .LVU128
+ 484              	.LVL52:
+  76:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 485              		.loc 1 76 5 view .LVU129
+  76:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 486              		.loc 1 76 5 view .LVU130
+ 487 000e FFF7FEFF 		bl	knl_is_inirq
+ 488              	.LVL53:
+  76:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 489              		.loc 1 76 5 is_stmt 0 view .LVU131
+ 490 0012 0028     		cmp	r0, #0
+ 491 0014 54D1     		bne	.L45
+  77:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(flag_match);
+ 492              		.loc 1 77 5 is_stmt 1 view .LVU132
+  77:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(flag_match);
+ 493              		.loc 1 77 5 view .LVU133
+ 494 0016 002C     		cmp	r4, #0
+ 495 0018 55D0     		beq	.L46
+  78:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 496              		.loc 1 78 5 view .LVU134
+  78:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 17
+
+
+ 497              		.loc 1 78 5 view .LVU135
+ 498 001a 002E     		cmp	r6, #0
+ 499 001c 56D0     		beq	.L47
+  79:..//kernel/core/tos_event.c **** 
+ 500              		.loc 1 79 5 view .LVU136
+  79:..//kernel/core/tos_event.c **** 
+ 501              		.loc 1 79 5 view .LVU137
+ 502              	.LVL54:
+ 503              	.LBB20:
+ 504              	.LBI20:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 505              		.loc 2 182 31 view .LVU138
+ 506              	.LBB21:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 507              		.loc 2 184 5 view .LVU139
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 508              		.loc 2 184 19 is_stmt 0 view .LVU140
+ 509 001e 6288     		ldrh	r2, [r4, #2]
+ 510              	.LVL55:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 511              		.loc 2 184 19 view .LVU141
+ 512              	.LBE21:
+ 513              	.LBE20:
+  79:..//kernel/core/tos_event.c **** 
+ 514              		.loc 1 79 5 view .LVU142
+ 515 0020 43F6EE33 		movw	r3, #15342
+ 516 0024 9A42     		cmp	r2, r3
+ 517 0026 54D1     		bne	.L48
+  81:..//kernel/core/tos_event.c ****         return K_ERR_EVENT_PEND_OPT_INVALID;
+ 518              		.loc 1 81 5 is_stmt 1 view .LVU143
+  81:..//kernel/core/tos_event.c ****         return K_ERR_EVENT_PEND_OPT_INVALID;
+ 519              		.loc 1 81 8 is_stmt 0 view .LVU144
+ 520 0028 15F00303 		ands	r3, r5, #3
+ 521 002c 55D0     		beq	.L49
+  85:..//kernel/core/tos_event.c ****         return K_ERR_EVENT_PEND_OPT_INVALID;
+ 522              		.loc 1 85 5 is_stmt 1 view .LVU145
+  85:..//kernel/core/tos_event.c ****         return K_ERR_EVENT_PEND_OPT_INVALID;
+ 523              		.loc 1 85 8 is_stmt 0 view .LVU146
+ 524 002e 032B     		cmp	r3, #3
+ 525 0030 55D0     		beq	.L50
+  89:..//kernel/core/tos_event.c **** 
+ 526              		.loc 1 89 5 is_stmt 1 view .LVU147
+  89:..//kernel/core/tos_event.c **** 
+ 527              		.loc 1 89 5 view .LVU148
+ 528 0032 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 529              	.LVL56:
+ 530 0036 8046     		mov	r8, r0
+ 531              	.LVL57:
+  91:..//kernel/core/tos_event.c ****         if (opt_pend & TOS_OPT_EVENT_PEND_CLR) { // destroy the bridge after get across the river
+ 532              		.loc 1 91 5 view .LVU149
+  91:..//kernel/core/tos_event.c ****         if (opt_pend & TOS_OPT_EVENT_PEND_CLR) { // destroy the bridge after get across the river
+ 533              		.loc 1 91 9 is_stmt 0 view .LVU150
+ 534 0038 2B46     		mov	r3, r5
+ 535 003a 3246     		mov	r2, r6
+ 536 003c 3946     		mov	r1, r7
+ 537 003e E068     		ldr	r0, [r4, #12]
+ 538              	.LVL58:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 18
+
+
+  91:..//kernel/core/tos_event.c ****         if (opt_pend & TOS_OPT_EVENT_PEND_CLR) { // destroy the bridge after get across the river
+ 539              		.loc 1 91 9 view .LVU151
+ 540 0040 FFF7FEFF 		bl	event_is_match
+ 541              	.LVL59:
+  91:..//kernel/core/tos_event.c ****         if (opt_pend & TOS_OPT_EVENT_PEND_CLR) { // destroy the bridge after get across the river
+ 542              		.loc 1 91 8 view .LVU152
+ 543 0044 30BB     		cbnz	r0, .L52
+  99:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 544              		.loc 1 99 5 is_stmt 1 view .LVU153
+  99:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 545              		.loc 1 99 8 is_stmt 0 view .LVU154
+ 546 0046 DDE90823 		ldrd	r2, [sp, #32]
+ 547 004a 1343     		orrs	r3, r2, r3
+ 548 004c 2CD0     		beq	.L53
+ 104:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 549              		.loc 1 104 5 is_stmt 1 view .LVU155
+ 104:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 550              		.loc 1 104 9 is_stmt 0 view .LVU156
+ 551 004e FFF7FEFF 		bl	knl_is_sched_locked
+ 552              	.LVL60:
+ 104:..//kernel/core/tos_event.c ****         TOS_CPU_INT_ENABLE();
+ 553              		.loc 1 104 8 view .LVU157
+ 554 0052 78BB     		cbnz	r0, .L54
+ 109:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = flag_match;
+ 555              		.loc 1 109 5 is_stmt 1 view .LVU158
+ 109:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = flag_match;
+ 556              		.loc 1 109 16 is_stmt 0 view .LVU159
+ 557 0054 DFF88C90 		ldr	r9, .L55
+ 558 0058 D9F80000 		ldr	r0, [r9]
+ 109:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = flag_match;
+ 559              		.loc 1 109 35 view .LVU160
+ 560 005c C767     		str	r7, [r0, #124]
+ 110:..//kernel/core/tos_event.c ****     k_curr_task->opt_event_pend   = opt_pend;
+ 561              		.loc 1 110 5 is_stmt 1 view .LVU161
+ 110:..//kernel/core/tos_event.c ****     k_curr_task->opt_event_pend   = opt_pend;
+ 562              		.loc 1 110 35 is_stmt 0 view .LVU162
+ 563 005e C0F88060 		str	r6, [r0, #128]
+ 111:..//kernel/core/tos_event.c **** 
+ 564              		.loc 1 111 5 is_stmt 1 view .LVU163
+ 111:..//kernel/core/tos_event.c **** 
+ 565              		.loc 1 111 35 is_stmt 0 view .LVU164
+ 566 0062 A0F87850 		strh	r5, [r0, #120]	@ movhi
+ 113:..//kernel/core/tos_event.c **** 
+ 567              		.loc 1 113 5 is_stmt 1 view .LVU165
+ 568 0066 DDE90823 		ldrd	r2, [sp, #32]
+ 569 006a 211D     		adds	r1, r4, #4
+ 570 006c FFF7FEFF 		bl	pend_task_block
+ 571              	.LVL61:
+ 115:..//kernel/core/tos_event.c ****     knl_sched();
+ 572              		.loc 1 115 5 view .LVU166
+ 115:..//kernel/core/tos_event.c ****     knl_sched();
+ 573              		.loc 1 115 5 view .LVU167
+ 574 0070 4046     		mov	r0, r8
+ 575 0072 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 576              	.LVL62:
+ 116:..//kernel/core/tos_event.c **** 
+ 577              		.loc 1 116 5 view .LVU168
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 19
+
+
+ 578 0076 FFF7FEFF 		bl	knl_sched
+ 579              	.LVL63:
+ 118:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = (k_event_flag_t *)K_NULL;
+ 580              		.loc 1 118 5 view .LVU169
+ 118:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = (k_event_flag_t *)K_NULL;
+ 581              		.loc 1 118 16 is_stmt 0 view .LVU170
+ 582 007a D9F80030 		ldr	r3, [r9]
+ 118:..//kernel/core/tos_event.c ****     k_curr_task->flag_match       = (k_event_flag_t *)K_NULL;
+ 583              		.loc 1 118 35 view .LVU171
+ 584 007e 0022     		movs	r2, #0
+ 585 0080 DA67     		str	r2, [r3, #124]
+ 119:..//kernel/core/tos_event.c ****     k_curr_task->opt_event_pend   = (k_opt_t)0u;
+ 586              		.loc 1 119 5 is_stmt 1 view .LVU172
+ 119:..//kernel/core/tos_event.c ****     k_curr_task->opt_event_pend   = (k_opt_t)0u;
+ 587              		.loc 1 119 35 is_stmt 0 view .LVU173
+ 588 0082 C3F88020 		str	r2, [r3, #128]
+ 120:..//kernel/core/tos_event.c **** 
+ 589              		.loc 1 120 5 is_stmt 1 view .LVU174
+ 120:..//kernel/core/tos_event.c **** 
+ 590              		.loc 1 120 35 is_stmt 0 view .LVU175
+ 591 0086 A3F87820 		strh	r2, [r3, #120]	@ movhi
+ 122:..//kernel/core/tos_event.c **** }
+ 592              		.loc 1 122 5 is_stmt 1 view .LVU176
+ 122:..//kernel/core/tos_event.c **** }
+ 593              		.loc 1 122 12 is_stmt 0 view .LVU177
+ 594 008a 93F86800 		ldrb	r0, [r3, #104]	@ zero_extendqisi2
+ 595 008e FFF7FEFF 		bl	pend_state2errno
+ 596              	.LVL64:
+ 597 0092 20E0     		b	.L40
+ 598              	.L52:
+  92:..//kernel/core/tos_event.c ****             event->flag = (k_event_flag_t)0u;
+ 599              		.loc 1 92 9 is_stmt 1 view .LVU178
+  92:..//kernel/core/tos_event.c ****             event->flag = (k_event_flag_t)0u;
+ 600              		.loc 1 92 12 is_stmt 0 view .LVU179
+ 601 0094 15F0040F 		tst	r5, #4
+ 602 0098 01D0     		beq	.L42
+  93:..//kernel/core/tos_event.c ****         }
+ 603              		.loc 1 93 13 is_stmt 1 view .LVU180
+  93:..//kernel/core/tos_event.c ****         }
+ 604              		.loc 1 93 25 is_stmt 0 view .LVU181
+ 605 009a 0023     		movs	r3, #0
+ 606 009c E360     		str	r3, [r4, #12]
+ 607              	.L42:
+  95:..//kernel/core/tos_event.c ****         return K_ERR_NONE;
+ 608              		.loc 1 95 9 is_stmt 1 view .LVU182
+  95:..//kernel/core/tos_event.c ****         return K_ERR_NONE;
+ 609              		.loc 1 95 9 view .LVU183
+ 610 009e 4046     		mov	r0, r8
+ 611 00a0 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 612              	.LVL65:
+  96:..//kernel/core/tos_event.c ****     }
+ 613              		.loc 1 96 9 view .LVU184
+  96:..//kernel/core/tos_event.c ****     }
+ 614              		.loc 1 96 16 is_stmt 0 view .LVU185
+ 615 00a4 0020     		movs	r0, #0
+ 616 00a6 16E0     		b	.L40
+ 617              	.L53:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 20
+
+
+ 100:..//kernel/core/tos_event.c ****         return K_ERR_PEND_NOWAIT;
+ 618              		.loc 1 100 9 is_stmt 1 view .LVU186
+ 100:..//kernel/core/tos_event.c ****         return K_ERR_PEND_NOWAIT;
+ 619              		.loc 1 100 9 view .LVU187
+ 620 00a8 4046     		mov	r0, r8
+ 621 00aa FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 622              	.LVL66:
+ 101:..//kernel/core/tos_event.c ****     }
+ 623              		.loc 1 101 9 view .LVU188
+ 101:..//kernel/core/tos_event.c ****     }
+ 624              		.loc 1 101 16 is_stmt 0 view .LVU189
+ 625 00ae 4FF49660 		mov	r0, #1200
+ 626 00b2 10E0     		b	.L40
+ 627              	.L54:
+ 105:..//kernel/core/tos_event.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 628              		.loc 1 105 9 is_stmt 1 view .LVU190
+ 105:..//kernel/core/tos_event.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 629              		.loc 1 105 9 view .LVU191
+ 630 00b4 4046     		mov	r0, r8
+ 631 00b6 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 632              	.LVL67:
+ 106:..//kernel/core/tos_event.c ****     }
+ 633              		.loc 1 106 9 view .LVU192
+ 106:..//kernel/core/tos_event.c ****     }
+ 634              		.loc 1 106 16 is_stmt 0 view .LVU193
+ 635 00ba 40F2B140 		movw	r0, #1201
+ 636 00be 0AE0     		b	.L40
+ 637              	.LVL68:
+ 638              	.L45:
+  76:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(event);
+ 639              		.loc 1 76 5 view .LVU194
+ 640 00c0 4FF4C870 		mov	r0, #400
+ 641 00c4 07E0     		b	.L40
+ 642              	.L46:
+  77:..//kernel/core/tos_event.c ****     TOS_PTR_SANITY_CHECK(flag_match);
+ 643              		.loc 1 77 5 view .LVU195
+ 644 00c6 40F24C40 		movw	r0, #1100
+ 645 00ca 04E0     		b	.L40
+ 646              	.L47:
+  78:..//kernel/core/tos_event.c ****     TOS_OBJ_VERIFY(event, KNL_OBJ_TYPE_EVENT);
+ 647              		.loc 1 78 5 view .LVU196
+ 648 00cc 40F24C40 		movw	r0, #1100
+ 649 00d0 01E0     		b	.L40
+ 650              	.L48:
+  79:..//kernel/core/tos_event.c **** 
+ 651              		.loc 1 79 5 view .LVU197
+ 652 00d2 40F24D40 		movw	r0, #1101
+ 653              	.LVL69:
+ 654              	.L40:
+ 123:..//kernel/core/tos_event.c **** 
+ 655              		.loc 1 123 1 view .LVU198
+ 656 00d6 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 657              	.LVL70:
+ 658              	.L49:
+  82:..//kernel/core/tos_event.c ****     }
+ 659              		.loc 1 82 16 view .LVU199
+ 660 00da C820     		movs	r0, #200
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 21
+
+
+ 661 00dc FBE7     		b	.L40
+ 662              	.L50:
+  86:..//kernel/core/tos_event.c ****     }
+ 663              		.loc 1 86 16 view .LVU200
+ 664 00de C820     		movs	r0, #200
+ 665 00e0 F9E7     		b	.L40
+ 666              	.L56:
+ 667 00e2 00BF     		.align	2
+ 668              	.L55:
+ 669 00e4 00000000 		.word	k_curr_task
+ 670              		.cfi_endproc
+ 671              	.LFE113:
+ 673              		.section	.text.tos_event_post,"ax",%progbits
+ 674              		.align	1
+ 675              		.global	tos_event_post
+ 676              		.syntax unified
+ 677              		.thumb
+ 678              		.thumb_func
+ 679              		.fpu softvfp
+ 681              	tos_event_post:
+ 682              	.LVL71:
+ 683              	.LFB115:
+ 158:..//kernel/core/tos_event.c **** 
+ 159:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_post(k_event_t *event, k_event_flag_t flag)
+ 160:..//kernel/core/tos_event.c **** {
+ 684              		.loc 1 160 1 is_stmt 1 view -0
+ 685              		.cfi_startproc
+ 686              		@ args = 0, pretend = 0, frame = 0
+ 687              		@ frame_needed = 0, uses_anonymous_args = 0
+ 688              		.loc 1 160 1 is_stmt 0 view .LVU202
+ 689 0000 08B5     		push	{r3, lr}
+ 690              	.LCFI8:
+ 691              		.cfi_def_cfa_offset 8
+ 692              		.cfi_offset 3, -8
+ 693              		.cfi_offset 14, -4
+ 161:..//kernel/core/tos_event.c ****     return event_do_post(event, flag, OPT_EVENT_POST_CLR);
+ 694              		.loc 1 161 5 is_stmt 1 view .LVU203
+ 695              		.loc 1 161 12 is_stmt 0 view .LVU204
+ 696 0002 0122     		movs	r2, #1
+ 697 0004 FFF7FEFF 		bl	event_do_post
+ 698              	.LVL72:
+ 162:..//kernel/core/tos_event.c **** }
+ 699              		.loc 1 162 1 view .LVU205
+ 700 0008 08BD     		pop	{r3, pc}
+ 701              		.cfi_endproc
+ 702              	.LFE115:
+ 704              		.section	.text.tos_event_post_keep,"ax",%progbits
+ 705              		.align	1
+ 706              		.global	tos_event_post_keep
+ 707              		.syntax unified
+ 708              		.thumb
+ 709              		.thumb_func
+ 710              		.fpu softvfp
+ 712              	tos_event_post_keep:
+ 713              	.LVL73:
+ 714              	.LFB116:
+ 163:..//kernel/core/tos_event.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 22
+
+
+ 164:..//kernel/core/tos_event.c **** __API__ k_err_t tos_event_post_keep(k_event_t *event, k_event_flag_t flag)
+ 165:..//kernel/core/tos_event.c **** {
+ 715              		.loc 1 165 1 is_stmt 1 view -0
+ 716              		.cfi_startproc
+ 717              		@ args = 0, pretend = 0, frame = 0
+ 718              		@ frame_needed = 0, uses_anonymous_args = 0
+ 719              		.loc 1 165 1 is_stmt 0 view .LVU207
+ 720 0000 08B5     		push	{r3, lr}
+ 721              	.LCFI9:
+ 722              		.cfi_def_cfa_offset 8
+ 723              		.cfi_offset 3, -8
+ 724              		.cfi_offset 14, -4
+ 166:..//kernel/core/tos_event.c ****     return event_do_post(event, flag, OPT_EVENT_POST_KEP);
+ 725              		.loc 1 166 5 is_stmt 1 view .LVU208
+ 726              		.loc 1 166 12 is_stmt 0 view .LVU209
+ 727 0002 0022     		movs	r2, #0
+ 728 0004 FFF7FEFF 		bl	event_do_post
+ 729              	.LVL74:
+ 167:..//kernel/core/tos_event.c **** }
+ 730              		.loc 1 167 1 view .LVU210
+ 731 0008 08BD     		pop	{r3, pc}
+ 732              		.cfi_endproc
+ 733              	.LFE116:
+ 735              		.text
+ 736              	.Letext0:
+ 737              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ 738              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 739              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 740              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 741              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 742              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 743              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 744              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 745              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 746              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 747              		.file 13 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 748              		.file 14 "..//kernel/core/include/tos_ktypes.h"
+ 749              		.file 15 "..//kernel/core/include/tos_task.h"
+ 750              		.file 16 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 751              		.file 17 "..//kernel/core/include/tos_list.h"
+ 752              		.file 18 "..//kernel/core/include/tos_pend.h"
+ 753              		.file 19 "..//kernel/core/include/tos_event.h"
+ 754              		.file 20 "..//kernel/core/include/tos_timer.h"
+ 755              		.file 21 "..//kernel/core/include/tos_mmheap.h"
+ 756              		.file 22 "..//kernel/core/include/tos_sched.h"
+ 757              		.file 23 "..//kernel/core/include/tos_global.h"
+ 758              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_event.c
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:16     .text.event_is_match:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:23     .text.event_is_match:00000000 event_is_match
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:93     .text.event_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:99     .text.event_do_post:00000000 event_do_post
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:267    .text.tos_event_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:274    .text.tos_event_create:00000000 tos_event_create
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:333    .text.tos_event_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:340    .text.tos_event_destroy:00000000 tos_event_destroy
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:453    .text.tos_event_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:460    .text.tos_event_pend:00000000 tos_event_pend
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:669    .text.tos_event_pend:000000e4 $d
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:674    .text.tos_event_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:681    .text.tos_event_post:00000000 tos_event_post
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:705    .text.tos_event_post_keep:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc1tZ8Qd.s:712    .text.tos_event_post_keep:00000000 tos_event_post_keep
+
+UNDEFINED SYMBOLS
+tos_cpu_cpsr_save
+pend_task_wakeup
+tos_cpu_cpsr_restore
+knl_sched
+pend_object_init
+pend_wakeup_all
+pend_object_deinit
+knl_is_inirq
+knl_is_sched_locked
+pend_task_block
+pend_state2errno
+k_curr_task

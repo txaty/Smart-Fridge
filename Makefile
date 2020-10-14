@@ -13,7 +13,7 @@
 ######################################
 # target
 ######################################
-TARGET = SmartFridge
+TARGET = smart_fridge
 
 
 ######################################
@@ -24,7 +24,7 @@ DEBUG = 1
 # optimization
 OPT = -Og
 
-
+TOP_DIR = ../
 #######################################
 # paths
 #######################################
@@ -54,9 +54,26 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 Src/system_stm32f1xx.c  
 
+ARCH_SRC = \
+${wildcard $(TOP_DIR)/arch/arm/arm-v7m/cortex-m3/gcc/*.c} \
+${wildcard $(TOP_DIR)/arch/arm/arm-v7m/common/*.c}
+
+C_SOURCES += $(ARCH_SRC)
+
+KERNEL_SRC = \
+${wildcard $(TOP_DIR)/kernel/core/*.c}
+C_SOURCES += $(KERNEL_SRC)
+
+CMSIS_SRC = \
+${wildcard $(TOP_DIR)/osal/cmsis_os/*.c}
+C_SOURCES += $(CMSIS_SRC)
+
 # ASM sources
 ASM_SOURCES =  \
 startup_stm32f103xe.s
+
+ASM_SOURCES_S = \
+$(TOP_DIR)/arch/arm/arm-v7m/cortex-m3/gcc/port_s.S
 
 
 #######################################
@@ -113,8 +130,19 @@ C_INCLUDES =  \
 -IDrivers/STM32F1xx_HAL_Driver/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include \
--IDrivers/CMSIS/Include \
--IDrivers/CMSIS/Include
+-IDrivers/CMSIS/Include 
+
+KERNEL_INC = \
+-I$(TOP_DIR)/kernel/core/include \
+-I$(TOP_DIR)/kernel/pm/include \
+-I$(TOP_DIR)/arch/arm/arm-v7m/common/include \
+-I$(TOP_DIR)/arch/arm/arm-v7m/cortex-m3/gcc \
+-I$(TOP_DIR)/board/TOS_CONFIG
+C_INCLUDES += $(KERNEL_INC)
+
+CMSIS_INC = \
+-I $(TOP_DIR)/osal/cmsis_os
+C_INCLUDES += $(CMSIS_INC)
 
 
 # compile gcc flags
@@ -156,10 +184,16 @@ vpath %.c $(sort $(dir $(C_SOURCES)))
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
+OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES_S:.S=.o)))
+vpath %.S $(sort $(dir $(ASM_SOURCES_S)))
+
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
+	$(AS) -c $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile

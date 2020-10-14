@@ -21,9 +21,24 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "gpio.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "cmsis_os.h"
+//task1
+#define TASK1_STK_SIZE 512
+void task1(void *pdata);
+osThreadDef(task1, osPriorityNormal, 1, TASK1_STK_SIZE);
+
+void task1(void *pdata)
+{
+  int count = 1;
+  while (1)
+  {
+    printf("\r\nHello world!\r\n###This is task1 ,count is %d \r\n", count++);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+    osDelay(2000);
+  }
+}
 
 /* USER CODE END Includes */
 
@@ -88,7 +103,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  osKernelInitialize();                  //TOS Tiny kernel initialize
+  osThreadCreate(osThread(task1), NULL); // Create task1
+  osKernelStart();                       //Start TOS Tiny
   /* USER CODE END 2 */
 
   /* Infinite loop */

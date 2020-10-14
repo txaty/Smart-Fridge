@@ -1,0 +1,165 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_global.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.global	k_timer_ctl
+  16              		.comm	k_mmheap_ctl,3204,4
+  17              		.comm	k_mmheap_default_pool,256,4
+  18              		.global	k_tick_list
+  19              		.global	k_stat_list
+  20              		.global	k_dead_task_list
+  21              		.global	k_cpu_cycle_per_tick
+  22              		.global	k_cpu_tick_per_second
+  23              		.global	k_idle_task_stk_size
+  24              		.global	k_idle_task_stk_addr
+  25              		.comm	k_idle_task_stk,512,4
+  26              		.comm	k_idle_task,136,8
+  27              		.global	k_next_task
+  28              		.global	k_curr_task
+  29              		.global	k_tick_count
+  30              		.comm	k_rdyq,88,4
+  31              		.global	k_knl_state
+  32              		.global	k_sched_lock_nest_cnt
+  33              		.global	k_irq_nest_cnt
+  34              		.section	.bss.k_cpu_cycle_per_tick,"aw",%nobits
+  35              		.align	2
+  38              	k_cpu_cycle_per_tick:
+  39 0000 00000000 		.space	4
+  40              		.section	.bss.k_curr_task,"aw",%nobits
+  41              		.align	2
+  44              	k_curr_task:
+  45 0000 00000000 		.space	4
+  46              		.section	.bss.k_irq_nest_cnt,"aw",%nobits
+  49              	k_irq_nest_cnt:
+  50 0000 00       		.space	1
+  51              		.section	.bss.k_knl_state,"aw",%nobits
+  54              	k_knl_state:
+  55 0000 00       		.space	1
+  56              		.section	.bss.k_next_task,"aw",%nobits
+  57              		.align	2
+  60              	k_next_task:
+  61 0000 00000000 		.space	4
+  62              		.section	.bss.k_sched_lock_nest_cnt,"aw",%nobits
+  65              	k_sched_lock_nest_cnt:
+  66 0000 00       		.space	1
+  67              		.section	.bss.k_tick_count,"aw",%nobits
+  68              		.align	3
+  71              	k_tick_count:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s 			page 2
+
+
+  72 0000 00000000 		.space	8
+  72      00000000 
+  73              		.section	.data.k_cpu_tick_per_second,"aw"
+  74              		.align	3
+  77              	k_cpu_tick_per_second:
+  78 0000 E8030000 		.word	1000
+  79 0004 00000000 		.word	0
+  80              		.section	.data.k_dead_task_list,"aw"
+  81              		.align	2
+  84              	k_dead_task_list:
+  85 0000 00000000 		.word	k_dead_task_list
+  86 0004 00000000 		.word	k_dead_task_list
+  87              		.section	.data.k_stat_list,"aw"
+  88              		.align	2
+  91              	k_stat_list:
+  92 0000 00000000 		.word	k_stat_list
+  93 0004 00000000 		.word	k_stat_list
+  94              		.section	.data.k_tick_list,"aw"
+  95              		.align	2
+  98              	k_tick_list:
+  99 0000 00000000 		.word	k_tick_list
+ 100 0004 00000000 		.word	k_tick_list
+ 101              		.section	.data.k_timer_ctl,"aw"
+ 102              		.align	3
+ 105              	k_timer_ctl:
+ 106 0000 FFFFFFFF 		.word	-1
+ 107 0004 FFFFFFFF 		.word	-1
+ 108 0008 08000000 		.word	k_timer_ctl+8
+ 109 000c 08000000 		.word	k_timer_ctl+8
+ 110              		.section	.rodata.k_idle_task_stk_addr,"a"
+ 111              		.align	2
+ 114              	k_idle_task_stk_addr:
+ 115 0000 00000000 		.word	k_idle_task_stk
+ 116              		.section	.rodata.k_idle_task_stk_size,"a"
+ 117              		.align	2
+ 120              	k_idle_task_stk_size:
+ 121 0000 00020000 		.word	512
+ 122              		.text
+ 123              	.Letext0:
+ 124              		.file 1 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 125              		.file 2 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 126              		.file 3 "Drivers/CMSIS/Include/core_cm3.h"
+ 127              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 128              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 129              		.file 6 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 130              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 131              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 132              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 133              		.file 10 "..//kernel/core/include/tos_ktypes.h"
+ 134              		.file 11 "..//kernel/core/include/tos_task.h"
+ 135              		.file 12 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 136              		.file 13 "..//kernel/core/include/tos_list.h"
+ 137              		.file 14 "..//kernel/core/include/tos_pend.h"
+ 138              		.file 15 "..//kernel/core/include/tos_sys.h"
+ 139              		.file 16 "..//kernel/core/include/tos_timer.h"
+ 140              		.file 17 "..//kernel/core/include/tos_mmheap.h"
+ 141              		.file 18 "..//kernel/core/include/tos_sched.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s 			page 3
+
+
+ 142              		.file 19 "..//kernel/core/include/tos_global.h"
+ 143              		.file 20 "..//kernel/core/tos_global.c"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_global.c
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:105    .data.k_timer_ctl:00000000 k_timer_ctl
+                            *COM*:00000c84 k_mmheap_ctl
+                            *COM*:00000100 k_mmheap_default_pool
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:98     .data.k_tick_list:00000000 k_tick_list
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:91     .data.k_stat_list:00000000 k_stat_list
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:84     .data.k_dead_task_list:00000000 k_dead_task_list
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:38     .bss.k_cpu_cycle_per_tick:00000000 k_cpu_cycle_per_tick
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:77     .data.k_cpu_tick_per_second:00000000 k_cpu_tick_per_second
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:120    .rodata.k_idle_task_stk_size:00000000 k_idle_task_stk_size
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:114    .rodata.k_idle_task_stk_addr:00000000 k_idle_task_stk_addr
+                            *COM*:00000200 k_idle_task_stk
+                            *COM*:00000088 k_idle_task
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:60     .bss.k_next_task:00000000 k_next_task
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:44     .bss.k_curr_task:00000000 k_curr_task
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:71     .bss.k_tick_count:00000000 k_tick_count
+                            *COM*:00000058 k_rdyq
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:54     .bss.k_knl_state:00000000 k_knl_state
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:65     .bss.k_sched_lock_nest_cnt:00000000 k_sched_lock_nest_cnt
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:49     .bss.k_irq_nest_cnt:00000000 k_irq_nest_cnt
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:35     .bss.k_cpu_cycle_per_tick:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:41     .bss.k_curr_task:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:50     .bss.k_irq_nest_cnt:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:55     .bss.k_knl_state:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:57     .bss.k_next_task:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:66     .bss.k_sched_lock_nest_cnt:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:68     .bss.k_tick_count:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:74     .data.k_cpu_tick_per_second:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:81     .data.k_dead_task_list:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:88     .data.k_stat_list:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:95     .data.k_tick_list:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:102    .data.k_timer_ctl:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:111    .rodata.k_idle_task_stk_addr:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGDGoGY.s:117    .rodata.k_idle_task_stk_size:00000000 $d
+
+NO UNDEFINED SYMBOLS

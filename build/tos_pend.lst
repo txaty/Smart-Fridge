@@ -1,0 +1,1693 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_pend.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.pend_list_add,"ax",%progbits
+  16              		.align	1
+  17              		.arch armv7-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	pend_list_add:
+  24              	.LVL0:
+  25              	.LFB110:
+  26              		.file 1 "..//kernel/core/tos_pend.c"
+   1:..//kernel/core/tos_pend.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_pend.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_pend.c ****  * available.
+   4:..//kernel/core/tos_pend.c ****  *
+   5:..//kernel/core/tos_pend.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_pend.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_pend.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_pend.c ****  *
+   9:..//kernel/core/tos_pend.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_pend.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_pend.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_pend.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_pend.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_pend.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_pend.c ****  * within TencentOS.
+  16:..//kernel/core/tos_pend.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_pend.c **** 
+  18:..//kernel/core/tos_pend.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_pend.c **** 
+  20:..//kernel/core/tos_pend.c **** __STATIC__ void pend_list_add(k_task_t *task, pend_obj_t *pend_obj)
+  21:..//kernel/core/tos_pend.c **** {
+  27              		.loc 1 21 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              		.loc 1 21 1 is_stmt 0 view .LVU1
+  33 0000 30B4     		push	{r4, r5}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 5, -4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 2
+
+
+  22:..//kernel/core/tos_pend.c ****     k_task_t *iter;
+  38              		.loc 1 22 5 is_stmt 1 view .LVU2
+  23:..//kernel/core/tos_pend.c **** 
+  24:..//kernel/core/tos_pend.c ****     /* keep priority in descending order, the boss(task with highest priority,
+  25:..//kernel/core/tos_pend.c ****        numerically smallest) always comes first
+  26:..//kernel/core/tos_pend.c ****     */
+  27:..//kernel/core/tos_pend.c ****     TOS_LIST_FOR_EACH_ENTRY(iter, k_task_t, pend_list, &pend_obj->list) {
+  39              		.loc 1 27 5 view .LVU3
+  40 0002 0B68     		ldr	r3, [r1]
+  41 0004 503B     		subs	r3, r3, #80
+  42              	.LVL1:
+  43              	.L2:
+  44              		.loc 1 27 5 is_stmt 0 discriminator 1 view .LVU4
+  45 0006 03F15002 		add	r2, r3, #80
+  46 000a 8A42     		cmp	r2, r1
+  47 000c 08D0     		beq	.L3
+  28:..//kernel/core/tos_pend.c ****         if (task->prio < iter->prio) {
+  48              		.loc 1 28 9 is_stmt 1 view .LVU5
+  49              		.loc 1 28 17 is_stmt 0 view .LVU6
+  50 000e 90F82150 		ldrb	r5, [r0, #33]	@ zero_extendqisi2
+  51              		.loc 1 28 30 view .LVU7
+  52 0012 93F82140 		ldrb	r4, [r3, #33]	@ zero_extendqisi2
+  53              		.loc 1 28 12 view .LVU8
+  54 0016 A542     		cmp	r5, r4
+  55 0018 02D3     		bcc	.L3
+  27:..//kernel/core/tos_pend.c ****         if (task->prio < iter->prio) {
+  56              		.loc 1 27 5 discriminator 2 view .LVU9
+  57 001a 1B6D     		ldr	r3, [r3, #80]
+  58              	.LVL2:
+  27:..//kernel/core/tos_pend.c ****         if (task->prio < iter->prio) {
+  59              		.loc 1 27 5 discriminator 2 view .LVU10
+  60 001c 503B     		subs	r3, r3, #80
+  61              	.LVL3:
+  27:..//kernel/core/tos_pend.c ****         if (task->prio < iter->prio) {
+  62              		.loc 1 27 5 discriminator 2 view .LVU11
+  63 001e F2E7     		b	.L2
+  64              	.L3:
+  29:..//kernel/core/tos_pend.c ****             break;
+  30:..//kernel/core/tos_pend.c ****         }
+  31:..//kernel/core/tos_pend.c ****     }
+  32:..//kernel/core/tos_pend.c ****     tos_list_add_tail(&task->pend_list, &iter->pend_list);
+  65              		.loc 1 32 5 is_stmt 1 view .LVU12
+  66 0020 00F15005 		add	r5, r0, #80
+  67              	.LVL4:
+  68              	.LBB36:
+  69              	.LBI36:
+  70              		.file 2 "..//kernel/core/include/tos_list.h"
+   1:..//kernel/core/include/tos_list.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_list.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_list.h ****  * available.
+   4:..//kernel/core/include/tos_list.h ****  *
+   5:..//kernel/core/include/tos_list.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_list.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_list.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_list.h ****  *
+   9:..//kernel/core/include/tos_list.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_list.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 3
+
+
+  11:..//kernel/core/include/tos_list.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_list.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_list.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_list.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_list.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_list.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_list.h **** 
+  18:..//kernel/core/include/tos_list.h **** #ifndef _TOS_LIST_H_
+  19:..//kernel/core/include/tos_list.h **** #define  _TOS_LIST_H_
+  20:..//kernel/core/include/tos_list.h **** 
+  21:..//kernel/core/include/tos_list.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_list.h **** 
+  23:..//kernel/core/include/tos_list.h **** typedef struct k_list_node_st {
+  24:..//kernel/core/include/tos_list.h ****     struct k_list_node_st *next;
+  25:..//kernel/core/include/tos_list.h ****     struct k_list_node_st *prev;
+  26:..//kernel/core/include/tos_list.h **** } k_list_t;
+  27:..//kernel/core/include/tos_list.h **** 
+  28:..//kernel/core/include/tos_list.h **** #define TOS_LIST_NODE(node) \
+  29:..//kernel/core/include/tos_list.h ****     { &(node), &(node) }
+  30:..//kernel/core/include/tos_list.h **** 
+  31:..//kernel/core/include/tos_list.h **** #define TOS_LIST_DEFINE(list) \
+  32:..//kernel/core/include/tos_list.h ****     k_list_t list = { &(list), &(list) }
+  33:..//kernel/core/include/tos_list.h **** 
+  34:..//kernel/core/include/tos_list.h **** #define TOS_LIST_ENTRY(node, type, field) \
+  35:..//kernel/core/include/tos_list.h ****     TOS_CONTAINER_OF_FIELD(node, type, field)
+  36:..//kernel/core/include/tos_list.h **** 
+  37:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FIRST_ENTRY(list, type, field) \
+  38:..//kernel/core/include/tos_list.h ****     TOS_LIST_ENTRY((list)->next, type, field)
+  39:..//kernel/core/include/tos_list.h **** 
+  40:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FIRST_ENTRY_OR_NULL(list, type, field) \
+  41:..//kernel/core/include/tos_list.h ****     (tos_list_empty(list) ? K_NULL : TOS_LIST_FIRST_ENTRY(list, type, field))
+  42:..//kernel/core/include/tos_list.h **** 
+  43:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH(curr, list) \
+  44:..//kernel/core/include/tos_list.h ****     for (curr = (list)->next; curr != (list); curr = curr->next)
+  45:..//kernel/core/include/tos_list.h **** 
+  46:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_PREV(curr, list) \
+  47:..//kernel/core/include/tos_list.h ****     for (curr = (list)->prev; curr != (list); curr = curr->prev)
+  48:..//kernel/core/include/tos_list.h **** 
+  49:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_SAFE(curr, next, list) \
+  50:..//kernel/core/include/tos_list.h ****     for (curr = (list)->next, next = curr->next; curr != (list); \
+  51:..//kernel/core/include/tos_list.h ****             curr = next, next = curr->next)
+  52:..//kernel/core/include/tos_list.h **** 
+  53:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_PREV_SAFE(curr, next, list) \
+  54:..//kernel/core/include/tos_list.h ****     for (curr = (list)->prev, next = curr->prev; \
+  55:..//kernel/core/include/tos_list.h ****             curr != (list); \
+  56:..//kernel/core/include/tos_list.h ****             curr = next, next = curr->prev)
+  57:..//kernel/core/include/tos_list.h **** 
+  58:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY(entry, type, field, list) \
+  59:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->next, type, field); \
+  60:..//kernel/core/include/tos_list.h ****         &entry->field != (list); \
+  61:..//kernel/core/include/tos_list.h ****         entry = TOS_LIST_ENTRY(entry->field.next, type, field))
+  62:..//kernel/core/include/tos_list.h **** 
+  63:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_REVERSE(entry, type, field, list) \
+  64:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->prev, type, field); \
+  65:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
+  66:..//kernel/core/include/tos_list.h ****             entry = TOS_LIST_ENTRY(entry->field.prev, type, field))
+  67:..//kernel/core/include/tos_list.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 4
+
+
+  68:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_SAFE(entry, tmp, type, field, list) \
+  69:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->next, type, field), \
+  70:..//kernel/core/include/tos_list.h ****             tmp = TOS_LIST_ENTRY(entry->field.next, type, field); \
+  71:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
+  72:..//kernel/core/include/tos_list.h ****             entry = tmp, tmp = TOS_LIST_ENTRY(entry->field.next, type, field))
+  73:..//kernel/core/include/tos_list.h **** 
+  74:..//kernel/core/include/tos_list.h **** #define TOS_LIST_FOR_EACH_ENTRY_SAFE_REVERSE(entry, tmp, type, field, list) \
+  75:..//kernel/core/include/tos_list.h ****     for (entry = TOS_LIST_ENTRY((list)->prev, type, field), \
+  76:..//kernel/core/include/tos_list.h ****             tmp = TOS_LIST_ENTRY(entry->field.prev, type, field); \
+  77:..//kernel/core/include/tos_list.h ****             &entry->field != (list); \
+  78:..//kernel/core/include/tos_list.h ****             entry = tmp, tmp = TOS_LIST_ENTRY(entry->field.prev, type, field))
+  79:..//kernel/core/include/tos_list.h **** 
+  80:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_add(k_list_t *node, k_list_t *prev, k_list_t *next)
+  81:..//kernel/core/include/tos_list.h **** {
+  82:..//kernel/core/include/tos_list.h ****     next->prev = node;
+  83:..//kernel/core/include/tos_list.h ****     node->next = next;
+  84:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+  85:..//kernel/core/include/tos_list.h ****     prev->next = node;
+  86:..//kernel/core/include/tos_list.h **** }
+  87:..//kernel/core/include/tos_list.h **** 
+  88:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_del(k_list_t *prev, k_list_t *next)
+  89:..//kernel/core/include/tos_list.h **** {
+  90:..//kernel/core/include/tos_list.h ****     next->prev = prev;
+  91:..//kernel/core/include/tos_list.h ****     prev->next = next;
+  92:..//kernel/core/include/tos_list.h **** }
+  93:..//kernel/core/include/tos_list.h **** 
+  94:..//kernel/core/include/tos_list.h **** __STATIC_INLINE__ void _list_del_node(k_list_t *node)
+  95:..//kernel/core/include/tos_list.h **** {
+  96:..//kernel/core/include/tos_list.h ****     _list_del(node->prev, node->next);
+  97:..//kernel/core/include/tos_list.h **** }
+  98:..//kernel/core/include/tos_list.h **** 
+  99:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_init(k_list_t *list)
+ 100:..//kernel/core/include/tos_list.h **** {
+ 101:..//kernel/core/include/tos_list.h ****     list->next = list;
+ 102:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 103:..//kernel/core/include/tos_list.h **** }
+ 104:..//kernel/core/include/tos_list.h **** 
+ 105:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_add(k_list_t *node, k_list_t *list)
+ 106:..//kernel/core/include/tos_list.h **** {
+ 107:..//kernel/core/include/tos_list.h ****     _list_add(node, list, list->next);
+ 108:..//kernel/core/include/tos_list.h **** }
+ 109:..//kernel/core/include/tos_list.h **** 
+ 110:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_add_tail(k_list_t *node, k_list_t *list)
+  71              		.loc 2 110 32 view .LVU13
+  72              	.LBB37:
+ 111:..//kernel/core/include/tos_list.h **** {
+ 112:..//kernel/core/include/tos_list.h ****     _list_add(node, list->prev, list);
+  73              		.loc 2 112 5 view .LVU14
+  74              		.loc 2 112 25 is_stmt 0 view .LVU15
+  75 0024 5C6D     		ldr	r4, [r3, #84]
+  76              	.LVL5:
+  77              	.LBB38:
+  78              	.LBI38:
+  80:..//kernel/core/include/tos_list.h **** {
+  79              		.loc 2 80 24 is_stmt 1 view .LVU16
+  80              	.LBB39:
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 5
+
+
+  81              		.loc 2 82 5 view .LVU17
+  82:..//kernel/core/include/tos_list.h ****     node->next = next;
+  82              		.loc 2 82 16 is_stmt 0 view .LVU18
+  83 0026 5D65     		str	r5, [r3, #84]
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+  84              		.loc 2 83 5 is_stmt 1 view .LVU19
+  83:..//kernel/core/include/tos_list.h ****     node->prev = prev;
+  85              		.loc 2 83 16 is_stmt 0 view .LVU20
+  86 0028 0265     		str	r2, [r0, #80]
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+  87              		.loc 2 84 5 is_stmt 1 view .LVU21
+  84:..//kernel/core/include/tos_list.h ****     prev->next = node;
+  88              		.loc 2 84 16 is_stmt 0 view .LVU22
+  89 002a 4465     		str	r4, [r0, #84]
+  85:..//kernel/core/include/tos_list.h **** }
+  90              		.loc 2 85 5 is_stmt 1 view .LVU23
+  85:..//kernel/core/include/tos_list.h **** }
+  91              		.loc 2 85 16 is_stmt 0 view .LVU24
+  92 002c 2560     		str	r5, [r4]
+  93              	.LVL6:
+  85:..//kernel/core/include/tos_list.h **** }
+  94              		.loc 2 85 16 view .LVU25
+  95              	.LBE39:
+  96              	.LBE38:
+  97              	.LBE37:
+  98              	.LBE36:
+  33:..//kernel/core/tos_pend.c **** 
+  34:..//kernel/core/tos_pend.c ****     // remember me, you may use me someday
+  35:..//kernel/core/tos_pend.c ****     task->pending_obj = pend_obj;
+  99              		.loc 1 35 5 is_stmt 1 view .LVU26
+ 100              		.loc 1 35 23 is_stmt 0 view .LVU27
+ 101 002e 4166     		str	r1, [r0, #100]
+  36:..//kernel/core/tos_pend.c ****     task_state_set_pend(task);
+ 102              		.loc 1 36 5 is_stmt 1 view .LVU28
+ 103              	.LVL7:
+ 104              	.LBB40:
+ 105              	.LBI40:
+ 106              		.file 3 "..//kernel/core/include/tos_task.h"
+   1:..//kernel/core/include/tos_task.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_task.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_task.h ****  * available.
+   4:..//kernel/core/include/tos_task.h ****  *
+   5:..//kernel/core/include/tos_task.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_task.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_task.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_task.h ****  *
+   9:..//kernel/core/include/tos_task.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_task.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_task.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_task.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_task.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_task.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_task.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_task.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_task.h **** 
+  18:..//kernel/core/include/tos_task.h **** #ifndef _TOS_TASK_H_
+  19:..//kernel/core/include/tos_task.h **** #define  _TOS_TASK_H_
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 6
+
+
+  20:..//kernel/core/include/tos_task.h **** 
+  21:..//kernel/core/include/tos_task.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_task.h **** 
+  23:..//kernel/core/include/tos_task.h **** #define K_TASK_NAME_MAX                 (16u)
+  24:..//kernel/core/include/tos_task.h **** #define K_TASK_STK_SIZE_MIN             (sizeof(cpu_context_t))
+  25:..//kernel/core/include/tos_task.h **** 
+  26:..//kernel/core/include/tos_task.h **** // task state is just a flag, indicating which manager list we are in.
+  27:..//kernel/core/include/tos_task.h **** 
+  28:..//kernel/core/include/tos_task.h **** // ready to schedule
+  29:..//kernel/core/include/tos_task.h **** // a task's pend_list is in readyqueue
+  30:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_READY                (k_task_state_t)0x0000
+  31:..//kernel/core/include/tos_task.h **** 
+  32:..//kernel/core/include/tos_task.h **** // delayed, or pend for a timeout
+  33:..//kernel/core/include/tos_task.h **** // a task's tick_list is in k_tick_list
+  34:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_SLEEP                (k_task_state_t)0x0001
+  35:..//kernel/core/include/tos_task.h **** 
+  36:..//kernel/core/include/tos_task.h **** // pend for something
+  37:..//kernel/core/include/tos_task.h **** // a task's pend_list is in some pend object's list
+  38:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_PEND                 (k_task_state_t)0x0002
+  39:..//kernel/core/include/tos_task.h **** 
+  40:..//kernel/core/include/tos_task.h **** // suspended
+  41:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_SUSPENDED            (k_task_state_t)0x0004
+  42:..//kernel/core/include/tos_task.h **** 
+  43:..//kernel/core/include/tos_task.h **** // deleted
+  44:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_DELETED              (k_task_state_t)0x0008
+  45:..//kernel/core/include/tos_task.h **** 
+  46:..//kernel/core/include/tos_task.h **** // actually we don't really need those TASK_STATE below, if you understand the task state deeply, t
+  47:..//kernel/core/include/tos_task.h **** 
+  48:..//kernel/core/include/tos_task.h **** // we are pending, also we are waitting for a timeout(eg. tos_sem_pend with a valid timeout, not TO
+  49:..//kernel/core/include/tos_task.h **** // both a task's tick_list and pend_list is not empty
+  50:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_PENDTIMEOUT                      (k_task_state_t)(K_TASK_STATE_PEND | K_TASK_S
+  51:..//kernel/core/include/tos_task.h **** 
+  52:..//kernel/core/include/tos_task.h **** // suspended when sleeping
+  53:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_SLEEP_SUSPENDED                  (k_task_state_t)(K_TASK_STATE_SLEEP | K_TASK_
+  54:..//kernel/core/include/tos_task.h **** 
+  55:..//kernel/core/include/tos_task.h **** // suspended when pending
+  56:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_PEND_SUSPENDED                   (k_task_state_t)(K_TASK_STATE_PEND | K_TASK_S
+  57:..//kernel/core/include/tos_task.h **** 
+  58:..//kernel/core/include/tos_task.h **** // suspended when pendtimeout
+  59:..//kernel/core/include/tos_task.h **** #define K_TASK_STATE_PENDTIMEOUT_SUSPENDED            (k_task_state_t)(K_TASK_STATE_PENDTIMEOUT | K
+  60:..//kernel/core/include/tos_task.h **** 
+  61:..//kernel/core/include/tos_task.h **** 
+  62:..//kernel/core/include/tos_task.h **** // if you configure TOS_CFG_TASK_PRIO_MAX as 10, means the priority for kernel is (0 ... 9]
+  63:..//kernel/core/include/tos_task.h **** // the priority 9(TOS_CFG_TASK_PRIO_MAX - 1) is only for idle, so avaliable priority for you is (0 
+  64:..//kernel/core/include/tos_task.h **** #define K_TASK_PRIO_IDLE                                (k_prio_t)(TOS_CFG_TASK_PRIO_MAX - (k_prio_
+  65:..//kernel/core/include/tos_task.h **** #define K_TASK_PRIO_INVALID                             (k_prio_t)(TOS_CFG_TASK_PRIO_MAX)
+  66:..//kernel/core/include/tos_task.h **** 
+  67:..//kernel/core/include/tos_task.h **** typedef void (*k_task_entry_t)(void *arg);
+  68:..//kernel/core/include/tos_task.h **** 
+  69:..//kernel/core/include/tos_task.h **** typedef void (*k_task_walker_t)(k_task_t *task);
+  70:..//kernel/core/include/tos_task.h **** 
+  71:..//kernel/core/include/tos_task.h **** /**
+  72:..//kernel/core/include/tos_task.h ****  * task control block
+  73:..//kernel/core/include/tos_task.h ****  */
+  74:..//kernel/core/include/tos_task.h **** struct k_task_st {
+  75:..//kernel/core/include/tos_task.h ****     k_stack_t          *sp;                     /**< task stack pointer. This lady always comes fir
+  76:..//kernel/core/include/tos_task.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 7
+
+
+  77:..//kernel/core/include/tos_task.h ****     knl_obj_t           knl_obj;                /**< just for verification, test whether current ob
+  78:..//kernel/core/include/tos_task.h **** 
+  79:..//kernel/core/include/tos_task.h ****     char                name[K_TASK_NAME_MAX];  /**< task name */
+  80:..//kernel/core/include/tos_task.h ****     k_task_entry_t      entry;                  /**< task entry */
+  81:..//kernel/core/include/tos_task.h ****     void               *arg;                    /**< argument for task entry */
+  82:..//kernel/core/include/tos_task.h ****     k_task_state_t      state;                  /**< just state */
+  83:..//kernel/core/include/tos_task.h ****     k_prio_t            prio;                   /**< just priority */
+  84:..//kernel/core/include/tos_task.h **** 
+  85:..//kernel/core/include/tos_task.h ****     k_stack_t          *stk_base;               /**< task stack base address */
+  86:..//kernel/core/include/tos_task.h ****     size_t              stk_size;               /**< stack size of the task */
+  87:..//kernel/core/include/tos_task.h **** 
+  88:..//kernel/core/include/tos_task.h **** #if TOS_CFG_TASK_DYNAMIC_CREATE_EN > 0u
+  89:..//kernel/core/include/tos_task.h ****     k_list_t            dead_list;              /**< when a dynamic allocated task destroyed, we ho
+  90:..//kernel/core/include/tos_task.h **** #endif
+  91:..//kernel/core/include/tos_task.h **** 
+  92:..//kernel/core/include/tos_task.h ****     k_list_t            stat_list;              /**< list for hooking us to the k_stat_list */
+  93:..//kernel/core/include/tos_task.h **** 
+  94:..//kernel/core/include/tos_task.h ****     k_tick_t            tick_expires;           /**< if we are in k_tick_list, how much time will w
+  95:..//kernel/core/include/tos_task.h **** 
+  96:..//kernel/core/include/tos_task.h ****     k_list_t            tick_list;              /**< list for hooking us to the k_tick_list */
+  97:..//kernel/core/include/tos_task.h ****     k_list_t            pend_list;              /**< when we are ready, our pend_list is in readyqu
+  98:..//kernel/core/include/tos_task.h **** 
+  99:..//kernel/core/include/tos_task.h **** #if TOS_CFG_MUTEX_EN > 0u
+ 100:..//kernel/core/include/tos_task.h ****     k_list_t            mutex_own_list;         /**< the list hold all the mutex we own.
+ 101:..//kernel/core/include/tos_task.h ****                                                     When we die(tos_task_destroy), we have an oblig
+ 102:..//kernel/core/include/tos_task.h ****                                                     if not, those pending tasks may never get a cha
+ 103:..//kernel/core/include/tos_task.h ****     k_prio_t            prio_pending;           /*< when tos_task_prio_change called, we may be jus
+ 104:..//kernel/core/include/tos_task.h ****                                                     to avoid PRIORITY INVERSION, must make sure our
+ 105:..//kernel/core/include/tos_task.h ****                                                     the mutex we hold. So, if the prio_new of tos_t
+ 106:..//kernel/core/include/tos_task.h ****                                                     (may against the principle of PRIORITY INVERSIO
+ 107:..//kernel/core/include/tos_task.h ****                                                     change in the right time(mutex_old_owner_releas
+ 108:..//kernel/core/include/tos_task.h **** #endif
+ 109:..//kernel/core/include/tos_task.h **** 
+ 110:..//kernel/core/include/tos_task.h ****     pend_obj_t         *pending_obj;            /**< if we are pending, which pend object's list we
+ 111:..//kernel/core/include/tos_task.h ****     pend_state_t        pend_state;             /**< why we wakeup from a pend */
+ 112:..//kernel/core/include/tos_task.h **** 
+ 113:..//kernel/core/include/tos_task.h **** #if TOS_CFG_ROUND_ROBIN_EN > 0u
+ 114:..//kernel/core/include/tos_task.h ****     k_timeslice_t       timeslice_reload;   /**< if current time slice is used up, use time_slice_r
+ 115:..//kernel/core/include/tos_task.h ****     k_timeslice_t       timeslice;          /**< how much time slice left for us? */
+ 116:..//kernel/core/include/tos_task.h **** #endif
+ 117:..//kernel/core/include/tos_task.h **** 
+ 118:..//kernel/core/include/tos_task.h **** #if (TOS_CFG_MESSAGE_QUEUE_EN > 0u) || (TOS_CFG_PRIORITY_MESSAGE_QUEUE_EN > 0u)
+ 119:..//kernel/core/include/tos_task.h ****     void               *msg;                /**< if we pend a message queue successfully, our msg w
+ 120:..//kernel/core/include/tos_task.h **** #endif
+ 121:..//kernel/core/include/tos_task.h **** 
+ 122:..//kernel/core/include/tos_task.h **** #if (TOS_CFG_MAIL_QUEUE_EN > 0u) || (TOS_CFG_PRIORITY_MAIL_QUEUE_EN > 0u)
+ 123:..//kernel/core/include/tos_task.h ****     void               *mail;               /**< if we pend a mail queue successfully, our mail and
+ 124:..//kernel/core/include/tos_task.h ****     size_t              mail_size;
+ 125:..//kernel/core/include/tos_task.h **** #endif
+ 126:..//kernel/core/include/tos_task.h **** 
+ 127:..//kernel/core/include/tos_task.h **** #if TOS_CFG_EVENT_EN > 0u
+ 128:..//kernel/core/include/tos_task.h ****     k_opt_t             opt_event_pend;     /**< if we are pending an event, what's the option for 
+ 129:..//kernel/core/include/tos_task.h ****     k_event_flag_t      flag_expect;        /**< if we are pending an event, what event flag are we
+ 130:..//kernel/core/include/tos_task.h ****     k_event_flag_t     *flag_match;         /**< if we pend an event successfully, flag_match will 
+ 131:..//kernel/core/include/tos_task.h ****                                                     by tos_event_pend to the caller */
+ 132:..//kernel/core/include/tos_task.h **** #endif
+ 133:..//kernel/core/include/tos_task.h **** };
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 8
+
+
+ 134:..//kernel/core/include/tos_task.h **** 
+ 135:..//kernel/core/include/tos_task.h **** /**
+ 136:..//kernel/core/include/tos_task.h ****  * @brief Create a task.
+ 137:..//kernel/core/include/tos_task.h ****  * create a task.
+ 138:..//kernel/core/include/tos_task.h ****  *
+ 139:..//kernel/core/include/tos_task.h ****  * @attention None
+ 140:..//kernel/core/include/tos_task.h ****  *
+ 141:..//kernel/core/include/tos_task.h ****  * @param[in]   task        pointer to the handler of the task.
+ 142:..//kernel/core/include/tos_task.h ****  * @param[in]   name        name of the task.
+ 143:..//kernel/core/include/tos_task.h ****  * @param[in]   entry       running entry of the task.
+ 144:..//kernel/core/include/tos_task.h ****  * @param[in]   arg         argument for the entry of the task.
+ 145:..//kernel/core/include/tos_task.h ****  * @param[in]   prio        priority of the task.
+ 146:..//kernel/core/include/tos_task.h ****  * @param[in]   stk_base    stack base address of the task.
+ 147:..//kernel/core/include/tos_task.h ****  * @param[in]   stk_size    stack size of the task.
+ 148:..//kernel/core/include/tos_task.h ****  * @param[in]   timeslice   time slice of the task.
+ 149:..//kernel/core/include/tos_task.h ****  *
+ 150:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 151:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_STK_SIZE_INVALID    stack size is invalid.
+ 152:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_PRIO_INVALID        priority is invalid.
+ 153:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE                     return successfully.
+ 154:..//kernel/core/include/tos_task.h ****  */
+ 155:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_create(k_task_t *task,
+ 156:..//kernel/core/include/tos_task.h ****                                             char *name,
+ 157:..//kernel/core/include/tos_task.h ****                                             k_task_entry_t entry,
+ 158:..//kernel/core/include/tos_task.h ****                                             void *arg,
+ 159:..//kernel/core/include/tos_task.h ****                                             k_prio_t prio,
+ 160:..//kernel/core/include/tos_task.h ****                                             k_stack_t *stk_base,
+ 161:..//kernel/core/include/tos_task.h ****                                             size_t stk_size,
+ 162:..//kernel/core/include/tos_task.h ****                                             k_timeslice_t timeslice);
+ 163:..//kernel/core/include/tos_task.h **** 
+ 164:..//kernel/core/include/tos_task.h **** /**
+ 165:..//kernel/core/include/tos_task.h ****  * @brief Destroy a task.
+ 166:..//kernel/core/include/tos_task.h ****  * delete a task.
+ 167:..//kernel/core/include/tos_task.h ****  *
+ 168:..//kernel/core/include/tos_task.h ****  * @attention None
+ 169:..//kernel/core/include/tos_task.h ****  *
+ 170:..//kernel/core/include/tos_task.h ****  * @param[in]   task        pointer to the handler of the task to be deleted.
+ 171:..//kernel/core/include/tos_task.h ****  *
+ 172:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 173:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_DESTROY_IDLE    attempt to destroy idle task.
+ 174:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE                 return successfully.
+ 175:..//kernel/core/include/tos_task.h ****  */
+ 176:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_destroy(k_task_t *task);
+ 177:..//kernel/core/include/tos_task.h **** 
+ 178:..//kernel/core/include/tos_task.h **** #if TOS_CFG_TASK_DYNAMIC_CREATE_EN > 0u
+ 179:..//kernel/core/include/tos_task.h **** 
+ 180:..//kernel/core/include/tos_task.h **** /**
+ 181:..//kernel/core/include/tos_task.h ****  * @brief Create a task with a dynamic allocated task handler and stack.
+ 182:..//kernel/core/include/tos_task.h ****  * create a task with a dynamic allocated task handler and stack.
+ 183:..//kernel/core/include/tos_task.h ****  *
+ 184:..//kernel/core/include/tos_task.h ****  * @param[out]  task        dynamic allocated task handler.
+ 185:..//kernel/core/include/tos_task.h ****  * @param[in]   name        name of the task.
+ 186:..//kernel/core/include/tos_task.h ****  * @param[in]   entry       running entry of the task.
+ 187:..//kernel/core/include/tos_task.h ****  * @param[in]   arg         argument for the entry of the task.
+ 188:..//kernel/core/include/tos_task.h ****  * @param[in]   prio        priority of the task.
+ 189:..//kernel/core/include/tos_task.h ****  * @param[in]   stk_size    stack size of the task.
+ 190:..//kernel/core/include/tos_task.h ****  * @param[in]   timeslice   time slice of the task.
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 9
+
+
+ 191:..//kernel/core/include/tos_task.h ****  *
+ 192:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 193:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_STK_SIZE_INVALID    stack size is invalid.
+ 194:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_PRIO_INVALID        priority is invalid.
+ 195:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_OUT_OF_MEMORY       out of memory(insufficient heap memory).
+ 196:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE                     return successfully.
+ 197:..//kernel/core/include/tos_task.h ****  */
+ 198:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_create_dyn(k_task_t **task,
+ 199:..//kernel/core/include/tos_task.h ****                                                     char *name,
+ 200:..//kernel/core/include/tos_task.h ****                                                     k_task_entry_t entry,
+ 201:..//kernel/core/include/tos_task.h ****                                                     void *arg,
+ 202:..//kernel/core/include/tos_task.h ****                                                     k_prio_t prio,
+ 203:..//kernel/core/include/tos_task.h ****                                                     size_t stk_size,
+ 204:..//kernel/core/include/tos_task.h ****                                                     k_timeslice_t timeslice);
+ 205:..//kernel/core/include/tos_task.h **** 
+ 206:..//kernel/core/include/tos_task.h **** #endif
+ 207:..//kernel/core/include/tos_task.h **** 
+ 208:..//kernel/core/include/tos_task.h **** /**
+ 209:..//kernel/core/include/tos_task.h ****  * @brief Delay current task for ticks.
+ 210:..//kernel/core/include/tos_task.h ****  * Delay for a specified amount of ticks.
+ 211:..//kernel/core/include/tos_task.h ****  *
+ 212:..//kernel/core/include/tos_task.h ****  * @attention None
+ 213:..//kernel/core/include/tos_task.h ****  *
+ 214:..//kernel/core/include/tos_task.h ****  * @param[in]   delay       amount of ticks to delay.
+ 215:..//kernel/core/include/tos_task.h ****  *
+ 216:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 217:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_DELAY_ZERO     delay is zero.
+ 218:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE           return successfully.
+ 219:..//kernel/core/include/tos_task.h ****  */
+ 220:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_delay(k_tick_t delay);
+ 221:..//kernel/core/include/tos_task.h **** 
+ 222:..//kernel/core/include/tos_task.h **** /**
+ 223:..//kernel/core/include/tos_task.h ****  * @brief Resume task from delay.
+ 224:..//kernel/core/include/tos_task.h ****  * Resume a delayed task from delay.
+ 225:..//kernel/core/include/tos_task.h ****  *
+ 226:..//kernel/core/include/tos_task.h ****  * @attention None
+ 227:..//kernel/core/include/tos_task.h ****  *
+ 228:..//kernel/core/include/tos_task.h ****  * @param[in]   task        the pointer to the handler of the task.
+ 229:..//kernel/core/include/tos_task.h ****  *
+ 230:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 231:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_NOT_DELAY         task is not delayed.
+ 232:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_SUSPENDED         task is suspended.
+ 233:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE                   return successfully.
+ 234:..//kernel/core/include/tos_task.h ****  */
+ 235:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_delay_abort(k_task_t *task);
+ 236:..//kernel/core/include/tos_task.h **** 
+ 237:..//kernel/core/include/tos_task.h **** /**
+ 238:..//kernel/core/include/tos_task.h ****  * @brief Suspend a task.
+ 239:..//kernel/core/include/tos_task.h ****  * Bring a task to sleep.
+ 240:..//kernel/core/include/tos_task.h ****  *
+ 241:..//kernel/core/include/tos_task.h ****  * @attention None
+ 242:..//kernel/core/include/tos_task.h ****  *
+ 243:..//kernel/core/include/tos_task.h ****  * @param[in]   task        pointer to the handler of the task to be resume.
+ 244:..//kernel/core/include/tos_task.h ****  *
+ 245:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 246:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_SUSPEND_IDLE  attempt to suspend idle task.
+ 247:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE               return successfully.
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 10
+
+
+ 248:..//kernel/core/include/tos_task.h ****  */
+ 249:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_suspend(k_task_t *task);
+ 250:..//kernel/core/include/tos_task.h **** 
+ 251:..//kernel/core/include/tos_task.h **** /**
+ 252:..//kernel/core/include/tos_task.h ****  * @brief Resume a task.
+ 253:..//kernel/core/include/tos_task.h ****  * Bring a task to run.
+ 254:..//kernel/core/include/tos_task.h ****  *
+ 255:..//kernel/core/include/tos_task.h ****  * @attention None
+ 256:..//kernel/core/include/tos_task.h ****  *
+ 257:..//kernel/core/include/tos_task.h ****  * @param[in]   task        pointer to the handler of the task to be resume.
+ 258:..//kernel/core/include/tos_task.h ****  *
+ 259:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 260:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_RESUME_SELF   attempt to resume self-task.
+ 261:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE               return successfully.
+ 262:..//kernel/core/include/tos_task.h ****  */
+ 263:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_resume(k_task_t *task);
+ 264:..//kernel/core/include/tos_task.h **** 
+ 265:..//kernel/core/include/tos_task.h **** /**
+ 266:..//kernel/core/include/tos_task.h ****  * @brief Change task priority.
+ 267:..//kernel/core/include/tos_task.h ****  * Change a priority of the task.
+ 268:..//kernel/core/include/tos_task.h ****  *
+ 269:..//kernel/core/include/tos_task.h ****  * @attention None
+ 270:..//kernel/core/include/tos_task.h ****  *
+ 271:..//kernel/core/include/tos_task.h ****  * @param[in]   task        pointer to the handler of the task to be resume.
+ 272:..//kernel/core/include/tos_task.h ****  * @param[in]   prio_new    new priority.
+ 273:..//kernel/core/include/tos_task.h ****  *
+ 274:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 275:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_PRIO_INVALID  new priority is invalid.
+ 276:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE               return successfully.
+ 277:..//kernel/core/include/tos_task.h ****  */
+ 278:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_prio_change(k_task_t *task, k_prio_t prio_new);
+ 279:..//kernel/core/include/tos_task.h **** 
+ 280:..//kernel/core/include/tos_task.h **** /**
+ 281:..//kernel/core/include/tos_task.h ****  * @brief Quit schedule this time.
+ 282:..//kernel/core/include/tos_task.h ****  * Quit the cpu this time.
+ 283:..//kernel/core/include/tos_task.h ****  *
+ 284:..//kernel/core/include/tos_task.h ****  * @attention None
+ 285:..//kernel/core/include/tos_task.h ****  *
+ 286:..//kernel/core/include/tos_task.h ****  * @param   None
+ 287:..//kernel/core/include/tos_task.h ****  *
+ 288:..//kernel/core/include/tos_task.h ****  * @return  None
+ 289:..//kernel/core/include/tos_task.h ****  */
+ 290:..//kernel/core/include/tos_task.h **** __API__ void    tos_task_yield(void);
+ 291:..//kernel/core/include/tos_task.h **** 
+ 292:..//kernel/core/include/tos_task.h **** /**
+ 293:..//kernel/core/include/tos_task.h ****  * @brief Get current running task.
+ 294:..//kernel/core/include/tos_task.h ****  * Get current running task.
+ 295:..//kernel/core/include/tos_task.h ****  *
+ 296:..//kernel/core/include/tos_task.h ****  * @attention if kernel is not running, you'll get K_NULL
+ 297:..//kernel/core/include/tos_task.h ****  *
+ 298:..//kernel/core/include/tos_task.h ****  * @param   None
+ 299:..//kernel/core/include/tos_task.h ****  *
+ 300:..//kernel/core/include/tos_task.h ****  * @return  current running task handler
+ 301:..//kernel/core/include/tos_task.h ****  */
+ 302:..//kernel/core/include/tos_task.h **** __API__ k_task_t *tos_task_curr_task_get(void);
+ 303:..//kernel/core/include/tos_task.h **** 
+ 304:..//kernel/core/include/tos_task.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 11
+
+
+ 305:..//kernel/core/include/tos_task.h **** #if TOS_CFG_TASK_STACK_DRAUGHT_DEPTH_DETACT_EN > 0u
+ 306:..//kernel/core/include/tos_task.h **** 
+ 307:..//kernel/core/include/tos_task.h **** /**
+ 308:..//kernel/core/include/tos_task.h ****  * @brief Get the maximum stack draught depth of a task.
+ 309:..//kernel/core/include/tos_task.h ****  *
+ 310:..//kernel/core/include/tos_task.h ****  * @attention None
+ 311:..//kernel/core/include/tos_task.h ****  *
+ 312:..//kernel/core/include/tos_task.h ****  * @param[in]   task        pointer to the handler of the task.
+ 313:..//kernel/core/include/tos_task.h ****  * @param[out]  depth       task stack draught depth.
+ 314:..//kernel/core/include/tos_task.h ****  *
+ 315:..//kernel/core/include/tos_task.h ****  * @return  errcode
+ 316:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_NONE                 get depth successfully.
+ 317:..//kernel/core/include/tos_task.h ****  * @retval  #K_ERR_TASK_STK_OVERFLOW    task stack is overflow.
+ 318:..//kernel/core/include/tos_task.h ****  */
+ 319:..//kernel/core/include/tos_task.h **** __API__ k_err_t tos_task_stack_draught_depth(k_task_t *task, int *depth);
+ 320:..//kernel/core/include/tos_task.h **** 
+ 321:..//kernel/core/include/tos_task.h **** #endif
+ 322:..//kernel/core/include/tos_task.h **** 
+ 323:..//kernel/core/include/tos_task.h **** /**
+ 324:..//kernel/core/include/tos_task.h ****  * @brief Walk through all the tasks in the statistic list.
+ 325:..//kernel/core/include/tos_task.h ****  *
+ 326:..//kernel/core/include/tos_task.h ****  * @attention None
+ 327:..//kernel/core/include/tos_task.h ****  *
+ 328:..//kernel/core/include/tos_task.h ****  * @param[in]   walker      a function involved when meeting each tasks in the list.
+ 329:..//kernel/core/include/tos_task.h ****  *
+ 330:..//kernel/core/include/tos_task.h ****  * @return  None
+ 331:..//kernel/core/include/tos_task.h ****  */
+ 332:..//kernel/core/include/tos_task.h **** __API__ void tos_task_walkthru(k_task_walker_t walker);
+ 333:..//kernel/core/include/tos_task.h **** 
+ 334:..//kernel/core/include/tos_task.h **** /**
+ 335:..//kernel/core/include/tos_task.h ****  * @brief A debug API for display all tasks information.
+ 336:..//kernel/core/include/tos_task.h ****  *
+ 337:..//kernel/core/include/tos_task.h ****  * @attention None
+ 338:..//kernel/core/include/tos_task.h ****  *
+ 339:..//kernel/core/include/tos_task.h ****  * @param   None
+ 340:..//kernel/core/include/tos_task.h ****  *
+ 341:..//kernel/core/include/tos_task.h ****  * @return  None
+ 342:..//kernel/core/include/tos_task.h ****  */
+ 343:..//kernel/core/include/tos_task.h **** __DEBUG__ void tos_task_info_display(void);
+ 344:..//kernel/core/include/tos_task.h **** 
+ 345:..//kernel/core/include/tos_task.h **** __KNL__ void task_free_all(void);
+ 346:..//kernel/core/include/tos_task.h **** 
+ 347:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ int task_state_is_ready(k_task_t *task)
+ 348:..//kernel/core/include/tos_task.h **** {
+ 349:..//kernel/core/include/tos_task.h ****     return task->state == K_TASK_STATE_READY;
+ 350:..//kernel/core/include/tos_task.h **** }
+ 351:..//kernel/core/include/tos_task.h **** 
+ 352:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ int task_state_is_sleeping(k_task_t *task)
+ 353:..//kernel/core/include/tos_task.h **** {
+ 354:..//kernel/core/include/tos_task.h ****     return task->state & K_TASK_STATE_SLEEP;
+ 355:..//kernel/core/include/tos_task.h **** }
+ 356:..//kernel/core/include/tos_task.h **** 
+ 357:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ int task_state_is_pending(k_task_t *task)
+ 358:..//kernel/core/include/tos_task.h **** {
+ 359:..//kernel/core/include/tos_task.h ****     return task->state & K_TASK_STATE_PEND;
+ 360:..//kernel/core/include/tos_task.h **** }
+ 361:..//kernel/core/include/tos_task.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 12
+
+
+ 362:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ int task_state_is_suspended(k_task_t *task)
+ 363:..//kernel/core/include/tos_task.h **** {
+ 364:..//kernel/core/include/tos_task.h ****     return task->state & K_TASK_STATE_SUSPENDED;
+ 365:..//kernel/core/include/tos_task.h **** }
+ 366:..//kernel/core/include/tos_task.h **** 
+ 367:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ void task_state_reset_pending(k_task_t *task)
+ 368:..//kernel/core/include/tos_task.h **** {
+ 369:..//kernel/core/include/tos_task.h ****     task->state &= ~K_TASK_STATE_PEND;
+ 370:..//kernel/core/include/tos_task.h **** }
+ 371:..//kernel/core/include/tos_task.h **** 
+ 372:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ void task_state_reset_sleeping(k_task_t *task)
+ 373:..//kernel/core/include/tos_task.h **** {
+ 374:..//kernel/core/include/tos_task.h ****     task->state &= ~K_TASK_STATE_SLEEP;
+ 375:..//kernel/core/include/tos_task.h **** }
+ 376:..//kernel/core/include/tos_task.h **** 
+ 377:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ void task_state_reset_suspended(k_task_t *task)
+ 378:..//kernel/core/include/tos_task.h **** {
+ 379:..//kernel/core/include/tos_task.h ****     task->state &= ~K_TASK_STATE_SUSPENDED;
+ 380:..//kernel/core/include/tos_task.h **** }
+ 381:..//kernel/core/include/tos_task.h **** 
+ 382:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ void task_state_set_suspended(k_task_t *task)
+ 383:..//kernel/core/include/tos_task.h **** {
+ 384:..//kernel/core/include/tos_task.h ****     task->state |= K_TASK_STATE_SUSPENDED;
+ 385:..//kernel/core/include/tos_task.h **** }
+ 386:..//kernel/core/include/tos_task.h **** 
+ 387:..//kernel/core/include/tos_task.h **** __KNL__ __STATIC_INLINE__ void task_state_set_pend(k_task_t *task)
+ 107              		.loc 3 387 32 view .LVU29
+ 108              	.LBB41:
+ 388:..//kernel/core/include/tos_task.h **** {
+ 389:..//kernel/core/include/tos_task.h ****     task->state |= K_TASK_STATE_PEND;
+ 109              		.loc 3 389 5 view .LVU30
+ 110              		.loc 3 389 17 is_stmt 0 view .LVU31
+ 111 0030 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 112              	.LVL8:
+ 113              		.loc 3 389 17 view .LVU32
+ 114 0034 43F00203 		orr	r3, r3, #2
+ 115 0038 80F82030 		strb	r3, [r0, #32]
+ 116              	.LVL9:
+ 117              		.loc 3 389 17 view .LVU33
+ 118              	.LBE41:
+ 119              	.LBE40:
+  37:..//kernel/core/tos_pend.c **** }
+ 120              		.loc 1 37 1 view .LVU34
+ 121 003c 30BC     		pop	{r4, r5}
+ 122              	.LCFI1:
+ 123              		.cfi_restore 5
+ 124              		.cfi_restore 4
+ 125              		.cfi_def_cfa_offset 0
+ 126 003e 7047     		bx	lr
+ 127              		.cfi_endproc
+ 128              	.LFE110:
+ 130              		.section	.text.pend_highest_pending_prio_get,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	pend_highest_pending_prio_get
+ 133              		.syntax unified
+ 134              		.thumb
+ 135              		.thumb_func
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 13
+
+
+ 136              		.fpu softvfp
+ 138              	pend_highest_pending_prio_get:
+ 139              	.LVL10:
+ 140              	.LFB111:
+  38:..//kernel/core/tos_pend.c **** 
+  39:..//kernel/core/tos_pend.c **** __KNL__ k_prio_t pend_highest_pending_prio_get(pend_obj_t *object)
+  40:..//kernel/core/tos_pend.c **** {
+ 141              		.loc 1 40 1 is_stmt 1 view -0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145              		@ link register save eliminated.
+  41:..//kernel/core/tos_pend.c ****     k_task_t *task;
+ 146              		.loc 1 41 5 view .LVU36
+  42:..//kernel/core/tos_pend.c **** 
+  43:..//kernel/core/tos_pend.c ****     // we keep the task priority in descending order, so the first one is just fine.
+  44:..//kernel/core/tos_pend.c ****     task = TOS_LIST_FIRST_ENTRY_OR_NULL(&object->list, k_task_t, pend_list);
+ 147              		.loc 1 44 5 view .LVU37
+ 148              	.LBB42:
+ 149              	.LBI42:
+ 113:..//kernel/core/include/tos_list.h **** }
+ 114:..//kernel/core/include/tos_list.h **** 
+ 115:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_del(k_list_t *node)
+ 116:..//kernel/core/include/tos_list.h **** {
+ 117:..//kernel/core/include/tos_list.h ****     _list_del(node->prev, node->next);
+ 118:..//kernel/core/include/tos_list.h **** }
+ 119:..//kernel/core/include/tos_list.h **** 
+ 120:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_del_init(k_list_t *node)
+ 121:..//kernel/core/include/tos_list.h **** {
+ 122:..//kernel/core/include/tos_list.h ****     _list_del_node(node);
+ 123:..//kernel/core/include/tos_list.h ****     tos_list_init(node);
+ 124:..//kernel/core/include/tos_list.h **** }
+ 125:..//kernel/core/include/tos_list.h **** 
+ 126:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_move(k_list_t *node, k_list_t *list)
+ 127:..//kernel/core/include/tos_list.h **** {
+ 128:..//kernel/core/include/tos_list.h ****     _list_del_node(node);
+ 129:..//kernel/core/include/tos_list.h ****     tos_list_add(node, list);
+ 130:..//kernel/core/include/tos_list.h **** }
+ 131:..//kernel/core/include/tos_list.h **** 
+ 132:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ void tos_list_move_tail(k_list_t *node, k_list_t *list)
+ 133:..//kernel/core/include/tos_list.h **** {
+ 134:..//kernel/core/include/tos_list.h ****     _list_del_node(node);
+ 135:..//kernel/core/include/tos_list.h ****     tos_list_add_tail(node, list);
+ 136:..//kernel/core/include/tos_list.h **** }
+ 137:..//kernel/core/include/tos_list.h **** 
+ 138:..//kernel/core/include/tos_list.h **** __API__ __STATIC_INLINE__ int tos_list_empty(const k_list_t *list)
+ 150              		.loc 2 138 31 view .LVU38
+ 151              	.LBB43:
+ 139:..//kernel/core/include/tos_list.h **** {
+ 140:..//kernel/core/include/tos_list.h ****     return list->next == list;
+ 152              		.loc 2 140 5 view .LVU39
+ 153              		.loc 2 140 16 is_stmt 0 view .LVU40
+ 154 0000 0368     		ldr	r3, [r0]
+ 155              	.LVL11:
+ 156              		.loc 2 140 16 view .LVU41
+ 157              	.LBE43:
+ 158              	.LBE42:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 14
+
+
+ 159              		.loc 1 44 12 view .LVU42
+ 160 0002 9842     		cmp	r0, r3
+ 161 0004 04D0     		beq	.L8
+ 162              	.LVL12:
+  45:..//kernel/core/tos_pend.c ****     return task ? task->prio : K_TASK_PRIO_INVALID;
+ 163              		.loc 1 45 5 is_stmt 1 discriminator 1 view .LVU43
+ 164              		.loc 1 45 30 is_stmt 0 discriminator 1 view .LVU44
+ 165 0006 503B     		subs	r3, r3, #80
+ 166              	.LVL13:
+ 167              		.loc 1 45 30 discriminator 1 view .LVU45
+ 168 0008 04D0     		beq	.L9
+ 169 000a 93F82100 		ldrb	r0, [r3, #33]	@ zero_extendqisi2
+ 170              	.LVL14:
+ 171              		.loc 1 45 30 discriminator 1 view .LVU46
+ 172 000e 7047     		bx	lr
+ 173              	.LVL15:
+ 174              	.L8:
+ 175              		.loc 1 45 30 view .LVU47
+ 176 0010 0A20     		movs	r0, #10
+ 177              	.LVL16:
+ 178              		.loc 1 45 30 view .LVU48
+ 179 0012 7047     		bx	lr
+ 180              	.LVL17:
+ 181              	.L9:
+ 182              		.loc 1 45 30 view .LVU49
+ 183 0014 0A20     		movs	r0, #10
+ 184              	.LVL18:
+  46:..//kernel/core/tos_pend.c **** }
+ 185              		.loc 1 46 1 view .LVU50
+ 186 0016 7047     		bx	lr
+ 187              		.cfi_endproc
+ 188              	.LFE111:
+ 190              		.section	.text.pend_highest_pending_task_get,"ax",%progbits
+ 191              		.align	1
+ 192              		.global	pend_highest_pending_task_get
+ 193              		.syntax unified
+ 194              		.thumb
+ 195              		.thumb_func
+ 196              		.fpu softvfp
+ 198              	pend_highest_pending_task_get:
+ 199              	.LVL19:
+ 200              	.LFB112:
+  47:..//kernel/core/tos_pend.c **** 
+  48:..//kernel/core/tos_pend.c **** __KNL__ k_task_t *pend_highest_pending_task_get(pend_obj_t *object)
+  49:..//kernel/core/tos_pend.c **** {
+ 201              		.loc 1 49 1 is_stmt 1 view -0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205              		@ link register save eliminated.
+  50:..//kernel/core/tos_pend.c ****     return TOS_LIST_FIRST_ENTRY(&object->list, k_task_t, pend_list);
+ 206              		.loc 1 50 5 view .LVU52
+ 207              		.loc 1 50 12 is_stmt 0 view .LVU53
+ 208 0000 0068     		ldr	r0, [r0]
+ 209              	.LVL20:
+  51:..//kernel/core/tos_pend.c **** }
+ 210              		.loc 1 51 1 view .LVU54
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 15
+
+
+ 211 0002 5038     		subs	r0, r0, #80
+ 212 0004 7047     		bx	lr
+ 213              		.cfi_endproc
+ 214              	.LFE112:
+ 216              		.section	.text.pend_list_remove,"ax",%progbits
+ 217              		.align	1
+ 218              		.global	pend_list_remove
+ 219              		.syntax unified
+ 220              		.thumb
+ 221              		.thumb_func
+ 222              		.fpu softvfp
+ 224              	pend_list_remove:
+ 225              	.LVL21:
+ 226              	.LFB113:
+  52:..//kernel/core/tos_pend.c **** 
+  53:..//kernel/core/tos_pend.c **** __KNL__ void pend_list_remove(k_task_t *task)
+  54:..//kernel/core/tos_pend.c **** {
+ 227              		.loc 1 54 1 is_stmt 1 view -0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 0
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              		@ link register save eliminated.
+  55:..//kernel/core/tos_pend.c ****     tos_list_del(&task->pend_list);
+ 232              		.loc 1 55 5 view .LVU56
+ 233              	.LBB44:
+ 234              	.LBI44:
+ 115:..//kernel/core/include/tos_list.h **** {
+ 235              		.loc 2 115 32 view .LVU57
+ 236              	.LBB45:
+ 117:..//kernel/core/include/tos_list.h **** }
+ 237              		.loc 2 117 5 view .LVU58
+ 117:..//kernel/core/include/tos_list.h **** }
+ 238              		.loc 2 117 19 is_stmt 0 view .LVU59
+ 239 0000 436D     		ldr	r3, [r0, #84]
+ 117:..//kernel/core/include/tos_list.h **** }
+ 240              		.loc 2 117 31 view .LVU60
+ 241 0002 026D     		ldr	r2, [r0, #80]
+ 242              	.LVL22:
+ 243              	.LBB46:
+ 244              	.LBI46:
+  88:..//kernel/core/include/tos_list.h **** {
+ 245              		.loc 2 88 24 is_stmt 1 view .LVU61
+ 246              	.LBB47:
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 247              		.loc 2 90 5 view .LVU62
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 248              		.loc 2 90 16 is_stmt 0 view .LVU63
+ 249 0004 5360     		str	r3, [r2, #4]
+  91:..//kernel/core/include/tos_list.h **** }
+ 250              		.loc 2 91 5 is_stmt 1 view .LVU64
+  91:..//kernel/core/include/tos_list.h **** }
+ 251              		.loc 2 91 16 is_stmt 0 view .LVU65
+ 252 0006 1A60     		str	r2, [r3]
+ 253              	.LVL23:
+  91:..//kernel/core/include/tos_list.h **** }
+ 254              		.loc 2 91 16 view .LVU66
+ 255              	.LBE47:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 16
+
+
+ 256              	.LBE46:
+ 257              	.LBE45:
+ 258              	.LBE44:
+  56:..//kernel/core/tos_pend.c **** 
+  57:..//kernel/core/tos_pend.c ****     task->pending_obj = (pend_obj_t *)K_NULL;
+ 259              		.loc 1 57 5 is_stmt 1 view .LVU67
+ 260              		.loc 1 57 23 is_stmt 0 view .LVU68
+ 261 0008 0023     		movs	r3, #0
+ 262 000a 4366     		str	r3, [r0, #100]
+  58:..//kernel/core/tos_pend.c ****     task_state_reset_pending(task);
+ 263              		.loc 1 58 5 is_stmt 1 view .LVU69
+ 264              	.LVL24:
+ 265              	.LBB48:
+ 266              	.LBI48:
+ 367:..//kernel/core/include/tos_task.h **** {
+ 267              		.loc 3 367 32 view .LVU70
+ 268              	.LBB49:
+ 369:..//kernel/core/include/tos_task.h **** }
+ 269              		.loc 3 369 5 view .LVU71
+ 369:..//kernel/core/include/tos_task.h **** }
+ 270              		.loc 3 369 17 is_stmt 0 view .LVU72
+ 271 000c 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 272 0010 23F00203 		bic	r3, r3, #2
+ 273 0014 80F82030 		strb	r3, [r0, #32]
+ 274              	.LVL25:
+ 369:..//kernel/core/include/tos_task.h **** }
+ 275              		.loc 3 369 17 view .LVU73
+ 276              	.LBE49:
+ 277              	.LBE48:
+  59:..//kernel/core/tos_pend.c **** }
+ 278              		.loc 1 59 1 view .LVU74
+ 279 0018 7047     		bx	lr
+ 280              		.cfi_endproc
+ 281              	.LFE113:
+ 283              		.section	.text.pend_object_init,"ax",%progbits
+ 284              		.align	1
+ 285              		.global	pend_object_init
+ 286              		.syntax unified
+ 287              		.thumb
+ 288              		.thumb_func
+ 289              		.fpu softvfp
+ 291              	pend_object_init:
+ 292              	.LVL26:
+ 293              	.LFB114:
+  60:..//kernel/core/tos_pend.c **** 
+  61:..//kernel/core/tos_pend.c **** __KNL__ void pend_object_init(pend_obj_t *object)
+  62:..//kernel/core/tos_pend.c **** {
+ 294              		.loc 1 62 1 is_stmt 1 view -0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298              		@ link register save eliminated.
+  63:..//kernel/core/tos_pend.c ****     tos_list_init(&object->list);
+ 299              		.loc 1 63 5 view .LVU76
+ 300              	.LBB50:
+ 301              	.LBI50:
+  99:..//kernel/core/include/tos_list.h **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 17
+
+
+ 302              		.loc 2 99 32 view .LVU77
+ 303              	.LBB51:
+ 101:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 304              		.loc 2 101 5 view .LVU78
+ 101:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 305              		.loc 2 101 16 is_stmt 0 view .LVU79
+ 306 0000 0060     		str	r0, [r0]
+ 102:..//kernel/core/include/tos_list.h **** }
+ 307              		.loc 2 102 5 is_stmt 1 view .LVU80
+ 102:..//kernel/core/include/tos_list.h **** }
+ 308              		.loc 2 102 16 is_stmt 0 view .LVU81
+ 309 0002 4060     		str	r0, [r0, #4]
+ 310              	.LVL27:
+ 102:..//kernel/core/include/tos_list.h **** }
+ 311              		.loc 2 102 16 view .LVU82
+ 312              	.LBE51:
+ 313              	.LBE50:
+  64:..//kernel/core/tos_pend.c **** }
+ 314              		.loc 1 64 1 view .LVU83
+ 315 0004 7047     		bx	lr
+ 316              		.cfi_endproc
+ 317              	.LFE114:
+ 319              		.section	.text.pend_object_deinit,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	pend_object_deinit
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 325              		.fpu softvfp
+ 327              	pend_object_deinit:
+ 328              	.LVL28:
+ 329              	.LFB115:
+  65:..//kernel/core/tos_pend.c **** 
+  66:..//kernel/core/tos_pend.c **** __KNL__ void pend_object_deinit(pend_obj_t *object)
+  67:..//kernel/core/tos_pend.c **** {
+ 330              		.loc 1 67 1 is_stmt 1 view -0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334              		@ link register save eliminated.
+  68:..//kernel/core/tos_pend.c ****     tos_list_init(&object->list);
+ 335              		.loc 1 68 5 view .LVU85
+ 336              	.LBB52:
+ 337              	.LBI52:
+  99:..//kernel/core/include/tos_list.h **** {
+ 338              		.loc 2 99 32 view .LVU86
+ 339              	.LBB53:
+ 101:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 340              		.loc 2 101 5 view .LVU87
+ 101:..//kernel/core/include/tos_list.h ****     list->prev = list;
+ 341              		.loc 2 101 16 is_stmt 0 view .LVU88
+ 342 0000 0060     		str	r0, [r0]
+ 102:..//kernel/core/include/tos_list.h **** }
+ 343              		.loc 2 102 5 is_stmt 1 view .LVU89
+ 102:..//kernel/core/include/tos_list.h **** }
+ 344              		.loc 2 102 16 is_stmt 0 view .LVU90
+ 345 0002 4060     		str	r0, [r0, #4]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 18
+
+
+ 346              	.LVL29:
+ 102:..//kernel/core/include/tos_list.h **** }
+ 347              		.loc 2 102 16 view .LVU91
+ 348              	.LBE53:
+ 349              	.LBE52:
+  69:..//kernel/core/tos_pend.c **** }
+ 350              		.loc 1 69 1 view .LVU92
+ 351 0004 7047     		bx	lr
+ 352              		.cfi_endproc
+ 353              	.LFE115:
+ 355              		.section	.text.pend_is_nopending,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	pend_is_nopending
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 361              		.fpu softvfp
+ 363              	pend_is_nopending:
+ 364              	.LVL30:
+ 365              	.LFB116:
+  70:..//kernel/core/tos_pend.c **** 
+  71:..//kernel/core/tos_pend.c **** __KNL__ int pend_is_nopending(pend_obj_t *object)
+  72:..//kernel/core/tos_pend.c **** {
+ 366              		.loc 1 72 1 is_stmt 1 view -0
+ 367              		.cfi_startproc
+ 368              		@ args = 0, pretend = 0, frame = 0
+ 369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 370              		@ link register save eliminated.
+  73:..//kernel/core/tos_pend.c ****     return tos_list_empty(&object->list);
+ 371              		.loc 1 73 5 view .LVU94
+ 372              	.LBB54:
+ 373              	.LBI54:
+ 138:..//kernel/core/include/tos_list.h **** {
+ 374              		.loc 2 138 31 view .LVU95
+ 375              	.LBB55:
+ 376              		.loc 2 140 5 view .LVU96
+ 377              		.loc 2 140 16 is_stmt 0 view .LVU97
+ 378 0000 0368     		ldr	r3, [r0]
+ 379              	.LVL31:
+ 380              		.loc 2 140 16 view .LVU98
+ 381              	.LBE55:
+ 382              	.LBE54:
+  74:..//kernel/core/tos_pend.c **** }
+ 383              		.loc 1 74 1 view .LVU99
+ 384 0002 9842     		cmp	r0, r3
+ 385 0004 14BF     		ite	ne
+ 386 0006 0020     		movne	r0, #0
+ 387              	.LVL32:
+ 388              		.loc 1 74 1 view .LVU100
+ 389 0008 0120     		moveq	r0, #1
+ 390 000a 7047     		bx	lr
+ 391              		.cfi_endproc
+ 392              	.LFE116:
+ 394              		.section	.text.pend_list_adjust,"ax",%progbits
+ 395              		.align	1
+ 396              		.global	pend_list_adjust
+ 397              		.syntax unified
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 19
+
+
+ 398              		.thumb
+ 399              		.thumb_func
+ 400              		.fpu softvfp
+ 402              	pend_list_adjust:
+ 403              	.LVL33:
+ 404              	.LFB117:
+  75:..//kernel/core/tos_pend.c **** 
+  76:..//kernel/core/tos_pend.c **** __KNL__ void pend_list_adjust(k_task_t *task)
+  77:..//kernel/core/tos_pend.c **** {
+ 405              		.loc 1 77 1 is_stmt 1 view -0
+ 406              		.cfi_startproc
+ 407              		@ args = 0, pretend = 0, frame = 0
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409              		.loc 1 77 1 is_stmt 0 view .LVU102
+ 410 0000 08B5     		push	{r3, lr}
+ 411              	.LCFI2:
+ 412              		.cfi_def_cfa_offset 8
+ 413              		.cfi_offset 3, -8
+ 414              		.cfi_offset 14, -4
+  78:..//kernel/core/tos_pend.c ****     // we may be the boss, so re-enter the pend list
+  79:..//kernel/core/tos_pend.c ****     tos_list_del(&task->pend_list);
+ 415              		.loc 1 79 5 is_stmt 1 view .LVU103
+ 416              	.LVL34:
+ 417              	.LBB56:
+ 418              	.LBI56:
+ 115:..//kernel/core/include/tos_list.h **** {
+ 419              		.loc 2 115 32 view .LVU104
+ 420              	.LBB57:
+ 117:..//kernel/core/include/tos_list.h **** }
+ 421              		.loc 2 117 5 view .LVU105
+ 117:..//kernel/core/include/tos_list.h **** }
+ 422              		.loc 2 117 19 is_stmt 0 view .LVU106
+ 423 0002 426D     		ldr	r2, [r0, #84]
+ 117:..//kernel/core/include/tos_list.h **** }
+ 424              		.loc 2 117 31 view .LVU107
+ 425 0004 016D     		ldr	r1, [r0, #80]
+ 426              	.LVL35:
+ 427              	.LBB58:
+ 428              	.LBI58:
+  88:..//kernel/core/include/tos_list.h **** {
+ 429              		.loc 2 88 24 is_stmt 1 view .LVU108
+ 430              	.LBB59:
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 431              		.loc 2 90 5 view .LVU109
+  90:..//kernel/core/include/tos_list.h ****     prev->next = next;
+ 432              		.loc 2 90 16 is_stmt 0 view .LVU110
+ 433 0006 4A60     		str	r2, [r1, #4]
+  91:..//kernel/core/include/tos_list.h **** }
+ 434              		.loc 2 91 5 is_stmt 1 view .LVU111
+  91:..//kernel/core/include/tos_list.h **** }
+ 435              		.loc 2 91 16 is_stmt 0 view .LVU112
+ 436 0008 1160     		str	r1, [r2]
+ 437              	.LVL36:
+  91:..//kernel/core/include/tos_list.h **** }
+ 438              		.loc 2 91 16 view .LVU113
+ 439              	.LBE59:
+ 440              	.LBE58:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 20
+
+
+ 441              	.LBE57:
+ 442              	.LBE56:
+  80:..//kernel/core/tos_pend.c ****     // the "someday" comes
+  81:..//kernel/core/tos_pend.c ****     pend_list_add(task, task->pending_obj);
+ 443              		.loc 1 81 5 is_stmt 1 view .LVU114
+ 444 000a 416E     		ldr	r1, [r0, #100]
+ 445 000c FFF7FEFF 		bl	pend_list_add
+ 446              	.LVL37:
+  82:..//kernel/core/tos_pend.c **** }
+ 447              		.loc 1 82 1 is_stmt 0 view .LVU115
+ 448 0010 08BD     		pop	{r3, pc}
+ 449              		.cfi_endproc
+ 450              	.LFE117:
+ 452              		.section	.text.pend_state2errno,"ax",%progbits
+ 453              		.align	1
+ 454              		.global	pend_state2errno
+ 455              		.syntax unified
+ 456              		.thumb
+ 457              		.thumb_func
+ 458              		.fpu softvfp
+ 460              	pend_state2errno:
+ 461              	.LVL38:
+ 462              	.LFB118:
+  83:..//kernel/core/tos_pend.c **** 
+  84:..//kernel/core/tos_pend.c **** __KNL__ k_err_t pend_state2errno(pend_state_t state)
+  85:..//kernel/core/tos_pend.c **** {
+ 463              		.loc 1 85 1 is_stmt 1 view -0
+ 464              		.cfi_startproc
+ 465              		@ args = 0, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+ 467              		@ link register save eliminated.
+  86:..//kernel/core/tos_pend.c ****     if (state == PEND_STATE_POST) {
+ 468              		.loc 1 86 5 view .LVU117
+ 469              		.loc 1 86 8 is_stmt 0 view .LVU118
+ 470 0000 0128     		cmp	r0, #1
+ 471 0002 0BD0     		beq	.L19
+  87:..//kernel/core/tos_pend.c ****         return K_ERR_NONE;
+  88:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_TIMEOUT) {
+ 472              		.loc 1 88 12 is_stmt 1 view .LVU119
+ 473              		.loc 1 88 15 is_stmt 0 view .LVU120
+ 474 0004 0228     		cmp	r0, #2
+ 475 0006 0BD0     		beq	.L20
+  89:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_TIMEOUT;
+  90:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_DESTROY) {
+ 476              		.loc 1 90 12 is_stmt 1 view .LVU121
+ 477              		.loc 1 90 15 is_stmt 0 view .LVU122
+ 478 0008 0328     		cmp	r0, #3
+ 479 000a 0CD0     		beq	.L21
+  91:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_DESTROY;
+  92:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_OWNER_DIE) {
+ 480              		.loc 1 92 12 is_stmt 1 view .LVU123
+ 481              		.loc 1 92 15 is_stmt 0 view .LVU124
+ 482 000c 0428     		cmp	r0, #4
+ 483 000e 02D0     		beq	.L23
+  93:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_OWNER_DIE;
+  94:..//kernel/core/tos_pend.c ****     } else {
+  95:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_ABNORMAL;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 21
+
+
+ 484              		.loc 1 95 16 view .LVU125
+ 485 0010 40F2B240 		movw	r0, #1202
+ 486              	.LVL39:
+  96:..//kernel/core/tos_pend.c ****     }
+  97:..//kernel/core/tos_pend.c **** }
+ 487              		.loc 1 97 1 view .LVU126
+ 488 0014 7047     		bx	lr
+ 489              	.LVL40:
+ 490              	.L23:
+  93:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_OWNER_DIE;
+ 491              		.loc 1 93 16 view .LVU127
+ 492 0016 40F2B540 		movw	r0, #1205
+ 493              	.LVL41:
+  93:..//kernel/core/tos_pend.c ****         return K_ERR_PEND_OWNER_DIE;
+ 494              		.loc 1 93 16 view .LVU128
+ 495 001a 7047     		bx	lr
+ 496              	.LVL42:
+ 497              	.L19:
+  87:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_TIMEOUT) {
+ 498              		.loc 1 87 16 view .LVU129
+ 499 001c 0020     		movs	r0, #0
+ 500              	.LVL43:
+  87:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_TIMEOUT) {
+ 501              		.loc 1 87 16 view .LVU130
+ 502 001e 7047     		bx	lr
+ 503              	.LVL44:
+ 504              	.L20:
+  89:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_DESTROY) {
+ 505              		.loc 1 89 16 view .LVU131
+ 506 0020 40F2B340 		movw	r0, #1203
+ 507              	.LVL45:
+  89:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_DESTROY) {
+ 508              		.loc 1 89 16 view .LVU132
+ 509 0024 7047     		bx	lr
+ 510              	.LVL46:
+ 511              	.L21:
+  91:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_OWNER_DIE) {
+ 512              		.loc 1 91 16 view .LVU133
+ 513 0026 40F2B440 		movw	r0, #1204
+ 514              	.LVL47:
+  91:..//kernel/core/tos_pend.c ****     } else if (state == PEND_STATE_OWNER_DIE) {
+ 515              		.loc 1 91 16 view .LVU134
+ 516 002a 7047     		bx	lr
+ 517              		.cfi_endproc
+ 518              	.LFE118:
+ 520              		.section	.text.pend_task_wakeup,"ax",%progbits
+ 521              		.align	1
+ 522              		.global	pend_task_wakeup
+ 523              		.syntax unified
+ 524              		.thumb
+ 525              		.thumb_func
+ 526              		.fpu softvfp
+ 528              	pend_task_wakeup:
+ 529              	.LVL48:
+ 530              	.LFB119:
+  98:..//kernel/core/tos_pend.c **** 
+  99:..//kernel/core/tos_pend.c **** __KNL__ void pend_task_wakeup(k_task_t *task, pend_state_t state)
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 22
+
+
+ 100:..//kernel/core/tos_pend.c **** {
+ 531              		.loc 1 100 1 is_stmt 1 view -0
+ 532              		.cfi_startproc
+ 533              		@ args = 0, pretend = 0, frame = 0
+ 534              		@ frame_needed = 0, uses_anonymous_args = 0
+ 535              		.loc 1 100 1 is_stmt 0 view .LVU136
+ 536 0000 10B5     		push	{r4, lr}
+ 537              	.LCFI3:
+ 538              		.cfi_def_cfa_offset 8
+ 539              		.cfi_offset 4, -8
+ 540              		.cfi_offset 14, -4
+ 541 0002 0446     		mov	r4, r0
+ 101:..//kernel/core/tos_pend.c ****     if (task_state_is_pending(task)) {
+ 542              		.loc 1 101 5 is_stmt 1 view .LVU137
+ 543              	.LVL49:
+ 544              	.LBB60:
+ 545              	.LBI60:
+ 357:..//kernel/core/include/tos_task.h **** {
+ 546              		.loc 3 357 31 view .LVU138
+ 547              	.LBB61:
+ 359:..//kernel/core/include/tos_task.h **** }
+ 548              		.loc 3 359 5 view .LVU139
+ 359:..//kernel/core/include/tos_task.h **** }
+ 549              		.loc 3 359 16 is_stmt 0 view .LVU140
+ 550 0004 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 551              	.LVL50:
+ 359:..//kernel/core/include/tos_task.h **** }
+ 552              		.loc 3 359 16 view .LVU141
+ 553              	.LBE61:
+ 554              	.LBE60:
+ 555              		.loc 1 101 8 view .LVU142
+ 556 0008 13F0020F 		tst	r3, #2
+ 557 000c 0AD1     		bne	.L29
+ 558              	.LVL51:
+ 559              	.L25:
+ 102:..//kernel/core/tos_pend.c ****         // mark why we wakeup
+ 103:..//kernel/core/tos_pend.c ****         task->pend_state = state;
+ 104:..//kernel/core/tos_pend.c ****         pend_list_remove(task);
+ 105:..//kernel/core/tos_pend.c ****     }
+ 106:..//kernel/core/tos_pend.c **** 
+ 107:..//kernel/core/tos_pend.c ****     if (task_state_is_sleeping(task)) {
+ 560              		.loc 1 107 5 is_stmt 1 view .LVU143
+ 561              	.LBB62:
+ 562              	.LBI62:
+ 352:..//kernel/core/include/tos_task.h **** {
+ 563              		.loc 3 352 31 view .LVU144
+ 564              	.LBB63:
+ 354:..//kernel/core/include/tos_task.h **** }
+ 565              		.loc 3 354 5 view .LVU145
+ 354:..//kernel/core/include/tos_task.h **** }
+ 566              		.loc 3 354 16 is_stmt 0 view .LVU146
+ 567 000e 94F82030 		ldrb	r3, [r4, #32]	@ zero_extendqisi2
+ 568              	.LVL52:
+ 354:..//kernel/core/include/tos_task.h **** }
+ 569              		.loc 3 354 16 view .LVU147
+ 570              	.LBE63:
+ 571              	.LBE62:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 23
+
+
+ 572              		.loc 1 107 8 view .LVU148
+ 573 0012 13F0010F 		tst	r3, #1
+ 574 0016 0AD1     		bne	.L30
+ 575              	.L26:
+ 108:..//kernel/core/tos_pend.c ****         tick_list_remove(task);
+ 109:..//kernel/core/tos_pend.c ****     }
+ 110:..//kernel/core/tos_pend.c **** 
+ 111:..//kernel/core/tos_pend.c ****     if (task_state_is_suspended(task)) {
+ 576              		.loc 1 111 5 is_stmt 1 view .LVU149
+ 577              	.LVL53:
+ 578              	.LBB64:
+ 579              	.LBI64:
+ 362:..//kernel/core/include/tos_task.h **** {
+ 580              		.loc 3 362 31 view .LVU150
+ 581              	.LBB65:
+ 364:..//kernel/core/include/tos_task.h **** }
+ 582              		.loc 3 364 5 view .LVU151
+ 364:..//kernel/core/include/tos_task.h **** }
+ 583              		.loc 3 364 16 is_stmt 0 view .LVU152
+ 584 0018 94F82030 		ldrb	r3, [r4, #32]	@ zero_extendqisi2
+ 585              	.LVL54:
+ 364:..//kernel/core/include/tos_task.h **** }
+ 586              		.loc 3 364 16 view .LVU153
+ 587              	.LBE65:
+ 588              	.LBE64:
+ 589              		.loc 1 111 8 view .LVU154
+ 590 001c 13F0040F 		tst	r3, #4
+ 591 0020 09D0     		beq	.L31
+ 592              	.L24:
+ 112:..//kernel/core/tos_pend.c ****         return;
+ 113:..//kernel/core/tos_pend.c ****     }
+ 114:..//kernel/core/tos_pend.c **** 
+ 115:..//kernel/core/tos_pend.c ****     readyqueue_add(task);
+ 116:..//kernel/core/tos_pend.c **** }
+ 593              		.loc 1 116 1 view .LVU155
+ 594 0022 10BD     		pop	{r4, pc}
+ 595              	.LVL55:
+ 596              	.L29:
+ 103:..//kernel/core/tos_pend.c ****         pend_list_remove(task);
+ 597              		.loc 1 103 9 is_stmt 1 view .LVU156
+ 103:..//kernel/core/tos_pend.c ****         pend_list_remove(task);
+ 598              		.loc 1 103 26 is_stmt 0 view .LVU157
+ 599 0024 80F86810 		strb	r1, [r0, #104]
+ 104:..//kernel/core/tos_pend.c ****     }
+ 600              		.loc 1 104 9 is_stmt 1 view .LVU158
+ 601 0028 FFF7FEFF 		bl	pend_list_remove
+ 602              	.LVL56:
+ 104:..//kernel/core/tos_pend.c ****     }
+ 603              		.loc 1 104 9 is_stmt 0 view .LVU159
+ 604 002c EFE7     		b	.L25
+ 605              	.L30:
+ 108:..//kernel/core/tos_pend.c ****     }
+ 606              		.loc 1 108 9 is_stmt 1 view .LVU160
+ 607 002e 2046     		mov	r0, r4
+ 608 0030 FFF7FEFF 		bl	tick_list_remove
+ 609              	.LVL57:
+ 610 0034 F0E7     		b	.L26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 24
+
+
+ 611              	.L31:
+ 115:..//kernel/core/tos_pend.c **** }
+ 612              		.loc 1 115 5 view .LVU161
+ 613 0036 2046     		mov	r0, r4
+ 614 0038 FFF7FEFF 		bl	readyqueue_add
+ 615              	.LVL58:
+ 616 003c F1E7     		b	.L24
+ 617              		.cfi_endproc
+ 618              	.LFE119:
+ 620              		.section	.text.pend_task_block,"ax",%progbits
+ 621              		.align	1
+ 622              		.global	pend_task_block
+ 623              		.syntax unified
+ 624              		.thumb
+ 625              		.thumb_func
+ 626              		.fpu softvfp
+ 628              	pend_task_block:
+ 629              	.LVL59:
+ 630              	.LFB120:
+ 117:..//kernel/core/tos_pend.c **** 
+ 118:..//kernel/core/tos_pend.c **** __KNL__ void pend_task_block(k_task_t *task, pend_obj_t *object, k_tick_t timeout)
+ 119:..//kernel/core/tos_pend.c **** {
+ 631              		.loc 1 119 1 view -0
+ 632              		.cfi_startproc
+ 633              		@ args = 0, pretend = 0, frame = 0
+ 634              		@ frame_needed = 0, uses_anonymous_args = 0
+ 635              		.loc 1 119 1 is_stmt 0 view .LVU163
+ 636 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 637              	.LCFI4:
+ 638              		.cfi_def_cfa_offset 24
+ 639              		.cfi_offset 3, -24
+ 640              		.cfi_offset 4, -20
+ 641              		.cfi_offset 5, -16
+ 642              		.cfi_offset 6, -12
+ 643              		.cfi_offset 7, -8
+ 644              		.cfi_offset 14, -4
+ 645 0002 0446     		mov	r4, r0
+ 646 0004 0D46     		mov	r5, r1
+ 647 0006 1646     		mov	r6, r2
+ 648 0008 1F46     		mov	r7, r3
+ 120:..//kernel/core/tos_pend.c ****     readyqueue_remove(task);
+ 649              		.loc 1 120 5 is_stmt 1 view .LVU164
+ 650 000a FFF7FEFF 		bl	readyqueue_remove
+ 651              	.LVL60:
+ 121:..//kernel/core/tos_pend.c **** 
+ 122:..//kernel/core/tos_pend.c ****     task->pend_state = PEND_STATE_NONE;
+ 652              		.loc 1 122 5 view .LVU165
+ 653              		.loc 1 122 22 is_stmt 0 view .LVU166
+ 654 000e 0023     		movs	r3, #0
+ 655 0010 84F86830 		strb	r3, [r4, #104]
+ 123:..//kernel/core/tos_pend.c ****     pend_list_add(task, object);
+ 656              		.loc 1 123 5 is_stmt 1 view .LVU167
+ 657 0014 2946     		mov	r1, r5
+ 658 0016 2046     		mov	r0, r4
+ 659 0018 FFF7FEFF 		bl	pend_list_add
+ 660              	.LVL61:
+ 124:..//kernel/core/tos_pend.c **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 25
+
+
+ 125:..//kernel/core/tos_pend.c ****     if (timeout != TOS_TIME_FOREVER) {
+ 661              		.loc 1 125 5 view .LVU168
+ 662              		.loc 1 125 8 is_stmt 0 view .LVU169
+ 663 001c B7F1FF3F 		cmp	r7, #-1
+ 664 0020 08BF     		it	eq
+ 665 0022 B6F1FF3F 		cmpeq	r6, #-1
+ 666 0026 00D1     		bne	.L35
+ 667              	.L32:
+ 126:..//kernel/core/tos_pend.c ****         tick_list_add(task, timeout);
+ 127:..//kernel/core/tos_pend.c ****     }
+ 128:..//kernel/core/tos_pend.c **** }
+ 668              		.loc 1 128 1 view .LVU170
+ 669 0028 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 670              	.LVL62:
+ 671              	.L35:
+ 126:..//kernel/core/tos_pend.c ****         tick_list_add(task, timeout);
+ 672              		.loc 1 126 9 is_stmt 1 view .LVU171
+ 673 002a 3246     		mov	r2, r6
+ 674 002c 3B46     		mov	r3, r7
+ 675 002e 2046     		mov	r0, r4
+ 676 0030 FFF7FEFF 		bl	tick_list_add
+ 677              	.LVL63:
+ 678              		.loc 1 128 1 is_stmt 0 view .LVU172
+ 679 0034 F8E7     		b	.L32
+ 680              		.cfi_endproc
+ 681              	.LFE120:
+ 683              		.section	.text.pend_wakeup_one,"ax",%progbits
+ 684              		.align	1
+ 685              		.global	pend_wakeup_one
+ 686              		.syntax unified
+ 687              		.thumb
+ 688              		.thumb_func
+ 689              		.fpu softvfp
+ 691              	pend_wakeup_one:
+ 692              	.LVL64:
+ 693              	.LFB121:
+ 129:..//kernel/core/tos_pend.c **** 
+ 130:..//kernel/core/tos_pend.c **** __KNL__ void pend_wakeup_one(pend_obj_t *object, pend_state_t state)
+ 131:..//kernel/core/tos_pend.c **** {
+ 694              		.loc 1 131 1 is_stmt 1 view -0
+ 695              		.cfi_startproc
+ 696              		@ args = 0, pretend = 0, frame = 0
+ 697              		@ frame_needed = 0, uses_anonymous_args = 0
+ 698              		.loc 1 131 1 is_stmt 0 view .LVU174
+ 699 0000 08B5     		push	{r3, lr}
+ 700              	.LCFI5:
+ 701              		.cfi_def_cfa_offset 8
+ 702              		.cfi_offset 3, -8
+ 703              		.cfi_offset 14, -4
+ 132:..//kernel/core/tos_pend.c ****     pend_task_wakeup(TOS_LIST_FIRST_ENTRY(&object->list, k_task_t, pend_list), state);
+ 704              		.loc 1 132 5 is_stmt 1 view .LVU175
+ 705              		.loc 1 132 22 is_stmt 0 view .LVU176
+ 706 0002 0068     		ldr	r0, [r0]
+ 707              	.LVL65:
+ 708              		.loc 1 132 5 view .LVU177
+ 709 0004 5038     		subs	r0, r0, #80
+ 710 0006 FFF7FEFF 		bl	pend_task_wakeup
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 26
+
+
+ 711              	.LVL66:
+ 133:..//kernel/core/tos_pend.c **** }
+ 712              		.loc 1 133 1 view .LVU178
+ 713 000a 08BD     		pop	{r3, pc}
+ 714              		.cfi_endproc
+ 715              	.LFE121:
+ 717              		.section	.text.pend_wakeup_all,"ax",%progbits
+ 718              		.align	1
+ 719              		.global	pend_wakeup_all
+ 720              		.syntax unified
+ 721              		.thumb
+ 722              		.thumb_func
+ 723              		.fpu softvfp
+ 725              	pend_wakeup_all:
+ 726              	.LVL67:
+ 727              	.LFB122:
+ 134:..//kernel/core/tos_pend.c **** 
+ 135:..//kernel/core/tos_pend.c **** __KNL__ void pend_wakeup_all(pend_obj_t *object, pend_state_t state)
+ 136:..//kernel/core/tos_pend.c **** {
+ 728              		.loc 1 136 1 is_stmt 1 view -0
+ 729              		.cfi_startproc
+ 730              		@ args = 0, pretend = 0, frame = 0
+ 731              		@ frame_needed = 0, uses_anonymous_args = 0
+ 732              		.loc 1 136 1 is_stmt 0 view .LVU180
+ 733 0000 70B5     		push	{r4, r5, r6, lr}
+ 734              	.LCFI6:
+ 735              		.cfi_def_cfa_offset 16
+ 736              		.cfi_offset 4, -16
+ 737              		.cfi_offset 5, -12
+ 738              		.cfi_offset 6, -8
+ 739              		.cfi_offset 14, -4
+ 740 0002 0546     		mov	r5, r0
+ 741 0004 0E46     		mov	r6, r1
+ 137:..//kernel/core/tos_pend.c ****     k_task_t *task, *tmp;
+ 742              		.loc 1 137 5 is_stmt 1 view .LVU181
+ 138:..//kernel/core/tos_pend.c **** 
+ 139:..//kernel/core/tos_pend.c ****     TOS_LIST_FOR_EACH_ENTRY_SAFE(task, tmp, k_task_t, pend_list, &object->list) {
+ 743              		.loc 1 139 5 view .LVU182
+ 744 0006 0068     		ldr	r0, [r0]
+ 745              	.LVL68:
+ 746              		.loc 1 139 5 is_stmt 0 view .LVU183
+ 747 0008 50F85049 		ldr	r4, [r0], #-80
+ 748              	.LVL69:
+ 749              		.loc 1 139 5 view .LVU184
+ 750 000c 503C     		subs	r4, r4, #80
+ 751              	.LVL70:
+ 752              	.L39:
+ 753              		.loc 1 139 5 discriminator 1 view .LVU185
+ 754 000e 00F15003 		add	r3, r0, #80
+ 755 0012 AB42     		cmp	r3, r5
+ 756 0014 07D0     		beq	.L42
+ 140:..//kernel/core/tos_pend.c ****         pend_task_wakeup(task, state);
+ 757              		.loc 1 140 9 is_stmt 1 discriminator 3 view .LVU186
+ 758 0016 3146     		mov	r1, r6
+ 759 0018 FFF7FEFF 		bl	pend_task_wakeup
+ 760              	.LVL71:
+ 139:..//kernel/core/tos_pend.c ****         pend_task_wakeup(task, state);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 27
+
+
+ 761              		.loc 1 139 5 is_stmt 0 discriminator 3 view .LVU187
+ 762 001c 236D     		ldr	r3, [r4, #80]
+ 763              	.LVL72:
+ 139:..//kernel/core/tos_pend.c ****         pend_task_wakeup(task, state);
+ 764              		.loc 1 139 5 discriminator 3 view .LVU188
+ 765 001e 2046     		mov	r0, r4
+ 766 0020 A3F15004 		sub	r4, r3, #80
+ 767              	.LVL73:
+ 139:..//kernel/core/tos_pend.c ****         pend_task_wakeup(task, state);
+ 768              		.loc 1 139 5 discriminator 3 view .LVU189
+ 769 0024 F3E7     		b	.L39
+ 770              	.L42:
+ 141:..//kernel/core/tos_pend.c ****     }
+ 142:..//kernel/core/tos_pend.c **** }
+ 771              		.loc 1 142 1 view .LVU190
+ 772 0026 70BD     		pop	{r4, r5, r6, pc}
+ 773              		.loc 1 142 1 view .LVU191
+ 774              		.cfi_endproc
+ 775              	.LFE122:
+ 777              		.section	.text.pend_wakeup,"ax",%progbits
+ 778              		.align	1
+ 779              		.global	pend_wakeup
+ 780              		.syntax unified
+ 781              		.thumb
+ 782              		.thumb_func
+ 783              		.fpu softvfp
+ 785              	pend_wakeup:
+ 786              	.LVL74:
+ 787              	.LFB123:
+ 143:..//kernel/core/tos_pend.c **** 
+ 144:..//kernel/core/tos_pend.c **** __KNL__ void pend_wakeup(pend_obj_t *object, pend_state_t state, opt_post_t opt)
+ 145:..//kernel/core/tos_pend.c **** {
+ 788              		.loc 1 145 1 is_stmt 1 view -0
+ 789              		.cfi_startproc
+ 790              		@ args = 0, pretend = 0, frame = 0
+ 791              		@ frame_needed = 0, uses_anonymous_args = 0
+ 792              		.loc 1 145 1 is_stmt 0 view .LVU193
+ 793 0000 08B5     		push	{r3, lr}
+ 794              	.LCFI7:
+ 795              		.cfi_def_cfa_offset 8
+ 796              		.cfi_offset 3, -8
+ 797              		.cfi_offset 14, -4
+ 146:..//kernel/core/tos_pend.c ****     if (opt == OPT_POST_ONE) {
+ 798              		.loc 1 146 5 is_stmt 1 view .LVU194
+ 799              		.loc 1 146 8 is_stmt 0 view .LVU195
+ 800 0002 12B9     		cbnz	r2, .L44
+ 147:..//kernel/core/tos_pend.c ****         pend_wakeup_one(object, state);
+ 801              		.loc 1 147 9 is_stmt 1 view .LVU196
+ 802 0004 FFF7FEFF 		bl	pend_wakeup_one
+ 803              	.LVL75:
+ 804              	.L43:
+ 148:..//kernel/core/tos_pend.c ****     } else {
+ 149:..//kernel/core/tos_pend.c ****         pend_wakeup_all(object, state);
+ 150:..//kernel/core/tos_pend.c ****     }
+ 151:..//kernel/core/tos_pend.c **** }
+ 805              		.loc 1 151 1 is_stmt 0 view .LVU197
+ 806 0008 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 28
+
+
+ 807              	.LVL76:
+ 808              	.L44:
+ 149:..//kernel/core/tos_pend.c ****     }
+ 809              		.loc 1 149 9 is_stmt 1 view .LVU198
+ 810 000a FFF7FEFF 		bl	pend_wakeup_all
+ 811              	.LVL77:
+ 812              		.loc 1 151 1 is_stmt 0 view .LVU199
+ 813 000e FBE7     		b	.L43
+ 814              		.cfi_endproc
+ 815              	.LFE123:
+ 817              		.text
+ 818              	.Letext0:
+ 819              		.file 4 "..//kernel/core/include/tos_kerr.h"
+ 820              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 821              		.file 6 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 822              		.file 7 "Drivers/CMSIS/Include/core_cm3.h"
+ 823              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 824              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 825              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 826              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 827              		.file 12 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 828              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 829              		.file 14 "..//kernel/core/include/tos_ktypes.h"
+ 830              		.file 15 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 831              		.file 16 "..//kernel/core/include/tos_pend.h"
+ 832              		.file 17 "..//kernel/core/include/tos_sys.h"
+ 833              		.file 18 "..//kernel/core/include/tos_timer.h"
+ 834              		.file 19 "..//kernel/core/include/tos_mmheap.h"
+ 835              		.file 20 "..//kernel/core/include/tos_sched.h"
+ 836              		.file 21 "..//kernel/core/include/tos_global.h"
+ 837              		.file 22 "..//kernel/core/include/tos_tick.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc8343IH.s 			page 29
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_pend.c
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:16     .text.pend_list_add:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:23     .text.pend_list_add:00000000 pend_list_add
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:131    .text.pend_highest_pending_prio_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:138    .text.pend_highest_pending_prio_get:00000000 pend_highest_pending_prio_get
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:191    .text.pend_highest_pending_task_get:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:198    .text.pend_highest_pending_task_get:00000000 pend_highest_pending_task_get
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:217    .text.pend_list_remove:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:224    .text.pend_list_remove:00000000 pend_list_remove
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:284    .text.pend_object_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:291    .text.pend_object_init:00000000 pend_object_init
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:320    .text.pend_object_deinit:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:327    .text.pend_object_deinit:00000000 pend_object_deinit
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:356    .text.pend_is_nopending:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:363    .text.pend_is_nopending:00000000 pend_is_nopending
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:395    .text.pend_list_adjust:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:402    .text.pend_list_adjust:00000000 pend_list_adjust
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:453    .text.pend_state2errno:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:460    .text.pend_state2errno:00000000 pend_state2errno
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:521    .text.pend_task_wakeup:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:528    .text.pend_task_wakeup:00000000 pend_task_wakeup
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:621    .text.pend_task_block:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:628    .text.pend_task_block:00000000 pend_task_block
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:684    .text.pend_wakeup_one:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:691    .text.pend_wakeup_one:00000000 pend_wakeup_one
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:718    .text.pend_wakeup_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:725    .text.pend_wakeup_all:00000000 pend_wakeup_all
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:778    .text.pend_wakeup:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc8343IH.s:785    .text.pend_wakeup:00000000 pend_wakeup
+
+UNDEFINED SYMBOLS
+tick_list_remove
+readyqueue_add
+readyqueue_remove
+tick_list_add

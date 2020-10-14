@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -15,17 +15,18 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 1
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.section	.text.SystemClock_Config,"ax",%progbits
+  15              		.section	.text.task1,"ax",%progbits
   16              		.align	1
-  17              		.global	SystemClock_Config
+  17              		.global	task1
   18              		.arch armv7-m
   19              		.syntax unified
   20              		.thumb
   21              		.thumb_func
   22              		.fpu softvfp
-  24              	SystemClock_Config:
-  25              	.LFB67:
-  26              		.file 1 "Src/main.c"
+  24              	task1:
+  25              	.LVL0:
+  26              	.LFB110:
+  27              		.file 1 "Src/main.c"
    1:Src/main.c    **** /* USER CODE BEGIN Header */
    2:Src/main.c    **** /**
    3:Src/main.c    ****   ******************************************************************************
@@ -49,334 +50,485 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 1
   21:Src/main.c    **** /* Includes ------------------------------------------------------------------*/
   22:Src/main.c    **** #include "main.h"
   23:Src/main.c    **** #include "gpio.h"
-  24:Src/main.c    **** 
-  25:Src/main.c    **** /* Private includes ----------------------------------------------------------*/
-  26:Src/main.c    **** /* USER CODE BEGIN Includes */
-  27:Src/main.c    **** 
-  28:Src/main.c    **** /* USER CODE END Includes */
-  29:Src/main.c    **** 
-  30:Src/main.c    **** /* Private typedef -----------------------------------------------------------*/
-  31:Src/main.c    **** /* USER CODE BEGIN PTD */
-  32:Src/main.c    **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 2
+  24:Src/main.c    **** /* Private includes ----------------------------------------------------------*/
+  25:Src/main.c    **** /* USER CODE BEGIN Includes */
+  26:Src/main.c    **** #include "cmsis_os.h"
+  27:Src/main.c    **** //task1
+  28:Src/main.c    **** #define TASK1_STK_SIZE 512
+  29:Src/main.c    **** void task1(void *pdata);
+  30:Src/main.c    **** osThreadDef(task1, osPriorityNormal, 1, TASK1_STK_SIZE);
+  31:Src/main.c    **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 2
 
 
-  33:Src/main.c    **** /* USER CODE END PTD */
-  34:Src/main.c    **** 
-  35:Src/main.c    **** /* Private define ------------------------------------------------------------*/
-  36:Src/main.c    **** /* USER CODE BEGIN PD */
-  37:Src/main.c    **** 
-  38:Src/main.c    **** /* USER CODE END PD */
-  39:Src/main.c    **** 
-  40:Src/main.c    **** /* Private macro -------------------------------------------------------------*/
-  41:Src/main.c    **** /* USER CODE BEGIN PM */
+  32:Src/main.c    **** void task1(void *pdata)
+  33:Src/main.c    **** {
+  28              		.loc 1 33 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 33 1 is_stmt 0 view .LVU1
+  33 0000 10B5     		push	{r4, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 14, -4
+  34:Src/main.c    ****   int count = 1;
+  38              		.loc 1 34 3 is_stmt 1 view .LVU2
+  39              	.LVL1:
+  40              		.loc 1 34 7 is_stmt 0 view .LVU3
+  41 0002 0121     		movs	r1, #1
+  42              	.LVL2:
+  43              	.L2:
+  35:Src/main.c    ****   while (1)
+  44              		.loc 1 35 3 is_stmt 1 discriminator 1 view .LVU4
+  36:Src/main.c    ****   {
+  37:Src/main.c    ****     printf("\r\nHello world!\r\n###This is task1 ,count is %d \r\n", count++);
+  45              		.loc 1 37 5 discriminator 1 view .LVU5
+  46 0004 4C1C     		adds	r4, r1, #1
+  47              	.LVL3:
+  48              		.loc 1 37 5 is_stmt 0 discriminator 1 view .LVU6
+  49 0006 0648     		ldr	r0, .L4
+  50 0008 FFF7FEFF 		bl	printf
+  51              	.LVL4:
+  38:Src/main.c    ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+  52              		.loc 1 38 5 is_stmt 1 discriminator 1 view .LVU7
+  53 000c 2021     		movs	r1, #32
+  54 000e 0548     		ldr	r0, .L4+4
+  55 0010 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+  56              	.LVL5:
+  39:Src/main.c    ****     osDelay(2000);
+  57              		.loc 1 39 5 discriminator 1 view .LVU8
+  58 0014 4FF4FA60 		mov	r0, #2000
+  59 0018 FFF7FEFF 		bl	osDelay
+  60              	.LVL6:
+  37:Src/main.c    ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+  61              		.loc 1 37 5 is_stmt 0 discriminator 1 view .LVU9
+  62 001c 2146     		mov	r1, r4
+  63 001e F1E7     		b	.L2
+  64              	.L5:
+  65              		.align	2
+  66              	.L4:
+  67 0020 00000000 		.word	.LC0
+  68 0024 000C0140 		.word	1073810432
+  69              		.cfi_endproc
+  70              	.LFE110:
+  72              		.section	.text.SystemClock_Config,"ax",%progbits
+  73              		.align	1
+  74              		.global	SystemClock_Config
+  75              		.syntax unified
+  76              		.thumb
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 3
+
+
+  77              		.thumb_func
+  78              		.fpu softvfp
+  80              	SystemClock_Config:
+  81              	.LFB112:
+  40:Src/main.c    ****   }
+  41:Src/main.c    **** }
   42:Src/main.c    **** 
-  43:Src/main.c    **** /* USER CODE END PM */
+  43:Src/main.c    **** /* USER CODE END Includes */
   44:Src/main.c    **** 
-  45:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
-  46:Src/main.c    **** 
-  47:Src/main.c    **** /* USER CODE BEGIN PV */
-  48:Src/main.c    **** 
-  49:Src/main.c    **** /* USER CODE END PV */
-  50:Src/main.c    **** 
-  51:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
-  52:Src/main.c    **** void SystemClock_Config(void);
-  53:Src/main.c    **** /* USER CODE BEGIN PFP */
+  45:Src/main.c    **** /* Private typedef -----------------------------------------------------------*/
+  46:Src/main.c    **** /* USER CODE BEGIN PTD */
+  47:Src/main.c    **** 
+  48:Src/main.c    **** /* USER CODE END PTD */
+  49:Src/main.c    **** 
+  50:Src/main.c    **** /* Private define ------------------------------------------------------------*/
+  51:Src/main.c    **** /* USER CODE BEGIN PD */
+  52:Src/main.c    **** 
+  53:Src/main.c    **** /* USER CODE END PD */
   54:Src/main.c    **** 
-  55:Src/main.c    **** /* USER CODE END PFP */
-  56:Src/main.c    **** 
-  57:Src/main.c    **** /* Private user code ---------------------------------------------------------*/
-  58:Src/main.c    **** /* USER CODE BEGIN 0 */
+  55:Src/main.c    **** /* Private macro -------------------------------------------------------------*/
+  56:Src/main.c    **** /* USER CODE BEGIN PM */
+  57:Src/main.c    **** 
+  58:Src/main.c    **** /* USER CODE END PM */
   59:Src/main.c    **** 
-  60:Src/main.c    **** /* USER CODE END 0 */
+  60:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
   61:Src/main.c    **** 
-  62:Src/main.c    **** /**
-  63:Src/main.c    ****   * @brief  The application entry point.
-  64:Src/main.c    ****   * @retval int
-  65:Src/main.c    ****   */
-  66:Src/main.c    **** int main(void)
-  67:Src/main.c    **** {
-  68:Src/main.c    ****   /* USER CODE BEGIN 1 */
+  62:Src/main.c    **** /* USER CODE BEGIN PV */
+  63:Src/main.c    **** 
+  64:Src/main.c    **** /* USER CODE END PV */
+  65:Src/main.c    **** 
+  66:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  67:Src/main.c    **** void SystemClock_Config(void);
+  68:Src/main.c    **** /* USER CODE BEGIN PFP */
   69:Src/main.c    **** 
-  70:Src/main.c    ****   /* USER CODE END 1 */
-  71:Src/main.c    ****   
-  72:Src/main.c    **** 
-  73:Src/main.c    ****   /* MCU Configuration--------------------------------------------------------*/
+  70:Src/main.c    **** /* USER CODE END PFP */
+  71:Src/main.c    **** 
+  72:Src/main.c    **** /* Private user code ---------------------------------------------------------*/
+  73:Src/main.c    **** /* USER CODE BEGIN 0 */
   74:Src/main.c    **** 
-  75:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  76:Src/main.c    ****   HAL_Init();
-  77:Src/main.c    **** 
-  78:Src/main.c    ****   /* USER CODE BEGIN Init */
-  79:Src/main.c    **** 
-  80:Src/main.c    ****   /* USER CODE END Init */
-  81:Src/main.c    **** 
-  82:Src/main.c    ****   /* Configure the system clock */
-  83:Src/main.c    ****   SystemClock_Config();
-  84:Src/main.c    **** 
-  85:Src/main.c    ****   /* USER CODE BEGIN SysInit */
-  86:Src/main.c    **** 
-  87:Src/main.c    ****   /* USER CODE END SysInit */
-  88:Src/main.c    **** 
-  89:Src/main.c    ****   /* Initialize all configured peripherals */
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 3
-
-
-  90:Src/main.c    ****   MX_GPIO_Init();
-  91:Src/main.c    ****   /* USER CODE BEGIN 2 */
-  92:Src/main.c    **** 
-  93:Src/main.c    ****   /* USER CODE END 2 */
-  94:Src/main.c    **** 
-  95:Src/main.c    ****   /* Infinite loop */
-  96:Src/main.c    ****   /* USER CODE BEGIN WHILE */
-  97:Src/main.c    ****   while (1)
-  98:Src/main.c    ****   {
-  99:Src/main.c    ****     /* USER CODE END WHILE */
- 100:Src/main.c    **** 
- 101:Src/main.c    ****     /* USER CODE BEGIN 3 */
- 102:Src/main.c    ****   }
- 103:Src/main.c    ****   /* USER CODE END 3 */
- 104:Src/main.c    **** }
- 105:Src/main.c    **** 
- 106:Src/main.c    **** /**
- 107:Src/main.c    ****   * @brief System Clock Configuration
- 108:Src/main.c    ****   * @retval None
- 109:Src/main.c    ****   */
- 110:Src/main.c    **** void SystemClock_Config(void)
- 111:Src/main.c    **** {
-  27              		.loc 1 111 1 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 64
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31 0000 30B5     		push	{r4, r5, lr}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 12
-  34              		.cfi_offset 4, -12
-  35              		.cfi_offset 5, -8
-  36              		.cfi_offset 14, -4
-  37 0002 91B0     		sub	sp, sp, #68
-  38              	.LCFI1:
-  39              		.cfi_def_cfa_offset 80
- 112:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  40              		.loc 1 112 3 view .LVU1
-  41              		.loc 1 112 22 is_stmt 0 view .LVU2
-  42 0004 0024     		movs	r4, #0
-  43 0006 0994     		str	r4, [sp, #36]
-  44 0008 0B94     		str	r4, [sp, #44]
-  45 000a 0C94     		str	r4, [sp, #48]
- 113:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  46              		.loc 1 113 3 is_stmt 1 view .LVU3
-  47              		.loc 1 113 22 is_stmt 0 view .LVU4
-  48 000c 0194     		str	r4, [sp, #4]
-  49 000e 0294     		str	r4, [sp, #8]
-  50 0010 0394     		str	r4, [sp, #12]
-  51 0012 0494     		str	r4, [sp, #16]
-  52 0014 0594     		str	r4, [sp, #20]
- 114:Src/main.c    **** 
- 115:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 116:Src/main.c    ****   */
- 117:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  53              		.loc 1 117 3 is_stmt 1 view .LVU5
-  54              		.loc 1 117 36 is_stmt 0 view .LVU6
-  55 0016 0122     		movs	r2, #1
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 4
-
-
-  56 0018 0692     		str	r2, [sp, #24]
- 118:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  57              		.loc 1 118 3 is_stmt 1 view .LVU7
-  58              		.loc 1 118 30 is_stmt 0 view .LVU8
-  59 001a 4FF48033 		mov	r3, #65536
-  60 001e 0793     		str	r3, [sp, #28]
- 119:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
-  61              		.loc 1 119 3 is_stmt 1 view .LVU9
-  62              		.loc 1 119 36 is_stmt 0 view .LVU10
-  63 0020 0894     		str	r4, [sp, #32]
- 120:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  64              		.loc 1 120 3 is_stmt 1 view .LVU11
-  65              		.loc 1 120 30 is_stmt 0 view .LVU12
-  66 0022 0A92     		str	r2, [sp, #40]
- 121:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  67              		.loc 1 121 3 is_stmt 1 view .LVU13
-  68              		.loc 1 121 34 is_stmt 0 view .LVU14
-  69 0024 0225     		movs	r5, #2
-  70 0026 0D95     		str	r5, [sp, #52]
- 122:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  71              		.loc 1 122 3 is_stmt 1 view .LVU15
-  72              		.loc 1 122 35 is_stmt 0 view .LVU16
-  73 0028 0E93     		str	r3, [sp, #56]
- 123:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
-  74              		.loc 1 123 3 is_stmt 1 view .LVU17
-  75              		.loc 1 123 32 is_stmt 0 view .LVU18
-  76 002a 4FF4E013 		mov	r3, #1835008
-  77 002e 0F93     		str	r3, [sp, #60]
- 124:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  78              		.loc 1 124 3 is_stmt 1 view .LVU19
-  79              		.loc 1 124 7 is_stmt 0 view .LVU20
-  80 0030 06A8     		add	r0, sp, #24
-  81 0032 FFF7FEFF 		bl	HAL_RCC_OscConfig
-  82              	.LVL0:
- 125:Src/main.c    ****   {
- 126:Src/main.c    ****     Error_Handler();
- 127:Src/main.c    ****   }
- 128:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 129:Src/main.c    ****   */
- 130:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-  83              		.loc 1 130 3 is_stmt 1 view .LVU21
-  84              		.loc 1 130 31 is_stmt 0 view .LVU22
-  85 0036 0F23     		movs	r3, #15
-  86 0038 0193     		str	r3, [sp, #4]
- 131:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 132:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  87              		.loc 1 132 3 is_stmt 1 view .LVU23
-  88              		.loc 1 132 34 is_stmt 0 view .LVU24
-  89 003a 0295     		str	r5, [sp, #8]
- 133:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  90              		.loc 1 133 3 is_stmt 1 view .LVU25
-  91              		.loc 1 133 35 is_stmt 0 view .LVU26
-  92 003c 0394     		str	r4, [sp, #12]
- 134:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  93              		.loc 1 134 3 is_stmt 1 view .LVU27
-  94              		.loc 1 134 36 is_stmt 0 view .LVU28
-  95 003e 4FF48063 		mov	r3, #1024
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 5
-
-
-  96 0042 0493     		str	r3, [sp, #16]
- 135:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-  97              		.loc 1 135 3 is_stmt 1 view .LVU29
-  98              		.loc 1 135 36 is_stmt 0 view .LVU30
-  99 0044 0594     		str	r4, [sp, #20]
- 136:Src/main.c    **** 
- 137:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
- 100              		.loc 1 137 3 is_stmt 1 view .LVU31
- 101              		.loc 1 137 7 is_stmt 0 view .LVU32
- 102 0046 2946     		mov	r1, r5
- 103 0048 01A8     		add	r0, sp, #4
- 104 004a FFF7FEFF 		bl	HAL_RCC_ClockConfig
- 105              	.LVL1:
- 138:Src/main.c    ****   {
- 139:Src/main.c    ****     Error_Handler();
- 140:Src/main.c    ****   }
- 141:Src/main.c    **** }
- 106              		.loc 1 141 1 view .LVU33
- 107 004e 11B0     		add	sp, sp, #68
- 108              	.LCFI2:
- 109              		.cfi_def_cfa_offset 12
- 110              		@ sp needed
- 111 0050 30BD     		pop	{r4, r5, pc}
- 112              		.cfi_endproc
- 113              	.LFE67:
- 115              		.section	.text.main,"ax",%progbits
- 116              		.align	1
- 117              		.global	main
- 118              		.syntax unified
- 119              		.thumb
- 120              		.thumb_func
- 121              		.fpu softvfp
- 123              	main:
- 124              	.LFB66:
-  67:Src/main.c    ****   /* USER CODE BEGIN 1 */
- 125              		.loc 1 67 1 is_stmt 1 view -0
- 126              		.cfi_startproc
- 127              		@ Volatile: function does not return.
- 128              		@ args = 0, pretend = 0, frame = 0
- 129              		@ frame_needed = 0, uses_anonymous_args = 0
- 130 0000 08B5     		push	{r3, lr}
- 131              	.LCFI3:
- 132              		.cfi_def_cfa_offset 8
- 133              		.cfi_offset 3, -8
- 134              		.cfi_offset 14, -4
+  75:Src/main.c    **** /* USER CODE END 0 */
   76:Src/main.c    **** 
- 135              		.loc 1 76 3 view .LVU35
- 136 0002 FFF7FEFF 		bl	HAL_Init
- 137              	.LVL2:
-  83:Src/main.c    **** 
- 138              		.loc 1 83 3 view .LVU36
- 139 0006 FFF7FEFF 		bl	SystemClock_Config
- 140              	.LVL3:
-  90:Src/main.c    ****   /* USER CODE BEGIN 2 */
- 141              		.loc 1 90 3 view .LVU37
- 142 000a FFF7FEFF 		bl	MX_GPIO_Init
- 143              	.LVL4:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 6
+  77:Src/main.c    **** /**
+  78:Src/main.c    ****   * @brief  The application entry point.
+  79:Src/main.c    ****   * @retval int
+  80:Src/main.c    ****   */
+  81:Src/main.c    **** int main(void)
+  82:Src/main.c    **** {
+  83:Src/main.c    ****   /* USER CODE BEGIN 1 */
+  84:Src/main.c    **** 
+  85:Src/main.c    ****   /* USER CODE END 1 */
+  86:Src/main.c    **** 
+  87:Src/main.c    ****   /* MCU Configuration--------------------------------------------------------*/
+  88:Src/main.c    **** 
+  89:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  90:Src/main.c    ****   HAL_Init();
+  91:Src/main.c    **** 
+  92:Src/main.c    ****   /* USER CODE BEGIN Init */
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 4
 
 
- 144              	.L4:
-  97:Src/main.c    ****   {
- 145              		.loc 1 97 3 discriminator 1 view .LVU38
- 102:Src/main.c    ****   /* USER CODE END 3 */
- 146              		.loc 1 102 3 discriminator 1 view .LVU39
-  97:Src/main.c    ****   {
- 147              		.loc 1 97 9 discriminator 1 view .LVU40
- 148 000e FEE7     		b	.L4
- 149              		.cfi_endproc
- 150              	.LFE66:
- 152              		.section	.text.Error_Handler,"ax",%progbits
- 153              		.align	1
- 154              		.global	Error_Handler
- 155              		.syntax unified
- 156              		.thumb
- 157              		.thumb_func
- 158              		.fpu softvfp
- 160              	Error_Handler:
- 161              	.LFB68:
- 142:Src/main.c    **** 
- 143:Src/main.c    **** /* USER CODE BEGIN 4 */
- 144:Src/main.c    **** 
- 145:Src/main.c    **** /* USER CODE END 4 */
- 146:Src/main.c    **** 
- 147:Src/main.c    **** /**
- 148:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
- 149:Src/main.c    ****   * @retval None
- 150:Src/main.c    ****   */
- 151:Src/main.c    **** void Error_Handler(void)
- 152:Src/main.c    **** {
- 162              		.loc 1 152 1 view -0
- 163              		.cfi_startproc
- 164              		@ args = 0, pretend = 0, frame = 0
- 165              		@ frame_needed = 0, uses_anonymous_args = 0
- 166              		@ link register save eliminated.
- 153:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
- 154:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
- 155:Src/main.c    **** 
- 156:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
- 157:Src/main.c    **** }
- 167              		.loc 1 157 1 view .LVU42
- 168 0000 7047     		bx	lr
- 169              		.cfi_endproc
- 170              	.LFE68:
- 172              		.text
- 173              	.Letext0:
- 174              		.file 2 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\machine\\_default_types.h"
- 175              		.file 3 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_stdint.h"
- 176              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 177              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 178              		.file 6 "d:\\arm_gcc\\9 2020-q2-update\\lib\\gcc\\arm-none-eabi\\9.3.1\\include\\stddef.h"
- 179              		.file 7 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\_types.h"
- 180              		.file 8 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\reent.h"
- 181              		.file 9 "d:\\arm_gcc\\9 2020-q2-update\\arm-none-eabi\\include\\sys\\lock.h"
- 182              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 183              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
- 184              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 7
+  93:Src/main.c    **** 
+  94:Src/main.c    ****   /* USER CODE END Init */
+  95:Src/main.c    **** 
+  96:Src/main.c    ****   /* Configure the system clock */
+  97:Src/main.c    ****   SystemClock_Config();
+  98:Src/main.c    **** 
+  99:Src/main.c    ****   /* USER CODE BEGIN SysInit */
+ 100:Src/main.c    **** 
+ 101:Src/main.c    ****   /* USER CODE END SysInit */
+ 102:Src/main.c    **** 
+ 103:Src/main.c    ****   /* Initialize all configured peripherals */
+ 104:Src/main.c    ****   MX_GPIO_Init();
+ 105:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 106:Src/main.c    ****   osKernelInitialize();                  //TOS Tiny kernel initialize
+ 107:Src/main.c    ****   osThreadCreate(osThread(task1), NULL); // Create task1
+ 108:Src/main.c    ****   osKernelStart();                       //Start TOS Tiny
+ 109:Src/main.c    ****   /* USER CODE END 2 */
+ 110:Src/main.c    **** 
+ 111:Src/main.c    ****   /* Infinite loop */
+ 112:Src/main.c    ****   /* USER CODE BEGIN WHILE */
+ 113:Src/main.c    ****   while (1)
+ 114:Src/main.c    ****   {
+ 115:Src/main.c    ****     /* USER CODE END WHILE */
+ 116:Src/main.c    **** 
+ 117:Src/main.c    ****     /* USER CODE BEGIN 3 */
+ 118:Src/main.c    ****   }
+ 119:Src/main.c    ****   /* USER CODE END 3 */
+ 120:Src/main.c    **** }
+ 121:Src/main.c    **** 
+ 122:Src/main.c    **** /**
+ 123:Src/main.c    ****   * @brief System Clock Configuration
+ 124:Src/main.c    ****   * @retval None
+ 125:Src/main.c    ****   */
+ 126:Src/main.c    **** void SystemClock_Config(void)
+ 127:Src/main.c    **** {
+  82              		.loc 1 127 1 is_stmt 1 view -0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 64
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 30B5     		push	{r4, r5, lr}
+  87              	.LCFI1:
+  88              		.cfi_def_cfa_offset 12
+  89              		.cfi_offset 4, -12
+  90              		.cfi_offset 5, -8
+  91              		.cfi_offset 14, -4
+  92 0002 91B0     		sub	sp, sp, #68
+  93              	.LCFI2:
+  94              		.cfi_def_cfa_offset 80
+ 128:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  95              		.loc 1 128 3 view .LVU11
+  96              		.loc 1 128 22 is_stmt 0 view .LVU12
+  97 0004 0024     		movs	r4, #0
+  98 0006 0894     		str	r4, [sp, #32]
+  99 0008 0994     		str	r4, [sp, #36]
+ 100 000a 0B94     		str	r4, [sp, #44]
+ 101 000c 0C94     		str	r4, [sp, #48]
+ 129:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 5
 
 
- 185              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 186              		.file 14 "Inc/gpio.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cctWkruX.s 			page 8
+ 102              		.loc 1 129 3 is_stmt 1 view .LVU13
+ 103              		.loc 1 129 22 is_stmt 0 view .LVU14
+ 104 000e 0194     		str	r4, [sp, #4]
+ 105 0010 0294     		str	r4, [sp, #8]
+ 106 0012 0394     		str	r4, [sp, #12]
+ 107 0014 0494     		str	r4, [sp, #16]
+ 108 0016 0594     		str	r4, [sp, #20]
+ 130:Src/main.c    **** 
+ 131:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 132:Src/main.c    ****   */
+ 133:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ 109              		.loc 1 133 3 is_stmt 1 view .LVU15
+ 110              		.loc 1 133 36 is_stmt 0 view .LVU16
+ 111 0018 0122     		movs	r2, #1
+ 112 001a 0692     		str	r2, [sp, #24]
+ 134:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 113              		.loc 1 134 3 is_stmt 1 view .LVU17
+ 114              		.loc 1 134 30 is_stmt 0 view .LVU18
+ 115 001c 4FF48033 		mov	r3, #65536
+ 116 0020 0793     		str	r3, [sp, #28]
+ 135:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 117              		.loc 1 135 3 is_stmt 1 view .LVU19
+ 136:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 118              		.loc 1 136 3 view .LVU20
+ 119              		.loc 1 136 30 is_stmt 0 view .LVU21
+ 120 0022 0A92     		str	r2, [sp, #40]
+ 137:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 121              		.loc 1 137 3 is_stmt 1 view .LVU22
+ 122              		.loc 1 137 34 is_stmt 0 view .LVU23
+ 123 0024 0225     		movs	r5, #2
+ 124 0026 0D95     		str	r5, [sp, #52]
+ 138:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 125              		.loc 1 138 3 is_stmt 1 view .LVU24
+ 126              		.loc 1 138 35 is_stmt 0 view .LVU25
+ 127 0028 0E93     		str	r3, [sp, #56]
+ 139:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 128              		.loc 1 139 3 is_stmt 1 view .LVU26
+ 129              		.loc 1 139 32 is_stmt 0 view .LVU27
+ 130 002a 4FF4E013 		mov	r3, #1835008
+ 131 002e 0F93     		str	r3, [sp, #60]
+ 140:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 132              		.loc 1 140 3 is_stmt 1 view .LVU28
+ 133              		.loc 1 140 7 is_stmt 0 view .LVU29
+ 134 0030 06A8     		add	r0, sp, #24
+ 135 0032 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 136              	.LVL7:
+ 141:Src/main.c    ****   {
+ 142:Src/main.c    ****     Error_Handler();
+ 143:Src/main.c    ****   }
+ 144:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 145:Src/main.c    ****   */
+ 146:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | R
+ 137              		.loc 1 146 3 is_stmt 1 view .LVU30
+ 138              		.loc 1 146 31 is_stmt 0 view .LVU31
+ 139 0036 0F23     		movs	r3, #15
+ 140 0038 0193     		str	r3, [sp, #4]
+ 147:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 6
+
+
+ 141              		.loc 1 147 3 is_stmt 1 view .LVU32
+ 142              		.loc 1 147 34 is_stmt 0 view .LVU33
+ 143 003a 0295     		str	r5, [sp, #8]
+ 148:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 144              		.loc 1 148 3 is_stmt 1 view .LVU34
+ 145              		.loc 1 148 35 is_stmt 0 view .LVU35
+ 146 003c 0394     		str	r4, [sp, #12]
+ 149:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 147              		.loc 1 149 3 is_stmt 1 view .LVU36
+ 148              		.loc 1 149 36 is_stmt 0 view .LVU37
+ 149 003e 4FF48063 		mov	r3, #1024
+ 150 0042 0493     		str	r3, [sp, #16]
+ 150:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 151              		.loc 1 150 3 is_stmt 1 view .LVU38
+ 152              		.loc 1 150 36 is_stmt 0 view .LVU39
+ 153 0044 0594     		str	r4, [sp, #20]
+ 151:Src/main.c    **** 
+ 152:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+ 154              		.loc 1 152 3 is_stmt 1 view .LVU40
+ 155              		.loc 1 152 7 is_stmt 0 view .LVU41
+ 156 0046 2946     		mov	r1, r5
+ 157 0048 01A8     		add	r0, sp, #4
+ 158 004a FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 159              	.LVL8:
+ 153:Src/main.c    ****   {
+ 154:Src/main.c    ****     Error_Handler();
+ 155:Src/main.c    ****   }
+ 156:Src/main.c    **** }
+ 160              		.loc 1 156 1 view .LVU42
+ 161 004e 11B0     		add	sp, sp, #68
+ 162              	.LCFI3:
+ 163              		.cfi_def_cfa_offset 12
+ 164              		@ sp needed
+ 165 0050 30BD     		pop	{r4, r5, pc}
+ 166              		.cfi_endproc
+ 167              	.LFE112:
+ 169              		.section	.text.main,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	main
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.fpu softvfp
+ 177              	main:
+ 178              	.LFB111:
+  82:Src/main.c    ****   /* USER CODE BEGIN 1 */
+ 179              		.loc 1 82 1 is_stmt 1 view -0
+ 180              		.cfi_startproc
+ 181              		@ Volatile: function does not return.
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184 0000 08B5     		push	{r3, lr}
+ 185              	.LCFI4:
+ 186              		.cfi_def_cfa_offset 8
+ 187              		.cfi_offset 3, -8
+ 188              		.cfi_offset 14, -4
+  90:Src/main.c    **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 7
+
+
+ 189              		.loc 1 90 3 view .LVU44
+ 190 0002 FFF7FEFF 		bl	HAL_Init
+ 191              	.LVL9:
+  97:Src/main.c    **** 
+ 192              		.loc 1 97 3 view .LVU45
+ 193 0006 FFF7FEFF 		bl	SystemClock_Config
+ 194              	.LVL10:
+ 104:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 195              		.loc 1 104 3 view .LVU46
+ 196 000a FFF7FEFF 		bl	MX_GPIO_Init
+ 197              	.LVL11:
+ 106:Src/main.c    ****   osThreadCreate(osThread(task1), NULL); // Create task1
+ 198              		.loc 1 106 3 view .LVU47
+ 199 000e FFF7FEFF 		bl	osKernelInitialize
+ 200              	.LVL12:
+ 107:Src/main.c    ****   osKernelStart();                       //Start TOS Tiny
+ 201              		.loc 1 107 3 view .LVU48
+ 202 0012 0021     		movs	r1, #0
+ 203 0014 0248     		ldr	r0, .L11
+ 204 0016 FFF7FEFF 		bl	osThreadCreate
+ 205              	.LVL13:
+ 108:Src/main.c    ****   /* USER CODE END 2 */
+ 206              		.loc 1 108 3 view .LVU49
+ 207 001a FFF7FEFF 		bl	osKernelStart
+ 208              	.LVL14:
+ 209              	.L9:
+ 113:Src/main.c    ****   {
+ 210              		.loc 1 113 3 discriminator 1 view .LVU50
+ 118:Src/main.c    ****   /* USER CODE END 3 */
+ 211              		.loc 1 118 3 discriminator 1 view .LVU51
+ 212 001e FEE7     		b	.L9
+ 213              	.L12:
+ 214              		.align	2
+ 215              	.L11:
+ 216 0020 00000000 		.word	.LANCHOR0
+ 217              		.cfi_endproc
+ 218              	.LFE111:
+ 220              		.section	.text.Error_Handler,"ax",%progbits
+ 221              		.align	1
+ 222              		.global	Error_Handler
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ 226              		.fpu softvfp
+ 228              	Error_Handler:
+ 229              	.LFB113:
+ 157:Src/main.c    **** 
+ 158:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 159:Src/main.c    **** 
+ 160:Src/main.c    **** /* USER CODE END 4 */
+ 161:Src/main.c    **** 
+ 162:Src/main.c    **** /**
+ 163:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 164:Src/main.c    ****   * @retval None
+ 165:Src/main.c    ****   */
+ 166:Src/main.c    **** void Error_Handler(void)
+ 167:Src/main.c    **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 8
+
+
+ 230              		.loc 1 167 1 view -0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234              		@ link register save eliminated.
+ 168:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 169:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
+ 170:Src/main.c    **** 
+ 171:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
+ 172:Src/main.c    **** }
+ 235              		.loc 1 172 1 view .LVU53
+ 236 0000 7047     		bx	lr
+ 237              		.cfi_endproc
+ 238              	.LFE113:
+ 240              		.global	os_thread_def_task1
+ 241              		.comm	task_stack_task1,512,4
+ 242              		.comm	task_handler_task1,136,8
+ 243              		.section	.rodata.os_thread_def_task1,"a"
+ 244              		.align	2
+ 245              		.set	.LANCHOR0,. + 0
+ 248              	os_thread_def_task1:
+ 249 0000 00000000 		.word	.LC1
+ 250 0004 00000000 		.word	task1
+ 251 0008 0000     		.short	0
+ 252 000a 0000     		.space	2
+ 253 000c 01000000 		.word	1
+ 254 0010 00000000 		.word	task_stack_task1
+ 255 0014 00020000 		.word	512
+ 256 0018 00000000 		.word	0
+ 257 001c 00000000 		.word	task_handler_task1
+ 258              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 259              		.align	2
+ 260              	.LC1:
+ 261 0000 7461736B 		.ascii	"task1\000"
+ 261      3100
+ 262              		.section	.rodata.task1.str1.4,"aMS",%progbits,1
+ 263              		.align	2
+ 264              	.LC0:
+ 265 0000 0D0A4865 		.ascii	"\015\012Hello world!\015\012###This is task1 ,count"
+ 265      6C6C6F20 
+ 265      776F726C 
+ 265      64210D0A 
+ 265      23232354 
+ 266 0027 20697320 		.ascii	" is %d \015\012\000"
+ 266      2564200D 
+ 266      0A00
+ 267              		.text
+ 268              	.Letext0:
+ 269              		.file 2 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 270              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 271              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 272              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 273              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 274              		.file 7 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 275              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 276              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 277              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 9
+
+
+ 278              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 279              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 280              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 281              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 282              		.file 15 "..//kernel/core/include/tos_ktypes.h"
+ 283              		.file 16 "..//kernel/core/include/tos_task.h"
+ 284              		.file 17 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 285              		.file 18 "..//kernel/core/include/tos_list.h"
+ 286              		.file 19 "..//kernel/core/include/tos_pend.h"
+ 287              		.file 20 "..//kernel/core/include/tos_sys.h"
+ 288              		.file 21 "..//kernel/core/include/tos_timer.h"
+ 289              		.file 22 "..//kernel/core/include/tos_mmheap.h"
+ 290              		.file 23 "..//kernel/core/include/tos_sched.h"
+ 291              		.file 24 "..//kernel/core/include/tos_global.h"
+ 292              		.file 25 "..//osal/cmsis_os/cmsis_os.h"
+ 293              		.file 26 "Inc/gpio.h"
+ 294              		.file 27 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdio.h"
+ 295              		.file 28 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\tianx\AppData\Local\Temp\cctWkruX.s:16     .text.SystemClock_Config:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cctWkruX.s:24     .text.SystemClock_Config:00000000 SystemClock_Config
-C:\Users\tianx\AppData\Local\Temp\cctWkruX.s:116    .text.main:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cctWkruX.s:123    .text.main:00000000 main
-C:\Users\tianx\AppData\Local\Temp\cctWkruX.s:153    .text.Error_Handler:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cctWkruX.s:160    .text.Error_Handler:00000000 Error_Handler
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:16     .text.task1:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:24     .text.task1:00000000 task1
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:67     .text.task1:00000020 $d
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:73     .text.SystemClock_Config:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:80     .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:170    .text.main:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:177    .text.main:00000000 main
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:216    .text.main:00000020 $d
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:221    .text.Error_Handler:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:228    .text.Error_Handler:00000000 Error_Handler
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:248    .rodata.os_thread_def_task1:00000000 os_thread_def_task1
+                            *COM*:00000200 task_stack_task1
+                            *COM*:00000088 task_handler_task1
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:244    .rodata.os_thread_def_task1:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:259    .rodata.str1.4:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccGeGyeW.s:263    .rodata.task1.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
+printf
+HAL_GPIO_TogglePin
+osDelay
 HAL_RCC_OscConfig
 HAL_RCC_ClockConfig
 HAL_Init
 MX_GPIO_Init
+osKernelInitialize
+osThreadCreate
+osKernelStart

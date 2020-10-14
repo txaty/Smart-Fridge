@@ -1,0 +1,1949 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_ring_queue.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_ring_q_create,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_ring_q_create
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_ring_q_create:
+  25              	.LVL0:
+  26              	.LFB114:
+  27              		.file 1 "..//kernel/core/tos_ring_queue.c"
+   1:..//kernel/core/tos_ring_queue.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_ring_queue.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_ring_queue.c ****  * available.
+   4:..//kernel/core/tos_ring_queue.c ****  *
+   5:..//kernel/core/tos_ring_queue.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_ring_queue.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_ring_queue.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_ring_queue.c ****  *
+   9:..//kernel/core/tos_ring_queue.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_ring_queue.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_ring_queue.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_ring_queue.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_ring_queue.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_ring_queue.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_ring_queue.c ****  * within TencentOS.
+  16:..//kernel/core/tos_ring_queue.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_ring_queue.c **** 
+  18:..//kernel/core/tos_ring_queue.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_ring_queue.c **** 
+  20:..//kernel/core/tos_ring_queue.c **** __STATIC_INLINE__ void ring_q_item_copy_to(k_ring_q_t *ring_q, void *item_out, size_t *item_size)
+  21:..//kernel/core/tos_ring_queue.c **** {
+  22:..//kernel/core/tos_ring_queue.c ****     memcpy(item_out, RING_HEAD_ITEM(ring_q), ring_q->item_size);
+  23:..//kernel/core/tos_ring_queue.c ****     if (item_size) {
+  24:..//kernel/core/tos_ring_queue.c ****         *item_size = ring_q->item_size;
+  25:..//kernel/core/tos_ring_queue.c ****     }
+  26:..//kernel/core/tos_ring_queue.c **** }
+  27:..//kernel/core/tos_ring_queue.c **** 
+  28:..//kernel/core/tos_ring_queue.c **** __STATIC_INLINE__ void ring_q_item_copy_from(k_ring_q_t *ring_q, void *item_in)
+  29:..//kernel/core/tos_ring_queue.c **** {
+  30:..//kernel/core/tos_ring_queue.c ****     memcpy(RING_TAIL_ITEM(ring_q), item_in, ring_q->item_size);
+  31:..//kernel/core/tos_ring_queue.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 2
+
+
+  32:..//kernel/core/tos_ring_queue.c **** 
+  33:..//kernel/core/tos_ring_queue.c **** __STATIC_INLINE__ void ring_q_item_increase(k_ring_q_t *ring_q)
+  34:..//kernel/core/tos_ring_queue.c **** {
+  35:..//kernel/core/tos_ring_queue.c ****     ring_q->tail = RING_NEXT(ring_q, ring_q->tail);
+  36:..//kernel/core/tos_ring_queue.c ****     ++ring_q->total;
+  37:..//kernel/core/tos_ring_queue.c **** }
+  38:..//kernel/core/tos_ring_queue.c **** 
+  39:..//kernel/core/tos_ring_queue.c **** __STATIC_INLINE__ void ring_q_item_decrease(k_ring_q_t *ring_q)
+  40:..//kernel/core/tos_ring_queue.c **** {
+  41:..//kernel/core/tos_ring_queue.c ****     ring_q->head = RING_NEXT(ring_q, ring_q->head);
+  42:..//kernel/core/tos_ring_queue.c ****     --ring_q->total;
+  43:..//kernel/core/tos_ring_queue.c **** }
+  44:..//kernel/core/tos_ring_queue.c **** 
+  45:..//kernel/core/tos_ring_queue.c ****  __API__ k_err_t tos_ring_q_create(k_ring_q_t *ring_q, void *pool, size_t item_cnt, size_t item_siz
+  46:..//kernel/core/tos_ring_queue.c **** {
+  28              		.loc 1 46 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  47:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+  33              		.loc 1 47 5 view .LVU1
+  34              		.loc 1 47 5 view .LVU2
+  35 0000 80B1     		cbz	r0, .L3
+  46:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+  36              		.loc 1 46 1 is_stmt 0 view .LVU3
+  37 0002 10B4     		push	{r4}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 4
+  40              		.cfi_offset 4, -4
+  41 0004 0446     		mov	r4, r0
+  48:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(pool);
+  42              		.loc 1 48 5 is_stmt 1 view .LVU4
+  43              		.loc 1 48 5 view .LVU5
+  44 0006 81B1     		cbz	r1, .L4
+  49:..//kernel/core/tos_ring_queue.c **** 
+  50:..//kernel/core/tos_ring_queue.c ****     ring_q->head        = 0u;
+  45              		.loc 1 50 5 view .LVU6
+  46              		.loc 1 50 25 is_stmt 0 view .LVU7
+  47 0008 0020     		movs	r0, #0
+  48              	.LVL1:
+  49              		.loc 1 50 25 view .LVU8
+  50 000a A080     		strh	r0, [r4, #4]	@ movhi
+  51:..//kernel/core/tos_ring_queue.c ****     ring_q->tail        = 0u;
+  51              		.loc 1 51 5 is_stmt 1 view .LVU9
+  52              		.loc 1 51 25 is_stmt 0 view .LVU10
+  53 000c E080     		strh	r0, [r4, #6]	@ movhi
+  52:..//kernel/core/tos_ring_queue.c ****     ring_q->total       = 0;
+  54              		.loc 1 52 5 is_stmt 1 view .LVU11
+  55              		.loc 1 52 25 is_stmt 0 view .LVU12
+  56 000e A060     		str	r0, [r4, #8]
+  53:..//kernel/core/tos_ring_queue.c **** 
+  54:..//kernel/core/tos_ring_queue.c ****     ring_q->pool        = (uint8_t *)pool;
+  57              		.loc 1 54 5 is_stmt 1 view .LVU13
+  58              		.loc 1 54 25 is_stmt 0 view .LVU14
+  59 0010 E160     		str	r1, [r4, #12]
+  55:..//kernel/core/tos_ring_queue.c ****     ring_q->item_size   = item_size;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 3
+
+
+  60              		.loc 1 55 5 is_stmt 1 view .LVU15
+  61              		.loc 1 55 25 is_stmt 0 view .LVU16
+  62 0012 2361     		str	r3, [r4, #16]
+  56:..//kernel/core/tos_ring_queue.c ****     ring_q->item_cnt    = item_cnt;
+  63              		.loc 1 56 5 is_stmt 1 view .LVU17
+  64              		.loc 1 56 25 is_stmt 0 view .LVU18
+  65 0014 6261     		str	r2, [r4, #20]
+  57:..//kernel/core/tos_ring_queue.c **** 
+  58:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_INIT(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+  66              		.loc 1 58 5 is_stmt 1 view .LVU19
+  67              	.LVL2:
+  68              	.LBB44:
+  69              	.LBI44:
+  70              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 4
+
+
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ 100:..//kernel/core/include/tos_sys.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 5
+
+
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 6
+
+
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+  71              		.loc 2 187 32 view .LVU20
+  72              	.LBB45:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+  73              		.loc 2 189 5 view .LVU21
+  74              		.loc 2 189 19 is_stmt 0 view .LVU22
+  75 0016 4DF6D623 		movw	r3, #56022
+  76              	.LVL3:
+  77              		.loc 2 189 19 view .LVU23
+  78 001a 6380     		strh	r3, [r4, #2]	@ movhi
+  79              	.LVL4:
+  80              		.loc 2 189 19 view .LVU24
+  81              	.LBE45:
+  82              	.LBE44:
+  59:..//kernel/core/tos_ring_queue.c ****     knl_object_alloc_set_static(&ring_q->knl_obj);
+  83              		.loc 1 59 5 is_stmt 1 view .LVU25
+  84              	.LBB46:
+  85              	.LBI46:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 195:..//kernel/core/include/tos_sys.h **** }
+ 196:..//kernel/core/include/tos_sys.h **** 
+ 197:..//kernel/core/include/tos_sys.h **** #endif
+ 198:..//kernel/core/include/tos_sys.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 7
+
+
+ 199:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_reset(knl_obj_t *knl_obj)
+ 200:..//kernel/core/include/tos_sys.h **** {
+ 201:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_NONE;
+ 202:..//kernel/core/include/tos_sys.h **** }
+ 203:..//kernel/core/include/tos_sys.h **** 
+ 204:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_dynamic(knl_obj_t *knl_obj)
+ 205:..//kernel/core/include/tos_sys.h **** {
+ 206:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_DYNAMIC;
+ 207:..//kernel/core/include/tos_sys.h **** }
+ 208:..//kernel/core/include/tos_sys.h **** 
+ 209:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_static(knl_obj_t *knl_obj)
+  86              		.loc 2 209 32 view .LVU26
+  87              	.LBB47:
+ 210:..//kernel/core/include/tos_sys.h **** {
+ 211:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_STATIC;
+  88              		.loc 2 211 5 view .LVU27
+  89              		.loc 2 211 25 is_stmt 0 view .LVU28
+  90 001c 0123     		movs	r3, #1
+  91 001e 2370     		strb	r3, [r4]
+  92              	.LVL5:
+  93              		.loc 2 211 25 view .LVU29
+  94              	.LBE47:
+  95              	.LBE46:
+  60:..//kernel/core/tos_ring_queue.c **** 
+  61:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+  96              		.loc 1 61 5 is_stmt 1 view .LVU30
+  97              	.L2:
+  62:..//kernel/core/tos_ring_queue.c **** }
+  98              		.loc 1 62 1 is_stmt 0 view .LVU31
+  99 0020 10BC     		pop	{r4}
+ 100              	.LCFI1:
+ 101              		.cfi_restore 4
+ 102              		.cfi_def_cfa_offset 0
+ 103              	.LVL6:
+ 104              		.loc 1 62 1 view .LVU32
+ 105 0022 7047     		bx	lr
+ 106              	.LVL7:
+ 107              	.L3:
+  47:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(pool);
+ 108              		.loc 1 47 5 view .LVU33
+ 109 0024 40F24C40 		movw	r0, #1100
+ 110              	.LVL8:
+ 111              		.loc 1 62 1 view .LVU34
+ 112 0028 7047     		bx	lr
+ 113              	.LVL9:
+ 114              	.L4:
+ 115              	.LCFI2:
+ 116              		.cfi_def_cfa_offset 4
+ 117              		.cfi_offset 4, -4
+  48:..//kernel/core/tos_ring_queue.c **** 
+ 118              		.loc 1 48 5 view .LVU35
+ 119 002a 40F24C40 		movw	r0, #1100
+ 120              	.LVL10:
+  48:..//kernel/core/tos_ring_queue.c **** 
+ 121              		.loc 1 48 5 view .LVU36
+ 122 002e F7E7     		b	.L2
+ 123              		.cfi_endproc
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 8
+
+
+ 124              	.LFE114:
+ 126              		.section	.text.tos_ring_q_destroy,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	tos_ring_q_destroy
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 132              		.fpu softvfp
+ 134              	tos_ring_q_destroy:
+ 135              	.LVL11:
+ 136              	.LFB115:
+  63:..//kernel/core/tos_ring_queue.c **** 
+  64:..//kernel/core/tos_ring_queue.c **** __API__ k_err_t tos_ring_q_destroy(k_ring_q_t *ring_q)
+  65:..//kernel/core/tos_ring_queue.c **** {
+ 137              		.loc 1 65 1 is_stmt 1 view -0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141              		@ link register save eliminated.
+  66:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 142              		.loc 1 66 5 view .LVU38
+ 143              		.loc 1 66 5 view .LVU39
+ 144 0000 0346     		mov	r3, r0
+ 145 0002 88B1     		cbz	r0, .L11
+  67:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 146              		.loc 1 67 5 view .LVU40
+ 147              		.loc 1 67 5 view .LVU41
+ 148              	.LVL12:
+ 149              	.LBB48:
+ 150              	.LBI48:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 151              		.loc 2 182 31 view .LVU42
+ 152              	.LBB49:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 153              		.loc 2 184 5 view .LVU43
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 154              		.loc 2 184 19 is_stmt 0 view .LVU44
+ 155 0004 4188     		ldrh	r1, [r0, #2]
+ 156              	.LVL13:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 157              		.loc 2 184 19 view .LVU45
+ 158              	.LBE49:
+ 159              	.LBE48:
+ 160              		.loc 1 67 5 view .LVU46
+ 161 0006 4DF6D622 		movw	r2, #56022
+ 162 000a 9142     		cmp	r1, r2
+ 163 000c 0FD1     		bne	.L12
+  68:..//kernel/core/tos_ring_queue.c **** 
+  69:..//kernel/core/tos_ring_queue.c ****     if (!knl_object_alloc_is_static(&ring_q->knl_obj)) {
+ 164              		.loc 1 69 5 is_stmt 1 view .LVU47
+ 165              	.LVL14:
+ 166              	.LBB50:
+ 167              	.LBI50:
+ 212:..//kernel/core/include/tos_sys.h **** }
+ 213:..//kernel/core/include/tos_sys.h **** 
+ 214:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_dynamic(knl_obj_t *knl_obj)
+ 215:..//kernel/core/include/tos_sys.h **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 9
+
+
+ 216:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_DYNAMIC;
+ 217:..//kernel/core/include/tos_sys.h **** }
+ 218:..//kernel/core/include/tos_sys.h **** 
+ 219:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_static(knl_obj_t *knl_obj)
+ 168              		.loc 2 219 31 view .LVU48
+ 169              	.LBB51:
+ 220:..//kernel/core/include/tos_sys.h **** {
+ 221:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_STATIC;
+ 170              		.loc 2 221 5 view .LVU49
+ 171              		.loc 2 221 19 is_stmt 0 view .LVU50
+ 172 000e 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 173              	.LVL15:
+ 174              		.loc 2 221 19 view .LVU51
+ 175              	.LBE51:
+ 176              	.LBE50:
+ 177              		.loc 1 69 8 view .LVU52
+ 178 0010 012A     		cmp	r2, #1
+ 179 0012 0FD1     		bne	.L13
+  70:..//kernel/core/tos_ring_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+  71:..//kernel/core/tos_ring_queue.c ****     }
+  72:..//kernel/core/tos_ring_queue.c **** 
+  73:..//kernel/core/tos_ring_queue.c ****     ring_q->head        = 0u;
+ 180              		.loc 1 73 5 is_stmt 1 view .LVU53
+ 181              		.loc 1 73 25 is_stmt 0 view .LVU54
+ 182 0014 0020     		movs	r0, #0
+ 183              	.LVL16:
+ 184              		.loc 1 73 25 view .LVU55
+ 185 0016 9880     		strh	r0, [r3, #4]	@ movhi
+  74:..//kernel/core/tos_ring_queue.c ****     ring_q->tail        = 0u;
+ 186              		.loc 1 74 5 is_stmt 1 view .LVU56
+ 187              		.loc 1 74 25 is_stmt 0 view .LVU57
+ 188 0018 D880     		strh	r0, [r3, #6]	@ movhi
+  75:..//kernel/core/tos_ring_queue.c ****     ring_q->total       = 0;
+ 189              		.loc 1 75 5 is_stmt 1 view .LVU58
+ 190              		.loc 1 75 25 is_stmt 0 view .LVU59
+ 191 001a 9860     		str	r0, [r3, #8]
+  76:..//kernel/core/tos_ring_queue.c **** 
+  77:..//kernel/core/tos_ring_queue.c ****     ring_q->pool        = K_NULL;
+ 192              		.loc 1 77 5 is_stmt 1 view .LVU60
+ 193              		.loc 1 77 25 is_stmt 0 view .LVU61
+ 194 001c D860     		str	r0, [r3, #12]
+  78:..//kernel/core/tos_ring_queue.c ****     ring_q->item_size   = 0u;
+ 195              		.loc 1 78 5 is_stmt 1 view .LVU62
+ 196              		.loc 1 78 25 is_stmt 0 view .LVU63
+ 197 001e 1861     		str	r0, [r3, #16]
+  79:..//kernel/core/tos_ring_queue.c ****     ring_q->item_cnt    = 0u;
+ 198              		.loc 1 79 5 is_stmt 1 view .LVU64
+ 199              		.loc 1 79 25 is_stmt 0 view .LVU65
+ 200 0020 5861     		str	r0, [r3, #20]
+  80:..//kernel/core/tos_ring_queue.c **** 
+  81:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_DEINIT(ring_q);
+ 201              		.loc 1 81 5 is_stmt 1 view .LVU66
+ 202              	.LVL17:
+ 203              	.LBB52:
+ 204              	.LBI52:
+ 192:..//kernel/core/include/tos_sys.h **** {
+ 205              		.loc 2 192 32 view .LVU67
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 10
+
+
+ 206              	.LBB53:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 207              		.loc 2 194 5 view .LVU68
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 208              		.loc 2 194 19 is_stmt 0 view .LVU69
+ 209 0022 5880     		strh	r0, [r3, #2]	@ movhi
+ 210              	.LVL18:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 211              		.loc 2 194 19 view .LVU70
+ 212              	.LBE53:
+ 213              	.LBE52:
+  82:..//kernel/core/tos_ring_queue.c ****     knl_object_alloc_reset(&ring_q->knl_obj);
+ 214              		.loc 1 82 5 is_stmt 1 view .LVU71
+ 215              	.LBB54:
+ 216              	.LBI54:
+ 199:..//kernel/core/include/tos_sys.h **** {
+ 217              		.loc 2 199 32 view .LVU72
+ 218              	.LBB55:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 219              		.loc 2 201 5 view .LVU73
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 220              		.loc 2 201 25 is_stmt 0 view .LVU74
+ 221 0024 1870     		strb	r0, [r3]
+ 222              	.LVL19:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 223              		.loc 2 201 25 view .LVU75
+ 224              	.LBE55:
+ 225              	.LBE54:
+  83:..//kernel/core/tos_ring_queue.c **** 
+  84:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 226              		.loc 1 84 5 is_stmt 1 view .LVU76
+ 227              		.loc 1 84 12 is_stmt 0 view .LVU77
+ 228 0026 7047     		bx	lr
+ 229              	.LVL20:
+ 230              	.L11:
+  66:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 231              		.loc 1 66 5 view .LVU78
+ 232 0028 40F24C40 		movw	r0, #1100
+ 233              	.LVL21:
+  66:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 234              		.loc 1 66 5 view .LVU79
+ 235 002c 7047     		bx	lr
+ 236              	.LVL22:
+ 237              	.L12:
+  67:..//kernel/core/tos_ring_queue.c **** 
+ 238              		.loc 1 67 5 view .LVU80
+ 239 002e 40F24D40 		movw	r0, #1101
+ 240              	.LVL23:
+  67:..//kernel/core/tos_ring_queue.c **** 
+ 241              		.loc 1 67 5 view .LVU81
+ 242 0032 7047     		bx	lr
+ 243              	.LVL24:
+ 244              	.L13:
+  70:..//kernel/core/tos_ring_queue.c ****     }
+ 245              		.loc 1 70 16 view .LVU82
+ 246 0034 40F24E40 		movw	r0, #1102
+ 247              	.LVL25:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 11
+
+
+  85:..//kernel/core/tos_ring_queue.c **** }
+ 248              		.loc 1 85 1 view .LVU83
+ 249 0038 7047     		bx	lr
+ 250              		.cfi_endproc
+ 251              	.LFE115:
+ 253              		.section	.text.tos_ring_q_create_dyn,"ax",%progbits
+ 254              		.align	1
+ 255              		.global	tos_ring_q_create_dyn
+ 256              		.syntax unified
+ 257              		.thumb
+ 258              		.thumb_func
+ 259              		.fpu softvfp
+ 261              	tos_ring_q_create_dyn:
+ 262              	.LVL26:
+ 263              	.LFB116:
+  86:..//kernel/core/tos_ring_queue.c **** 
+  87:..//kernel/core/tos_ring_queue.c ****  __API__ k_err_t tos_ring_q_create_dyn(k_ring_q_t *ring_q, size_t item_cnt, size_t item_size)
+  88:..//kernel/core/tos_ring_queue.c **** {
+ 264              		.loc 1 88 1 is_stmt 1 view -0
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+  89:..//kernel/core/tos_ring_queue.c ****     void *pool;
+ 268              		.loc 1 89 5 view .LVU85
+  90:..//kernel/core/tos_ring_queue.c **** 
+  91:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 269              		.loc 1 91 5 view .LVU86
+ 270              		.loc 1 91 5 view .LVU87
+ 271 0000 B0B1     		cbz	r0, .L16
+  88:..//kernel/core/tos_ring_queue.c ****     void *pool;
+ 272              		.loc 1 88 1 is_stmt 0 view .LVU88
+ 273 0002 70B5     		push	{r4, r5, r6, lr}
+ 274              	.LCFI3:
+ 275              		.cfi_def_cfa_offset 16
+ 276              		.cfi_offset 4, -16
+ 277              		.cfi_offset 5, -12
+ 278              		.cfi_offset 6, -8
+ 279              		.cfi_offset 14, -4
+ 280 0004 0446     		mov	r4, r0
+ 281 0006 1646     		mov	r6, r2
+ 282 0008 0D46     		mov	r5, r1
+  92:..//kernel/core/tos_ring_queue.c **** 
+  93:..//kernel/core/tos_ring_queue.c ****     pool = tos_mmheap_alloc(item_cnt * item_size);
+ 283              		.loc 1 93 5 is_stmt 1 view .LVU89
+ 284              		.loc 1 93 12 is_stmt 0 view .LVU90
+ 285 000a 02FB01F0 		mul	r0, r2, r1
+ 286              	.LVL27:
+ 287              		.loc 1 93 12 view .LVU91
+ 288 000e FFF7FEFF 		bl	tos_mmheap_alloc
+ 289              	.LVL28:
+  94:..//kernel/core/tos_ring_queue.c ****     if (!pool) {
+ 290              		.loc 1 94 5 is_stmt 1 view .LVU92
+ 291              		.loc 1 94 8 is_stmt 0 view .LVU93
+ 292 0012 0346     		mov	r3, r0
+ 293 0014 78B1     		cbz	r0, .L17
+  95:..//kernel/core/tos_ring_queue.c ****         return K_ERR_OUT_OF_MEMORY;
+  96:..//kernel/core/tos_ring_queue.c ****     }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 12
+
+
+  97:..//kernel/core/tos_ring_queue.c **** 
+  98:..//kernel/core/tos_ring_queue.c ****     ring_q->head        = 0u;
+ 294              		.loc 1 98 5 is_stmt 1 view .LVU94
+ 295              		.loc 1 98 25 is_stmt 0 view .LVU95
+ 296 0016 0020     		movs	r0, #0
+ 297              	.LVL29:
+ 298              		.loc 1 98 25 view .LVU96
+ 299 0018 A080     		strh	r0, [r4, #4]	@ movhi
+  99:..//kernel/core/tos_ring_queue.c ****     ring_q->tail        = 0u;
+ 300              		.loc 1 99 5 is_stmt 1 view .LVU97
+ 301              		.loc 1 99 25 is_stmt 0 view .LVU98
+ 302 001a E080     		strh	r0, [r4, #6]	@ movhi
+ 100:..//kernel/core/tos_ring_queue.c ****     ring_q->total       = 0;
+ 303              		.loc 1 100 5 is_stmt 1 view .LVU99
+ 304              		.loc 1 100 25 is_stmt 0 view .LVU100
+ 305 001c A060     		str	r0, [r4, #8]
+ 101:..//kernel/core/tos_ring_queue.c **** 
+ 102:..//kernel/core/tos_ring_queue.c ****     ring_q->pool        = (uint8_t *)pool;
+ 306              		.loc 1 102 5 is_stmt 1 view .LVU101
+ 307              		.loc 1 102 25 is_stmt 0 view .LVU102
+ 308 001e E360     		str	r3, [r4, #12]
+ 103:..//kernel/core/tos_ring_queue.c ****     ring_q->item_size   = item_size;
+ 309              		.loc 1 103 5 is_stmt 1 view .LVU103
+ 310              		.loc 1 103 25 is_stmt 0 view .LVU104
+ 311 0020 2661     		str	r6, [r4, #16]
+ 104:..//kernel/core/tos_ring_queue.c ****     ring_q->item_cnt    = item_cnt;
+ 312              		.loc 1 104 5 is_stmt 1 view .LVU105
+ 313              		.loc 1 104 25 is_stmt 0 view .LVU106
+ 314 0022 6561     		str	r5, [r4, #20]
+ 105:..//kernel/core/tos_ring_queue.c **** 
+ 106:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_INIT(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 315              		.loc 1 106 5 is_stmt 1 view .LVU107
+ 316              	.LVL30:
+ 317              	.LBB56:
+ 318              	.LBI56:
+ 187:..//kernel/core/include/tos_sys.h **** {
+ 319              		.loc 2 187 32 view .LVU108
+ 320              	.LBB57:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 321              		.loc 2 189 5 view .LVU109
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 322              		.loc 2 189 19 is_stmt 0 view .LVU110
+ 323 0024 4DF6D623 		movw	r3, #56022
+ 324              	.LVL31:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 325              		.loc 2 189 19 view .LVU111
+ 326 0028 6380     		strh	r3, [r4, #2]	@ movhi
+ 327              	.LVL32:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 328              		.loc 2 189 19 view .LVU112
+ 329              	.LBE57:
+ 330              	.LBE56:
+ 107:..//kernel/core/tos_ring_queue.c ****     knl_object_alloc_set_dynamic(&ring_q->knl_obj);
+ 331              		.loc 1 107 5 is_stmt 1 view .LVU113
+ 332              	.LBB58:
+ 333              	.LBI58:
+ 204:..//kernel/core/include/tos_sys.h **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 13
+
+
+ 334              		.loc 2 204 32 view .LVU114
+ 335              	.LBB59:
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 336              		.loc 2 206 5 view .LVU115
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 337              		.loc 2 206 25 is_stmt 0 view .LVU116
+ 338 002a 0223     		movs	r3, #2
+ 339 002c 2370     		strb	r3, [r4]
+ 340              	.LVL33:
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 341              		.loc 2 206 25 view .LVU117
+ 342              	.LBE59:
+ 343              	.LBE58:
+ 108:..//kernel/core/tos_ring_queue.c **** 
+ 109:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 344              		.loc 1 109 5 is_stmt 1 view .LVU118
+ 345              	.L15:
+ 110:..//kernel/core/tos_ring_queue.c **** }
+ 346              		.loc 1 110 1 is_stmt 0 view .LVU119
+ 347 002e 70BD     		pop	{r4, r5, r6, pc}
+ 348              	.LVL34:
+ 349              	.L16:
+ 350              	.LCFI4:
+ 351              		.cfi_def_cfa_offset 0
+ 352              		.cfi_restore 4
+ 353              		.cfi_restore 5
+ 354              		.cfi_restore 6
+ 355              		.cfi_restore 14
+  91:..//kernel/core/tos_ring_queue.c **** 
+ 356              		.loc 1 91 5 view .LVU120
+ 357 0030 40F24C40 		movw	r0, #1100
+ 358              	.LVL35:
+ 359              		.loc 1 110 1 view .LVU121
+ 360 0034 7047     		bx	lr
+ 361              	.LVL36:
+ 362              	.L17:
+ 363              	.LCFI5:
+ 364              		.cfi_def_cfa_offset 16
+ 365              		.cfi_offset 4, -16
+ 366              		.cfi_offset 5, -12
+ 367              		.cfi_offset 6, -8
+ 368              		.cfi_offset 14, -4
+  95:..//kernel/core/tos_ring_queue.c ****     }
+ 369              		.loc 1 95 16 view .LVU122
+ 370 0036 40F27E40 		movw	r0, #1150
+ 371              	.LVL37:
+  95:..//kernel/core/tos_ring_queue.c ****     }
+ 372              		.loc 1 95 16 view .LVU123
+ 373 003a F8E7     		b	.L15
+ 374              		.cfi_endproc
+ 375              	.LFE116:
+ 377              		.section	.text.tos_ring_q_destroy_dyn,"ax",%progbits
+ 378              		.align	1
+ 379              		.global	tos_ring_q_destroy_dyn
+ 380              		.syntax unified
+ 381              		.thumb
+ 382              		.thumb_func
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 14
+
+
+ 383              		.fpu softvfp
+ 385              	tos_ring_q_destroy_dyn:
+ 386              	.LVL38:
+ 387              	.LFB117:
+ 111:..//kernel/core/tos_ring_queue.c **** 
+ 112:..//kernel/core/tos_ring_queue.c **** __API__ k_err_t tos_ring_q_destroy_dyn(k_ring_q_t *ring_q)
+ 113:..//kernel/core/tos_ring_queue.c **** {
+ 388              		.loc 1 113 1 is_stmt 1 view -0
+ 389              		.cfi_startproc
+ 390              		@ args = 0, pretend = 0, frame = 0
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 392              		.loc 1 114 5 view .LVU125
+ 393              		.loc 1 114 5 view .LVU126
+ 394 0000 C8B1     		cbz	r0, .L24
+ 113:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 395              		.loc 1 113 1 is_stmt 0 view .LVU127
+ 396 0002 10B5     		push	{r4, lr}
+ 397              	.LCFI6:
+ 398              		.cfi_def_cfa_offset 8
+ 399              		.cfi_offset 4, -8
+ 400              		.cfi_offset 14, -4
+ 401 0004 0446     		mov	r4, r0
+ 115:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 402              		.loc 1 115 5 is_stmt 1 view .LVU128
+ 403              		.loc 1 115 5 view .LVU129
+ 404              	.LVL39:
+ 405              	.LBB60:
+ 406              	.LBI60:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 407              		.loc 2 182 31 view .LVU130
+ 408              	.LBB61:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 409              		.loc 2 184 5 view .LVU131
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 410              		.loc 2 184 19 is_stmt 0 view .LVU132
+ 411 0006 4288     		ldrh	r2, [r0, #2]
+ 412              	.LVL40:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 413              		.loc 2 184 19 view .LVU133
+ 414              	.LBE61:
+ 415              	.LBE60:
+ 416              		.loc 1 115 5 view .LVU134
+ 417 0008 4DF6D623 		movw	r3, #56022
+ 418 000c 9A42     		cmp	r2, r3
+ 419 000e 15D1     		bne	.L25
+ 116:..//kernel/core/tos_ring_queue.c **** 
+ 117:..//kernel/core/tos_ring_queue.c ****     if (!knl_object_alloc_is_dynamic(&ring_q->knl_obj)) {
+ 420              		.loc 1 117 5 is_stmt 1 view .LVU135
+ 421              	.LVL41:
+ 422              	.LBB62:
+ 423              	.LBI62:
+ 214:..//kernel/core/include/tos_sys.h **** {
+ 424              		.loc 2 214 31 view .LVU136
+ 425              	.LBB63:
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 426              		.loc 2 216 5 view .LVU137
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 15
+
+
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 427              		.loc 2 216 19 is_stmt 0 view .LVU138
+ 428 0010 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 429              	.LVL42:
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 430              		.loc 2 216 19 view .LVU139
+ 431              	.LBE63:
+ 432              	.LBE62:
+ 433              		.loc 1 117 8 view .LVU140
+ 434 0012 022B     		cmp	r3, #2
+ 435 0014 02D0     		beq	.L31
+ 118:..//kernel/core/tos_ring_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 436              		.loc 1 118 16 view .LVU141
+ 437 0016 40F24E40 		movw	r0, #1102
+ 438              	.LVL43:
+ 439              		.loc 1 118 16 view .LVU142
+ 440 001a 11E0     		b	.L23
+ 441              	.LVL44:
+ 442              	.L31:
+ 119:..//kernel/core/tos_ring_queue.c ****     }
+ 120:..//kernel/core/tos_ring_queue.c **** 
+ 121:..//kernel/core/tos_ring_queue.c ****     tos_mmheap_free(ring_q->pool);
+ 443              		.loc 1 121 5 is_stmt 1 view .LVU143
+ 444 001c C068     		ldr	r0, [r0, #12]
+ 445              	.LVL45:
+ 446              		.loc 1 121 5 is_stmt 0 view .LVU144
+ 447 001e FFF7FEFF 		bl	tos_mmheap_free
+ 448              	.LVL46:
+ 122:..//kernel/core/tos_ring_queue.c **** 
+ 123:..//kernel/core/tos_ring_queue.c ****     ring_q->head        = 0u;
+ 449              		.loc 1 123 5 is_stmt 1 view .LVU145
+ 450              		.loc 1 123 25 is_stmt 0 view .LVU146
+ 451 0022 0020     		movs	r0, #0
+ 452 0024 A080     		strh	r0, [r4, #4]	@ movhi
+ 124:..//kernel/core/tos_ring_queue.c ****     ring_q->tail        = 0u;
+ 453              		.loc 1 124 5 is_stmt 1 view .LVU147
+ 454              		.loc 1 124 25 is_stmt 0 view .LVU148
+ 455 0026 E080     		strh	r0, [r4, #6]	@ movhi
+ 125:..//kernel/core/tos_ring_queue.c ****     ring_q->total       = 0;
+ 456              		.loc 1 125 5 is_stmt 1 view .LVU149
+ 457              		.loc 1 125 25 is_stmt 0 view .LVU150
+ 458 0028 A060     		str	r0, [r4, #8]
+ 126:..//kernel/core/tos_ring_queue.c **** 
+ 127:..//kernel/core/tos_ring_queue.c ****     ring_q->pool        = K_NULL;
+ 459              		.loc 1 127 5 is_stmt 1 view .LVU151
+ 460              		.loc 1 127 25 is_stmt 0 view .LVU152
+ 461 002a E060     		str	r0, [r4, #12]
+ 128:..//kernel/core/tos_ring_queue.c ****     ring_q->item_size   = 0u;
+ 462              		.loc 1 128 5 is_stmt 1 view .LVU153
+ 463              		.loc 1 128 25 is_stmt 0 view .LVU154
+ 464 002c 2061     		str	r0, [r4, #16]
+ 129:..//kernel/core/tos_ring_queue.c ****     ring_q->item_cnt    = 0u;
+ 465              		.loc 1 129 5 is_stmt 1 view .LVU155
+ 466              		.loc 1 129 25 is_stmt 0 view .LVU156
+ 467 002e 6061     		str	r0, [r4, #20]
+ 130:..//kernel/core/tos_ring_queue.c **** 
+ 131:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_DEINIT(ring_q);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 16
+
+
+ 468              		.loc 1 131 5 is_stmt 1 view .LVU157
+ 469              	.LVL47:
+ 470              	.LBB64:
+ 471              	.LBI64:
+ 192:..//kernel/core/include/tos_sys.h **** {
+ 472              		.loc 2 192 32 view .LVU158
+ 473              	.LBB65:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 474              		.loc 2 194 5 view .LVU159
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 475              		.loc 2 194 19 is_stmt 0 view .LVU160
+ 476 0030 6080     		strh	r0, [r4, #2]	@ movhi
+ 477              	.LVL48:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 478              		.loc 2 194 19 view .LVU161
+ 479              	.LBE65:
+ 480              	.LBE64:
+ 132:..//kernel/core/tos_ring_queue.c ****     knl_object_alloc_reset(&ring_q->knl_obj);
+ 481              		.loc 1 132 5 is_stmt 1 view .LVU162
+ 482              	.LBB66:
+ 483              	.LBI66:
+ 199:..//kernel/core/include/tos_sys.h **** {
+ 484              		.loc 2 199 32 view .LVU163
+ 485              	.LBB67:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 486              		.loc 2 201 5 view .LVU164
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 487              		.loc 2 201 25 is_stmt 0 view .LVU165
+ 488 0032 2070     		strb	r0, [r4]
+ 489              	.LVL49:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 490              		.loc 2 201 25 view .LVU166
+ 491              	.LBE67:
+ 492              	.LBE66:
+ 133:..//kernel/core/tos_ring_queue.c **** 
+ 134:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 493              		.loc 1 134 5 is_stmt 1 view .LVU167
+ 494              		.loc 1 134 12 is_stmt 0 view .LVU168
+ 495 0034 04E0     		b	.L23
+ 496              	.LVL50:
+ 497              	.L24:
+ 498              	.LCFI7:
+ 499              		.cfi_def_cfa_offset 0
+ 500              		.cfi_restore 4
+ 501              		.cfi_restore 14
+ 114:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 502              		.loc 1 114 5 view .LVU169
+ 503 0036 40F24C40 		movw	r0, #1100
+ 504              	.LVL51:
+ 135:..//kernel/core/tos_ring_queue.c **** }
+ 505              		.loc 1 135 1 view .LVU170
+ 506 003a 7047     		bx	lr
+ 507              	.LVL52:
+ 508              	.L25:
+ 509              	.LCFI8:
+ 510              		.cfi_def_cfa_offset 8
+ 511              		.cfi_offset 4, -8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 17
+
+
+ 512              		.cfi_offset 14, -4
+ 115:..//kernel/core/tos_ring_queue.c **** 
+ 513              		.loc 1 115 5 view .LVU171
+ 514 003c 40F24D40 		movw	r0, #1101
+ 515              	.LVL53:
+ 516              	.L23:
+ 517              		.loc 1 135 1 view .LVU172
+ 518 0040 10BD     		pop	{r4, pc}
+ 519              		.loc 1 135 1 view .LVU173
+ 520              		.cfi_endproc
+ 521              	.LFE117:
+ 523              		.section	.text.tos_ring_q_flush,"ax",%progbits
+ 524              		.align	1
+ 525              		.global	tos_ring_q_flush
+ 526              		.syntax unified
+ 527              		.thumb
+ 528              		.thumb_func
+ 529              		.fpu softvfp
+ 531              	tos_ring_q_flush:
+ 532              	.LVL54:
+ 533              	.LFB120:
+ 136:..//kernel/core/tos_ring_queue.c **** 
+ 137:..//kernel/core/tos_ring_queue.c **** __API__ k_err_t tos_ring_q_enqueue(k_ring_q_t *ring_q, void *item, size_t item_size)
+ 138:..//kernel/core/tos_ring_queue.c **** {
+ 139:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 140:..//kernel/core/tos_ring_queue.c **** 
+ 141:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 142:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 143:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 144:..//kernel/core/tos_ring_queue.c **** 
+ 145:..//kernel/core/tos_ring_queue.c ****     if (item_size != ring_q->item_size) {
+ 146:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_ITEM_SIZE_NOT_MATCH;
+ 147:..//kernel/core/tos_ring_queue.c ****     }
+ 148:..//kernel/core/tos_ring_queue.c **** 
+ 149:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_DISABLE();
+ 150:..//kernel/core/tos_ring_queue.c **** 
+ 151:..//kernel/core/tos_ring_queue.c ****     if (tos_ring_q_is_full(ring_q)) {
+ 152:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 153:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_FULL;
+ 154:..//kernel/core/tos_ring_queue.c ****     }
+ 155:..//kernel/core/tos_ring_queue.c **** 
+ 156:..//kernel/core/tos_ring_queue.c ****     ring_q_item_copy_from(ring_q, item);
+ 157:..//kernel/core/tos_ring_queue.c ****     ring_q_item_increase(ring_q);
+ 158:..//kernel/core/tos_ring_queue.c **** 
+ 159:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 160:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 161:..//kernel/core/tos_ring_queue.c **** }
+ 162:..//kernel/core/tos_ring_queue.c **** 
+ 163:..//kernel/core/tos_ring_queue.c **** __API__ k_err_t tos_ring_q_dequeue(k_ring_q_t *ring_q, void *item, size_t *item_size)
+ 164:..//kernel/core/tos_ring_queue.c **** {
+ 165:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 166:..//kernel/core/tos_ring_queue.c **** 
+ 167:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 168:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 169:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 170:..//kernel/core/tos_ring_queue.c **** 
+ 171:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_DISABLE();
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 18
+
+
+ 172:..//kernel/core/tos_ring_queue.c **** 
+ 173:..//kernel/core/tos_ring_queue.c ****     if (tos_ring_q_is_empty(ring_q)) {
+ 174:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 175:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_EMPTY;
+ 176:..//kernel/core/tos_ring_queue.c ****     }
+ 177:..//kernel/core/tos_ring_queue.c **** 
+ 178:..//kernel/core/tos_ring_queue.c ****     ring_q_item_copy_to(ring_q, item, item_size);
+ 179:..//kernel/core/tos_ring_queue.c ****     ring_q_item_decrease(ring_q);
+ 180:..//kernel/core/tos_ring_queue.c **** 
+ 181:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 182:..//kernel/core/tos_ring_queue.c **** 
+ 183:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 184:..//kernel/core/tos_ring_queue.c **** }
+ 185:..//kernel/core/tos_ring_queue.c **** 
+ 186:..//kernel/core/tos_ring_queue.c **** __API__ k_err_t tos_ring_q_flush(k_ring_q_t *ring_q)
+ 187:..//kernel/core/tos_ring_queue.c **** {
+ 534              		.loc 1 187 1 is_stmt 1 view -0
+ 535              		.cfi_startproc
+ 536              		@ args = 0, pretend = 0, frame = 0
+ 537              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 538              		.loc 1 188 5 view .LVU175
+ 189:..//kernel/core/tos_ring_queue.c **** 
+ 190:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(ring_q);
+ 539              		.loc 1 190 5 view .LVU176
+ 540              		.loc 1 190 5 view .LVU177
+ 541 0000 98B1     		cbz	r0, .L34
+ 187:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 542              		.loc 1 187 1 is_stmt 0 view .LVU178
+ 543 0002 38B5     		push	{r3, r4, r5, lr}
+ 544              	.LCFI9:
+ 545              		.cfi_def_cfa_offset 16
+ 546              		.cfi_offset 3, -16
+ 547              		.cfi_offset 4, -12
+ 548              		.cfi_offset 5, -8
+ 549              		.cfi_offset 14, -4
+ 550 0004 0546     		mov	r5, r0
+ 191:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 551              		.loc 1 191 5 is_stmt 1 view .LVU179
+ 552              		.loc 1 191 5 view .LVU180
+ 553              	.LVL55:
+ 554              	.LBB68:
+ 555              	.LBI68:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 556              		.loc 2 182 31 view .LVU181
+ 557              	.LBB69:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 558              		.loc 2 184 5 view .LVU182
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 559              		.loc 2 184 19 is_stmt 0 view .LVU183
+ 560 0006 4188     		ldrh	r1, [r0, #2]
+ 561              	.LVL56:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 562              		.loc 2 184 19 view .LVU184
+ 563              	.LBE69:
+ 564              	.LBE68:
+ 565              		.loc 1 191 5 view .LVU185
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 19
+
+
+ 566 0008 4DF6D622 		movw	r2, #56022
+ 567 000c 9142     		cmp	r1, r2
+ 568 000e 02D0     		beq	.L40
+ 569 0010 40F24D40 		movw	r0, #1101
+ 570              	.LVL57:
+ 571              	.L33:
+ 192:..//kernel/core/tos_ring_queue.c **** 
+ 193:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_DISABLE();
+ 194:..//kernel/core/tos_ring_queue.c **** 
+ 195:..//kernel/core/tos_ring_queue.c ****     ring_q->head    = 0u;
+ 196:..//kernel/core/tos_ring_queue.c ****     ring_q->tail    = 0u;
+ 197:..//kernel/core/tos_ring_queue.c ****     ring_q->total   = 0;
+ 198:..//kernel/core/tos_ring_queue.c **** 
+ 199:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 200:..//kernel/core/tos_ring_queue.c **** 
+ 201:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 202:..//kernel/core/tos_ring_queue.c **** }
+ 572              		.loc 1 202 1 view .LVU186
+ 573 0014 38BD     		pop	{r3, r4, r5, pc}
+ 574              	.LVL58:
+ 575              	.L40:
+ 193:..//kernel/core/tos_ring_queue.c **** 
+ 576              		.loc 1 193 5 is_stmt 1 view .LVU187
+ 193:..//kernel/core/tos_ring_queue.c **** 
+ 577              		.loc 1 193 5 view .LVU188
+ 578 0016 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 579              	.LVL59:
+ 195:..//kernel/core/tos_ring_queue.c ****     ring_q->tail    = 0u;
+ 580              		.loc 1 195 5 view .LVU189
+ 195:..//kernel/core/tos_ring_queue.c ****     ring_q->tail    = 0u;
+ 581              		.loc 1 195 21 is_stmt 0 view .LVU190
+ 582 001a 0024     		movs	r4, #0
+ 583 001c AC80     		strh	r4, [r5, #4]	@ movhi
+ 196:..//kernel/core/tos_ring_queue.c ****     ring_q->total   = 0;
+ 584              		.loc 1 196 5 is_stmt 1 view .LVU191
+ 196:..//kernel/core/tos_ring_queue.c ****     ring_q->total   = 0;
+ 585              		.loc 1 196 21 is_stmt 0 view .LVU192
+ 586 001e EC80     		strh	r4, [r5, #6]	@ movhi
+ 197:..//kernel/core/tos_ring_queue.c **** 
+ 587              		.loc 1 197 5 is_stmt 1 view .LVU193
+ 197:..//kernel/core/tos_ring_queue.c **** 
+ 588              		.loc 1 197 21 is_stmt 0 view .LVU194
+ 589 0020 AC60     		str	r4, [r5, #8]
+ 199:..//kernel/core/tos_ring_queue.c **** 
+ 590              		.loc 1 199 5 is_stmt 1 view .LVU195
+ 199:..//kernel/core/tos_ring_queue.c **** 
+ 591              		.loc 1 199 5 view .LVU196
+ 592 0022 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 593              	.LVL60:
+ 201:..//kernel/core/tos_ring_queue.c **** }
+ 594              		.loc 1 201 5 view .LVU197
+ 201:..//kernel/core/tos_ring_queue.c **** }
+ 595              		.loc 1 201 12 is_stmt 0 view .LVU198
+ 596 0026 2046     		mov	r0, r4
+ 597 0028 F4E7     		b	.L33
+ 598              	.LVL61:
+ 599              	.L34:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 20
+
+
+ 600              	.LCFI10:
+ 601              		.cfi_def_cfa_offset 0
+ 602              		.cfi_restore 3
+ 603              		.cfi_restore 4
+ 604              		.cfi_restore 5
+ 605              		.cfi_restore 14
+ 190:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 606              		.loc 1 190 5 view .LVU199
+ 607 002a 40F24C40 		movw	r0, #1100
+ 608              	.LVL62:
+ 609              		.loc 1 202 1 view .LVU200
+ 610 002e 7047     		bx	lr
+ 611              		.cfi_endproc
+ 612              	.LFE120:
+ 614              		.section	.text.tos_ring_q_is_empty,"ax",%progbits
+ 615              		.align	1
+ 616              		.global	tos_ring_q_is_empty
+ 617              		.syntax unified
+ 618              		.thumb
+ 619              		.thumb_func
+ 620              		.fpu softvfp
+ 622              	tos_ring_q_is_empty:
+ 623              	.LVL63:
+ 624              	.LFB121:
+ 203:..//kernel/core/tos_ring_queue.c **** 
+ 204:..//kernel/core/tos_ring_queue.c **** __API__ int tos_ring_q_is_empty(k_ring_q_t *ring_q)
+ 205:..//kernel/core/tos_ring_queue.c **** {
+ 625              		.loc 1 205 1 is_stmt 1 view -0
+ 626              		.cfi_startproc
+ 627              		@ args = 0, pretend = 0, frame = 0
+ 628              		@ frame_needed = 0, uses_anonymous_args = 0
+ 629              		.loc 1 205 1 is_stmt 0 view .LVU202
+ 630 0000 10B5     		push	{r4, lr}
+ 631              	.LCFI11:
+ 632              		.cfi_def_cfa_offset 8
+ 633              		.cfi_offset 4, -8
+ 634              		.cfi_offset 14, -4
+ 206:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 635              		.loc 1 206 5 is_stmt 1 view .LVU203
+ 636              	.LVL64:
+ 207:..//kernel/core/tos_ring_queue.c ****     int is_empty = K_FALSE;
+ 637              		.loc 1 207 5 view .LVU204
+ 208:..//kernel/core/tos_ring_queue.c **** 
+ 209:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK_RC(ring_q, K_FALSE);
+ 638              		.loc 1 209 5 view .LVU205
+ 639              		.loc 1 209 5 view .LVU206
+ 640 0002 B0FA80F4 		clz	r4, r0
+ 641 0006 6409     		lsrs	r4, r4, #5
+ 642 0008 84B9     		cbnz	r4, .L43
+ 210:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY_RC(ring_q, KNL_OBJ_TYPE_RING_QUEUE, K_FALSE);
+ 643              		.loc 1 210 5 view .LVU207
+ 644              		.loc 1 210 5 view .LVU208
+ 645              	.LVL65:
+ 646              	.LBB70:
+ 647              	.LBI70:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 648              		.loc 2 182 31 view .LVU209
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 21
+
+
+ 649              	.LBB71:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 650              		.loc 2 184 5 view .LVU210
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 651              		.loc 2 184 19 is_stmt 0 view .LVU211
+ 652 000a 4188     		ldrh	r1, [r0, #2]
+ 653              	.LVL66:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 654              		.loc 2 184 19 view .LVU212
+ 655              	.LBE71:
+ 656              	.LBE70:
+ 657              		.loc 1 210 5 view .LVU213
+ 658 000c 4DF6D622 		movw	r2, #56022
+ 659 0010 9142     		cmp	r1, r2
+ 660 0012 01D0     		beq	.L45
+ 661              	.LVL67:
+ 662              	.L41:
+ 211:..//kernel/core/tos_ring_queue.c **** 
+ 212:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_DISABLE();
+ 213:..//kernel/core/tos_ring_queue.c ****     is_empty = (ring_q->total == 0 ? K_TRUE : K_FALSE);
+ 214:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 215:..//kernel/core/tos_ring_queue.c **** 
+ 216:..//kernel/core/tos_ring_queue.c ****     return is_empty;
+ 217:..//kernel/core/tos_ring_queue.c **** }
+ 663              		.loc 1 217 1 view .LVU214
+ 664 0014 2046     		mov	r0, r4
+ 665 0016 10BD     		pop	{r4, pc}
+ 666              	.LVL68:
+ 667              	.L45:
+ 668              		.loc 1 217 1 view .LVU215
+ 669 0018 0446     		mov	r4, r0
+ 212:..//kernel/core/tos_ring_queue.c ****     is_empty = (ring_q->total == 0 ? K_TRUE : K_FALSE);
+ 670              		.loc 1 212 5 is_stmt 1 view .LVU216
+ 212:..//kernel/core/tos_ring_queue.c ****     is_empty = (ring_q->total == 0 ? K_TRUE : K_FALSE);
+ 671              		.loc 1 212 5 view .LVU217
+ 672 001a FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 673              	.LVL69:
+ 213:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 674              		.loc 1 213 5 view .LVU218
+ 213:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 675              		.loc 1 213 23 is_stmt 0 view .LVU219
+ 676 001e A468     		ldr	r4, [r4, #8]
+ 677              	.LVL70:
+ 213:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 678              		.loc 1 213 45 view .LVU220
+ 679 0020 B4FA84F4 		clz	r4, r4
+ 680 0024 6409     		lsrs	r4, r4, #5
+ 681              	.LVL71:
+ 214:..//kernel/core/tos_ring_queue.c **** 
+ 682              		.loc 1 214 5 is_stmt 1 view .LVU221
+ 214:..//kernel/core/tos_ring_queue.c **** 
+ 683              		.loc 1 214 5 view .LVU222
+ 684 0026 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 685              	.LVL72:
+ 216:..//kernel/core/tos_ring_queue.c **** }
+ 686              		.loc 1 216 5 view .LVU223
+ 216:..//kernel/core/tos_ring_queue.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 22
+
+
+ 687              		.loc 1 216 12 is_stmt 0 view .LVU224
+ 688 002a F3E7     		b	.L41
+ 689              	.LVL73:
+ 690              	.L43:
+ 209:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY_RC(ring_q, KNL_OBJ_TYPE_RING_QUEUE, K_FALSE);
+ 691              		.loc 1 209 5 view .LVU225
+ 692 002c 0024     		movs	r4, #0
+ 693 002e F1E7     		b	.L41
+ 694              		.cfi_endproc
+ 695              	.LFE121:
+ 697              		.section	.text.tos_ring_q_dequeue,"ax",%progbits
+ 698              		.align	1
+ 699              		.global	tos_ring_q_dequeue
+ 700              		.syntax unified
+ 701              		.thumb
+ 702              		.thumb_func
+ 703              		.fpu softvfp
+ 705              	tos_ring_q_dequeue:
+ 706              	.LVL74:
+ 707              	.LFB119:
+ 164:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 708              		.loc 1 164 1 is_stmt 1 view -0
+ 709              		.cfi_startproc
+ 710              		@ args = 0, pretend = 0, frame = 0
+ 711              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165:..//kernel/core/tos_ring_queue.c **** 
+ 712              		.loc 1 165 5 view .LVU227
+ 167:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 713              		.loc 1 167 5 view .LVU228
+ 167:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 714              		.loc 1 167 5 view .LVU229
+ 715 0000 0028     		cmp	r0, #0
+ 716 0002 36D0     		beq	.L50
+ 164:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 717              		.loc 1 164 1 is_stmt 0 view .LVU230
+ 718 0004 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 719              	.LCFI12:
+ 720              		.cfi_def_cfa_offset 24
+ 721              		.cfi_offset 3, -24
+ 722              		.cfi_offset 4, -20
+ 723              		.cfi_offset 5, -16
+ 724              		.cfi_offset 6, -12
+ 725              		.cfi_offset 7, -8
+ 726              		.cfi_offset 14, -4
+ 727 0006 0446     		mov	r4, r0
+ 168:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 728              		.loc 1 168 5 is_stmt 1 view .LVU231
+ 168:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 729              		.loc 1 168 5 view .LVU232
+ 730 0008 0029     		cmp	r1, #0
+ 731 000a 35D0     		beq	.L51
+ 169:..//kernel/core/tos_ring_queue.c **** 
+ 732              		.loc 1 169 5 view .LVU233
+ 169:..//kernel/core/tos_ring_queue.c **** 
+ 733              		.loc 1 169 5 view .LVU234
+ 734              	.LVL75:
+ 735              	.LBB72:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 23
+
+
+ 736              	.LBI72:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 737              		.loc 2 182 31 view .LVU235
+ 738              	.LBB73:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 739              		.loc 2 184 5 view .LVU236
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 740              		.loc 2 184 19 is_stmt 0 view .LVU237
+ 741 000c 4088     		ldrh	r0, [r0, #2]
+ 742              	.LVL76:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 743              		.loc 2 184 19 view .LVU238
+ 744              	.LBE73:
+ 745              	.LBE72:
+ 169:..//kernel/core/tos_ring_queue.c **** 
+ 746              		.loc 1 169 5 view .LVU239
+ 747 000e 4DF6D623 		movw	r3, #56022
+ 748 0012 9842     		cmp	r0, r3
+ 749 0014 02D0     		beq	.L57
+ 750 0016 40F24D40 		movw	r0, #1101
+ 751              	.LVL77:
+ 752              	.L47:
+ 184:..//kernel/core/tos_ring_queue.c **** 
+ 753              		.loc 1 184 1 view .LVU240
+ 754 001a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 755              	.LVL78:
+ 756              	.L57:
+ 184:..//kernel/core/tos_ring_queue.c **** 
+ 757              		.loc 1 184 1 view .LVU241
+ 758 001c 1646     		mov	r6, r2
+ 759 001e 0D46     		mov	r5, r1
+ 171:..//kernel/core/tos_ring_queue.c **** 
+ 760              		.loc 1 171 5 is_stmt 1 view .LVU242
+ 171:..//kernel/core/tos_ring_queue.c **** 
+ 761              		.loc 1 171 5 view .LVU243
+ 762 0020 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 763              	.LVL79:
+ 171:..//kernel/core/tos_ring_queue.c **** 
+ 764              		.loc 1 171 5 is_stmt 0 view .LVU244
+ 765 0024 0746     		mov	r7, r0
+ 766              	.LVL80:
+ 173:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 767              		.loc 1 173 5 is_stmt 1 view .LVU245
+ 173:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 768              		.loc 1 173 9 is_stmt 0 view .LVU246
+ 769 0026 2046     		mov	r0, r4
+ 770              	.LVL81:
+ 173:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 771              		.loc 1 173 9 view .LVU247
+ 772 0028 FFF7FEFF 		bl	tos_ring_q_is_empty
+ 773              	.LVL82:
+ 173:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 774              		.loc 1 173 8 view .LVU248
+ 775 002c D8B9     		cbnz	r0, .L58
+ 178:..//kernel/core/tos_ring_queue.c ****     ring_q_item_decrease(ring_q);
+ 776              		.loc 1 178 5 is_stmt 1 view .LVU249
+ 777              	.LVL83:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 24
+
+
+ 778              	.LBB74:
+ 779              	.LBI74:
+  20:..//kernel/core/tos_ring_queue.c **** {
+ 780              		.loc 1 20 24 view .LVU250
+ 781              	.LBB75:
+  22:..//kernel/core/tos_ring_queue.c ****     if (item_size) {
+ 782              		.loc 1 22 5 view .LVU251
+  22:..//kernel/core/tos_ring_queue.c ****     if (item_size) {
+ 783              		.loc 1 22 22 is_stmt 0 view .LVU252
+ 784 002e E168     		ldr	r1, [r4, #12]
+ 785 0030 A088     		ldrh	r0, [r4, #4]
+ 786 0032 2369     		ldr	r3, [r4, #16]
+  22:..//kernel/core/tos_ring_queue.c ****     if (item_size) {
+ 787              		.loc 1 22 5 view .LVU253
+ 788 0034 1A46     		mov	r2, r3
+ 789 0036 03FB0011 		mla	r1, r3, r0, r1
+ 790 003a 2846     		mov	r0, r5
+ 791 003c FFF7FEFF 		bl	memcpy
+ 792              	.LVL84:
+  23:..//kernel/core/tos_ring_queue.c ****         *item_size = ring_q->item_size;
+ 793              		.loc 1 23 5 is_stmt 1 view .LVU254
+  23:..//kernel/core/tos_ring_queue.c ****         *item_size = ring_q->item_size;
+ 794              		.loc 1 23 8 is_stmt 0 view .LVU255
+ 795 0040 0EB1     		cbz	r6, .L49
+  24:..//kernel/core/tos_ring_queue.c ****     }
+ 796              		.loc 1 24 9 is_stmt 1 view .LVU256
+  24:..//kernel/core/tos_ring_queue.c ****     }
+ 797              		.loc 1 24 28 is_stmt 0 view .LVU257
+ 798 0042 2369     		ldr	r3, [r4, #16]
+  24:..//kernel/core/tos_ring_queue.c ****     }
+ 799              		.loc 1 24 20 view .LVU258
+ 800 0044 3360     		str	r3, [r6]
+ 801              	.L49:
+ 802              	.LVL85:
+  24:..//kernel/core/tos_ring_queue.c ****     }
+ 803              		.loc 1 24 20 view .LVU259
+ 804              	.LBE75:
+ 805              	.LBE74:
+ 179:..//kernel/core/tos_ring_queue.c **** 
+ 806              		.loc 1 179 5 is_stmt 1 view .LVU260
+ 807              	.LBB76:
+ 808              	.LBI76:
+  39:..//kernel/core/tos_ring_queue.c **** {
+ 809              		.loc 1 39 24 view .LVU261
+ 810              	.LBB77:
+  41:..//kernel/core/tos_ring_queue.c ****     --ring_q->total;
+ 811              		.loc 1 41 5 view .LVU262
+  41:..//kernel/core/tos_ring_queue.c ****     --ring_q->total;
+ 812              		.loc 1 41 20 is_stmt 0 view .LVU263
+ 813 0046 A388     		ldrh	r3, [r4, #4]
+ 814 0048 0133     		adds	r3, r3, #1
+ 815 004a 6169     		ldr	r1, [r4, #20]
+ 816 004c B3FBF1F2 		udiv	r2, r3, r1
+ 817 0050 01FB1233 		mls	r3, r1, r2, r3
+  41:..//kernel/core/tos_ring_queue.c ****     --ring_q->total;
+ 818              		.loc 1 41 18 view .LVU264
+ 819 0054 A380     		strh	r3, [r4, #4]	@ movhi
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 25
+
+
+  42:..//kernel/core/tos_ring_queue.c **** }
+ 820              		.loc 1 42 5 is_stmt 1 view .LVU265
+  42:..//kernel/core/tos_ring_queue.c **** }
+ 821              		.loc 1 42 13 is_stmt 0 view .LVU266
+ 822 0056 A368     		ldr	r3, [r4, #8]
+  42:..//kernel/core/tos_ring_queue.c **** }
+ 823              		.loc 1 42 5 view .LVU267
+ 824 0058 013B     		subs	r3, r3, #1
+ 825 005a A360     		str	r3, [r4, #8]
+ 826              	.LVL86:
+  42:..//kernel/core/tos_ring_queue.c **** }
+ 827              		.loc 1 42 5 view .LVU268
+ 828              	.LBE77:
+ 829              	.LBE76:
+ 181:..//kernel/core/tos_ring_queue.c **** 
+ 830              		.loc 1 181 5 is_stmt 1 view .LVU269
+ 181:..//kernel/core/tos_ring_queue.c **** 
+ 831              		.loc 1 181 5 view .LVU270
+ 832 005c 3846     		mov	r0, r7
+ 833 005e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 834              	.LVL87:
+ 183:..//kernel/core/tos_ring_queue.c **** }
+ 835              		.loc 1 183 5 view .LVU271
+ 183:..//kernel/core/tos_ring_queue.c **** }
+ 836              		.loc 1 183 12 is_stmt 0 view .LVU272
+ 837 0062 0020     		movs	r0, #0
+ 838 0064 D9E7     		b	.L47
+ 839              	.L58:
+ 174:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_EMPTY;
+ 840              		.loc 1 174 9 is_stmt 1 view .LVU273
+ 174:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_EMPTY;
+ 841              		.loc 1 174 9 view .LVU274
+ 842 0066 3846     		mov	r0, r7
+ 843 0068 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 844              	.LVL88:
+ 175:..//kernel/core/tos_ring_queue.c ****     }
+ 845              		.loc 1 175 9 view .LVU275
+ 175:..//kernel/core/tos_ring_queue.c ****     }
+ 846              		.loc 1 175 16 is_stmt 0 view .LVU276
+ 847 006c 40F2DD50 		movw	r0, #1501
+ 848 0070 D3E7     		b	.L47
+ 849              	.LVL89:
+ 850              	.L50:
+ 851              	.LCFI13:
+ 852              		.cfi_def_cfa_offset 0
+ 853              		.cfi_restore 3
+ 854              		.cfi_restore 4
+ 855              		.cfi_restore 5
+ 856              		.cfi_restore 6
+ 857              		.cfi_restore 7
+ 858              		.cfi_restore 14
+ 167:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 859              		.loc 1 167 5 view .LVU277
+ 860 0072 40F24C40 		movw	r0, #1100
+ 861              	.LVL90:
+ 184:..//kernel/core/tos_ring_queue.c **** 
+ 862              		.loc 1 184 1 view .LVU278
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 26
+
+
+ 863 0076 7047     		bx	lr
+ 864              	.LVL91:
+ 865              	.L51:
+ 866              	.LCFI14:
+ 867              		.cfi_def_cfa_offset 24
+ 868              		.cfi_offset 3, -24
+ 869              		.cfi_offset 4, -20
+ 870              		.cfi_offset 5, -16
+ 871              		.cfi_offset 6, -12
+ 872              		.cfi_offset 7, -8
+ 873              		.cfi_offset 14, -4
+ 168:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 874              		.loc 1 168 5 view .LVU279
+ 875 0078 40F24C40 		movw	r0, #1100
+ 876              	.LVL92:
+ 168:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 877              		.loc 1 168 5 view .LVU280
+ 878 007c CDE7     		b	.L47
+ 879              		.cfi_endproc
+ 880              	.LFE119:
+ 882              		.section	.text.tos_ring_q_is_full,"ax",%progbits
+ 883              		.align	1
+ 884              		.global	tos_ring_q_is_full
+ 885              		.syntax unified
+ 886              		.thumb
+ 887              		.thumb_func
+ 888              		.fpu softvfp
+ 890              	tos_ring_q_is_full:
+ 891              	.LVL93:
+ 892              	.LFB122:
+ 218:..//kernel/core/tos_ring_queue.c **** 
+ 219:..//kernel/core/tos_ring_queue.c **** __API__ int tos_ring_q_is_full(k_ring_q_t *ring_q)
+ 220:..//kernel/core/tos_ring_queue.c **** {
+ 893              		.loc 1 220 1 is_stmt 1 view -0
+ 894              		.cfi_startproc
+ 895              		@ args = 0, pretend = 0, frame = 0
+ 896              		@ frame_needed = 0, uses_anonymous_args = 0
+ 897              		.loc 1 220 1 is_stmt 0 view .LVU282
+ 898 0000 38B5     		push	{r3, r4, r5, lr}
+ 899              	.LCFI15:
+ 900              		.cfi_def_cfa_offset 16
+ 901              		.cfi_offset 3, -16
+ 902              		.cfi_offset 4, -12
+ 903              		.cfi_offset 5, -8
+ 904              		.cfi_offset 14, -4
+ 221:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 905              		.loc 1 221 5 is_stmt 1 view .LVU283
+ 906              	.LVL94:
+ 222:..//kernel/core/tos_ring_queue.c ****     int is_full = K_FALSE;
+ 907              		.loc 1 222 5 view .LVU284
+ 223:..//kernel/core/tos_ring_queue.c **** 
+ 224:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK_RC(ring_q, K_FALSE);
+ 908              		.loc 1 224 5 view .LVU285
+ 909              		.loc 1 224 5 view .LVU286
+ 910 0002 B0FA80F4 		clz	r4, r0
+ 911 0006 6409     		lsrs	r4, r4, #5
+ 912 0008 94B9     		cbnz	r4, .L61
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 27
+
+
+ 913 000a 0546     		mov	r5, r0
+ 225:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY_RC(ring_q, KNL_OBJ_TYPE_RING_QUEUE, K_FALSE);
+ 914              		.loc 1 225 5 view .LVU287
+ 915              		.loc 1 225 5 view .LVU288
+ 916              	.LVL95:
+ 917              	.LBB78:
+ 918              	.LBI78:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 919              		.loc 2 182 31 view .LVU289
+ 920              	.LBB79:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 921              		.loc 2 184 5 view .LVU290
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 922              		.loc 2 184 19 is_stmt 0 view .LVU291
+ 923 000c 4188     		ldrh	r1, [r0, #2]
+ 924              	.LVL96:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 925              		.loc 2 184 19 view .LVU292
+ 926              	.LBE79:
+ 927              	.LBE78:
+ 928              		.loc 1 225 5 view .LVU293
+ 929 000e 4DF6D622 		movw	r2, #56022
+ 930 0012 9142     		cmp	r1, r2
+ 931 0014 01D0     		beq	.L63
+ 932              	.LVL97:
+ 933              	.L59:
+ 226:..//kernel/core/tos_ring_queue.c **** 
+ 227:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_DISABLE();
+ 228:..//kernel/core/tos_ring_queue.c ****     is_full = (ring_q->total == ring_q->item_cnt ? K_TRUE : K_FALSE);
+ 229:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 230:..//kernel/core/tos_ring_queue.c **** 
+ 231:..//kernel/core/tos_ring_queue.c ****     return is_full;
+ 232:..//kernel/core/tos_ring_queue.c **** }
+ 934              		.loc 1 232 1 view .LVU294
+ 935 0016 2046     		mov	r0, r4
+ 936 0018 38BD     		pop	{r3, r4, r5, pc}
+ 937              	.LVL98:
+ 938              	.L63:
+ 227:..//kernel/core/tos_ring_queue.c ****     is_full = (ring_q->total == ring_q->item_cnt ? K_TRUE : K_FALSE);
+ 939              		.loc 1 227 5 is_stmt 1 view .LVU295
+ 227:..//kernel/core/tos_ring_queue.c ****     is_full = (ring_q->total == ring_q->item_cnt ? K_TRUE : K_FALSE);
+ 940              		.loc 1 227 5 view .LVU296
+ 941 001a FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 942              	.LVL99:
+ 228:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 943              		.loc 1 228 5 view .LVU297
+ 228:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 944              		.loc 1 228 22 is_stmt 0 view .LVU298
+ 945 001e AC68     		ldr	r4, [r5, #8]
+ 228:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 946              		.loc 1 228 39 view .LVU299
+ 947 0020 6B69     		ldr	r3, [r5, #20]
+ 228:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_ENABLE();
+ 948              		.loc 1 228 59 view .LVU300
+ 949 0022 9C42     		cmp	r4, r3
+ 950 0024 14BF     		ite	ne
+ 951 0026 0024     		movne	r4, #0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 28
+
+
+ 952 0028 0124     		moveq	r4, #1
+ 953              	.LVL100:
+ 229:..//kernel/core/tos_ring_queue.c **** 
+ 954              		.loc 1 229 5 is_stmt 1 view .LVU301
+ 229:..//kernel/core/tos_ring_queue.c **** 
+ 955              		.loc 1 229 5 view .LVU302
+ 956 002a FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 957              	.LVL101:
+ 231:..//kernel/core/tos_ring_queue.c **** }
+ 958              		.loc 1 231 5 view .LVU303
+ 231:..//kernel/core/tos_ring_queue.c **** }
+ 959              		.loc 1 231 12 is_stmt 0 view .LVU304
+ 960 002e F2E7     		b	.L59
+ 961              	.LVL102:
+ 962              	.L61:
+ 224:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY_RC(ring_q, KNL_OBJ_TYPE_RING_QUEUE, K_FALSE);
+ 963              		.loc 1 224 5 view .LVU305
+ 964 0030 0024     		movs	r4, #0
+ 965 0032 F0E7     		b	.L59
+ 966              		.cfi_endproc
+ 967              	.LFE122:
+ 969              		.section	.text.tos_ring_q_enqueue,"ax",%progbits
+ 970              		.align	1
+ 971              		.global	tos_ring_q_enqueue
+ 972              		.syntax unified
+ 973              		.thumb
+ 974              		.thumb_func
+ 975              		.fpu softvfp
+ 977              	tos_ring_q_enqueue:
+ 978              	.LVL103:
+ 979              	.LFB118:
+ 138:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 980              		.loc 1 138 1 is_stmt 1 view -0
+ 981              		.cfi_startproc
+ 982              		@ args = 0, pretend = 0, frame = 0
+ 983              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139:..//kernel/core/tos_ring_queue.c **** 
+ 984              		.loc 1 139 5 view .LVU307
+ 141:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 985              		.loc 1 141 5 view .LVU308
+ 141:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 986              		.loc 1 141 5 view .LVU309
+ 987 0000 A0B3     		cbz	r0, .L67
+ 138:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_CPSR_ALLOC();
+ 988              		.loc 1 138 1 is_stmt 0 view .LVU310
+ 989 0002 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 990              	.LCFI16:
+ 991              		.cfi_def_cfa_offset 24
+ 992              		.cfi_offset 3, -24
+ 993              		.cfi_offset 4, -20
+ 994              		.cfi_offset 5, -16
+ 995              		.cfi_offset 6, -12
+ 996              		.cfi_offset 7, -8
+ 997              		.cfi_offset 14, -4
+ 998 0004 0546     		mov	r5, r0
+ 142:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 999              		.loc 1 142 5 is_stmt 1 view .LVU311
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 29
+
+
+ 142:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 1000              		.loc 1 142 5 view .LVU312
+ 1001 0006 A1B3     		cbz	r1, .L68
+ 143:..//kernel/core/tos_ring_queue.c **** 
+ 1002              		.loc 1 143 5 view .LVU313
+ 143:..//kernel/core/tos_ring_queue.c **** 
+ 1003              		.loc 1 143 5 view .LVU314
+ 1004              	.LVL104:
+ 1005              	.LBB80:
+ 1006              	.LBI80:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 1007              		.loc 2 182 31 view .LVU315
+ 1008              	.LBB81:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 1009              		.loc 2 184 5 view .LVU316
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 1010              		.loc 2 184 19 is_stmt 0 view .LVU317
+ 1011 0008 4488     		ldrh	r4, [r0, #2]
+ 1012              	.LVL105:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 1013              		.loc 2 184 19 view .LVU318
+ 1014              	.LBE81:
+ 1015              	.LBE80:
+ 143:..//kernel/core/tos_ring_queue.c **** 
+ 1016              		.loc 1 143 5 view .LVU319
+ 1017 000a 4DF6D620 		movw	r0, #56022
+ 1018              	.LVL106:
+ 143:..//kernel/core/tos_ring_queue.c **** 
+ 1019              		.loc 1 143 5 view .LVU320
+ 1020 000e 8442     		cmp	r4, r0
+ 1021 0010 32D1     		bne	.L69
+ 145:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_ITEM_SIZE_NOT_MATCH;
+ 1022              		.loc 1 145 5 is_stmt 1 view .LVU321
+ 145:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_ITEM_SIZE_NOT_MATCH;
+ 1023              		.loc 1 145 28 is_stmt 0 view .LVU322
+ 1024 0012 2869     		ldr	r0, [r5, #16]
+ 145:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_ITEM_SIZE_NOT_MATCH;
+ 1025              		.loc 1 145 8 view .LVU323
+ 1026 0014 9042     		cmp	r0, r2
+ 1027 0016 02D0     		beq	.L75
+ 146:..//kernel/core/tos_ring_queue.c ****     }
+ 1028              		.loc 1 146 16 view .LVU324
+ 1029 0018 40F2DE50 		movw	r0, #1502
+ 1030 001c 2EE0     		b	.L65
+ 1031              	.L75:
+ 1032 001e 0C46     		mov	r4, r1
+ 149:..//kernel/core/tos_ring_queue.c **** 
+ 1033              		.loc 1 149 5 is_stmt 1 view .LVU325
+ 149:..//kernel/core/tos_ring_queue.c **** 
+ 1034              		.loc 1 149 5 view .LVU326
+ 1035 0020 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 1036              	.LVL107:
+ 149:..//kernel/core/tos_ring_queue.c **** 
+ 1037              		.loc 1 149 5 is_stmt 0 view .LVU327
+ 1038 0024 0646     		mov	r6, r0
+ 1039              	.LVL108:
+ 151:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 30
+
+
+ 1040              		.loc 1 151 5 is_stmt 1 view .LVU328
+ 151:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 1041              		.loc 1 151 9 is_stmt 0 view .LVU329
+ 1042 0026 2846     		mov	r0, r5
+ 1043              	.LVL109:
+ 151:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 1044              		.loc 1 151 9 view .LVU330
+ 1045 0028 FFF7FEFF 		bl	tos_ring_q_is_full
+ 1046              	.LVL110:
+ 151:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
+ 1047              		.loc 1 151 8 view .LVU331
+ 1048 002c C0B9     		cbnz	r0, .L76
+ 156:..//kernel/core/tos_ring_queue.c ****     ring_q_item_increase(ring_q);
+ 1049              		.loc 1 156 5 is_stmt 1 view .LVU332
+ 1050              	.LVL111:
+ 1051              	.LBB82:
+ 1052              	.LBI82:
+  28:..//kernel/core/tos_ring_queue.c **** {
+ 1053              		.loc 1 28 24 view .LVU333
+ 1054              	.LBB83:
+  30:..//kernel/core/tos_ring_queue.c **** }
+ 1055              		.loc 1 30 5 view .LVU334
+  30:..//kernel/core/tos_ring_queue.c **** }
+ 1056              		.loc 1 30 12 is_stmt 0 view .LVU335
+ 1057 002e E868     		ldr	r0, [r5, #12]
+ 1058 0030 EF88     		ldrh	r7, [r5, #6]
+ 1059 0032 2B69     		ldr	r3, [r5, #16]
+  30:..//kernel/core/tos_ring_queue.c **** }
+ 1060              		.loc 1 30 5 view .LVU336
+ 1061 0034 1A46     		mov	r2, r3
+ 1062 0036 2146     		mov	r1, r4
+ 1063 0038 03FB0700 		mla	r0, r3, r7, r0
+ 1064 003c FFF7FEFF 		bl	memcpy
+ 1065              	.LVL112:
+  30:..//kernel/core/tos_ring_queue.c **** }
+ 1066              		.loc 1 30 5 view .LVU337
+ 1067              	.LBE83:
+ 1068              	.LBE82:
+ 157:..//kernel/core/tos_ring_queue.c **** 
+ 1069              		.loc 1 157 5 is_stmt 1 view .LVU338
+ 1070              	.LBB84:
+ 1071              	.LBI84:
+  33:..//kernel/core/tos_ring_queue.c **** {
+ 1072              		.loc 1 33 24 view .LVU339
+ 1073              	.LBB85:
+  35:..//kernel/core/tos_ring_queue.c ****     ++ring_q->total;
+ 1074              		.loc 1 35 5 view .LVU340
+  35:..//kernel/core/tos_ring_queue.c ****     ++ring_q->total;
+ 1075              		.loc 1 35 20 is_stmt 0 view .LVU341
+ 1076 0040 EB88     		ldrh	r3, [r5, #6]
+ 1077 0042 0133     		adds	r3, r3, #1
+ 1078 0044 6969     		ldr	r1, [r5, #20]
+ 1079 0046 B3FBF1F2 		udiv	r2, r3, r1
+ 1080 004a 01FB1233 		mls	r3, r1, r2, r3
+  35:..//kernel/core/tos_ring_queue.c ****     ++ring_q->total;
+ 1081              		.loc 1 35 18 view .LVU342
+ 1082 004e EB80     		strh	r3, [r5, #6]	@ movhi
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 31
+
+
+  36:..//kernel/core/tos_ring_queue.c **** }
+ 1083              		.loc 1 36 5 is_stmt 1 view .LVU343
+  36:..//kernel/core/tos_ring_queue.c **** }
+ 1084              		.loc 1 36 13 is_stmt 0 view .LVU344
+ 1085 0050 AB68     		ldr	r3, [r5, #8]
+  36:..//kernel/core/tos_ring_queue.c **** }
+ 1086              		.loc 1 36 5 view .LVU345
+ 1087 0052 0133     		adds	r3, r3, #1
+ 1088 0054 AB60     		str	r3, [r5, #8]
+ 1089              	.LVL113:
+  36:..//kernel/core/tos_ring_queue.c **** }
+ 1090              		.loc 1 36 5 view .LVU346
+ 1091              	.LBE85:
+ 1092              	.LBE84:
+ 159:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 1093              		.loc 1 159 5 is_stmt 1 view .LVU347
+ 159:..//kernel/core/tos_ring_queue.c ****     return K_ERR_NONE;
+ 1094              		.loc 1 159 5 view .LVU348
+ 1095 0056 3046     		mov	r0, r6
+ 1096 0058 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 1097              	.LVL114:
+ 160:..//kernel/core/tos_ring_queue.c **** }
+ 1098              		.loc 1 160 5 view .LVU349
+ 160:..//kernel/core/tos_ring_queue.c **** }
+ 1099              		.loc 1 160 12 is_stmt 0 view .LVU350
+ 1100 005c 0020     		movs	r0, #0
+ 1101 005e 0DE0     		b	.L65
+ 1102              	.L76:
+ 152:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_FULL;
+ 1103              		.loc 1 152 9 is_stmt 1 view .LVU351
+ 152:..//kernel/core/tos_ring_queue.c ****         return K_ERR_RING_Q_FULL;
+ 1104              		.loc 1 152 9 view .LVU352
+ 1105 0060 3046     		mov	r0, r6
+ 1106 0062 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 1107              	.LVL115:
+ 153:..//kernel/core/tos_ring_queue.c ****     }
+ 1108              		.loc 1 153 9 view .LVU353
+ 153:..//kernel/core/tos_ring_queue.c ****     }
+ 1109              		.loc 1 153 16 is_stmt 0 view .LVU354
+ 1110 0066 40F2DC50 		movw	r0, #1500
+ 1111 006a 07E0     		b	.L65
+ 1112              	.LVL116:
+ 1113              	.L67:
+ 1114              	.LCFI17:
+ 1115              		.cfi_def_cfa_offset 0
+ 1116              		.cfi_restore 3
+ 1117              		.cfi_restore 4
+ 1118              		.cfi_restore 5
+ 1119              		.cfi_restore 6
+ 1120              		.cfi_restore 7
+ 1121              		.cfi_restore 14
+ 141:..//kernel/core/tos_ring_queue.c ****     TOS_PTR_SANITY_CHECK(item);
+ 1122              		.loc 1 141 5 view .LVU355
+ 1123 006c 40F24C40 		movw	r0, #1100
+ 1124              	.LVL117:
+ 161:..//kernel/core/tos_ring_queue.c **** 
+ 1125              		.loc 1 161 1 view .LVU356
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 32
+
+
+ 1126 0070 7047     		bx	lr
+ 1127              	.LVL118:
+ 1128              	.L68:
+ 1129              	.LCFI18:
+ 1130              		.cfi_def_cfa_offset 24
+ 1131              		.cfi_offset 3, -24
+ 1132              		.cfi_offset 4, -20
+ 1133              		.cfi_offset 5, -16
+ 1134              		.cfi_offset 6, -12
+ 1135              		.cfi_offset 7, -8
+ 1136              		.cfi_offset 14, -4
+ 142:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 1137              		.loc 1 142 5 view .LVU357
+ 1138 0072 40F24C40 		movw	r0, #1100
+ 1139              	.LVL119:
+ 142:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
+ 1140              		.loc 1 142 5 view .LVU358
+ 1141 0076 01E0     		b	.L65
+ 1142              	.L69:
+ 143:..//kernel/core/tos_ring_queue.c **** 
+ 1143              		.loc 1 143 5 view .LVU359
+ 1144 0078 40F24D40 		movw	r0, #1101
+ 1145              	.LVL120:
+ 1146              	.L65:
+ 161:..//kernel/core/tos_ring_queue.c **** 
+ 1147              		.loc 1 161 1 view .LVU360
+ 1148 007c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 161:..//kernel/core/tos_ring_queue.c **** 
+ 1149              		.loc 1 161 1 view .LVU361
+ 1150              		.cfi_endproc
+ 1151              	.LFE118:
+ 1153              		.text
+ 1154              	.Letext0:
+ 1155              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ 1156              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1157              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1158              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 1159              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1160              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 1161              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 1162              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 1163              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 1164              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1165              		.file 13 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 1166              		.file 14 "..//kernel/core/include/tos_ktypes.h"
+ 1167              		.file 15 "..//kernel/core/include/tos_task.h"
+ 1168              		.file 16 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 1169              		.file 17 "..//kernel/core/include/tos_list.h"
+ 1170              		.file 18 "..//kernel/core/include/tos_pend.h"
+ 1171              		.file 19 "..//kernel/core/include/tos_ring_queue.h"
+ 1172              		.file 20 "..//kernel/core/include/tos_timer.h"
+ 1173              		.file 21 "..//kernel/core/include/tos_mmheap.h"
+ 1174              		.file 22 "..//kernel/core/include/tos_sched.h"
+ 1175              		.file 23 "..//kernel/core/include/tos_global.h"
+ 1176              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ 1177              		.file 25 "<built-in>"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_ring_queue.c
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:16     .text.tos_ring_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:24     .text.tos_ring_q_create:00000000 tos_ring_q_create
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:127    .text.tos_ring_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:134    .text.tos_ring_q_destroy:00000000 tos_ring_q_destroy
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:254    .text.tos_ring_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:261    .text.tos_ring_q_create_dyn:00000000 tos_ring_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:378    .text.tos_ring_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:385    .text.tos_ring_q_destroy_dyn:00000000 tos_ring_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:524    .text.tos_ring_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:531    .text.tos_ring_q_flush:00000000 tos_ring_q_flush
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:615    .text.tos_ring_q_is_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:622    .text.tos_ring_q_is_empty:00000000 tos_ring_q_is_empty
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:698    .text.tos_ring_q_dequeue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:705    .text.tos_ring_q_dequeue:00000000 tos_ring_q_dequeue
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:883    .text.tos_ring_q_is_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:890    .text.tos_ring_q_is_full:00000000 tos_ring_q_is_full
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:970    .text.tos_ring_q_enqueue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccWlY0Kx.s:977    .text.tos_ring_q_enqueue:00000000 tos_ring_q_enqueue
+
+UNDEFINED SYMBOLS
+tos_mmheap_alloc
+tos_mmheap_free
+tos_cpu_cpsr_save
+tos_cpu_cpsr_restore
+memcpy

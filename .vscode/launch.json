@@ -5,7 +5,7 @@
             "name": "ARM",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/${workspaceRootFolderName}.elf",
+            "program": "${workspaceFolder}/build/smart_fridge.elf",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -15,7 +15,7 @@
             "miDebuggerPath": "arm-none-eabi-gdb.exe",
             "setupCommands": [
                 {"text": "cd ${workspaceFolder}/build"},
-                {"text": "file ${workspaceRootFolderName}.elf"},
+                {"text": "file smart_fridge.elf"},
                 {"text": "target remote localhost:3333"},
                 {"text": "load"}
             ],

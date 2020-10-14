@@ -1,0 +1,1760 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_char_fifo.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_chr_fifo_create,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_chr_fifo_create
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_chr_fifo_create:
+  25              	.LVL0:
+  26              	.LFB110:
+  27              		.file 1 "..//kernel/core/tos_char_fifo.c"
+   1:..//kernel/core/tos_char_fifo.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_char_fifo.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_char_fifo.c ****  * available.
+   4:..//kernel/core/tos_char_fifo.c ****  *
+   5:..//kernel/core/tos_char_fifo.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_char_fifo.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_char_fifo.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_char_fifo.c ****  *
+   9:..//kernel/core/tos_char_fifo.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_char_fifo.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_char_fifo.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_char_fifo.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_char_fifo.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_char_fifo.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_char_fifo.c ****  * within TencentOS.
+  16:..//kernel/core/tos_char_fifo.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_char_fifo.c **** 
+  18:..//kernel/core/tos_char_fifo.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_char_fifo.c **** 
+  20:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_create(k_chr_fifo_t *chr_fifo, void *buffer, size_t size)
+  21:..//kernel/core/tos_char_fifo.c **** {
+  28              		.loc 1 21 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  22:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+  32              		.loc 1 22 5 view .LVU1
+  23:..//kernel/core/tos_char_fifo.c **** 
+  24:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+  33              		.loc 1 24 5 view .LVU2
+  34              		.loc 1 24 5 view .LVU3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 2
+
+
+  35 0000 78B1     		cbz	r0, .L3
+  21:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+  36              		.loc 1 21 1 is_stmt 0 view .LVU4
+  37 0002 10B5     		push	{r4, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 4, -8
+  41              		.cfi_offset 14, -4
+  42 0004 0446     		mov	r4, r0
+  25:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(buffer);
+  43              		.loc 1 25 5 is_stmt 1 view .LVU5
+  44              		.loc 1 25 5 view .LVU6
+  45 0006 81B1     		cbz	r1, .L4
+  26:..//kernel/core/tos_char_fifo.c **** 
+  27:..//kernel/core/tos_char_fifo.c ****     err = tos_ring_q_create(&chr_fifo->ring_q, buffer, size, sizeof(uint8_t));
+  46              		.loc 1 27 5 view .LVU7
+  47              		.loc 1 27 11 is_stmt 0 view .LVU8
+  48 0008 0123     		movs	r3, #1
+  49 000a 0430     		adds	r0, r0, #4
+  50              	.LVL1:
+  51              		.loc 1 27 11 view .LVU9
+  52 000c FFF7FEFF 		bl	tos_ring_q_create
+  53              	.LVL2:
+  28:..//kernel/core/tos_char_fifo.c ****     if (err != K_ERR_NONE) {
+  54              		.loc 1 28 5 is_stmt 1 view .LVU10
+  55              		.loc 1 28 8 is_stmt 0 view .LVU11
+  56 0010 0346     		mov	r3, r0
+  57 0012 20B9     		cbnz	r0, .L2
+  29:..//kernel/core/tos_char_fifo.c ****         return err;
+  30:..//kernel/core/tos_char_fifo.c ****     }
+  31:..//kernel/core/tos_char_fifo.c **** 
+  32:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_INIT(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+  58              		.loc 1 32 5 is_stmt 1 view .LVU12
+  59              	.LVL3:
+  60              	.LBB40:
+  61              	.LBI40:
+  62              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 3
+
+
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 4
+
+
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ 100:..//kernel/core/include/tos_sys.h **** 
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 5
+
+
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+  63              		.loc 2 187 32 view .LVU13
+  64              	.LBB41:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 6
+
+
+  65              		.loc 2 189 5 view .LVU14
+  66              		.loc 2 189 19 is_stmt 0 view .LVU15
+  67 0014 4DF6D222 		movw	r2, #56018
+  68 0018 6280     		strh	r2, [r4, #2]	@ movhi
+  69              	.LVL4:
+  70              		.loc 2 189 19 view .LVU16
+  71              	.LBE41:
+  72              	.LBE40:
+  33:..//kernel/core/tos_char_fifo.c ****     knl_object_alloc_set_static(&chr_fifo->knl_obj);
+  73              		.loc 1 33 5 is_stmt 1 view .LVU17
+  74              	.LBB42:
+  75              	.LBI42:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 195:..//kernel/core/include/tos_sys.h **** }
+ 196:..//kernel/core/include/tos_sys.h **** 
+ 197:..//kernel/core/include/tos_sys.h **** #endif
+ 198:..//kernel/core/include/tos_sys.h **** 
+ 199:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_reset(knl_obj_t *knl_obj)
+ 200:..//kernel/core/include/tos_sys.h **** {
+ 201:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_NONE;
+ 202:..//kernel/core/include/tos_sys.h **** }
+ 203:..//kernel/core/include/tos_sys.h **** 
+ 204:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_dynamic(knl_obj_t *knl_obj)
+ 205:..//kernel/core/include/tos_sys.h **** {
+ 206:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_DYNAMIC;
+ 207:..//kernel/core/include/tos_sys.h **** }
+ 208:..//kernel/core/include/tos_sys.h **** 
+ 209:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_set_static(knl_obj_t *knl_obj)
+  76              		.loc 2 209 32 view .LVU18
+  77              	.LBB43:
+ 210:..//kernel/core/include/tos_sys.h **** {
+ 211:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_STATIC;
+  78              		.loc 2 211 5 view .LVU19
+  79              		.loc 2 211 25 is_stmt 0 view .LVU20
+  80 001a 0122     		movs	r2, #1
+  81 001c 2270     		strb	r2, [r4]
+  82              	.LVL5:
+  83              		.loc 2 211 25 view .LVU21
+  84              	.LBE43:
+  85              	.LBE42:
+  34:..//kernel/core/tos_char_fifo.c **** 
+  35:..//kernel/core/tos_char_fifo.c ****     return K_ERR_NONE;
+  86              		.loc 1 35 5 is_stmt 1 view .LVU22
+  87              	.L2:
+  36:..//kernel/core/tos_char_fifo.c **** }
+  88              		.loc 1 36 1 is_stmt 0 view .LVU23
+  89 001e 1846     		mov	r0, r3
+  90 0020 10BD     		pop	{r4, pc}
+  91              	.LVL6:
+  92              	.L3:
+  93              	.LCFI1:
+  94              		.cfi_def_cfa_offset 0
+  95              		.cfi_restore 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 7
+
+
+  96              		.cfi_restore 14
+  24:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(buffer);
+  97              		.loc 1 24 5 view .LVU24
+  98 0022 40F24C43 		movw	r3, #1100
+  99              		.loc 1 36 1 view .LVU25
+ 100 0026 1846     		mov	r0, r3
+ 101              	.LVL7:
+ 102              		.loc 1 36 1 view .LVU26
+ 103 0028 7047     		bx	lr
+ 104              	.LVL8:
+ 105              	.L4:
+ 106              	.LCFI2:
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 4, -8
+ 109              		.cfi_offset 14, -4
+  25:..//kernel/core/tos_char_fifo.c **** 
+ 110              		.loc 1 25 5 view .LVU27
+ 111 002a 40F24C43 		movw	r3, #1100
+ 112 002e F6E7     		b	.L2
+ 113              		.cfi_endproc
+ 114              	.LFE110:
+ 116              		.section	.text.tos_chr_fifo_destroy,"ax",%progbits
+ 117              		.align	1
+ 118              		.global	tos_chr_fifo_destroy
+ 119              		.syntax unified
+ 120              		.thumb
+ 121              		.thumb_func
+ 122              		.fpu softvfp
+ 124              	tos_chr_fifo_destroy:
+ 125              	.LVL9:
+ 126              	.LFB111:
+  37:..//kernel/core/tos_char_fifo.c **** 
+  38:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_destroy(k_chr_fifo_t *chr_fifo)
+  39:..//kernel/core/tos_char_fifo.c **** {
+ 127              		.loc 1 39 1 is_stmt 1 view -0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+  40:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 131              		.loc 1 40 5 view .LVU29
+  41:..//kernel/core/tos_char_fifo.c **** 
+  42:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 132              		.loc 1 42 5 view .LVU30
+ 133              		.loc 1 42 5 view .LVU31
+ 134 0000 A8B1     		cbz	r0, .L11
+  39:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 135              		.loc 1 39 1 is_stmt 0 view .LVU32
+ 136 0002 10B5     		push	{r4, lr}
+ 137              	.LCFI3:
+ 138              		.cfi_def_cfa_offset 8
+ 139              		.cfi_offset 4, -8
+ 140              		.cfi_offset 14, -4
+ 141 0004 0446     		mov	r4, r0
+  43:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 142              		.loc 1 43 5 is_stmt 1 view .LVU33
+ 143              		.loc 1 43 5 view .LVU34
+ 144              	.LVL10:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 8
+
+
+ 145              	.LBB44:
+ 146              	.LBI44:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 147              		.loc 2 182 31 view .LVU35
+ 148              	.LBB45:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 149              		.loc 2 184 5 view .LVU36
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 150              		.loc 2 184 19 is_stmt 0 view .LVU37
+ 151 0006 4188     		ldrh	r1, [r0, #2]
+ 152              	.LVL11:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 153              		.loc 2 184 19 view .LVU38
+ 154              	.LBE45:
+ 155              	.LBE44:
+ 156              		.loc 1 43 5 view .LVU39
+ 157 0008 4DF6D222 		movw	r2, #56018
+ 158 000c 9142     		cmp	r1, r2
+ 159 000e 12D1     		bne	.L12
+  44:..//kernel/core/tos_char_fifo.c **** 
+  45:..//kernel/core/tos_char_fifo.c ****     if (!knl_object_alloc_is_static(&chr_fifo->knl_obj)) {
+ 160              		.loc 1 45 5 is_stmt 1 view .LVU40
+ 161              	.LVL12:
+ 162              	.LBB46:
+ 163              	.LBI46:
+ 212:..//kernel/core/include/tos_sys.h **** }
+ 213:..//kernel/core/include/tos_sys.h **** 
+ 214:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_dynamic(knl_obj_t *knl_obj)
+ 215:..//kernel/core/include/tos_sys.h **** {
+ 216:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_DYNAMIC;
+ 217:..//kernel/core/include/tos_sys.h **** }
+ 218:..//kernel/core/include/tos_sys.h **** 
+ 219:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_static(knl_obj_t *knl_obj)
+ 164              		.loc 2 219 31 view .LVU41
+ 165              	.LBB47:
+ 220:..//kernel/core/include/tos_sys.h **** {
+ 221:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_STATIC;
+ 166              		.loc 2 221 5 view .LVU42
+ 167              		.loc 2 221 19 is_stmt 0 view .LVU43
+ 168 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 169              	.LVL13:
+ 170              		.loc 2 221 19 view .LVU44
+ 171              	.LBE47:
+ 172              	.LBE46:
+ 173              		.loc 1 45 8 view .LVU45
+ 174 0012 012A     		cmp	r2, #1
+ 175 0014 02D0     		beq	.L18
+  46:..//kernel/core/tos_char_fifo.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 176              		.loc 1 46 16 view .LVU46
+ 177 0016 40F24E43 		movw	r3, #1102
+ 178 001a 0EE0     		b	.L10
+ 179              	.L18:
+  47:..//kernel/core/tos_char_fifo.c ****     }
+  48:..//kernel/core/tos_char_fifo.c **** 
+  49:..//kernel/core/tos_char_fifo.c ****     err = tos_ring_q_destroy(&chr_fifo->ring_q);
+ 180              		.loc 1 49 5 is_stmt 1 view .LVU47
+ 181              		.loc 1 49 11 is_stmt 0 view .LVU48
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 9
+
+
+ 182 001c 0430     		adds	r0, r0, #4
+ 183              	.LVL14:
+ 184              		.loc 1 49 11 view .LVU49
+ 185 001e FFF7FEFF 		bl	tos_ring_q_destroy
+ 186              	.LVL15:
+  50:..//kernel/core/tos_char_fifo.c ****     if (err != K_ERR_NONE) {
+ 187              		.loc 1 50 5 is_stmt 1 view .LVU50
+ 188              		.loc 1 50 8 is_stmt 0 view .LVU51
+ 189 0022 0346     		mov	r3, r0
+ 190 0024 48B9     		cbnz	r0, .L10
+  51:..//kernel/core/tos_char_fifo.c ****         return err;
+  52:..//kernel/core/tos_char_fifo.c ****     }
+  53:..//kernel/core/tos_char_fifo.c **** 
+  54:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_DEINIT(chr_fifo);
+ 191              		.loc 1 54 5 is_stmt 1 view .LVU52
+ 192              	.LVL16:
+ 193              	.LBB48:
+ 194              	.LBI48:
+ 192:..//kernel/core/include/tos_sys.h **** {
+ 195              		.loc 2 192 32 view .LVU53
+ 196              	.LBB49:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 197              		.loc 2 194 5 view .LVU54
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 198              		.loc 2 194 19 is_stmt 0 view .LVU55
+ 199 0026 0022     		movs	r2, #0
+ 200 0028 6280     		strh	r2, [r4, #2]	@ movhi
+ 201              	.LVL17:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 202              		.loc 2 194 19 view .LVU56
+ 203              	.LBE49:
+ 204              	.LBE48:
+  55:..//kernel/core/tos_char_fifo.c ****     knl_object_alloc_reset(&chr_fifo->knl_obj);
+ 205              		.loc 1 55 5 is_stmt 1 view .LVU57
+ 206              	.LBB50:
+ 207              	.LBI50:
+ 199:..//kernel/core/include/tos_sys.h **** {
+ 208              		.loc 2 199 32 view .LVU58
+ 209              	.LBB51:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 210              		.loc 2 201 5 view .LVU59
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 211              		.loc 2 201 25 is_stmt 0 view .LVU60
+ 212 002a 2270     		strb	r2, [r4]
+ 213              	.LVL18:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 214              		.loc 2 201 25 view .LVU61
+ 215              	.LBE51:
+ 216              	.LBE50:
+  56:..//kernel/core/tos_char_fifo.c **** 
+  57:..//kernel/core/tos_char_fifo.c ****     return K_ERR_NONE;
+ 217              		.loc 1 57 5 is_stmt 1 view .LVU62
+ 218              		.loc 1 57 12 is_stmt 0 view .LVU63
+ 219 002c 05E0     		b	.L10
+ 220              	.LVL19:
+ 221              	.L11:
+ 222              	.LCFI4:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 10
+
+
+ 223              		.cfi_def_cfa_offset 0
+ 224              		.cfi_restore 4
+ 225              		.cfi_restore 14
+  42:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 226              		.loc 1 42 5 view .LVU64
+ 227 002e 40F24C43 		movw	r3, #1100
+  58:..//kernel/core/tos_char_fifo.c **** }
+ 228              		.loc 1 58 1 view .LVU65
+ 229 0032 1846     		mov	r0, r3
+ 230              	.LVL20:
+ 231              		.loc 1 58 1 view .LVU66
+ 232 0034 7047     		bx	lr
+ 233              	.LVL21:
+ 234              	.L12:
+ 235              	.LCFI5:
+ 236              		.cfi_def_cfa_offset 8
+ 237              		.cfi_offset 4, -8
+ 238              		.cfi_offset 14, -4
+  43:..//kernel/core/tos_char_fifo.c **** 
+ 239              		.loc 1 43 5 view .LVU67
+ 240 0036 40F24D43 		movw	r3, #1101
+ 241              	.LVL22:
+ 242              	.L10:
+ 243              		.loc 1 58 1 view .LVU68
+ 244 003a 1846     		mov	r0, r3
+ 245 003c 10BD     		pop	{r4, pc}
+ 246              		.loc 1 58 1 view .LVU69
+ 247              		.cfi_endproc
+ 248              	.LFE111:
+ 250              		.section	.text.tos_chr_fifo_create_dyn,"ax",%progbits
+ 251              		.align	1
+ 252              		.global	tos_chr_fifo_create_dyn
+ 253              		.syntax unified
+ 254              		.thumb
+ 255              		.thumb_func
+ 256              		.fpu softvfp
+ 258              	tos_chr_fifo_create_dyn:
+ 259              	.LVL23:
+ 260              	.LFB112:
+  59:..//kernel/core/tos_char_fifo.c **** 
+  60:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_create_dyn(k_chr_fifo_t *chr_fifo, size_t fifo_size)
+  61:..//kernel/core/tos_char_fifo.c **** {
+ 261              		.loc 1 61 1 is_stmt 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+  62:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 265              		.loc 1 62 5 view .LVU71
+  63:..//kernel/core/tos_char_fifo.c **** 
+  64:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 266              		.loc 1 64 5 view .LVU72
+ 267              		.loc 1 64 5 view .LVU73
+ 268 0000 70B1     		cbz	r0, .L21
+  61:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 269              		.loc 1 61 1 is_stmt 0 view .LVU74
+ 270 0002 10B5     		push	{r4, lr}
+ 271              	.LCFI6:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 11
+
+
+ 272              		.cfi_def_cfa_offset 8
+ 273              		.cfi_offset 4, -8
+ 274              		.cfi_offset 14, -4
+ 275 0004 0446     		mov	r4, r0
+  65:..//kernel/core/tos_char_fifo.c **** 
+  66:..//kernel/core/tos_char_fifo.c ****     err = tos_ring_q_create_dyn(&chr_fifo->ring_q, fifo_size, sizeof(uint8_t));
+ 276              		.loc 1 66 5 is_stmt 1 view .LVU75
+ 277              		.loc 1 66 11 is_stmt 0 view .LVU76
+ 278 0006 0122     		movs	r2, #1
+ 279 0008 0430     		adds	r0, r0, #4
+ 280              	.LVL24:
+ 281              		.loc 1 66 11 view .LVU77
+ 282 000a FFF7FEFF 		bl	tos_ring_q_create_dyn
+ 283              	.LVL25:
+  67:..//kernel/core/tos_char_fifo.c ****     if (err != K_ERR_NONE) {
+ 284              		.loc 1 67 5 is_stmt 1 view .LVU78
+ 285              		.loc 1 67 8 is_stmt 0 view .LVU79
+ 286 000e 0346     		mov	r3, r0
+ 287 0010 20B9     		cbnz	r0, .L20
+  68:..//kernel/core/tos_char_fifo.c ****         return err;
+  69:..//kernel/core/tos_char_fifo.c ****     }
+  70:..//kernel/core/tos_char_fifo.c **** 
+  71:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_INIT(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 288              		.loc 1 71 5 is_stmt 1 view .LVU80
+ 289              	.LVL26:
+ 290              	.LBB52:
+ 291              	.LBI52:
+ 187:..//kernel/core/include/tos_sys.h **** {
+ 292              		.loc 2 187 32 view .LVU81
+ 293              	.LBB53:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 294              		.loc 2 189 5 view .LVU82
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 295              		.loc 2 189 19 is_stmt 0 view .LVU83
+ 296 0012 4DF6D222 		movw	r2, #56018
+ 297 0016 6280     		strh	r2, [r4, #2]	@ movhi
+ 298              	.LVL27:
+ 189:..//kernel/core/include/tos_sys.h **** }
+ 299              		.loc 2 189 19 view .LVU84
+ 300              	.LBE53:
+ 301              	.LBE52:
+  72:..//kernel/core/tos_char_fifo.c ****     knl_object_alloc_set_dynamic(&chr_fifo->knl_obj);
+ 302              		.loc 1 72 5 is_stmt 1 view .LVU85
+ 303              	.LBB54:
+ 304              	.LBI54:
+ 204:..//kernel/core/include/tos_sys.h **** {
+ 305              		.loc 2 204 32 view .LVU86
+ 306              	.LBB55:
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 307              		.loc 2 206 5 view .LVU87
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 308              		.loc 2 206 25 is_stmt 0 view .LVU88
+ 309 0018 0222     		movs	r2, #2
+ 310 001a 2270     		strb	r2, [r4]
+ 311              	.LVL28:
+ 206:..//kernel/core/include/tos_sys.h **** }
+ 312              		.loc 2 206 25 view .LVU89
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 12
+
+
+ 313              	.LBE55:
+ 314              	.LBE54:
+  73:..//kernel/core/tos_char_fifo.c **** 
+  74:..//kernel/core/tos_char_fifo.c ****     return K_ERR_NONE;
+ 315              		.loc 1 74 5 is_stmt 1 view .LVU90
+ 316              	.L20:
+  75:..//kernel/core/tos_char_fifo.c **** }
+ 317              		.loc 1 75 1 is_stmt 0 view .LVU91
+ 318 001c 1846     		mov	r0, r3
+ 319              	.LVL29:
+ 320              		.loc 1 75 1 view .LVU92
+ 321 001e 10BD     		pop	{r4, pc}
+ 322              	.LVL30:
+ 323              	.L21:
+ 324              	.LCFI7:
+ 325              		.cfi_def_cfa_offset 0
+ 326              		.cfi_restore 4
+ 327              		.cfi_restore 14
+  64:..//kernel/core/tos_char_fifo.c **** 
+ 328              		.loc 1 64 5 view .LVU93
+ 329 0020 40F24C43 		movw	r3, #1100
+ 330              		.loc 1 75 1 view .LVU94
+ 331 0024 1846     		mov	r0, r3
+ 332              	.LVL31:
+ 333              		.loc 1 75 1 view .LVU95
+ 334 0026 7047     		bx	lr
+ 335              		.cfi_endproc
+ 336              	.LFE112:
+ 338              		.section	.text.tos_chr_fifo_destroy_dyn,"ax",%progbits
+ 339              		.align	1
+ 340              		.global	tos_chr_fifo_destroy_dyn
+ 341              		.syntax unified
+ 342              		.thumb
+ 343              		.thumb_func
+ 344              		.fpu softvfp
+ 346              	tos_chr_fifo_destroy_dyn:
+ 347              	.LVL32:
+ 348              	.LFB113:
+  76:..//kernel/core/tos_char_fifo.c **** 
+  77:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_destroy_dyn(k_chr_fifo_t *chr_fifo)
+  78:..//kernel/core/tos_char_fifo.c **** {
+ 349              		.loc 1 78 1 is_stmt 1 view -0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+  79:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 353              		.loc 1 79 5 view .LVU97
+  80:..//kernel/core/tos_char_fifo.c **** 
+  81:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 354              		.loc 1 81 5 view .LVU98
+ 355              		.loc 1 81 5 view .LVU99
+ 356 0000 A8B1     		cbz	r0, .L28
+  78:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 357              		.loc 1 78 1 is_stmt 0 view .LVU100
+ 358 0002 10B5     		push	{r4, lr}
+ 359              	.LCFI8:
+ 360              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 13
+
+
+ 361              		.cfi_offset 4, -8
+ 362              		.cfi_offset 14, -4
+ 363 0004 0446     		mov	r4, r0
+  82:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 364              		.loc 1 82 5 is_stmt 1 view .LVU101
+ 365              		.loc 1 82 5 view .LVU102
+ 366              	.LVL33:
+ 367              	.LBB56:
+ 368              	.LBI56:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 369              		.loc 2 182 31 view .LVU103
+ 370              	.LBB57:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 371              		.loc 2 184 5 view .LVU104
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 372              		.loc 2 184 19 is_stmt 0 view .LVU105
+ 373 0006 4188     		ldrh	r1, [r0, #2]
+ 374              	.LVL34:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 375              		.loc 2 184 19 view .LVU106
+ 376              	.LBE57:
+ 377              	.LBE56:
+ 378              		.loc 1 82 5 view .LVU107
+ 379 0008 4DF6D222 		movw	r2, #56018
+ 380 000c 9142     		cmp	r1, r2
+ 381 000e 12D1     		bne	.L29
+  83:..//kernel/core/tos_char_fifo.c **** 
+  84:..//kernel/core/tos_char_fifo.c ****     if (!knl_object_alloc_is_dynamic(&chr_fifo->knl_obj)) {
+ 382              		.loc 1 84 5 is_stmt 1 view .LVU108
+ 383              	.LVL35:
+ 384              	.LBB58:
+ 385              	.LBI58:
+ 214:..//kernel/core/include/tos_sys.h **** {
+ 386              		.loc 2 214 31 view .LVU109
+ 387              	.LBB59:
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 388              		.loc 2 216 5 view .LVU110
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 389              		.loc 2 216 19 is_stmt 0 view .LVU111
+ 390 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 391              	.LVL36:
+ 216:..//kernel/core/include/tos_sys.h **** }
+ 392              		.loc 2 216 19 view .LVU112
+ 393              	.LBE59:
+ 394              	.LBE58:
+ 395              		.loc 1 84 8 view .LVU113
+ 396 0012 022A     		cmp	r2, #2
+ 397 0014 02D0     		beq	.L35
+  85:..//kernel/core/tos_char_fifo.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
+ 398              		.loc 1 85 16 view .LVU114
+ 399 0016 40F24E43 		movw	r3, #1102
+ 400 001a 0EE0     		b	.L27
+ 401              	.L35:
+  86:..//kernel/core/tos_char_fifo.c ****     }
+  87:..//kernel/core/tos_char_fifo.c **** 
+  88:..//kernel/core/tos_char_fifo.c ****     err = tos_ring_q_destroy_dyn(&chr_fifo->ring_q);
+ 402              		.loc 1 88 5 is_stmt 1 view .LVU115
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 14
+
+
+ 403              		.loc 1 88 11 is_stmt 0 view .LVU116
+ 404 001c 0430     		adds	r0, r0, #4
+ 405              	.LVL37:
+ 406              		.loc 1 88 11 view .LVU117
+ 407 001e FFF7FEFF 		bl	tos_ring_q_destroy_dyn
+ 408              	.LVL38:
+  89:..//kernel/core/tos_char_fifo.c ****     if (err != K_ERR_NONE) {
+ 409              		.loc 1 89 5 is_stmt 1 view .LVU118
+ 410              		.loc 1 89 8 is_stmt 0 view .LVU119
+ 411 0022 0346     		mov	r3, r0
+ 412 0024 48B9     		cbnz	r0, .L27
+  90:..//kernel/core/tos_char_fifo.c ****         return err;
+  91:..//kernel/core/tos_char_fifo.c ****     }
+  92:..//kernel/core/tos_char_fifo.c **** 
+  93:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_DEINIT(chr_fifo);
+ 413              		.loc 1 93 5 is_stmt 1 view .LVU120
+ 414              	.LVL39:
+ 415              	.LBB60:
+ 416              	.LBI60:
+ 192:..//kernel/core/include/tos_sys.h **** {
+ 417              		.loc 2 192 32 view .LVU121
+ 418              	.LBB61:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 419              		.loc 2 194 5 view .LVU122
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 420              		.loc 2 194 19 is_stmt 0 view .LVU123
+ 421 0026 0022     		movs	r2, #0
+ 422 0028 6280     		strh	r2, [r4, #2]	@ movhi
+ 423              	.LVL40:
+ 194:..//kernel/core/include/tos_sys.h **** }
+ 424              		.loc 2 194 19 view .LVU124
+ 425              	.LBE61:
+ 426              	.LBE60:
+  94:..//kernel/core/tos_char_fifo.c ****     knl_object_alloc_reset(&chr_fifo->knl_obj);
+ 427              		.loc 1 94 5 is_stmt 1 view .LVU125
+ 428              	.LBB62:
+ 429              	.LBI62:
+ 199:..//kernel/core/include/tos_sys.h **** {
+ 430              		.loc 2 199 32 view .LVU126
+ 431              	.LBB63:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 432              		.loc 2 201 5 view .LVU127
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 433              		.loc 2 201 25 is_stmt 0 view .LVU128
+ 434 002a 2270     		strb	r2, [r4]
+ 435              	.LVL41:
+ 201:..//kernel/core/include/tos_sys.h **** }
+ 436              		.loc 2 201 25 view .LVU129
+ 437              	.LBE63:
+ 438              	.LBE62:
+  95:..//kernel/core/tos_char_fifo.c **** 
+  96:..//kernel/core/tos_char_fifo.c ****     return K_ERR_NONE;
+ 439              		.loc 1 96 5 is_stmt 1 view .LVU130
+ 440              		.loc 1 96 12 is_stmt 0 view .LVU131
+ 441 002c 05E0     		b	.L27
+ 442              	.LVL42:
+ 443              	.L28:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 15
+
+
+ 444              	.LCFI9:
+ 445              		.cfi_def_cfa_offset 0
+ 446              		.cfi_restore 4
+ 447              		.cfi_restore 14
+  81:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 448              		.loc 1 81 5 view .LVU132
+ 449 002e 40F24C43 		movw	r3, #1100
+  97:..//kernel/core/tos_char_fifo.c **** }
+ 450              		.loc 1 97 1 view .LVU133
+ 451 0032 1846     		mov	r0, r3
+ 452              	.LVL43:
+ 453              		.loc 1 97 1 view .LVU134
+ 454 0034 7047     		bx	lr
+ 455              	.LVL44:
+ 456              	.L29:
+ 457              	.LCFI10:
+ 458              		.cfi_def_cfa_offset 8
+ 459              		.cfi_offset 4, -8
+ 460              		.cfi_offset 14, -4
+  82:..//kernel/core/tos_char_fifo.c **** 
+ 461              		.loc 1 82 5 view .LVU135
+ 462 0036 40F24D43 		movw	r3, #1101
+ 463              	.LVL45:
+ 464              	.L27:
+ 465              		.loc 1 97 1 view .LVU136
+ 466 003a 1846     		mov	r0, r3
+ 467 003c 10BD     		pop	{r4, pc}
+ 468              		.loc 1 97 1 view .LVU137
+ 469              		.cfi_endproc
+ 470              	.LFE113:
+ 472              		.section	.text.tos_chr_fifo_push,"ax",%progbits
+ 473              		.align	1
+ 474              		.global	tos_chr_fifo_push
+ 475              		.syntax unified
+ 476              		.thumb
+ 477              		.thumb_func
+ 478              		.fpu softvfp
+ 480              	tos_chr_fifo_push:
+ 481              	.LVL46:
+ 482              	.LFB114:
+  98:..//kernel/core/tos_char_fifo.c **** 
+  99:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_push(k_chr_fifo_t *chr_fifo, uint8_t data)
+ 100:..//kernel/core/tos_char_fifo.c **** {
+ 483              		.loc 1 100 1 is_stmt 1 view -0
+ 484              		.cfi_startproc
+ 485              		@ args = 0, pretend = 0, frame = 8
+ 486              		@ frame_needed = 0, uses_anonymous_args = 0
+ 487              		.loc 1 100 1 is_stmt 0 view .LVU139
+ 488 0000 00B5     		push	{lr}
+ 489              	.LCFI11:
+ 490              		.cfi_def_cfa_offset 4
+ 491              		.cfi_offset 14, -4
+ 492 0002 83B0     		sub	sp, sp, #12
+ 493              	.LCFI12:
+ 494              		.cfi_def_cfa_offset 16
+ 495 0004 8DF80710 		strb	r1, [sp, #7]
+ 101:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 16
+
+
+ 496              		.loc 1 101 5 is_stmt 1 view .LVU140
+ 497              		.loc 1 101 5 view .LVU141
+ 498 0008 80B1     		cbz	r0, .L38
+ 102:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 499              		.loc 1 102 5 view .LVU142
+ 500              		.loc 1 102 5 view .LVU143
+ 501              	.LVL47:
+ 502              	.LBB64:
+ 503              	.LBI64:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 504              		.loc 2 182 31 view .LVU144
+ 505              	.LBB65:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 506              		.loc 2 184 5 view .LVU145
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 507              		.loc 2 184 19 is_stmt 0 view .LVU146
+ 508 000a 4188     		ldrh	r1, [r0, #2]
+ 509              	.LVL48:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 510              		.loc 2 184 19 view .LVU147
+ 511              	.LBE65:
+ 512              	.LBE64:
+ 513              		.loc 1 102 5 view .LVU148
+ 514 000c 4DF6D222 		movw	r2, #56018
+ 515 0010 9142     		cmp	r1, r2
+ 516 0012 04D0     		beq	.L41
+ 517 0014 40F24D40 		movw	r0, #1101
+ 518              	.LVL49:
+ 519              	.L37:
+ 103:..//kernel/core/tos_char_fifo.c **** 
+ 104:..//kernel/core/tos_char_fifo.c ****     return tos_ring_q_enqueue(&chr_fifo->ring_q, &data, sizeof(uint8_t));
+ 105:..//kernel/core/tos_char_fifo.c **** }
+ 520              		.loc 1 105 1 view .LVU149
+ 521 0018 03B0     		add	sp, sp, #12
+ 522              	.LCFI13:
+ 523              		.cfi_remember_state
+ 524              		.cfi_def_cfa_offset 4
+ 525              		@ sp needed
+ 526 001a 5DF804FB 		ldr	pc, [sp], #4
+ 527              	.LVL50:
+ 528              	.L41:
+ 529              	.LCFI14:
+ 530              		.cfi_restore_state
+ 104:..//kernel/core/tos_char_fifo.c **** }
+ 531              		.loc 1 104 5 is_stmt 1 view .LVU150
+ 104:..//kernel/core/tos_char_fifo.c **** }
+ 532              		.loc 1 104 12 is_stmt 0 view .LVU151
+ 533 001e 0122     		movs	r2, #1
+ 534 0020 0DF10701 		add	r1, sp, #7
+ 535              	.LVL51:
+ 104:..//kernel/core/tos_char_fifo.c **** }
+ 536              		.loc 1 104 12 view .LVU152
+ 537 0024 0430     		adds	r0, r0, #4
+ 538              	.LVL52:
+ 104:..//kernel/core/tos_char_fifo.c **** }
+ 539              		.loc 1 104 12 view .LVU153
+ 540 0026 FFF7FEFF 		bl	tos_ring_q_enqueue
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 17
+
+
+ 541              	.LVL53:
+ 104:..//kernel/core/tos_char_fifo.c **** }
+ 542              		.loc 1 104 12 view .LVU154
+ 543 002a F5E7     		b	.L37
+ 544              	.LVL54:
+ 545              	.L38:
+ 101:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 546              		.loc 1 101 5 view .LVU155
+ 547 002c 40F24C40 		movw	r0, #1100
+ 548              	.LVL55:
+ 101:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 549              		.loc 1 101 5 view .LVU156
+ 550 0030 F2E7     		b	.L37
+ 551              		.cfi_endproc
+ 552              	.LFE114:
+ 554              		.section	.text.tos_chr_fifo_push_stream,"ax",%progbits
+ 555              		.align	1
+ 556              		.global	tos_chr_fifo_push_stream
+ 557              		.syntax unified
+ 558              		.thumb
+ 559              		.thumb_func
+ 560              		.fpu softvfp
+ 562              	tos_chr_fifo_push_stream:
+ 563              	.LVL56:
+ 564              	.LFB115:
+ 106:..//kernel/core/tos_char_fifo.c **** 
+ 107:..//kernel/core/tos_char_fifo.c **** __API__ int tos_chr_fifo_push_stream(k_chr_fifo_t *chr_fifo, uint8_t *stream, size_t size)
+ 108:..//kernel/core/tos_char_fifo.c **** {
+ 565              		.loc 1 108 1 is_stmt 1 view -0
+ 566              		.cfi_startproc
+ 567              		@ args = 0, pretend = 0, frame = 0
+ 568              		@ frame_needed = 0, uses_anonymous_args = 0
+ 569              		.loc 1 108 1 is_stmt 0 view .LVU158
+ 570 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 571              	.LCFI15:
+ 572              		.cfi_def_cfa_offset 24
+ 573              		.cfi_offset 4, -24
+ 574              		.cfi_offset 5, -20
+ 575              		.cfi_offset 6, -16
+ 576              		.cfi_offset 7, -12
+ 577              		.cfi_offset 8, -8
+ 578              		.cfi_offset 14, -4
+ 109:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_CPSR_ALLOC();
+ 579              		.loc 1 109 5 is_stmt 1 view .LVU159
+ 580              	.LVL57:
+ 110:..//kernel/core/tos_char_fifo.c ****     k_err_t err;
+ 581              		.loc 1 110 5 view .LVU160
+ 111:..//kernel/core/tos_char_fifo.c ****     int i = 0;
+ 582              		.loc 1 111 5 view .LVU161
+ 112:..//kernel/core/tos_char_fifo.c **** 
+ 113:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK_RC(chr_fifo, 0);
+ 583              		.loc 1 113 5 view .LVU162
+ 584              		.loc 1 113 5 view .LVU163
+ 585 0004 B0FA80F4 		clz	r4, r0
+ 586 0008 6409     		lsrs	r4, r4, #5
+ 587 000a FCB9     		cbnz	r4, .L47
+ 588 000c 0546     		mov	r5, r0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 18
+
+
+ 114:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, 0);
+ 589              		.loc 1 114 5 view .LVU164
+ 590              		.loc 1 114 5 view .LVU165
+ 591              	.LVL58:
+ 592              	.LBB66:
+ 593              	.LBI66:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 594              		.loc 2 182 31 view .LVU166
+ 595              	.LBB67:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 596              		.loc 2 184 5 view .LVU167
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 597              		.loc 2 184 19 is_stmt 0 view .LVU168
+ 598 000e 4088     		ldrh	r0, [r0, #2]
+ 599              	.LVL59:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 600              		.loc 2 184 19 view .LVU169
+ 601              	.LBE67:
+ 602              	.LBE66:
+ 603              		.loc 1 114 5 view .LVU170
+ 604 0010 4DF6D223 		movw	r3, #56018
+ 605 0014 9842     		cmp	r0, r3
+ 606 0016 02D0     		beq	.L49
+ 607              	.LVL60:
+ 608              	.L42:
+ 115:..//kernel/core/tos_char_fifo.c **** 
+ 116:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_INT_DISABLE();
+ 117:..//kernel/core/tos_char_fifo.c **** 
+ 118:..//kernel/core/tos_char_fifo.c ****     while (i < size) {
+ 119:..//kernel/core/tos_char_fifo.c ****         err = tos_ring_q_enqueue(&chr_fifo->ring_q, &stream[i], sizeof(uint8_t));
+ 120:..//kernel/core/tos_char_fifo.c ****         if (err != K_ERR_NONE) {
+ 121:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 122:..//kernel/core/tos_char_fifo.c ****             return i;
+ 123:..//kernel/core/tos_char_fifo.c ****         }
+ 124:..//kernel/core/tos_char_fifo.c ****         ++i;
+ 125:..//kernel/core/tos_char_fifo.c ****     }
+ 126:..//kernel/core/tos_char_fifo.c **** 
+ 127:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_INT_ENABLE();
+ 128:..//kernel/core/tos_char_fifo.c ****     return i;
+ 129:..//kernel/core/tos_char_fifo.c **** }
+ 609              		.loc 1 129 1 view .LVU171
+ 610 0018 2046     		mov	r0, r4
+ 611 001a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 612              	.LVL61:
+ 613              	.L49:
+ 614              		.loc 1 129 1 view .LVU172
+ 615 001e 1646     		mov	r6, r2
+ 616 0020 0F46     		mov	r7, r1
+ 116:..//kernel/core/tos_char_fifo.c **** 
+ 617              		.loc 1 116 5 is_stmt 1 view .LVU173
+ 116:..//kernel/core/tos_char_fifo.c **** 
+ 618              		.loc 1 116 5 view .LVU174
+ 619 0022 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 620              	.LVL62:
+ 116:..//kernel/core/tos_char_fifo.c **** 
+ 621              		.loc 1 116 5 is_stmt 0 view .LVU175
+ 622 0026 8046     		mov	r8, r0
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 19
+
+
+ 623              	.LVL63:
+ 118:..//kernel/core/tos_char_fifo.c ****         err = tos_ring_q_enqueue(&chr_fifo->ring_q, &stream[i], sizeof(uint8_t));
+ 624              		.loc 1 118 5 is_stmt 1 view .LVU176
+ 625              	.L44:
+ 118:..//kernel/core/tos_char_fifo.c ****         err = tos_ring_q_enqueue(&chr_fifo->ring_q, &stream[i], sizeof(uint8_t));
+ 626              		.loc 1 118 11 is_stmt 0 view .LVU177
+ 627 0028 B442     		cmp	r4, r6
+ 628 002a 0BD2     		bcs	.L50
+ 119:..//kernel/core/tos_char_fifo.c ****         if (err != K_ERR_NONE) {
+ 629              		.loc 1 119 9 is_stmt 1 view .LVU178
+ 119:..//kernel/core/tos_char_fifo.c ****         if (err != K_ERR_NONE) {
+ 630              		.loc 1 119 15 is_stmt 0 view .LVU179
+ 631 002c 0122     		movs	r2, #1
+ 632 002e 3919     		adds	r1, r7, r4
+ 633 0030 281D     		adds	r0, r5, #4
+ 634 0032 FFF7FEFF 		bl	tos_ring_q_enqueue
+ 635              	.LVL64:
+ 120:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 636              		.loc 1 120 9 is_stmt 1 view .LVU180
+ 120:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 637              		.loc 1 120 12 is_stmt 0 view .LVU181
+ 638 0036 08B9     		cbnz	r0, .L51
+ 124:..//kernel/core/tos_char_fifo.c ****     }
+ 639              		.loc 1 124 9 is_stmt 1 view .LVU182
+ 640 0038 0134     		adds	r4, r4, #1
+ 641              	.LVL65:
+ 124:..//kernel/core/tos_char_fifo.c ****     }
+ 642              		.loc 1 124 9 is_stmt 0 view .LVU183
+ 643 003a F5E7     		b	.L44
+ 644              	.L51:
+ 121:..//kernel/core/tos_char_fifo.c ****             return i;
+ 645              		.loc 1 121 13 is_stmt 1 view .LVU184
+ 121:..//kernel/core/tos_char_fifo.c ****             return i;
+ 646              		.loc 1 121 13 view .LVU185
+ 647 003c 4046     		mov	r0, r8
+ 648              	.LVL66:
+ 121:..//kernel/core/tos_char_fifo.c ****             return i;
+ 649              		.loc 1 121 13 is_stmt 0 view .LVU186
+ 650 003e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 651              	.LVL67:
+ 122:..//kernel/core/tos_char_fifo.c ****         }
+ 652              		.loc 1 122 13 is_stmt 1 view .LVU187
+ 122:..//kernel/core/tos_char_fifo.c ****         }
+ 653              		.loc 1 122 20 is_stmt 0 view .LVU188
+ 654 0042 E9E7     		b	.L42
+ 655              	.L50:
+ 127:..//kernel/core/tos_char_fifo.c ****     return i;
+ 656              		.loc 1 127 5 is_stmt 1 view .LVU189
+ 127:..//kernel/core/tos_char_fifo.c ****     return i;
+ 657              		.loc 1 127 5 view .LVU190
+ 658 0044 4046     		mov	r0, r8
+ 659 0046 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 660              	.LVL68:
+ 128:..//kernel/core/tos_char_fifo.c **** }
+ 661              		.loc 1 128 5 view .LVU191
+ 128:..//kernel/core/tos_char_fifo.c **** }
+ 662              		.loc 1 128 12 is_stmt 0 view .LVU192
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 20
+
+
+ 663 004a E5E7     		b	.L42
+ 664              	.LVL69:
+ 665              	.L47:
+ 113:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, 0);
+ 666              		.loc 1 113 5 view .LVU193
+ 667 004c 0024     		movs	r4, #0
+ 668 004e E3E7     		b	.L42
+ 669              		.cfi_endproc
+ 670              	.LFE115:
+ 672              		.section	.text.tos_chr_fifo_pop,"ax",%progbits
+ 673              		.align	1
+ 674              		.global	tos_chr_fifo_pop
+ 675              		.syntax unified
+ 676              		.thumb
+ 677              		.thumb_func
+ 678              		.fpu softvfp
+ 680              	tos_chr_fifo_pop:
+ 681              	.LVL70:
+ 682              	.LFB116:
+ 130:..//kernel/core/tos_char_fifo.c **** 
+ 131:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_pop(k_chr_fifo_t *chr_fifo, uint8_t *out)
+ 132:..//kernel/core/tos_char_fifo.c **** {
+ 683              		.loc 1 132 1 is_stmt 1 view -0
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 0
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 687              		.loc 1 133 5 view .LVU195
+ 688              		.loc 1 133 5 view .LVU196
+ 689 0000 70B1     		cbz	r0, .L54
+ 132:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 690              		.loc 1 132 1 is_stmt 0 view .LVU197
+ 691 0002 08B5     		push	{r3, lr}
+ 692              	.LCFI16:
+ 693              		.cfi_def_cfa_offset 8
+ 694              		.cfi_offset 3, -8
+ 695              		.cfi_offset 14, -4
+ 696 0004 0346     		mov	r3, r0
+ 134:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 697              		.loc 1 134 5 is_stmt 1 view .LVU198
+ 698              		.loc 1 134 5 view .LVU199
+ 699              	.LVL71:
+ 700              	.LBB68:
+ 701              	.LBI68:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 702              		.loc 2 182 31 view .LVU200
+ 703              	.LBB69:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 704              		.loc 2 184 5 view .LVU201
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 705              		.loc 2 184 19 is_stmt 0 view .LVU202
+ 706 0006 4088     		ldrh	r0, [r0, #2]
+ 707              	.LVL72:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 708              		.loc 2 184 19 view .LVU203
+ 709              	.LBE69:
+ 710              	.LBE68:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 21
+
+
+ 711              		.loc 1 134 5 view .LVU204
+ 712 0008 4DF6D222 		movw	r2, #56018
+ 713 000c 9042     		cmp	r0, r2
+ 714 000e 02D0     		beq	.L60
+ 715 0010 40F24D40 		movw	r0, #1101
+ 716              	.LVL73:
+ 717              	.L53:
+ 135:..//kernel/core/tos_char_fifo.c **** 
+ 136:..//kernel/core/tos_char_fifo.c ****     return tos_ring_q_dequeue(&chr_fifo->ring_q, (void *)out, K_NULL);
+ 137:..//kernel/core/tos_char_fifo.c **** }
+ 718              		.loc 1 137 1 view .LVU205
+ 719 0014 08BD     		pop	{r3, pc}
+ 720              	.LVL74:
+ 721              	.L60:
+ 136:..//kernel/core/tos_char_fifo.c **** }
+ 722              		.loc 1 136 5 is_stmt 1 view .LVU206
+ 136:..//kernel/core/tos_char_fifo.c **** }
+ 723              		.loc 1 136 12 is_stmt 0 view .LVU207
+ 724 0016 0022     		movs	r2, #0
+ 725 0018 181D     		adds	r0, r3, #4
+ 726 001a FFF7FEFF 		bl	tos_ring_q_dequeue
+ 727              	.LVL75:
+ 136:..//kernel/core/tos_char_fifo.c **** }
+ 728              		.loc 1 136 12 view .LVU208
+ 729 001e F9E7     		b	.L53
+ 730              	.LVL76:
+ 731              	.L54:
+ 732              	.LCFI17:
+ 733              		.cfi_def_cfa_offset 0
+ 734              		.cfi_restore 3
+ 735              		.cfi_restore 14
+ 133:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 736              		.loc 1 133 5 view .LVU209
+ 737 0020 40F24C40 		movw	r0, #1100
+ 738              	.LVL77:
+ 739              		.loc 1 137 1 view .LVU210
+ 740 0024 7047     		bx	lr
+ 741              		.cfi_endproc
+ 742              	.LFE116:
+ 744              		.section	.text.tos_chr_fifo_pop_stream,"ax",%progbits
+ 745              		.align	1
+ 746              		.global	tos_chr_fifo_pop_stream
+ 747              		.syntax unified
+ 748              		.thumb
+ 749              		.thumb_func
+ 750              		.fpu softvfp
+ 752              	tos_chr_fifo_pop_stream:
+ 753              	.LVL78:
+ 754              	.LFB117:
+ 138:..//kernel/core/tos_char_fifo.c **** 
+ 139:..//kernel/core/tos_char_fifo.c **** __API__ int tos_chr_fifo_pop_stream(k_chr_fifo_t *chr_fifo, uint8_t *buffer, size_t size)
+ 140:..//kernel/core/tos_char_fifo.c **** {
+ 755              		.loc 1 140 1 is_stmt 1 view -0
+ 756              		.cfi_startproc
+ 757              		@ args = 0, pretend = 0, frame = 8
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759              		.loc 1 140 1 is_stmt 0 view .LVU212
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 22
+
+
+ 760 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 761              	.LCFI18:
+ 762              		.cfi_def_cfa_offset 28
+ 763              		.cfi_offset 4, -28
+ 764              		.cfi_offset 5, -24
+ 765              		.cfi_offset 6, -20
+ 766              		.cfi_offset 7, -16
+ 767              		.cfi_offset 8, -12
+ 768              		.cfi_offset 9, -8
+ 769              		.cfi_offset 14, -4
+ 770 0004 83B0     		sub	sp, sp, #12
+ 771              	.LCFI19:
+ 772              		.cfi_def_cfa_offset 40
+ 141:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_CPSR_ALLOC();
+ 773              		.loc 1 141 5 is_stmt 1 view .LVU213
+ 774              	.LVL79:
+ 142:..//kernel/core/tos_char_fifo.c ****     int i = 0;
+ 775              		.loc 1 142 5 view .LVU214
+ 143:..//kernel/core/tos_char_fifo.c ****     uint8_t data;
+ 776              		.loc 1 143 5 view .LVU215
+ 144:..//kernel/core/tos_char_fifo.c **** 
+ 145:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK_RC(chr_fifo, 0);
+ 777              		.loc 1 145 5 view .LVU216
+ 778              		.loc 1 145 5 view .LVU217
+ 779 0006 B0FA80F4 		clz	r4, r0
+ 780 000a 6409     		lsrs	r4, r4, #5
+ 781 000c 34BB     		cbnz	r4, .L66
+ 782 000e 0646     		mov	r6, r0
+ 146:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, 0);
+ 783              		.loc 1 146 5 view .LVU218
+ 784              		.loc 1 146 5 view .LVU219
+ 785              	.LVL80:
+ 786              	.LBB70:
+ 787              	.LBI70:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 788              		.loc 2 182 31 view .LVU220
+ 789              	.LBB71:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 790              		.loc 2 184 5 view .LVU221
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 791              		.loc 2 184 19 is_stmt 0 view .LVU222
+ 792 0010 4088     		ldrh	r0, [r0, #2]
+ 793              	.LVL81:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 794              		.loc 2 184 19 view .LVU223
+ 795              	.LBE71:
+ 796              	.LBE70:
+ 797              		.loc 1 146 5 view .LVU224
+ 798 0012 4DF6D223 		movw	r3, #56018
+ 799 0016 9842     		cmp	r0, r3
+ 800 0018 03D0     		beq	.L68
+ 801              	.LVL82:
+ 802              	.L61:
+ 147:..//kernel/core/tos_char_fifo.c **** 
+ 148:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_INT_DISABLE();
+ 149:..//kernel/core/tos_char_fifo.c **** 
+ 150:..//kernel/core/tos_char_fifo.c ****     while (i < size) {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 23
+
+
+ 151:..//kernel/core/tos_char_fifo.c ****         if (tos_ring_q_dequeue(&chr_fifo->ring_q, &data, K_NULL) != K_ERR_NONE) {
+ 152:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 153:..//kernel/core/tos_char_fifo.c ****             return i;
+ 154:..//kernel/core/tos_char_fifo.c ****         }
+ 155:..//kernel/core/tos_char_fifo.c ****         buffer[i++] = data;
+ 156:..//kernel/core/tos_char_fifo.c ****     }
+ 157:..//kernel/core/tos_char_fifo.c **** 
+ 158:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_INT_ENABLE();
+ 159:..//kernel/core/tos_char_fifo.c ****     return i;
+ 160:..//kernel/core/tos_char_fifo.c **** }
+ 803              		.loc 1 160 1 view .LVU225
+ 804 001a 2046     		mov	r0, r4
+ 805 001c 03B0     		add	sp, sp, #12
+ 806              	.LCFI20:
+ 807              		.cfi_remember_state
+ 808              		.cfi_def_cfa_offset 28
+ 809              		@ sp needed
+ 810 001e BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 811              	.LVL83:
+ 812              	.L68:
+ 813              	.LCFI21:
+ 814              		.cfi_restore_state
+ 815              		.loc 1 160 1 view .LVU226
+ 816 0022 1746     		mov	r7, r2
+ 817 0024 8846     		mov	r8, r1
+ 148:..//kernel/core/tos_char_fifo.c **** 
+ 818              		.loc 1 148 5 is_stmt 1 view .LVU227
+ 148:..//kernel/core/tos_char_fifo.c **** 
+ 819              		.loc 1 148 5 view .LVU228
+ 820 0026 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 821              	.LVL84:
+ 148:..//kernel/core/tos_char_fifo.c **** 
+ 822              		.loc 1 148 5 is_stmt 0 view .LVU229
+ 823 002a 8146     		mov	r9, r0
+ 824              	.LVL85:
+ 150:..//kernel/core/tos_char_fifo.c ****         if (tos_ring_q_dequeue(&chr_fifo->ring_q, &data, K_NULL) != K_ERR_NONE) {
+ 825              		.loc 1 150 5 is_stmt 1 view .LVU230
+ 826              	.L63:
+ 150:..//kernel/core/tos_char_fifo.c ****         if (tos_ring_q_dequeue(&chr_fifo->ring_q, &data, K_NULL) != K_ERR_NONE) {
+ 827              		.loc 1 150 14 is_stmt 0 view .LVU231
+ 828 002c 2546     		mov	r5, r4
+ 150:..//kernel/core/tos_char_fifo.c ****         if (tos_ring_q_dequeue(&chr_fifo->ring_q, &data, K_NULL) != K_ERR_NONE) {
+ 829              		.loc 1 150 11 view .LVU232
+ 830 002e BC42     		cmp	r4, r7
+ 831 0030 10D2     		bcs	.L69
+ 151:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 832              		.loc 1 151 9 is_stmt 1 view .LVU233
+ 151:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 833              		.loc 1 151 13 is_stmt 0 view .LVU234
+ 834 0032 0022     		movs	r2, #0
+ 835 0034 0DF10701 		add	r1, sp, #7
+ 836 0038 301D     		adds	r0, r6, #4
+ 837 003a FFF7FEFF 		bl	tos_ring_q_dequeue
+ 838              	.LVL86:
+ 151:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
+ 839              		.loc 1 151 12 view .LVU235
+ 840 003e 28B9     		cbnz	r0, .L70
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 24
+
+
+ 155:..//kernel/core/tos_char_fifo.c ****     }
+ 841              		.loc 1 155 9 is_stmt 1 view .LVU236
+ 155:..//kernel/core/tos_char_fifo.c ****     }
+ 842              		.loc 1 155 17 is_stmt 0 view .LVU237
+ 843 0040 0134     		adds	r4, r4, #1
+ 844              	.LVL87:
+ 155:..//kernel/core/tos_char_fifo.c ****     }
+ 845              		.loc 1 155 21 view .LVU238
+ 846 0042 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 847 0046 08F80530 		strb	r3, [r8, r5]
+ 848 004a EFE7     		b	.L63
+ 849              	.L70:
+ 152:..//kernel/core/tos_char_fifo.c ****             return i;
+ 850              		.loc 1 152 13 is_stmt 1 view .LVU239
+ 152:..//kernel/core/tos_char_fifo.c ****             return i;
+ 851              		.loc 1 152 13 view .LVU240
+ 852 004c 4846     		mov	r0, r9
+ 853 004e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 854              	.LVL88:
+ 153:..//kernel/core/tos_char_fifo.c ****         }
+ 855              		.loc 1 153 13 view .LVU241
+ 153:..//kernel/core/tos_char_fifo.c ****         }
+ 856              		.loc 1 153 20 is_stmt 0 view .LVU242
+ 857 0052 E2E7     		b	.L61
+ 858              	.L69:
+ 158:..//kernel/core/tos_char_fifo.c ****     return i;
+ 859              		.loc 1 158 5 is_stmt 1 view .LVU243
+ 158:..//kernel/core/tos_char_fifo.c ****     return i;
+ 860              		.loc 1 158 5 view .LVU244
+ 861 0054 4846     		mov	r0, r9
+ 862 0056 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 863              	.LVL89:
+ 159:..//kernel/core/tos_char_fifo.c **** }
+ 864              		.loc 1 159 5 view .LVU245
+ 159:..//kernel/core/tos_char_fifo.c **** }
+ 865              		.loc 1 159 12 is_stmt 0 view .LVU246
+ 866 005a DEE7     		b	.L61
+ 867              	.LVL90:
+ 868              	.L66:
+ 145:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, 0);
+ 869              		.loc 1 145 5 view .LVU247
+ 870 005c 0024     		movs	r4, #0
+ 871 005e DCE7     		b	.L61
+ 872              		.cfi_endproc
+ 873              	.LFE117:
+ 875              		.section	.text.tos_chr_fifo_flush,"ax",%progbits
+ 876              		.align	1
+ 877              		.global	tos_chr_fifo_flush
+ 878              		.syntax unified
+ 879              		.thumb
+ 880              		.thumb_func
+ 881              		.fpu softvfp
+ 883              	tos_chr_fifo_flush:
+ 884              	.LVL91:
+ 885              	.LFB118:
+ 161:..//kernel/core/tos_char_fifo.c **** 
+ 162:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_flush(k_chr_fifo_t *chr_fifo)
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 25
+
+
+ 163:..//kernel/core/tos_char_fifo.c **** {
+ 886              		.loc 1 163 1 is_stmt 1 view -0
+ 887              		.cfi_startproc
+ 888              		@ args = 0, pretend = 0, frame = 0
+ 889              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 890              		.loc 1 164 5 view .LVU249
+ 891              		.loc 1 164 5 view .LVU250
+ 892 0000 60B1     		cbz	r0, .L73
+ 163:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
+ 893              		.loc 1 163 1 is_stmt 0 view .LVU251
+ 894 0002 08B5     		push	{r3, lr}
+ 895              	.LCFI22:
+ 896              		.cfi_def_cfa_offset 8
+ 897              		.cfi_offset 3, -8
+ 898              		.cfi_offset 14, -4
+ 165:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 899              		.loc 1 165 5 is_stmt 1 view .LVU252
+ 900              		.loc 1 165 5 view .LVU253
+ 901              	.LVL92:
+ 902              	.LBB72:
+ 903              	.LBI72:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 904              		.loc 2 182 31 view .LVU254
+ 905              	.LBB73:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 906              		.loc 2 184 5 view .LVU255
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 907              		.loc 2 184 19 is_stmt 0 view .LVU256
+ 908 0004 4188     		ldrh	r1, [r0, #2]
+ 909              	.LVL93:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 910              		.loc 2 184 19 view .LVU257
+ 911              	.LBE73:
+ 912              	.LBE72:
+ 913              		.loc 1 165 5 view .LVU258
+ 914 0006 4DF6D222 		movw	r2, #56018
+ 915 000a 9142     		cmp	r1, r2
+ 916 000c 02D0     		beq	.L79
+ 917 000e 40F24D40 		movw	r0, #1101
+ 918              	.LVL94:
+ 919              	.L72:
+ 166:..//kernel/core/tos_char_fifo.c **** 
+ 167:..//kernel/core/tos_char_fifo.c ****     return tos_ring_q_flush(&chr_fifo->ring_q);
+ 168:..//kernel/core/tos_char_fifo.c **** }
+ 920              		.loc 1 168 1 view .LVU259
+ 921 0012 08BD     		pop	{r3, pc}
+ 922              	.LVL95:
+ 923              	.L79:
+ 167:..//kernel/core/tos_char_fifo.c **** }
+ 924              		.loc 1 167 5 is_stmt 1 view .LVU260
+ 167:..//kernel/core/tos_char_fifo.c **** }
+ 925              		.loc 1 167 12 is_stmt 0 view .LVU261
+ 926 0014 0430     		adds	r0, r0, #4
+ 927              	.LVL96:
+ 167:..//kernel/core/tos_char_fifo.c **** }
+ 928              		.loc 1 167 12 view .LVU262
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 26
+
+
+ 929 0016 FFF7FEFF 		bl	tos_ring_q_flush
+ 930              	.LVL97:
+ 167:..//kernel/core/tos_char_fifo.c **** }
+ 931              		.loc 1 167 12 view .LVU263
+ 932 001a FAE7     		b	.L72
+ 933              	.LVL98:
+ 934              	.L73:
+ 935              	.LCFI23:
+ 936              		.cfi_def_cfa_offset 0
+ 937              		.cfi_restore 3
+ 938              		.cfi_restore 14
+ 164:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO);
+ 939              		.loc 1 164 5 view .LVU264
+ 940 001c 40F24C40 		movw	r0, #1100
+ 941              	.LVL99:
+ 942              		.loc 1 168 1 view .LVU265
+ 943 0020 7047     		bx	lr
+ 944              		.cfi_endproc
+ 945              	.LFE118:
+ 947              		.section	.text.tos_chr_fifo_is_empty,"ax",%progbits
+ 948              		.align	1
+ 949              		.global	tos_chr_fifo_is_empty
+ 950              		.syntax unified
+ 951              		.thumb
+ 952              		.thumb_func
+ 953              		.fpu softvfp
+ 955              	tos_chr_fifo_is_empty:
+ 956              	.LVL100:
+ 957              	.LFB119:
+ 169:..//kernel/core/tos_char_fifo.c **** 
+ 170:..//kernel/core/tos_char_fifo.c **** __API__ int tos_chr_fifo_is_empty(k_chr_fifo_t *chr_fifo)
+ 171:..//kernel/core/tos_char_fifo.c **** {
+ 958              		.loc 1 171 1 is_stmt 1 view -0
+ 959              		.cfi_startproc
+ 960              		@ args = 0, pretend = 0, frame = 0
+ 961              		@ frame_needed = 0, uses_anonymous_args = 0
+ 962              		.loc 1 171 1 is_stmt 0 view .LVU267
+ 963 0000 08B5     		push	{r3, lr}
+ 964              	.LCFI24:
+ 965              		.cfi_def_cfa_offset 8
+ 966              		.cfi_offset 3, -8
+ 967              		.cfi_offset 14, -4
+ 172:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK_RC(chr_fifo, K_FALSE);
+ 968              		.loc 1 172 5 is_stmt 1 view .LVU268
+ 969              		.loc 1 172 5 view .LVU269
+ 970 0002 0346     		mov	r3, r0
+ 971 0004 B0FA80F0 		clz	r0, r0
+ 972              	.LVL101:
+ 973              		.loc 1 172 5 is_stmt 0 view .LVU270
+ 974 0008 4009     		lsrs	r0, r0, #5
+ 975 000a 48B9     		cbnz	r0, .L82
+ 173:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, K_FALSE);
+ 976              		.loc 1 173 5 is_stmt 1 view .LVU271
+ 977              		.loc 1 173 5 view .LVU272
+ 978              	.LVL102:
+ 979              	.LBB74:
+ 980              	.LBI74:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 27
+
+
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 981              		.loc 2 182 31 view .LVU273
+ 982              	.LBB75:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 983              		.loc 2 184 5 view .LVU274
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 984              		.loc 2 184 19 is_stmt 0 view .LVU275
+ 985 000c 5988     		ldrh	r1, [r3, #2]
+ 986              	.LVL103:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 987              		.loc 2 184 19 view .LVU276
+ 988              	.LBE75:
+ 989              	.LBE74:
+ 990              		.loc 1 173 5 view .LVU277
+ 991 000e 4DF6D222 		movw	r2, #56018
+ 992 0012 9142     		cmp	r1, r2
+ 993 0014 00D0     		beq	.L84
+ 994              	.LVL104:
+ 995              	.L80:
+ 174:..//kernel/core/tos_char_fifo.c **** 
+ 175:..//kernel/core/tos_char_fifo.c ****     return tos_ring_q_is_empty(&chr_fifo->ring_q);
+ 176:..//kernel/core/tos_char_fifo.c **** }
+ 996              		.loc 1 176 1 view .LVU278
+ 997 0016 08BD     		pop	{r3, pc}
+ 998              	.LVL105:
+ 999              	.L84:
+ 175:..//kernel/core/tos_char_fifo.c **** }
+ 1000              		.loc 1 175 5 is_stmt 1 view .LVU279
+ 175:..//kernel/core/tos_char_fifo.c **** }
+ 1001              		.loc 1 175 12 is_stmt 0 view .LVU280
+ 1002 0018 181D     		adds	r0, r3, #4
+ 1003 001a FFF7FEFF 		bl	tos_ring_q_is_empty
+ 1004              	.LVL106:
+ 175:..//kernel/core/tos_char_fifo.c **** }
+ 1005              		.loc 1 175 12 view .LVU281
+ 1006 001e FAE7     		b	.L80
+ 1007              	.LVL107:
+ 1008              	.L82:
+ 172:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, K_FALSE);
+ 1009              		.loc 1 172 5 view .LVU282
+ 1010 0020 0020     		movs	r0, #0
+ 1011 0022 F8E7     		b	.L80
+ 1012              		.cfi_endproc
+ 1013              	.LFE119:
+ 1015              		.section	.text.tos_chr_fifo_is_full,"ax",%progbits
+ 1016              		.align	1
+ 1017              		.global	tos_chr_fifo_is_full
+ 1018              		.syntax unified
+ 1019              		.thumb
+ 1020              		.thumb_func
+ 1021              		.fpu softvfp
+ 1023              	tos_chr_fifo_is_full:
+ 1024              	.LVL108:
+ 1025              	.LFB120:
+ 177:..//kernel/core/tos_char_fifo.c **** 
+ 178:..//kernel/core/tos_char_fifo.c **** __API__ int tos_chr_fifo_is_full(k_chr_fifo_t *chr_fifo)
+ 179:..//kernel/core/tos_char_fifo.c **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 28
+
+
+ 1026              		.loc 1 179 1 is_stmt 1 view -0
+ 1027              		.cfi_startproc
+ 1028              		@ args = 0, pretend = 0, frame = 0
+ 1029              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1030              		.loc 1 179 1 is_stmt 0 view .LVU284
+ 1031 0000 08B5     		push	{r3, lr}
+ 1032              	.LCFI25:
+ 1033              		.cfi_def_cfa_offset 8
+ 1034              		.cfi_offset 3, -8
+ 1035              		.cfi_offset 14, -4
+ 180:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK_RC(chr_fifo, K_FALSE);
+ 1036              		.loc 1 180 5 is_stmt 1 view .LVU285
+ 1037              		.loc 1 180 5 view .LVU286
+ 1038 0002 0346     		mov	r3, r0
+ 1039 0004 B0FA80F0 		clz	r0, r0
+ 1040              	.LVL109:
+ 1041              		.loc 1 180 5 is_stmt 0 view .LVU287
+ 1042 0008 4009     		lsrs	r0, r0, #5
+ 1043 000a 48B9     		cbnz	r0, .L87
+ 181:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, K_FALSE);
+ 1044              		.loc 1 181 5 is_stmt 1 view .LVU288
+ 1045              		.loc 1 181 5 view .LVU289
+ 1046              	.LVL110:
+ 1047              	.LBB76:
+ 1048              	.LBI76:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 1049              		.loc 2 182 31 view .LVU290
+ 1050              	.LBB77:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 1051              		.loc 2 184 5 view .LVU291
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 1052              		.loc 2 184 19 is_stmt 0 view .LVU292
+ 1053 000c 5988     		ldrh	r1, [r3, #2]
+ 1054              	.LVL111:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 1055              		.loc 2 184 19 view .LVU293
+ 1056              	.LBE77:
+ 1057              	.LBE76:
+ 1058              		.loc 1 181 5 view .LVU294
+ 1059 000e 4DF6D222 		movw	r2, #56018
+ 1060 0012 9142     		cmp	r1, r2
+ 1061 0014 00D0     		beq	.L89
+ 1062              	.LVL112:
+ 1063              	.L85:
+ 182:..//kernel/core/tos_char_fifo.c **** 
+ 183:..//kernel/core/tos_char_fifo.c ****     return tos_ring_q_is_full(&chr_fifo->ring_q);
+ 184:..//kernel/core/tos_char_fifo.c **** }
+ 1064              		.loc 1 184 1 view .LVU295
+ 1065 0016 08BD     		pop	{r3, pc}
+ 1066              	.LVL113:
+ 1067              	.L89:
+ 183:..//kernel/core/tos_char_fifo.c **** }
+ 1068              		.loc 1 183 5 is_stmt 1 view .LVU296
+ 183:..//kernel/core/tos_char_fifo.c **** }
+ 1069              		.loc 1 183 12 is_stmt 0 view .LVU297
+ 1070 0018 181D     		adds	r0, r3, #4
+ 1071 001a FFF7FEFF 		bl	tos_ring_q_is_full
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 29
+
+
+ 1072              	.LVL114:
+ 183:..//kernel/core/tos_char_fifo.c **** }
+ 1073              		.loc 1 183 12 view .LVU298
+ 1074 001e FAE7     		b	.L85
+ 1075              	.LVL115:
+ 1076              	.L87:
+ 180:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, K_FALSE);
+ 1077              		.loc 1 180 5 view .LVU299
+ 1078 0020 0020     		movs	r0, #0
+ 1079 0022 F8E7     		b	.L85
+ 1080              		.cfi_endproc
+ 1081              	.LFE120:
+ 1083              		.text
+ 1084              	.Letext0:
+ 1085              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ 1086              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1087              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1088              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 1089              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1090              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 1091              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 1092              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 1093              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 1094              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1095              		.file 13 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 1096              		.file 14 "..//kernel/core/include/tos_ktypes.h"
+ 1097              		.file 15 "..//kernel/core/include/tos_task.h"
+ 1098              		.file 16 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 1099              		.file 17 "..//kernel/core/include/tos_list.h"
+ 1100              		.file 18 "..//kernel/core/include/tos_pend.h"
+ 1101              		.file 19 "..//kernel/core/include/tos_ring_queue.h"
+ 1102              		.file 20 "..//kernel/core/include/tos_char_fifo.h"
+ 1103              		.file 21 "..//kernel/core/include/tos_timer.h"
+ 1104              		.file 22 "..//kernel/core/include/tos_mmheap.h"
+ 1105              		.file 23 "..//kernel/core/include/tos_sched.h"
+ 1106              		.file 24 "..//kernel/core/include/tos_global.h"
+ 1107              		.file 25 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_char_fifo.c
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:16     .text.tos_chr_fifo_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:24     .text.tos_chr_fifo_create:00000000 tos_chr_fifo_create
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:117    .text.tos_chr_fifo_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:124    .text.tos_chr_fifo_destroy:00000000 tos_chr_fifo_destroy
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:251    .text.tos_chr_fifo_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:258    .text.tos_chr_fifo_create_dyn:00000000 tos_chr_fifo_create_dyn
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:339    .text.tos_chr_fifo_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:346    .text.tos_chr_fifo_destroy_dyn:00000000 tos_chr_fifo_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:473    .text.tos_chr_fifo_push:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:480    .text.tos_chr_fifo_push:00000000 tos_chr_fifo_push
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:555    .text.tos_chr_fifo_push_stream:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:562    .text.tos_chr_fifo_push_stream:00000000 tos_chr_fifo_push_stream
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:673    .text.tos_chr_fifo_pop:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:680    .text.tos_chr_fifo_pop:00000000 tos_chr_fifo_pop
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:745    .text.tos_chr_fifo_pop_stream:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:752    .text.tos_chr_fifo_pop_stream:00000000 tos_chr_fifo_pop_stream
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:876    .text.tos_chr_fifo_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:883    .text.tos_chr_fifo_flush:00000000 tos_chr_fifo_flush
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:948    .text.tos_chr_fifo_is_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:955    .text.tos_chr_fifo_is_empty:00000000 tos_chr_fifo_is_empty
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:1016   .text.tos_chr_fifo_is_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccs0qIab.s:1023   .text.tos_chr_fifo_is_full:00000000 tos_chr_fifo_is_full
+
+UNDEFINED SYMBOLS
+tos_ring_q_create
+tos_ring_q_destroy
+tos_ring_q_create_dyn
+tos_ring_q_destroy_dyn
+tos_ring_q_enqueue
+tos_cpu_cpsr_save
+tos_cpu_cpsr_restore
+tos_ring_q_dequeue
+tos_ring_q_flush
+tos_ring_q_is_empty
+tos_ring_q_is_full

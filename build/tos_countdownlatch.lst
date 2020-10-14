@@ -1,0 +1,1111 @@
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"tos_countdownlatch.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.tos_countdownlatch_create,"ax",%progbits
+  16              		.align	1
+  17              		.global	tos_countdownlatch_create
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	tos_countdownlatch_create:
+  25              	.LVL0:
+  26              	.LFB110:
+  27              		.file 1 "..//kernel/core/tos_countdownlatch.c"
+   1:..//kernel/core/tos_countdownlatch.c **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/tos_countdownlatch.c ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/tos_countdownlatch.c ****  * available.
+   4:..//kernel/core/tos_countdownlatch.c ****  *
+   5:..//kernel/core/tos_countdownlatch.c ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/tos_countdownlatch.c ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/tos_countdownlatch.c ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/tos_countdownlatch.c ****  *
+   9:..//kernel/core/tos_countdownlatch.c ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/tos_countdownlatch.c ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/tos_countdownlatch.c ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/tos_countdownlatch.c ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/tos_countdownlatch.c ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/tos_countdownlatch.c ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/tos_countdownlatch.c ****  * within TencentOS.
+  16:..//kernel/core/tos_countdownlatch.c ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/tos_countdownlatch.c **** 
+  18:..//kernel/core/tos_countdownlatch.c **** #include "tos_k.h"
+  19:..//kernel/core/tos_countdownlatch.c **** 
+  20:..//kernel/core/tos_countdownlatch.c **** __API__ k_err_t tos_countdownlatch_create(k_countdownlatch_t *countdownlatch, k_countdownlatch_cnt_
+  21:..//kernel/core/tos_countdownlatch.c **** {
+  28              		.loc 1 21 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  22:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+  32              		.loc 1 22 5 view .LVU1
+  33              		.loc 1 22 5 view .LVU2
+  34 0000 50B1     		cbz	r0, .L3
+  21:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+  35              		.loc 1 21 1 is_stmt 0 view .LVU3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 2
+
+
+  36 0002 10B5     		push	{r4, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 4, -8
+  40              		.cfi_offset 14, -4
+  41 0004 0446     		mov	r4, r0
+  23:..//kernel/core/tos_countdownlatch.c **** 
+  24:..//kernel/core/tos_countdownlatch.c ****     countdownlatch->count = count;
+  42              		.loc 1 24 5 is_stmt 1 view .LVU4
+  43              		.loc 1 24 27 is_stmt 0 view .LVU5
+  44 0006 8181     		strh	r1, [r0, #12]	@ movhi
+  25:..//kernel/core/tos_countdownlatch.c ****     pend_object_init(&countdownlatch->pend_obj);
+  45              		.loc 1 25 5 is_stmt 1 view .LVU6
+  46 0008 0430     		adds	r0, r0, #4
+  47              	.LVL1:
+  48              		.loc 1 25 5 is_stmt 0 view .LVU7
+  49 000a FFF7FEFF 		bl	pend_object_init
+  50              	.LVL2:
+  26:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_INIT(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+  51              		.loc 1 26 5 is_stmt 1 view .LVU8
+  52              	.LBB14:
+  53              	.LBI14:
+  54              		.file 2 "..//kernel/core/include/tos_sys.h"
+   1:..//kernel/core/include/tos_sys.h **** /*----------------------------------------------------------------------------
+   2:..//kernel/core/include/tos_sys.h ****  * Tencent is pleased to support the open source community by making TencentOS
+   3:..//kernel/core/include/tos_sys.h ****  * available.
+   4:..//kernel/core/include/tos_sys.h ****  *
+   5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
+   6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
+   7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
+   8:..//kernel/core/include/tos_sys.h ****  *
+   9:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS source code from Tencent,
+  10:..//kernel/core/include/tos_sys.h ****  * please note that TencentOS source code is licensed under the BSD 3-Clause
+  11:..//kernel/core/include/tos_sys.h ****  * License, except for the third-party components listed below which are
+  12:..//kernel/core/include/tos_sys.h ****  * subject to different license terms. Your integration of TencentOS into your
+  13:..//kernel/core/include/tos_sys.h ****  * own projects may require compliance with the BSD 3-Clause License, as well
+  14:..//kernel/core/include/tos_sys.h ****  * as the other licenses applicable to the third-party components included
+  15:..//kernel/core/include/tos_sys.h ****  * within TencentOS.
+  16:..//kernel/core/include/tos_sys.h ****  *---------------------------------------------------------------------------*/
+  17:..//kernel/core/include/tos_sys.h **** 
+  18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
+  19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
+  20:..//kernel/core/include/tos_sys.h **** 
+  21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
+  22:..//kernel/core/include/tos_sys.h **** 
+  23:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_IRQ             (k_nesting_t)250u
+  24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
+  25:..//kernel/core/include/tos_sys.h **** 
+  26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
+  27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
+  28:..//kernel/core/include/tos_sys.h ****     KNL_STATE_RUNNING,
+  29:..//kernel/core/include/tos_sys.h **** } knl_state_t;
+  30:..//kernel/core/include/tos_sys.h **** 
+  31:..//kernel/core/include/tos_sys.h **** // some kind of magic number, mainly for identifing whether the object is initialized, or whether u
+  32:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_type_en {
+  33:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_NONE                           = 0x0000,
+  34:..//kernel/core/include/tos_sys.h **** 
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 3
+
+
+  35:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BINARY_HEAP                    = 0xDAD0,
+  36:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BITMAP                         = 0xDAD1,
+  37:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_CHAR_FIFO                      = 0xDAD2,
+  38:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MMBLK_POOL                     = 0xDAD3,
+  39:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MSG_QUEUE                      = 0xDAD4,
+  40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
+  41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
+  42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
+  43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
+  44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
+  45:..//kernel/core/include/tos_sys.h **** 
+  46:..//kernel/core/include/tos_sys.h ****     // ipc object
+  47:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_BARRIER                        = 0x0BEE,
+  48:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COMPLETION                     = 0x1BEE,
+  49:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_COUNTDOWNLATCH                 = 0x2BEE,
+  50:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_EVENT                          = 0x3BEE,
+  51:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MAIL_QUEUE                     = 0x4BEE,
+  52:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MESSAGE_QUEUE                  = 0x5BEE,
+  53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
+  54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
+  55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
+  56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
+  57:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_SEMAPHORE                      = 0xABEE,
+  58:..//kernel/core/include/tos_sys.h **** } knl_obj_type_t;
+  59:..//kernel/core/include/tos_sys.h **** 
+  60:..//kernel/core/include/tos_sys.h **** typedef enum knl_obj_alloc_type_en {
+  61:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_NONE,
+  62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
+  63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
+  64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
+  65:..//kernel/core/include/tos_sys.h **** 
+  66:..//kernel/core/include/tos_sys.h **** typedef struct knl_object_st {
+  67:..//kernel/core/include/tos_sys.h ****     knl_obj_alloc_type_t    alloc_type; /* is dynamic allocated(using tos_mmheap) or static memory?
+  68:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+  69:..//kernel/core/include/tos_sys.h ****     knl_obj_type_t          type;
+  70:..//kernel/core/include/tos_sys.h **** #endif
+  71:..//kernel/core/include/tos_sys.h **** } knl_obj_t;
+  72:..//kernel/core/include/tos_sys.h **** 
+  73:..//kernel/core/include/tos_sys.h **** /**
+  74:..//kernel/core/include/tos_sys.h ****  * @brief Initialize the kernel.
+  75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
+  76:..//kernel/core/include/tos_sys.h ****  *
+  77:..//kernel/core/include/tos_sys.h ****  * @attention None
+  78:..//kernel/core/include/tos_sys.h ****  *
+  79:..//kernel/core/include/tos_sys.h ****  * @param   None
+  80:..//kernel/core/include/tos_sys.h ****  *
+  81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
+  83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  84:..//kernel/core/include/tos_sys.h ****  */
+  85:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_init(void);
+  86:..//kernel/core/include/tos_sys.h **** 
+  87:..//kernel/core/include/tos_sys.h **** /**
+  88:..//kernel/core/include/tos_sys.h ****  * @brief Start the kernel.
+  89:..//kernel/core/include/tos_sys.h ****  * get the kernel start to run, which means start the multitask scheduling.
+  90:..//kernel/core/include/tos_sys.h ****  *
+  91:..//kernel/core/include/tos_sys.h ****  * @attention None
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 4
+
+
+  92:..//kernel/core/include/tos_sys.h ****  *
+  93:..//kernel/core/include/tos_sys.h ****  * @param   None
+  94:..//kernel/core/include/tos_sys.h ****  *
+  95:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+  96:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_KNL_RUNNING            the kernel is already running.
+  97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
+  98:..//kernel/core/include/tos_sys.h ****  */
+  99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
+ 100:..//kernel/core/include/tos_sys.h **** 
+ 101:..//kernel/core/include/tos_sys.h **** /**
+ 102:..//kernel/core/include/tos_sys.h ****  * @brief Get the kernel state.
+ 103:..//kernel/core/include/tos_sys.h ****  * whether the kernel is running.
+ 104:..//kernel/core/include/tos_sys.h ****  *
+ 105:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 106:..//kernel/core/include/tos_sys.h ****  *
+ 107:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 108:..//kernel/core/include/tos_sys.h ****  *
+ 109:..//kernel/core/include/tos_sys.h ****  * @return  whether the kernel is running.
+ 110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
+ 111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
+ 112:..//kernel/core/include/tos_sys.h ****  */
+ 113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
+ 114:..//kernel/core/include/tos_sys.h **** 
+ 115:..//kernel/core/include/tos_sys.h **** /**
+ 116:..//kernel/core/include/tos_sys.h ****  * @brief Kernel enter the interrupt.
+ 117:..//kernel/core/include/tos_sys.h ****  * this function should be called in the entrance of a interrupt handler.
+ 118:..//kernel/core/include/tos_sys.h ****  *
+ 119:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 120:..//kernel/core/include/tos_sys.h ****  *
+ 121:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 122:..//kernel/core/include/tos_sys.h ****  *
+ 123:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 124:..//kernel/core/include/tos_sys.h ****  */
+ 125:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_enter(void);
+ 126:..//kernel/core/include/tos_sys.h **** 
+ 127:..//kernel/core/include/tos_sys.h **** /**
+ 128:..//kernel/core/include/tos_sys.h ****  * @brief Kernel exit the interrupt.
+ 129:..//kernel/core/include/tos_sys.h ****  * this function should be called in the exit of a interrupt handler.
+ 130:..//kernel/core/include/tos_sys.h ****  *
+ 131:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 132:..//kernel/core/include/tos_sys.h ****  *
+ 133:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 134:..//kernel/core/include/tos_sys.h ****  *
+ 135:..//kernel/core/include/tos_sys.h ****  * @return  None
+ 136:..//kernel/core/include/tos_sys.h ****  */
+ 137:..//kernel/core/include/tos_sys.h **** __API__ void    tos_knl_irq_leave(void);
+ 138:..//kernel/core/include/tos_sys.h **** 
+ 139:..//kernel/core/include/tos_sys.h **** /**
+ 140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
+ 141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
+ 142:..//kernel/core/include/tos_sys.h ****  *
+ 143:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 144:..//kernel/core/include/tos_sys.h ****  *
+ 145:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 146:..//kernel/core/include/tos_sys.h ****  *
+ 147:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 148:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 5
+
+
+ 149:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_LOCK_NESTING_OVERFLOW   the schedule lock nesting is overflow.
+ 150:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 151:..//kernel/core/include/tos_sys.h ****  */
+ 152:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_lock(void);
+ 153:..//kernel/core/include/tos_sys.h **** 
+ 154:..//kernel/core/include/tos_sys.h **** /**
+ 155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
+ 156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
+ 157:..//kernel/core/include/tos_sys.h ****  *
+ 158:..//kernel/core/include/tos_sys.h ****  * @attention None
+ 159:..//kernel/core/include/tos_sys.h ****  *
+ 160:..//kernel/core/include/tos_sys.h ****  * @param   None
+ 161:..//kernel/core/include/tos_sys.h ****  *
+ 162:..//kernel/core/include/tos_sys.h ****  * @return  errcode
+ 163:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_KNL_NOT_RUNNING         the kernel is not running.
+ 164:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_SCHED_NOT_LOCKED        the scheduler is not locked.
+ 165:..//kernel/core/include/tos_sys.h ****  * @retval  K_ERR_NONE                    return successfully.
+ 166:..//kernel/core/include/tos_sys.h ****  */
+ 167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
+ 168:..//kernel/core/include/tos_sys.h **** 
+ 169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
+ 170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
+ 171:..//kernel/core/include/tos_sys.h **** #endif
+ 172:..//kernel/core/include/tos_sys.h **** 
+ 173:..//kernel/core/include/tos_sys.h **** __KNL__ void    knl_sched(void);
+ 174:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_sched_locked(void);
+ 175:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_inirq(void);
+ 176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
+ 177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
+ 178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
+ 179:..//kernel/core/include/tos_sys.h **** 
+ 180:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_OBJECT_VERIFY_EN > 0u
+ 181:..//kernel/core/include/tos_sys.h **** 
+ 182:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_verify(knl_obj_t *knl_obj, knl_obj_type_t type)
+ 183:..//kernel/core/include/tos_sys.h **** {
+ 184:..//kernel/core/include/tos_sys.h ****     return knl_obj->type == type;
+ 185:..//kernel/core/include/tos_sys.h **** }
+ 186:..//kernel/core/include/tos_sys.h **** 
+ 187:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_init(knl_obj_t *knl_obj, knl_obj_type_t type)
+  55              		.loc 2 187 32 view .LVU9
+  56              	.LBB15:
+ 188:..//kernel/core/include/tos_sys.h **** {
+ 189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
+  57              		.loc 2 189 5 view .LVU10
+  58              		.loc 2 189 19 is_stmt 0 view .LVU11
+  59 000e 42F6EE33 		movw	r3, #11246
+  60 0012 6380     		strh	r3, [r4, #2]	@ movhi
+  61              	.LVL3:
+  62              		.loc 2 189 19 view .LVU12
+  63              	.LBE15:
+  64              	.LBE14:
+  27:..//kernel/core/tos_countdownlatch.c **** 
+  28:..//kernel/core/tos_countdownlatch.c ****     return K_ERR_NONE;
+  65              		.loc 1 28 5 is_stmt 1 view .LVU13
+  66              		.loc 1 28 12 is_stmt 0 view .LVU14
+  67 0014 0020     		movs	r0, #0
+  29:..//kernel/core/tos_countdownlatch.c **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 6
+
+
+  68              		.loc 1 29 1 view .LVU15
+  69 0016 10BD     		pop	{r4, pc}
+  70              	.LVL4:
+  71              	.L3:
+  72              	.LCFI1:
+  73              		.cfi_def_cfa_offset 0
+  74              		.cfi_restore 4
+  75              		.cfi_restore 14
+  22:..//kernel/core/tos_countdownlatch.c **** 
+  76              		.loc 1 22 5 view .LVU16
+  77 0018 40F24C40 		movw	r0, #1100
+  78              	.LVL5:
+  79              		.loc 1 29 1 view .LVU17
+  80 001c 7047     		bx	lr
+  81              		.cfi_endproc
+  82              	.LFE110:
+  84              		.section	.text.tos_countdownlatch_destroy,"ax",%progbits
+  85              		.align	1
+  86              		.global	tos_countdownlatch_destroy
+  87              		.syntax unified
+  88              		.thumb
+  89              		.thumb_func
+  90              		.fpu softvfp
+  92              	tos_countdownlatch_destroy:
+  93              	.LVL6:
+  94              	.LFB111:
+  30:..//kernel/core/tos_countdownlatch.c **** 
+  31:..//kernel/core/tos_countdownlatch.c **** __API__ k_err_t tos_countdownlatch_destroy(k_countdownlatch_t *countdownlatch)
+  32:..//kernel/core/tos_countdownlatch.c **** {
+  95              		.loc 1 32 1 is_stmt 1 view -0
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  33:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_CPSR_ALLOC();
+  99              		.loc 1 33 5 view .LVU19
+  34:..//kernel/core/tos_countdownlatch.c **** 
+  35:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+ 100              		.loc 1 35 5 view .LVU20
+ 101              		.loc 1 35 5 view .LVU21
+ 102 0000 E8B1     		cbz	r0, .L10
+  32:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_CPSR_ALLOC();
+ 103              		.loc 1 32 1 is_stmt 0 view .LVU22
+ 104 0002 70B5     		push	{r4, r5, r6, lr}
+ 105              	.LCFI2:
+ 106              		.cfi_def_cfa_offset 16
+ 107              		.cfi_offset 4, -16
+ 108              		.cfi_offset 5, -12
+ 109              		.cfi_offset 6, -8
+ 110              		.cfi_offset 14, -4
+ 111 0004 0446     		mov	r4, r0
+  36:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 112              		.loc 1 36 5 is_stmt 1 view .LVU23
+ 113              		.loc 1 36 5 view .LVU24
+ 114              	.LVL7:
+ 115              	.LBB16:
+ 116              	.LBI16:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 7
+
+
+ 117              		.loc 2 182 31 view .LVU25
+ 118              	.LBB17:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 119              		.loc 2 184 5 view .LVU26
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 120              		.loc 2 184 19 is_stmt 0 view .LVU27
+ 121 0006 4188     		ldrh	r1, [r0, #2]
+ 122              	.LVL8:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 123              		.loc 2 184 19 view .LVU28
+ 124              	.LBE17:
+ 125              	.LBE16:
+ 126              		.loc 1 36 5 view .LVU29
+ 127 0008 42F6EE32 		movw	r2, #11246
+ 128 000c 9142     		cmp	r1, r2
+ 129 000e 02D0     		beq	.L16
+ 130 0010 40F24D40 		movw	r0, #1101
+ 131              	.LVL9:
+ 132              	.L9:
+  37:..//kernel/core/tos_countdownlatch.c **** 
+  38:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_DISABLE();
+  39:..//kernel/core/tos_countdownlatch.c **** 
+  40:..//kernel/core/tos_countdownlatch.c ****     pend_wakeup_all(&countdownlatch->pend_obj, PEND_STATE_DESTROY);
+  41:..//kernel/core/tos_countdownlatch.c **** 
+  42:..//kernel/core/tos_countdownlatch.c ****     pend_object_deinit(&countdownlatch->pend_obj);
+  43:..//kernel/core/tos_countdownlatch.c **** 
+  44:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_DEINIT(countdownlatch);
+  45:..//kernel/core/tos_countdownlatch.c **** 
+  46:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_ENABLE();
+  47:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+  48:..//kernel/core/tos_countdownlatch.c **** 
+  49:..//kernel/core/tos_countdownlatch.c ****     return K_ERR_NONE;
+  50:..//kernel/core/tos_countdownlatch.c **** }
+ 133              		.loc 1 50 1 view .LVU30
+ 134 0014 70BD     		pop	{r4, r5, r6, pc}
+ 135              	.LVL10:
+ 136              	.L16:
+  38:..//kernel/core/tos_countdownlatch.c **** 
+ 137              		.loc 1 38 5 is_stmt 1 view .LVU31
+  38:..//kernel/core/tos_countdownlatch.c **** 
+ 138              		.loc 1 38 5 view .LVU32
+ 139 0016 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 140              	.LVL11:
+  38:..//kernel/core/tos_countdownlatch.c **** 
+ 141              		.loc 1 38 5 is_stmt 0 view .LVU33
+ 142 001a 0646     		mov	r6, r0
+ 143              	.LVL12:
+  40:..//kernel/core/tos_countdownlatch.c **** 
+ 144              		.loc 1 40 5 is_stmt 1 view .LVU34
+ 145 001c 251D     		adds	r5, r4, #4
+ 146 001e 0321     		movs	r1, #3
+ 147 0020 2846     		mov	r0, r5
+ 148              	.LVL13:
+  40:..//kernel/core/tos_countdownlatch.c **** 
+ 149              		.loc 1 40 5 is_stmt 0 view .LVU35
+ 150 0022 FFF7FEFF 		bl	pend_wakeup_all
+ 151              	.LVL14:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 8
+
+
+  42:..//kernel/core/tos_countdownlatch.c **** 
+ 152              		.loc 1 42 5 is_stmt 1 view .LVU36
+ 153 0026 2846     		mov	r0, r5
+ 154 0028 FFF7FEFF 		bl	pend_object_deinit
+ 155              	.LVL15:
+  44:..//kernel/core/tos_countdownlatch.c **** 
+ 156              		.loc 1 44 5 view .LVU37
+ 157              	.LBB18:
+ 158              	.LBI18:
+ 190:..//kernel/core/include/tos_sys.h **** }
+ 191:..//kernel/core/include/tos_sys.h **** 
+ 192:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_deinit(knl_obj_t *knl_obj)
+ 159              		.loc 2 192 32 view .LVU38
+ 160              	.LBB19:
+ 193:..//kernel/core/include/tos_sys.h **** {
+ 194:..//kernel/core/include/tos_sys.h ****     knl_obj->type = KNL_OBJ_TYPE_NONE;
+ 161              		.loc 2 194 5 view .LVU39
+ 162              		.loc 2 194 19 is_stmt 0 view .LVU40
+ 163 002c 0025     		movs	r5, #0
+ 164 002e 6580     		strh	r5, [r4, #2]	@ movhi
+ 165              	.LVL16:
+ 166              		.loc 2 194 19 view .LVU41
+ 167              	.LBE19:
+ 168              	.LBE18:
+  46:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 169              		.loc 1 46 5 is_stmt 1 view .LVU42
+  46:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 170              		.loc 1 46 5 view .LVU43
+ 171 0030 3046     		mov	r0, r6
+ 172 0032 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 173              	.LVL17:
+  47:..//kernel/core/tos_countdownlatch.c **** 
+ 174              		.loc 1 47 5 view .LVU44
+ 175 0036 FFF7FEFF 		bl	knl_sched
+ 176              	.LVL18:
+  49:..//kernel/core/tos_countdownlatch.c **** }
+ 177              		.loc 1 49 5 view .LVU45
+  49:..//kernel/core/tos_countdownlatch.c **** }
+ 178              		.loc 1 49 12 is_stmt 0 view .LVU46
+ 179 003a 2846     		mov	r0, r5
+ 180 003c EAE7     		b	.L9
+ 181              	.LVL19:
+ 182              	.L10:
+ 183              	.LCFI3:
+ 184              		.cfi_def_cfa_offset 0
+ 185              		.cfi_restore 4
+ 186              		.cfi_restore 5
+ 187              		.cfi_restore 6
+ 188              		.cfi_restore 14
+  35:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 189              		.loc 1 35 5 view .LVU47
+ 190 003e 40F24C40 		movw	r0, #1100
+ 191              	.LVL20:
+ 192              		.loc 1 50 1 view .LVU48
+ 193 0042 7047     		bx	lr
+ 194              		.cfi_endproc
+ 195              	.LFE111:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 9
+
+
+ 197              		.section	.text.tos_countdownlatch_pend_timed,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	tos_countdownlatch_pend_timed
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.fpu softvfp
+ 205              	tos_countdownlatch_pend_timed:
+ 206              	.LVL21:
+ 207              	.LFB112:
+  51:..//kernel/core/tos_countdownlatch.c **** 
+  52:..//kernel/core/tos_countdownlatch.c **** __API__ k_err_t tos_countdownlatch_pend_timed(k_countdownlatch_t *countdownlatch, k_tick_t timeout)
+  53:..//kernel/core/tos_countdownlatch.c **** {
+ 208              		.loc 1 53 1 is_stmt 1 view -0
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212              		.loc 1 53 1 is_stmt 0 view .LVU50
+ 213 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 214              	.LCFI4:
+ 215              		.cfi_def_cfa_offset 24
+ 216              		.cfi_offset 4, -24
+ 217              		.cfi_offset 5, -20
+ 218              		.cfi_offset 6, -16
+ 219              		.cfi_offset 7, -12
+ 220              		.cfi_offset 8, -8
+ 221              		.cfi_offset 14, -4
+ 222 0004 0446     		mov	r4, r0
+ 223 0006 1646     		mov	r6, r2
+ 224 0008 1F46     		mov	r7, r3
+  54:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_CPSR_ALLOC();
+ 225              		.loc 1 54 5 is_stmt 1 view .LVU51
+ 226              	.LVL22:
+  55:..//kernel/core/tos_countdownlatch.c **** 
+  56:..//kernel/core/tos_countdownlatch.c ****     TOS_IN_IRQ_CHECK();
+ 227              		.loc 1 56 5 view .LVU52
+ 228              		.loc 1 56 5 view .LVU53
+ 229 000a FFF7FEFF 		bl	knl_is_inirq
+ 230              	.LVL23:
+ 231              		.loc 1 56 5 is_stmt 0 view .LVU54
+ 232 000e B0BB     		cbnz	r0, .L22
+  57:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+ 233              		.loc 1 57 5 is_stmt 1 view .LVU55
+ 234              		.loc 1 57 5 view .LVU56
+ 235 0010 C4B3     		cbz	r4, .L23
+  58:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 236              		.loc 1 58 5 view .LVU57
+ 237              		.loc 1 58 5 view .LVU58
+ 238              	.LVL24:
+ 239              	.LBB20:
+ 240              	.LBI20:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 241              		.loc 2 182 31 view .LVU59
+ 242              	.LBB21:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 243              		.loc 2 184 5 view .LVU60
+ 184:..//kernel/core/include/tos_sys.h **** }
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 10
+
+
+ 244              		.loc 2 184 19 is_stmt 0 view .LVU61
+ 245 0012 6288     		ldrh	r2, [r4, #2]
+ 246              	.LVL25:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 247              		.loc 2 184 19 view .LVU62
+ 248              	.LBE21:
+ 249              	.LBE20:
+ 250              		.loc 1 58 5 view .LVU63
+ 251 0014 42F6EE33 		movw	r3, #11246
+ 252 0018 9A42     		cmp	r2, r3
+ 253 001a 04D0     		beq	.L26
+ 254 001c 40F24D45 		movw	r5, #1101
+ 255              	.LVL26:
+ 256              	.L18:
+  59:..//kernel/core/tos_countdownlatch.c **** 
+  60:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_DISABLE();
+  61:..//kernel/core/tos_countdownlatch.c **** 
+  62:..//kernel/core/tos_countdownlatch.c ****     if (countdownlatch->count == (k_countdownlatch_cnt_t)0u) {
+  63:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+  64:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_NONE;
+  65:..//kernel/core/tos_countdownlatch.c ****     }
+  66:..//kernel/core/tos_countdownlatch.c **** 
+  67:..//kernel/core/tos_countdownlatch.c ****     if (timeout == TOS_TIME_NOWAIT) { // no wait, return immediately
+  68:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+  69:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_PEND_NOWAIT;
+  70:..//kernel/core/tos_countdownlatch.c ****     }
+  71:..//kernel/core/tos_countdownlatch.c **** 
+  72:..//kernel/core/tos_countdownlatch.c ****     if (knl_is_sched_locked()) {
+  73:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+  74:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_PEND_SCHED_LOCKED;
+  75:..//kernel/core/tos_countdownlatch.c ****     }
+  76:..//kernel/core/tos_countdownlatch.c **** 
+  77:..//kernel/core/tos_countdownlatch.c ****     pend_task_block(k_curr_task, &countdownlatch->pend_obj, timeout);
+  78:..//kernel/core/tos_countdownlatch.c **** 
+  79:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_ENABLE();
+  80:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+  81:..//kernel/core/tos_countdownlatch.c **** 
+  82:..//kernel/core/tos_countdownlatch.c ****     return pend_state2errno(k_curr_task->pend_state);
+  83:..//kernel/core/tos_countdownlatch.c **** }
+ 257              		.loc 1 83 1 view .LVU64
+ 258 0020 2846     		mov	r0, r5
+ 259 0022 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 260              	.LVL27:
+ 261              	.L26:
+  60:..//kernel/core/tos_countdownlatch.c **** 
+ 262              		.loc 1 60 5 is_stmt 1 view .LVU65
+  60:..//kernel/core/tos_countdownlatch.c **** 
+ 263              		.loc 1 60 5 view .LVU66
+ 264 0026 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 265              	.LVL28:
+ 266 002a 8046     		mov	r8, r0
+ 267              	.LVL29:
+  62:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 268              		.loc 1 62 5 view .LVU67
+  62:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 269              		.loc 1 62 23 is_stmt 0 view .LVU68
+ 270 002c A589     		ldrh	r5, [r4, #12]
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 11
+
+
+  62:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 271              		.loc 1 62 8 view .LVU69
+ 272 002e C5B1     		cbz	r5, .L27
+  67:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 273              		.loc 1 67 5 is_stmt 1 view .LVU70
+  67:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 274              		.loc 1 67 8 is_stmt 0 view .LVU71
+ 275 0030 56EA0703 		orrs	r3, r6, r7
+ 276 0034 18D0     		beq	.L28
+  72:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 277              		.loc 1 72 5 is_stmt 1 view .LVU72
+  72:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 278              		.loc 1 72 9 is_stmt 0 view .LVU73
+ 279 0036 FFF7FEFF 		bl	knl_is_sched_locked
+ 280              	.LVL30:
+  72:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 281              		.loc 1 72 8 view .LVU74
+ 282 003a D0B9     		cbnz	r0, .L29
+  77:..//kernel/core/tos_countdownlatch.c **** 
+ 283              		.loc 1 77 5 is_stmt 1 view .LVU75
+ 284 003c 134D     		ldr	r5, .L30
+ 285 003e 3246     		mov	r2, r6
+ 286 0040 3B46     		mov	r3, r7
+ 287 0042 211D     		adds	r1, r4, #4
+ 288 0044 2868     		ldr	r0, [r5]
+ 289 0046 FFF7FEFF 		bl	pend_task_block
+ 290              	.LVL31:
+  79:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 291              		.loc 1 79 5 view .LVU76
+  79:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 292              		.loc 1 79 5 view .LVU77
+ 293 004a 4046     		mov	r0, r8
+ 294 004c FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 295              	.LVL32:
+  80:..//kernel/core/tos_countdownlatch.c **** 
+ 296              		.loc 1 80 5 view .LVU78
+ 297 0050 FFF7FEFF 		bl	knl_sched
+ 298              	.LVL33:
+  82:..//kernel/core/tos_countdownlatch.c **** }
+ 299              		.loc 1 82 5 view .LVU79
+  82:..//kernel/core/tos_countdownlatch.c **** }
+ 300              		.loc 1 82 40 is_stmt 0 view .LVU80
+ 301 0054 2B68     		ldr	r3, [r5]
+  82:..//kernel/core/tos_countdownlatch.c **** }
+ 302              		.loc 1 82 12 view .LVU81
+ 303 0056 93F86800 		ldrb	r0, [r3, #104]	@ zero_extendqisi2
+ 304 005a FFF7FEFF 		bl	pend_state2errno
+ 305              	.LVL34:
+ 306 005e 0546     		mov	r5, r0
+ 307 0060 DEE7     		b	.L18
+ 308              	.LVL35:
+ 309              	.L27:
+  63:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_NONE;
+ 310              		.loc 1 63 9 is_stmt 1 view .LVU82
+  63:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_NONE;
+ 311              		.loc 1 63 9 view .LVU83
+ 312 0062 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 12
+
+
+ 313              	.LVL36:
+  64:..//kernel/core/tos_countdownlatch.c ****     }
+ 314              		.loc 1 64 9 view .LVU84
+  64:..//kernel/core/tos_countdownlatch.c ****     }
+ 315              		.loc 1 64 16 is_stmt 0 view .LVU85
+ 316 0066 DBE7     		b	.L18
+ 317              	.LVL37:
+ 318              	.L28:
+  68:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_PEND_NOWAIT;
+ 319              		.loc 1 68 9 is_stmt 1 view .LVU86
+  68:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_PEND_NOWAIT;
+ 320              		.loc 1 68 9 view .LVU87
+ 321 0068 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 322              	.LVL38:
+  69:..//kernel/core/tos_countdownlatch.c ****     }
+ 323              		.loc 1 69 9 view .LVU88
+  69:..//kernel/core/tos_countdownlatch.c ****     }
+ 324              		.loc 1 69 16 is_stmt 0 view .LVU89
+ 325 006c 4FF49665 		mov	r5, #1200
+ 326 0070 D6E7     		b	.L18
+ 327              	.L29:
+  73:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 328              		.loc 1 73 9 is_stmt 1 view .LVU90
+  73:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_PEND_SCHED_LOCKED;
+ 329              		.loc 1 73 9 view .LVU91
+ 330 0072 4046     		mov	r0, r8
+ 331 0074 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 332              	.LVL39:
+  74:..//kernel/core/tos_countdownlatch.c ****     }
+ 333              		.loc 1 74 9 view .LVU92
+  74:..//kernel/core/tos_countdownlatch.c ****     }
+ 334              		.loc 1 74 16 is_stmt 0 view .LVU93
+ 335 0078 40F2B145 		movw	r5, #1201
+ 336 007c D0E7     		b	.L18
+ 337              	.LVL40:
+ 338              	.L22:
+  56:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+ 339              		.loc 1 56 5 view .LVU94
+ 340 007e 4FF4C875 		mov	r5, #400
+ 341 0082 CDE7     		b	.L18
+ 342              	.L23:
+  57:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 343              		.loc 1 57 5 view .LVU95
+ 344 0084 40F24C45 		movw	r5, #1100
+ 345 0088 CAE7     		b	.L18
+ 346              	.L31:
+ 347 008a 00BF     		.align	2
+ 348              	.L30:
+ 349 008c 00000000 		.word	k_curr_task
+ 350              		.cfi_endproc
+ 351              	.LFE112:
+ 353              		.section	.text.tos_countdownlatch_pend,"ax",%progbits
+ 354              		.align	1
+ 355              		.global	tos_countdownlatch_pend
+ 356              		.syntax unified
+ 357              		.thumb
+ 358              		.thumb_func
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 13
+
+
+ 359              		.fpu softvfp
+ 361              	tos_countdownlatch_pend:
+ 362              	.LVL41:
+ 363              	.LFB113:
+  84:..//kernel/core/tos_countdownlatch.c **** 
+  85:..//kernel/core/tos_countdownlatch.c **** __API__ k_err_t tos_countdownlatch_pend(k_countdownlatch_t *countdownlatch)
+  86:..//kernel/core/tos_countdownlatch.c **** {
+ 364              		.loc 1 86 1 is_stmt 1 view -0
+ 365              		.cfi_startproc
+ 366              		@ args = 0, pretend = 0, frame = 0
+ 367              		@ frame_needed = 0, uses_anonymous_args = 0
+ 368              		.loc 1 86 1 is_stmt 0 view .LVU97
+ 369 0000 08B5     		push	{r3, lr}
+ 370              	.LCFI5:
+ 371              		.cfi_def_cfa_offset 8
+ 372              		.cfi_offset 3, -8
+ 373              		.cfi_offset 14, -4
+  87:..//kernel/core/tos_countdownlatch.c ****     return tos_countdownlatch_pend_timed(countdownlatch, TOS_TIME_FOREVER);
+ 374              		.loc 1 87 5 is_stmt 1 view .LVU98
+ 375              		.loc 1 87 12 is_stmt 0 view .LVU99
+ 376 0002 4FF0FF32 		mov	r2, #-1
+ 377 0006 4FF0FF33 		mov	r3, #-1
+ 378 000a FFF7FEFF 		bl	tos_countdownlatch_pend_timed
+ 379              	.LVL42:
+  88:..//kernel/core/tos_countdownlatch.c **** }
+ 380              		.loc 1 88 1 view .LVU100
+ 381 000e 08BD     		pop	{r3, pc}
+ 382              		.cfi_endproc
+ 383              	.LFE113:
+ 385              		.section	.text.tos_countdownlatch_post,"ax",%progbits
+ 386              		.align	1
+ 387              		.global	tos_countdownlatch_post
+ 388              		.syntax unified
+ 389              		.thumb
+ 390              		.thumb_func
+ 391              		.fpu softvfp
+ 393              	tos_countdownlatch_post:
+ 394              	.LVL43:
+ 395              	.LFB114:
+  89:..//kernel/core/tos_countdownlatch.c **** 
+  90:..//kernel/core/tos_countdownlatch.c **** __API__ k_err_t tos_countdownlatch_post(k_countdownlatch_t *countdownlatch)
+  91:..//kernel/core/tos_countdownlatch.c **** {
+ 396              		.loc 1 91 1 is_stmt 1 view -0
+ 397              		.cfi_startproc
+ 398              		@ args = 0, pretend = 0, frame = 0
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400              		.loc 1 91 1 is_stmt 0 view .LVU102
+ 401 0000 70B5     		push	{r4, r5, r6, lr}
+ 402              	.LCFI6:
+ 403              		.cfi_def_cfa_offset 16
+ 404              		.cfi_offset 4, -16
+ 405              		.cfi_offset 5, -12
+ 406              		.cfi_offset 6, -8
+ 407              		.cfi_offset 14, -4
+  92:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_CPSR_ALLOC();
+ 408              		.loc 1 92 5 is_stmt 1 view .LVU103
+ 409              	.LVL44:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 14
+
+
+  93:..//kernel/core/tos_countdownlatch.c **** 
+  94:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+ 410              		.loc 1 94 5 view .LVU104
+ 411              		.loc 1 94 5 view .LVU105
+ 412 0002 20B3     		cbz	r0, .L38
+ 413 0004 0546     		mov	r5, r0
+  95:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 414              		.loc 1 95 5 view .LVU106
+ 415              		.loc 1 95 5 view .LVU107
+ 416              	.LVL45:
+ 417              	.LBB22:
+ 418              	.LBI22:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 419              		.loc 2 182 31 view .LVU108
+ 420              	.LBB23:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 421              		.loc 2 184 5 view .LVU109
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 422              		.loc 2 184 19 is_stmt 0 view .LVU110
+ 423 0006 4188     		ldrh	r1, [r0, #2]
+ 424              	.LVL46:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 425              		.loc 2 184 19 view .LVU111
+ 426              	.LBE23:
+ 427              	.LBE22:
+ 428              		.loc 1 95 5 view .LVU112
+ 429 0008 42F6EE32 		movw	r2, #11246
+ 430 000c 9142     		cmp	r1, r2
+ 431 000e 03D0     		beq	.L41
+ 432 0010 40F24D44 		movw	r4, #1101
+ 433              	.LVL47:
+ 434              	.L35:
+  96:..//kernel/core/tos_countdownlatch.c **** 
+  97:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_DISABLE();
+  98:..//kernel/core/tos_countdownlatch.c **** 
+  99:..//kernel/core/tos_countdownlatch.c ****     if (countdownlatch->count == (k_countdownlatch_cnt_t)0) {
+ 100:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 101:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_COUNTDOWNLATCH_OVERFLOW;
+ 102:..//kernel/core/tos_countdownlatch.c ****     }
+ 103:..//kernel/core/tos_countdownlatch.c **** 
+ 104:..//kernel/core/tos_countdownlatch.c ****     --countdownlatch->count;
+ 105:..//kernel/core/tos_countdownlatch.c **** 
+ 106:..//kernel/core/tos_countdownlatch.c ****     if (countdownlatch->count > (k_countdownlatch_cnt_t)0) {
+ 107:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 108:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_NONE;
+ 109:..//kernel/core/tos_countdownlatch.c ****     }
+ 110:..//kernel/core/tos_countdownlatch.c **** 
+ 111:..//kernel/core/tos_countdownlatch.c ****     pend_wakeup_one(&countdownlatch->pend_obj, PEND_STATE_POST);
+ 112:..//kernel/core/tos_countdownlatch.c **** 
+ 113:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_ENABLE();
+ 114:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 115:..//kernel/core/tos_countdownlatch.c **** 
+ 116:..//kernel/core/tos_countdownlatch.c ****     return K_ERR_NONE;
+ 117:..//kernel/core/tos_countdownlatch.c **** }
+ 435              		.loc 1 117 1 view .LVU113
+ 436 0014 2046     		mov	r0, r4
+ 437 0016 70BD     		pop	{r4, r5, r6, pc}
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 15
+
+
+ 438              	.LVL48:
+ 439              	.L41:
+  97:..//kernel/core/tos_countdownlatch.c **** 
+ 440              		.loc 1 97 5 is_stmt 1 view .LVU114
+  97:..//kernel/core/tos_countdownlatch.c **** 
+ 441              		.loc 1 97 5 view .LVU115
+ 442 0018 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 443              	.LVL49:
+  97:..//kernel/core/tos_countdownlatch.c **** 
+ 444              		.loc 1 97 5 is_stmt 0 view .LVU116
+ 445 001c 0646     		mov	r6, r0
+ 446              	.LVL50:
+  99:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 447              		.loc 1 99 5 is_stmt 1 view .LVU117
+  99:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 448              		.loc 1 99 23 is_stmt 0 view .LVU118
+ 449 001e AC89     		ldrh	r4, [r5, #12]
+  99:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 450              		.loc 1 99 8 view .LVU119
+ 451 0020 6CB1     		cbz	r4, .L42
+ 104:..//kernel/core/tos_countdownlatch.c **** 
+ 452              		.loc 1 104 5 is_stmt 1 view .LVU120
+ 453 0022 013C     		subs	r4, r4, #1
+ 454 0024 A4B2     		uxth	r4, r4
+ 455 0026 AC81     		strh	r4, [r5, #12]	@ movhi
+ 106:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 456              		.loc 1 106 5 view .LVU121
+ 106:..//kernel/core/tos_countdownlatch.c ****         TOS_CPU_INT_ENABLE();
+ 457              		.loc 1 106 8 is_stmt 0 view .LVU122
+ 458 0028 6CB9     		cbnz	r4, .L43
+ 111:..//kernel/core/tos_countdownlatch.c **** 
+ 459              		.loc 1 111 5 is_stmt 1 view .LVU123
+ 460 002a 0121     		movs	r1, #1
+ 461 002c 281D     		adds	r0, r5, #4
+ 462              	.LVL51:
+ 111:..//kernel/core/tos_countdownlatch.c **** 
+ 463              		.loc 1 111 5 is_stmt 0 view .LVU124
+ 464 002e FFF7FEFF 		bl	pend_wakeup_one
+ 465              	.LVL52:
+ 113:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 466              		.loc 1 113 5 is_stmt 1 view .LVU125
+ 113:..//kernel/core/tos_countdownlatch.c ****     knl_sched();
+ 467              		.loc 1 113 5 view .LVU126
+ 468 0032 3046     		mov	r0, r6
+ 469 0034 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 470              	.LVL53:
+ 114:..//kernel/core/tos_countdownlatch.c **** 
+ 471              		.loc 1 114 5 view .LVU127
+ 472 0038 FFF7FEFF 		bl	knl_sched
+ 473              	.LVL54:
+ 116:..//kernel/core/tos_countdownlatch.c **** }
+ 474              		.loc 1 116 5 view .LVU128
+ 116:..//kernel/core/tos_countdownlatch.c **** }
+ 475              		.loc 1 116 12 is_stmt 0 view .LVU129
+ 476 003c EAE7     		b	.L35
+ 477              	.LVL55:
+ 478              	.L42:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 16
+
+
+ 100:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_COUNTDOWNLATCH_OVERFLOW;
+ 479              		.loc 1 100 9 is_stmt 1 view .LVU130
+ 100:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_COUNTDOWNLATCH_OVERFLOW;
+ 480              		.loc 1 100 9 view .LVU131
+ 481 003e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 482              	.LVL56:
+ 101:..//kernel/core/tos_countdownlatch.c ****     }
+ 483              		.loc 1 101 9 view .LVU132
+ 101:..//kernel/core/tos_countdownlatch.c ****     }
+ 484              		.loc 1 101 16 is_stmt 0 view .LVU133
+ 485 0042 3224     		movs	r4, #50
+ 486 0044 E6E7     		b	.L35
+ 487              	.LVL57:
+ 488              	.L43:
+ 107:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_NONE;
+ 489              		.loc 1 107 9 is_stmt 1 view .LVU134
+ 107:..//kernel/core/tos_countdownlatch.c ****         return K_ERR_NONE;
+ 490              		.loc 1 107 9 view .LVU135
+ 491 0046 FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 492              	.LVL58:
+ 108:..//kernel/core/tos_countdownlatch.c ****     }
+ 493              		.loc 1 108 9 view .LVU136
+ 108:..//kernel/core/tos_countdownlatch.c ****     }
+ 494              		.loc 1 108 16 is_stmt 0 view .LVU137
+ 495 004a 0024     		movs	r4, #0
+ 496 004c E2E7     		b	.L35
+ 497              	.LVL59:
+ 498              	.L38:
+  94:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 499              		.loc 1 94 5 view .LVU138
+ 500 004e 40F24C44 		movw	r4, #1100
+ 501 0052 DFE7     		b	.L35
+ 502              		.cfi_endproc
+ 503              	.LFE114:
+ 505              		.section	.text.tos_countdownlatch_reset,"ax",%progbits
+ 506              		.align	1
+ 507              		.global	tos_countdownlatch_reset
+ 508              		.syntax unified
+ 509              		.thumb
+ 510              		.thumb_func
+ 511              		.fpu softvfp
+ 513              	tos_countdownlatch_reset:
+ 514              	.LVL60:
+ 515              	.LFB115:
+ 118:..//kernel/core/tos_countdownlatch.c **** 
+ 119:..//kernel/core/tos_countdownlatch.c **** __API__ k_err_t tos_countdownlatch_reset(k_countdownlatch_t *countdownlatch, k_countdownlatch_cnt_t
+ 120:..//kernel/core/tos_countdownlatch.c **** {
+ 516              		.loc 1 120 1 is_stmt 1 view -0
+ 517              		.cfi_startproc
+ 518              		@ args = 0, pretend = 0, frame = 0
+ 519              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_CPSR_ALLOC();
+ 520              		.loc 1 121 5 view .LVU140
+ 122:..//kernel/core/tos_countdownlatch.c **** 
+ 123:..//kernel/core/tos_countdownlatch.c ****     TOS_PTR_SANITY_CHECK(countdownlatch);
+ 521              		.loc 1 123 5 view .LVU141
+ 522              		.loc 1 123 5 view .LVU142
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 17
+
+
+ 523 0000 88B1     		cbz	r0, .L46
+ 120:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_CPSR_ALLOC();
+ 524              		.loc 1 120 1 is_stmt 0 view .LVU143
+ 525 0002 38B5     		push	{r3, r4, r5, lr}
+ 526              	.LCFI7:
+ 527              		.cfi_def_cfa_offset 16
+ 528              		.cfi_offset 3, -16
+ 529              		.cfi_offset 4, -12
+ 530              		.cfi_offset 5, -8
+ 531              		.cfi_offset 14, -4
+ 532 0004 0446     		mov	r4, r0
+ 124:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 533              		.loc 1 124 5 is_stmt 1 view .LVU144
+ 534              		.loc 1 124 5 view .LVU145
+ 535              	.LVL61:
+ 536              	.LBB24:
+ 537              	.LBI24:
+ 182:..//kernel/core/include/tos_sys.h **** {
+ 538              		.loc 2 182 31 view .LVU146
+ 539              	.LBB25:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 540              		.loc 2 184 5 view .LVU147
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 541              		.loc 2 184 19 is_stmt 0 view .LVU148
+ 542 0006 4088     		ldrh	r0, [r0, #2]
+ 543              	.LVL62:
+ 184:..//kernel/core/include/tos_sys.h **** }
+ 544              		.loc 2 184 19 view .LVU149
+ 545              	.LBE25:
+ 546              	.LBE24:
+ 547              		.loc 1 124 5 view .LVU150
+ 548 0008 42F6EE32 		movw	r2, #11246
+ 549 000c 9042     		cmp	r0, r2
+ 550 000e 02D0     		beq	.L52
+ 551 0010 40F24D40 		movw	r0, #1101
+ 552              	.LVL63:
+ 553              	.L45:
+ 125:..//kernel/core/tos_countdownlatch.c **** 
+ 126:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_DISABLE();
+ 127:..//kernel/core/tos_countdownlatch.c ****     countdownlatch->count = count;
+ 128:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_ENABLE();
+ 129:..//kernel/core/tos_countdownlatch.c **** 
+ 130:..//kernel/core/tos_countdownlatch.c ****     return K_ERR_NONE;
+ 131:..//kernel/core/tos_countdownlatch.c **** }
+ 554              		.loc 1 131 1 view .LVU151
+ 555 0014 38BD     		pop	{r3, r4, r5, pc}
+ 556              	.LVL64:
+ 557              	.L52:
+ 558              		.loc 1 131 1 view .LVU152
+ 559 0016 0D46     		mov	r5, r1
+ 126:..//kernel/core/tos_countdownlatch.c ****     countdownlatch->count = count;
+ 560              		.loc 1 126 5 is_stmt 1 view .LVU153
+ 126:..//kernel/core/tos_countdownlatch.c ****     countdownlatch->count = count;
+ 561              		.loc 1 126 5 view .LVU154
+ 562 0018 FFF7FEFF 		bl	tos_cpu_cpsr_save
+ 563              	.LVL65:
+ 127:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_ENABLE();
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 18
+
+
+ 564              		.loc 1 127 5 view .LVU155
+ 127:..//kernel/core/tos_countdownlatch.c ****     TOS_CPU_INT_ENABLE();
+ 565              		.loc 1 127 27 is_stmt 0 view .LVU156
+ 566 001c A581     		strh	r5, [r4, #12]	@ movhi
+ 128:..//kernel/core/tos_countdownlatch.c **** 
+ 567              		.loc 1 128 5 is_stmt 1 view .LVU157
+ 128:..//kernel/core/tos_countdownlatch.c **** 
+ 568              		.loc 1 128 5 view .LVU158
+ 569 001e FFF7FEFF 		bl	tos_cpu_cpsr_restore
+ 570              	.LVL66:
+ 130:..//kernel/core/tos_countdownlatch.c **** }
+ 571              		.loc 1 130 5 view .LVU159
+ 130:..//kernel/core/tos_countdownlatch.c **** }
+ 572              		.loc 1 130 12 is_stmt 0 view .LVU160
+ 573 0022 0020     		movs	r0, #0
+ 574 0024 F6E7     		b	.L45
+ 575              	.LVL67:
+ 576              	.L46:
+ 577              	.LCFI8:
+ 578              		.cfi_def_cfa_offset 0
+ 579              		.cfi_restore 3
+ 580              		.cfi_restore 4
+ 581              		.cfi_restore 5
+ 582              		.cfi_restore 14
+ 123:..//kernel/core/tos_countdownlatch.c ****     TOS_OBJ_VERIFY(countdownlatch, KNL_OBJ_TYPE_COUNTDOWNLATCH);
+ 583              		.loc 1 123 5 view .LVU161
+ 584 0026 40F24C40 		movw	r0, #1100
+ 585              	.LVL68:
+ 586              		.loc 1 131 1 view .LVU162
+ 587 002a 7047     		bx	lr
+ 588              		.cfi_endproc
+ 589              	.LFE115:
+ 591              		.text
+ 592              	.Letext0:
+ 593              		.file 3 "..//kernel/core/include/tos_kerr.h"
+ 594              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 595              		.file 5 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 596              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 597              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 598              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 599              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 600              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 601              		.file 11 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 602              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 603              		.file 13 "..//arch/arm/arm-v7m/common/include/tos_cpu_types.h"
+ 604              		.file 14 "..//kernel/core/include/tos_ktypes.h"
+ 605              		.file 15 "..//kernel/core/include/tos_task.h"
+ 606              		.file 16 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 607              		.file 17 "..//kernel/core/include/tos_list.h"
+ 608              		.file 18 "..//kernel/core/include/tos_pend.h"
+ 609              		.file 19 "..//kernel/core/include/tos_countdownlatch.h"
+ 610              		.file 20 "..//kernel/core/include/tos_timer.h"
+ 611              		.file 21 "..//kernel/core/include/tos_mmheap.h"
+ 612              		.file 22 "..//kernel/core/include/tos_sched.h"
+ 613              		.file 23 "..//kernel/core/include/tos_global.h"
+ 614              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tos_countdownlatch.c
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:16     .text.tos_countdownlatch_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:24     .text.tos_countdownlatch_create:00000000 tos_countdownlatch_create
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:85     .text.tos_countdownlatch_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:92     .text.tos_countdownlatch_destroy:00000000 tos_countdownlatch_destroy
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:198    .text.tos_countdownlatch_pend_timed:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:205    .text.tos_countdownlatch_pend_timed:00000000 tos_countdownlatch_pend_timed
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:349    .text.tos_countdownlatch_pend_timed:0000008c $d
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:354    .text.tos_countdownlatch_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:361    .text.tos_countdownlatch_pend:00000000 tos_countdownlatch_pend
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:386    .text.tos_countdownlatch_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:393    .text.tos_countdownlatch_post:00000000 tos_countdownlatch_post
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:506    .text.tos_countdownlatch_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccXpVlRU.s:513    .text.tos_countdownlatch_reset:00000000 tos_countdownlatch_reset
+
+UNDEFINED SYMBOLS
+pend_object_init
+tos_cpu_cpsr_save
+pend_wakeup_all
+pend_object_deinit
+tos_cpu_cpsr_restore
+knl_sched
+knl_is_inirq
+knl_is_sched_locked
+pend_task_block
+pend_state2errno
+k_curr_task
+pend_wakeup_one
