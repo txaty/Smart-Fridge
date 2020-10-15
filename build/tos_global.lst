@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s 			page 1
   67              		.section	.bss.k_tick_count,"aw",%nobits
   68              		.align	3
   71              	k_tick_count:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s 			page 2
 
 
   72 0000 00000000 		.space	8
@@ -118,48 +118,48 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s 			page 1
  139              		.file 16 "..//kernel/core/include/tos_timer.h"
  140              		.file 17 "..//kernel/core/include/tos_mmheap.h"
  141              		.file 18 "..//kernel/core/include/tos_sched.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s 			page 3
 
 
  142              		.file 19 "..//kernel/core/include/tos_global.h"
  143              		.file 20 "..//kernel/core/tos_global.c"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_global.c
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:105    .data.k_timer_ctl:00000000 k_timer_ctl
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:105    .data.k_timer_ctl:00000000 k_timer_ctl
                             *COM*:00000c84 k_mmheap_ctl
                             *COM*:00000100 k_mmheap_default_pool
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:98     .data.k_tick_list:00000000 k_tick_list
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:91     .data.k_stat_list:00000000 k_stat_list
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:84     .data.k_dead_task_list:00000000 k_dead_task_list
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:38     .bss.k_cpu_cycle_per_tick:00000000 k_cpu_cycle_per_tick
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:77     .data.k_cpu_tick_per_second:00000000 k_cpu_tick_per_second
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:120    .rodata.k_idle_task_stk_size:00000000 k_idle_task_stk_size
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:114    .rodata.k_idle_task_stk_addr:00000000 k_idle_task_stk_addr
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:98     .data.k_tick_list:00000000 k_tick_list
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:91     .data.k_stat_list:00000000 k_stat_list
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:84     .data.k_dead_task_list:00000000 k_dead_task_list
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:38     .bss.k_cpu_cycle_per_tick:00000000 k_cpu_cycle_per_tick
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:77     .data.k_cpu_tick_per_second:00000000 k_cpu_tick_per_second
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:120    .rodata.k_idle_task_stk_size:00000000 k_idle_task_stk_size
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:114    .rodata.k_idle_task_stk_addr:00000000 k_idle_task_stk_addr
                             *COM*:00000200 k_idle_task_stk
                             *COM*:00000088 k_idle_task
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:60     .bss.k_next_task:00000000 k_next_task
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:44     .bss.k_curr_task:00000000 k_curr_task
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:71     .bss.k_tick_count:00000000 k_tick_count
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:60     .bss.k_next_task:00000000 k_next_task
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:44     .bss.k_curr_task:00000000 k_curr_task
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:71     .bss.k_tick_count:00000000 k_tick_count
                             *COM*:00000048 k_rdyq
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:54     .bss.k_knl_state:00000000 k_knl_state
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:65     .bss.k_sched_lock_nest_cnt:00000000 k_sched_lock_nest_cnt
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:49     .bss.k_irq_nest_cnt:00000000 k_irq_nest_cnt
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:35     .bss.k_cpu_cycle_per_tick:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:41     .bss.k_curr_task:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:50     .bss.k_irq_nest_cnt:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:55     .bss.k_knl_state:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:57     .bss.k_next_task:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:66     .bss.k_sched_lock_nest_cnt:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:68     .bss.k_tick_count:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:74     .data.k_cpu_tick_per_second:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:81     .data.k_dead_task_list:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:88     .data.k_stat_list:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:95     .data.k_tick_list:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:102    .data.k_timer_ctl:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:111    .rodata.k_idle_task_stk_addr:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\cc6gwBeY.s:117    .rodata.k_idle_task_stk_size:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:54     .bss.k_knl_state:00000000 k_knl_state
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:65     .bss.k_sched_lock_nest_cnt:00000000 k_sched_lock_nest_cnt
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:49     .bss.k_irq_nest_cnt:00000000 k_irq_nest_cnt
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:35     .bss.k_cpu_cycle_per_tick:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:41     .bss.k_curr_task:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:50     .bss.k_irq_nest_cnt:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:55     .bss.k_knl_state:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:57     .bss.k_next_task:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:66     .bss.k_sched_lock_nest_cnt:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:68     .bss.k_tick_count:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:74     .data.k_cpu_tick_per_second:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:81     .data.k_dead_task_list:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:88     .data.k_stat_list:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:95     .data.k_tick_list:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:102    .data.k_timer_ctl:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:111    .rodata.k_idle_task_stk_addr:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccPLe2I6.s:117    .rodata.k_idle_task_stk_size:00000000 $d
 
 NO UNDEFINED SYMBOLS

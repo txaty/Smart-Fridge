@@ -16,9 +16,10 @@ build/main.o: Src/main.c Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
- Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h Inc/gpio.h \
- Inc/main.h ..//osal/cmsis_os/cmsis_os.h ..//kernel/core/include/tos_k.h \
- ..//kernel/core/include/tos_compiler.h \
+ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/usart.h \
+ Inc/main.h Inc/gpio.h ..//osal/cmsis_os/cmsis_os.h \
+ ..//kernel/core/include/tos_k.h ..//kernel/core/include/tos_compiler.h \
  ..//kernel/core/include/tos_kerr.h \
  ..//arch/arm/arm-v7m/common/include/tos_cpu_def.h \
  ..//board/TOS_CONFIG/tos_config.h \
@@ -52,7 +53,7 @@ build/main.o: Src/main.c Inc/main.h \
  ..//kernel/core/include/tos_stopwatch.h \
  ..//kernel/core/include/tos_mmblk.h ..//kernel/core/include/tos_mmheap.h \
  ..//kernel/core/include/tos_tick.h ..//kernel/core/include/tos_sched.h \
- ..//kernel/core/include/tos_global.h Inc/task.h
+ ..//kernel/core/include/tos_global.h Inc/task.h Inc/usart.h
 
 Inc/main.h:
 
@@ -96,9 +97,13 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 
-Inc/gpio.h:
+Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+
+Inc/usart.h:
 
 Inc/main.h:
+
+Inc/gpio.h:
 
 ..//osal/cmsis_os/cmsis_os.h:
 
@@ -191,3 +196,5 @@ Inc/main.h:
 ..//kernel/core/include/tos_global.h:
 
 Inc/task.h:
+
+Inc/usart.h:

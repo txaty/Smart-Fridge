@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -50,7 +50,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 1
    7:Src/task.c    ****     {
    8:Src/task.c    ****         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
   42              		.loc 1 8 9 discriminator 1 view .LVU3
-  43 0002 134C     		ldr	r4, .L4
+  43 0002 144C     		ldr	r4, .L4
   44 0004 2021     		movs	r1, #32
   45 0006 2046     		mov	r0, r4
   46 0008 FFF7FEFF 		bl	HAL_GPIO_TogglePin
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 1
    9:Src/task.c    ****         osDelay(500);
   48              		.loc 1 9 9 discriminator 1 view .LVU4
   49 000c 4FF4FA70 		mov	r0, #500
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s 			page 2
 
 
   50 0010 FFF7FEFF 		bl	osDelay
@@ -103,49 +103,141 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 1
   82 0046 2046     		mov	r0, r4
   83 0048 FFF7FEFF 		bl	HAL_GPIO_TogglePin
   84              	.LVL10:
-  85 004c D9E7     		b	.L2
-  86              	.L5:
-  87 004e 00BF     		.align	2
-  88              	.L4:
-  89 0050 000C0140 		.word	1073810432
-  90              		.cfi_endproc
-  91              	.LFE110:
-  93              		.text
-  94              	.Letext0:
-  95              		.file 2 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
-  96              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
-  97              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
-  98              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
-  99              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 100              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 3
+  17:Src/task.c    ****         printf("test\n");
+  85              		.loc 1 17 9 discriminator 1 view .LVU12
+  86 004c 0248     		ldr	r0, .L4+4
+  87 004e FFF7FEFF 		bl	puts
+  88              	.LVL11:
+  89 0052 D6E7     		b	.L2
+  90              	.L5:
+  91              		.align	2
+  92              	.L4:
+  93 0054 000C0140 		.word	1073810432
+  94 0058 00000000 		.word	.LC0
+  95              		.cfi_endproc
+  96              	.LFE110:
+  98              		.section	.text._write,"ax",%progbits
+  99              		.align	1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s 			page 3
 
 
- 101              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
- 102              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
- 103              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
- 104              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 105              		.file 12 "..//kernel/core/include/tos_ktypes.h"
- 106              		.file 13 "..//kernel/core/include/tos_task.h"
- 107              		.file 14 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
- 108              		.file 15 "..//kernel/core/include/tos_list.h"
- 109              		.file 16 "..//kernel/core/include/tos_pend.h"
- 110              		.file 17 "..//kernel/core/include/tos_sys.h"
- 111              		.file 18 "..//kernel/core/include/tos_timer.h"
- 112              		.file 19 "..//kernel/core/include/tos_mmheap.h"
- 113              		.file 20 "..//kernel/core/include/tos_sched.h"
- 114              		.file 21 "..//kernel/core/include/tos_global.h"
- 115              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 116              		.file 23 "..//osal/cmsis_os/cmsis_os.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s 			page 4
+ 100              		.global	_write
+ 101              		.syntax unified
+ 102              		.thumb
+ 103              		.thumb_func
+ 104              		.fpu softvfp
+ 106              	_write:
+ 107              	.LVL12:
+ 108              	.LFB111:
+  18:Src/task.c    ****     }
+  19:Src/task.c    **** }
+  20:Src/task.c    **** 
+  21:Src/task.c    **** #if defined(__CC_ARM) || defined(__ICCARM__)
+  22:Src/task.c    **** 
+  23:Src/task.c    **** int fputc(int ch, FILE *f)
+  24:Src/task.c    **** {
+  25:Src/task.c    ****     if (ch == '\n')
+  26:Src/task.c    ****     {
+  27:Src/task.c    ****         HAL_UART_Transmit(&huart1, (void *)"\r", 1, 30000);
+  28:Src/task.c    ****     }
+  29:Src/task.c    ****     HAL_UART_Transmit(&huart1, (unit8_t *)&ch, 1, 0xFFFF);
+  30:Src/task.c    ****     return ch;
+  31:Src/task.c    **** }
+  32:Src/task.c    **** 
+  33:Src/task.c    **** #elif defined (__GNUC__)
+  34:Src/task.c    **** 
+  35:Src/task.c    **** int _write(int fd, char *ptr, int len)
+  36:Src/task.c    **** {
+ 109              		.loc 1 36 1 view -0
+ 110              		.cfi_startproc
+ 111              		@ args = 0, pretend = 0, frame = 0
+ 112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113              		.loc 1 36 1 is_stmt 0 view .LVU14
+ 114 0000 10B5     		push	{r4, lr}
+ 115              	.LCFI1:
+ 116              		.cfi_def_cfa_offset 8
+ 117              		.cfi_offset 4, -8
+ 118              		.cfi_offset 14, -4
+ 119 0002 1446     		mov	r4, r2
+  37:Src/task.c    ****     (void)HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, 0xFFFF);
+ 120              		.loc 1 37 5 is_stmt 1 view .LVU15
+ 121              		.loc 1 37 11 is_stmt 0 view .LVU16
+ 122 0004 4FF6FF73 		movw	r3, #65535
+ 123 0008 92B2     		uxth	r2, r2
+ 124              	.LVL13:
+ 125              		.loc 1 37 11 view .LVU17
+ 126 000a 0248     		ldr	r0, .L8
+ 127              	.LVL14:
+ 128              		.loc 1 37 11 view .LVU18
+ 129 000c FFF7FEFF 		bl	HAL_UART_Transmit
+ 130              	.LVL15:
+  38:Src/task.c    ****     return len;
+ 131              		.loc 1 38 5 is_stmt 1 view .LVU19
+  39:Src/task.c    **** }
+ 132              		.loc 1 39 1 is_stmt 0 view .LVU20
+ 133 0010 2046     		mov	r0, r4
+ 134 0012 10BD     		pop	{r4, pc}
+ 135              	.LVL16:
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s 			page 4
+
+
+ 136              	.L9:
+ 137              		.loc 1 39 1 view .LVU21
+ 138              		.align	2
+ 139              	.L8:
+ 140 0014 00000000 		.word	huart1
+ 141              		.cfi_endproc
+ 142              	.LFE111:
+ 144              		.section	.rodata.redLedBlink.str1.4,"aMS",%progbits,1
+ 145              		.align	2
+ 146              	.LC0:
+ 147 0000 74657374 		.ascii	"test\000"
+ 147      00
+ 148              		.text
+ 149              	.Letext0:
+ 150              		.file 2 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 151              		.file 3 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 152              		.file 4 "d:\\arm_gcc\\8 2019-q3-update\\lib\\gcc\\arm-none-eabi\\8.3.1\\include\\stddef.h"
+ 153              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 154              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 155              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 156              		.file 8 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\_types.h"
+ 157              		.file 9 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\reent.h"
+ 158              		.file 10 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\sys\\lock.h"
+ 159              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 160              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 161              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 162              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 163              		.file 15 "..//kernel/core/include/tos_ktypes.h"
+ 164              		.file 16 "..//kernel/core/include/tos_task.h"
+ 165              		.file 17 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdlib.h"
+ 166              		.file 18 "..//kernel/core/include/tos_list.h"
+ 167              		.file 19 "..//kernel/core/include/tos_pend.h"
+ 168              		.file 20 "..//kernel/core/include/tos_sys.h"
+ 169              		.file 21 "..//kernel/core/include/tos_timer.h"
+ 170              		.file 22 "..//kernel/core/include/tos_mmheap.h"
+ 171              		.file 23 "..//kernel/core/include/tos_sched.h"
+ 172              		.file 24 "..//kernel/core/include/tos_global.h"
+ 173              		.file 25 "Inc/usart.h"
+ 174              		.file 26 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 175              		.file 27 "..//osal/cmsis_os/cmsis_os.h"
+ 176              		.file 28 "<built-in>"
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 task.c
-C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s:16     .text.redLedBlink:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s:24     .text.redLedBlink:00000000 redLedBlink
-C:\Users\tianx\AppData\Local\Temp\cc9kEmva.s:89     .text.redLedBlink:00000050 $d
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:16     .text.redLedBlink:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:24     .text.redLedBlink:00000000 redLedBlink
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:93     .text.redLedBlink:00000054 $d
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:99     .text._write:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:106    .text._write:00000000 _write
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:140    .text._write:00000014 $d
+C:\Users\tianx\AppData\Local\Temp\cc7oUM40.s:145    .rodata.redLedBlink.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_TogglePin
 osDelay
+puts
+HAL_UART_Transmit
+huart1

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   34              		.loc 1 22 5 view .LVU2
   35 0000 0346     		mov	r3, r0
   36 0002 38B1     		cbz	r0, .L3
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 2
 
 
   23:..//kernel/core/tos_stopwatch.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   40:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_QUEUE                 = 0xDAD5,
   41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
   42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 3
 
 
   43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   97:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
   98:..//kernel/core/include/tos_sys.h ****  */
   99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 4
 
 
  100:..//kernel/core/include/tos_sys.h **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  154:..//kernel/core/include/tos_sys.h **** /**
  155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
  156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 5
 
 
  157:..//kernel/core/include/tos_sys.h ****  *
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   28:..//kernel/core/tos_stopwatch.c **** }
   67              		.loc 1 28 1 view .LVU14
   68 0018 7047     		bx	lr
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 6
 
 
   69              		.cfi_endproc
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  114              		.loc 1 35 22 view .LVU27
  115 0010 0021     		movs	r1, #0
  116 0012 C3E90201 		strd	r0, [r3, #8]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 7
 
 
   36:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_DEINIT(stopwatch);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   40:..//kernel/core/tos_stopwatch.c **** 
   41:..//kernel/core/tos_stopwatch.c **** __API__ k_err_t tos_stopwatch_countdown(k_stopwatch_t *stopwatch, k_tick_t tick)
   42:..//kernel/core/tos_stopwatch.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 8
 
 
  161              		.loc 1 42 1 is_stmt 1 view -0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  200 0014 70BD     		pop	{r4, r5, r6, pc}
  201              	.LVL20:
  202              	.L16:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 9
 
 
  203              		.loc 1 52 1 view .LVU52
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   53:..//kernel/core/tos_stopwatch.c **** 
   54:..//kernel/core/tos_stopwatch.c **** __API__ k_err_t tos_stopwatch_countdown_ms(k_stopwatch_t *stopwatch, k_time_t millisec)
   55:..//kernel/core/tos_stopwatch.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 10
 
 
  250              		.loc 1 55 1 is_stmt 1 view -0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  291 0016 0846     		mov	r0, r1
   61:..//kernel/core/tos_stopwatch.c ****     return tos_stopwatch_countdown(stopwatch, tick);
  292              		.loc 1 61 5 is_stmt 1 view .LVU77
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 11
 
 
   61:..//kernel/core/tos_stopwatch.c ****     return tos_stopwatch_countdown(stopwatch, tick);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  341              		.cfi_offset 5, -24
  342              		.cfi_offset 6, -20
  343              		.cfi_offset 7, -16
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 12
 
 
  344              		.cfi_offset 8, -12
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   75:..//kernel/core/tos_stopwatch.c **** __API__ void tos_stopwatch_delay_ms(k_time_t millisec)
   76:..//kernel/core/tos_stopwatch.c **** {
  389              		.loc 1 76 1 is_stmt 1 view -0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 13
 
 
  390              		.cfi_startproc
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  100:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
  101:..//kernel/core/tos_stopwatch.c **** 
  102:..//kernel/core/tos_stopwatch.c ****     TOS_PTR_SANITY_CHECK_RC(stopwatch, (k_time_t)-1);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 14
 
 
  103:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_time_t)-1);
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  457 000e 4DF6D722 		movw	r2, #56023
  458 0012 9142     		cmp	r1, r2
  459 0014 00D0     		beq	.L35
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 15
 
 
  460              	.L31:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   85:..//kernel/core/tos_stopwatch.c **** 
  504              		.loc 1 85 5 view .LVU126
   87:..//kernel/core/tos_stopwatch.c ****     TOS_OBJ_VERIFY_RC(stopwatch, KNL_OBJ_TYPE_STOPWATCH, (k_tick_t)-1);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 16
 
 
  505              		.loc 1 87 5 view .LVU127
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
   90:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
  546              		.loc 1 90 8 view .LVU141
  547 001c 10B1     		cbz	r0, .L46
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 17
 
 
   91:..//kernel/core/tos_stopwatch.c ****     }
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  594              	.LFB117:
   99:..//kernel/core/tos_stopwatch.c ****     k_tick_t now;
  595              		.loc 1 99 1 is_stmt 1 view -0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 18
 
 
  596              		.cfi_startproc
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  636              		.loc 1 105 9 is_stmt 0 view .LVU166
  637 0016 FFF7FEFF 		bl	tos_stopwatch_is_expired
  638              	.LVL64:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 19
 
 
  105:..//kernel/core/tos_stopwatch.c ****         return (k_tick_t)0u;
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  680              		.loc 1 111 1 view .LVU179
  681 004c 7047     		bx	lr
  682              		.cfi_endproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 20
 
 
  683              	.LFE117:
@@ -1165,29 +1165,29 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 1
  705              		.file 21 "..//kernel/core/include/tos_sched.h"
  706              		.file 22 "..//kernel/core/include/tos_global.h"
  707              		.file 23 "..//kernel/core/include/tos_time.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_stopwatch.c
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:16     .text.tos_stopwatch_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:24     .text.tos_stopwatch_create:00000000 tos_stopwatch_create
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:73     .text.tos_stopwatch_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:80     .text.tos_stopwatch_destroy:00000000 tos_stopwatch_destroy
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:151    .text.tos_stopwatch_countdown:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:158    .text.tos_stopwatch_countdown:00000000 tos_stopwatch_countdown
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:240    .text.tos_stopwatch_countdown_ms:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:247    .text.tos_stopwatch_countdown_ms:00000000 tos_stopwatch_countdown_ms
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:321    .text.tos_stopwatch_delay:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:328    .text.tos_stopwatch_delay:00000000 tos_stopwatch_delay
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:379    .text.tos_stopwatch_delay_ms:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:386    .text.tos_stopwatch_delay_ms:00000000 tos_stopwatch_delay_ms
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:413    .text.tos_stopwatch_is_expired:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:420    .text.tos_stopwatch_is_expired:00000000 tos_stopwatch_is_expired
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:490    .text.tos_stopwatch_remain:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:497    .text.tos_stopwatch_remain:00000000 tos_stopwatch_remain
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:585    .text.tos_stopwatch_remain_ms:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccaI9Cju.s:592    .text.tos_stopwatch_remain_ms:00000000 tos_stopwatch_remain_ms
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:16     .text.tos_stopwatch_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:24     .text.tos_stopwatch_create:00000000 tos_stopwatch_create
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:73     .text.tos_stopwatch_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:80     .text.tos_stopwatch_destroy:00000000 tos_stopwatch_destroy
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:151    .text.tos_stopwatch_countdown:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:158    .text.tos_stopwatch_countdown:00000000 tos_stopwatch_countdown
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:240    .text.tos_stopwatch_countdown_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:247    .text.tos_stopwatch_countdown_ms:00000000 tos_stopwatch_countdown_ms
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:321    .text.tos_stopwatch_delay:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:328    .text.tos_stopwatch_delay:00000000 tos_stopwatch_delay
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:379    .text.tos_stopwatch_delay_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:386    .text.tos_stopwatch_delay_ms:00000000 tos_stopwatch_delay_ms
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:413    .text.tos_stopwatch_is_expired:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:420    .text.tos_stopwatch_is_expired:00000000 tos_stopwatch_is_expired
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:490    .text.tos_stopwatch_remain:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:497    .text.tos_stopwatch_remain:00000000 tos_stopwatch_remain
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:585    .text.tos_stopwatch_remain_ms:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccrEykqC.s:592    .text.tos_stopwatch_remain_ms:00000000 tos_stopwatch_remain_ms
 
 UNDEFINED SYMBOLS
 tos_systick_get

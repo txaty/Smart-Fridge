@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   30:..//kernel/core/tos_message_queue.c ****     if (err != K_ERR_NONE) {
   31:..//kernel/core/tos_message_queue.c ****         return err;
   32:..//kernel/core/tos_message_queue.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 2
 
 
   33:..//kernel/core/tos_message_queue.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   87:..//kernel/core/tos_message_queue.c **** 
   88:..//kernel/core/tos_message_queue.c ****     TOS_OBJ_INIT(msg_q, KNL_OBJ_TYPE_MESSAGE_QUEUE);
   89:..//kernel/core/tos_message_queue.c ****     knl_object_alloc_set_dynamic(&msg_q->knl_obj);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 3
 
 
   90:..//kernel/core/tos_message_queue.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  144:..//kernel/core/tos_message_queue.c **** 
  145:..//kernel/core/tos_message_queue.c ****     TOS_CPU_INT_DISABLE();
  146:..//kernel/core/tos_message_queue.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 4
 
 
  147:..//kernel/core/tos_message_queue.c ****     if (tos_ring_q_dequeue(&msg_q->ring_q, msg_ptr, K_NULL) == K_ERR_NONE) {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   46              		.loc 1 181 1 view .LVU6
   47 000a 08BD     		pop	{r3, pc}
   48              		.cfi_endproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 5
 
 
   49              	.LFE116:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
    5:..//kernel/core/include/tos_sys.h ****  * Copyright (C) 2019 THL A29 Limited, a Tencent company. All rights reserved.
    6:..//kernel/core/include/tos_sys.h ****  * If you have downloaded a copy of the TencentOS binary from Tencent, please
    7:..//kernel/core/include/tos_sys.h ****  * note that the TencentOS binary is licensed under the BSD 3-Clause License.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 6
 
 
    8:..//kernel/core/include/tos_sys.h ****  *
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   62:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_STATIC,
   63:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_ALLOC_TYPE_DYNAMIC,
   64:..//kernel/core/include/tos_sys.h **** } knl_obj_alloc_type_t;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 7
 
 
   65:..//kernel/core/include/tos_sys.h **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  119:..//kernel/core/include/tos_sys.h ****  * @attention None
  120:..//kernel/core/include/tos_sys.h ****  *
  121:..//kernel/core/include/tos_sys.h ****  * @param   None
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 8
 
 
  122:..//kernel/core/include/tos_sys.h ****  *
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  176:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_idle(k_task_t *task);
  177:..//kernel/core/include/tos_sys.h **** __KNL__ int     knl_is_self(k_task_t *task);
  178:..//kernel/core/include/tos_sys.h **** __KNL__ k_err_t knl_idle_init(void);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 9
 
 
  179:..//kernel/core/include/tos_sys.h **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  114              		@ sp needed
  115 001e 70BD     		pop	{r4, r5, r6, pc}
  116              	.LVL8:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 10
 
 
  117              	.L14:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  157 0044 0199     		ldr	r1, [sp, #4]
  158 0046 FFF7FEFF 		bl	msg_q_task_recv
  159              	.LVL16:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 11
 
 
  207:..//kernel/core/tos_message_queue.c ****             msg_q_task_recv(task, msg_ptr);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  199              	.LVL25:
  200:..//kernel/core/tos_message_queue.c ****         return K_ERR_NONE;
  200              		.loc 1 200 9 is_stmt 0 view .LVU52
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 12
 
 
  201 0070 FFF7FEFF 		bl	tos_cpu_cpsr_restore
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  244              		.thumb_func
  245              		.fpu softvfp
  247              	tos_msg_q_create:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 13
 
 
  248              	.LVL33:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   34:..//kernel/core/tos_message_queue.c **** 
  289              		.loc 1 34 5 is_stmt 1 view .LVU78
  290 0018 201D     		adds	r0, r4, #4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 14
 
 
  291              	.LVL38:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  315 0024 0123     		movs	r3, #1
  316 0026 2370     		strb	r3, [r4]
  317              	.LVL41:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 15
 
 
  318              		.loc 2 211 25 view .LVU89
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   47:..//kernel/core/tos_message_queue.c ****     TOS_OBJ_VERIFY(msg_q, KNL_OBJ_TYPE_MESSAGE_QUEUE);
  365              		.loc 1 47 5 view .LVU99
  366 0002 48B3     		cbz	r0, .L26
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 16
 
 
  367 0004 0446     		mov	r4, r0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   51:..//kernel/core/tos_message_queue.c ****     }
  402              		.loc 1 51 16 view .LVU113
  403 0016 40F24E45 		movw	r5, #1102
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 17
 
 
  404 001a 22E0     		b	.L24
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  443 003e 0023     		movs	r3, #0
  444 0040 6380     		strh	r3, [r4, #2]	@ movhi
  445              	.LVL56:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 18
 
 
  194:..//kernel/core/include/tos_sys.h **** }
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  484              	.LVL63:
  485              	.L26:
   47:..//kernel/core/tos_message_queue.c ****     TOS_OBJ_VERIFY(msg_q, KNL_OBJ_TYPE_MESSAGE_QUEUE);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 19
 
 
  486              		.loc 1 47 5 view .LVU145
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
   81:..//kernel/core/tos_message_queue.c ****     if (err != K_ERR_NONE) {
  533              		.loc 1 81 11 view .LVU155
  534 000a FFF7FEFF 		bl	tos_ring_q_create_dyn
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 20
 
 
  535              	.LVL67:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  575              	.LVL73:
  206:..//kernel/core/include/tos_sys.h **** }
  576              		.loc 2 206 25 view .LVU170
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 21
 
 
  577              	.LBE49:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  100:..//kernel/core/tos_message_queue.c **** 
  623              		.loc 1 100 5 view .LVU181
  624              	.LVL77:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 22
 
 
  625              	.LBB50:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  664              		.loc 1 106 5 is_stmt 0 view .LVU196
  665 0020 0646     		mov	r6, r0
  666              	.LVL82:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 23
 
 
  108:..//kernel/core/tos_message_queue.c ****     if (err != K_ERR_NONE) {
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  706              		.loc 2 199 32 view .LVU211
  707              	.LBB57:
  201:..//kernel/core/include/tos_sys.h **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 24
 
 
  708              		.loc 2 201 5 view .LVU212
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  125:..//kernel/core/tos_message_queue.c **** 
  748              		.loc 1 125 1 view .LVU227
  749 0062 2846     		mov	r0, r5
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 25
 
 
  750 0064 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  795 000c 02D0     		beq	.L54
  796 000e 40F24D40 		movw	r0, #1101
  797              	.LVL100:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 26
 
 
  798              	.L47:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  845              		.cfi_offset 3, -32
  846              		.cfi_offset 4, -28
  847              		.cfi_offset 5, -24
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 27
 
 
  848              		.cfi_offset 6, -20
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  887              	.LBE61:
  888              	.LBE60:
  143:..//kernel/core/tos_message_queue.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 28
 
 
  889              		.loc 1 143 5 view .LVU263
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  930 0052 1B4E     		ldr	r6, .L69
  931 0054 4246     		mov	r2, r8
  932 0056 4B46     		mov	r3, r9
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 29
 
 
  933 0058 211D     		adds	r1, r4, #4
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  148:..//kernel/core/tos_message_queue.c ****         return K_ERR_NONE;
  973              		.loc 1 148 9 is_stmt 1 view .LVU291
  148:..//kernel/core/tos_message_queue.c ****         return K_ERR_NONE;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 30
 
 
  974              		.loc 1 148 9 view .LVU292
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  1014              	.L62:
  142:..//kernel/core/tos_message_queue.c ****     TOS_OBJ_VERIFY(msg_q, KNL_OBJ_TYPE_MESSAGE_QUEUE);
  1015              		.loc 1 142 5 view .LVU307
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 31
 
 
  1016 00ba 40F24C46 		movw	r6, #1100
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  224:..//kernel/core/tos_message_queue.c **** {
  1067              		.loc 1 224 1 is_stmt 1 view -0
  1068              		.cfi_startproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 32
 
 
  1069              		@ args = 0, pretend = 0, frame = 0
@@ -1905,32 +1905,32 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 1
  1109              		.file 23 "..//kernel/core/include/tos_sched.h"
  1110              		.file 24 "..//kernel/core/include/tos_global.h"
  1111              		.file 25 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s 			page 33
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_message_queue.c
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:16     .text.msg_q_task_recv:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:23     .text.msg_q_task_recv:00000000 msg_q_task_recv
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:52     .text.msg_q_do_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:58     .text.msg_q_do_post:00000000 msg_q_do_post
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:240    .text.tos_msg_q_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:247    .text.tos_msg_q_create:00000000 tos_msg_q_create
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:337    .text.tos_msg_q_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:344    .text.tos_msg_q_destroy:00000000 tos_msg_q_destroy
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:501    .text.tos_msg_q_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:508    .text.tos_msg_q_create_dyn:00000000 tos_msg_q_create_dyn
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:591    .text.tos_msg_q_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:598    .text.tos_msg_q_destroy_dyn:00000000 tos_msg_q_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:755    .text.tos_msg_q_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:762    .text.tos_msg_q_flush:00000000 tos_msg_q_flush
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:827    .text.tos_msg_q_pend:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:834    .text.tos_msg_q_pend:00000000 tos_msg_q_pend
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:1021   .text.tos_msg_q_pend:000000c0 $d
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:1026   .text.tos_msg_q_post:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:1033   .text.tos_msg_q_post:00000000 tos_msg_q_post
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:1057   .text.tos_msg_q_post_all:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccDze2UM.s:1064   .text.tos_msg_q_post_all:00000000 tos_msg_q_post_all
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:16     .text.msg_q_task_recv:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:23     .text.msg_q_task_recv:00000000 msg_q_task_recv
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:52     .text.msg_q_do_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:58     .text.msg_q_do_post:00000000 msg_q_do_post
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:240    .text.tos_msg_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:247    .text.tos_msg_q_create:00000000 tos_msg_q_create
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:337    .text.tos_msg_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:344    .text.tos_msg_q_destroy:00000000 tos_msg_q_destroy
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:501    .text.tos_msg_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:508    .text.tos_msg_q_create_dyn:00000000 tos_msg_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:591    .text.tos_msg_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:598    .text.tos_msg_q_destroy_dyn:00000000 tos_msg_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:755    .text.tos_msg_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:762    .text.tos_msg_q_flush:00000000 tos_msg_q_flush
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:827    .text.tos_msg_q_pend:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:834    .text.tos_msg_q_pend:00000000 tos_msg_q_pend
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:1021   .text.tos_msg_q_pend:000000c0 $d
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:1026   .text.tos_msg_q_post:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:1033   .text.tos_msg_q_post:00000000 tos_msg_q_post
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:1057   .text.tos_msg_q_post_all:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccMFmtVU.s:1064   .text.tos_msg_q_post_all:00000000 tos_msg_q_post_all
 
 UNDEFINED SYMBOLS
 pend_task_wakeup

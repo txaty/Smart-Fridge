@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
   31:..//kernel/core/tos_sys.c **** #else
   32:..//kernel/core/tos_sys.c ****     err = mmheap_init();
   33:..//kernel/core/tos_sys.c **** #endif
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 2
 
 
   34:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
   88:..//kernel/core/tos_sys.c **** 
   89:..//kernel/core/tos_sys.c ****     --k_irq_nest_cnt;
   90:..//kernel/core/tos_sys.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 3
 
 
   91:..//kernel/core/tos_sys.c ****     if (knl_is_inirq()) {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  145:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_DISABLE();
  146:..//kernel/core/tos_sys.c ****     --k_sched_lock_nest_cnt;
  147:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 4
 
 
  148:..//kernel/core/tos_sys.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  202:..//kernel/core/tos_sys.c **** __KNL__ void knl_sched(void)
  203:..//kernel/core/tos_sys.c **** {
  204:..//kernel/core/tos_sys.c ****     TOS_CPU_CPSR_ALLOC();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 5
 
 
  205:..//kernel/core/tos_sys.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
   34              	.LCFI0:
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 3, -8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 6
 
 
   37              		.cfi_offset 14, -4
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
   85              		.thumb_func
   86              		.fpu softvfp
   88              	tos_knl_irq_enter:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 7
 
 
   89              	.LFB111:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  154:..//kernel/core/tos_sys.c ****     if (unlikely(tos_knl_is_running())) {
  136              		.loc 1 154 1 is_stmt 1 view -0
  137              		.cfi_startproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 8
 
 
  138              		@ args = 0, pretend = 0, frame = 0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  177              		.loc 1 156 16 view .LVU32
  178 0022 40F2F510 		movw	r0, #501
  179 0026 FBE7     		b	.L13
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 9
 
 
  180              	.L17:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  233              		@ frame_needed = 0, uses_anonymous_args = 0
  234              		@ link register save eliminated.
  236:..//kernel/core/tos_sys.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 10
 
 
  235              		.loc 1 236 5 view .LVU38
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  282 000c 80B1     		cbz	r0, .L27
  121:..//kernel/core/tos_sys.c ****         return K_ERR_LOCK_NESTING_OVERFLOW;
  283              		.loc 1 121 5 is_stmt 1 view .LVU48
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 11
 
 
  121:..//kernel/core/tos_sys.c ****         return K_ERR_LOCK_NESTING_OVERFLOW;
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  325 003c 00000000 		.word	k_sched_lock_nest_cnt
  326              		.cfi_endproc
  327              	.LFE113:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 12
 
 
  329              		.section	.text.knl_is_idle,"ax",%progbits
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  379              		.loc 1 246 17 is_stmt 0 view .LVU68
  380 0000 034B     		ldr	r3, .L36
  381 0002 1B68     		ldr	r3, [r3]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 13
 
 
  247:..//kernel/core/tos_sys.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
   83:..//kernel/core/tos_sys.c ****     if (!knl_is_inirq()) {
  430              		.loc 1 83 5 is_stmt 1 view .LVU77
   83:..//kernel/core/tos_sys.c ****     if (!knl_is_inirq()) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 14
 
 
  431              		.loc 1 83 5 view .LVU78
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  102:..//kernel/core/tos_sys.c ****         TOS_CPU_INT_ENABLE();
  470              		.loc 1 102 8 view .LVU94
  471 0036 88B9     		cbnz	r0, .L49
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 15
 
 
  107:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  511              		.loc 1 104 9 view .LVU109
  512 0062 D1E7     		b	.L38
  513              	.L51:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 16
 
 
  514              		.align	2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  559 0012 00B1     		cbz	r0, .L56
  560              	.LVL38:
  561              	.L52:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 17
 
 
  227:..//kernel/core/tos_sys.c **** 
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  601 003c EAE7     		b	.L52
  602              	.L59:
  603 003e 00BF     		.align	2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 18
 
 
  604              	.L58:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  648              		.loc 1 145 5 view .LVU147
  649 0014 FFF7FEFF 		bl	tos_cpu_cpsr_save
  650              	.LVL51:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 19
 
 
  146:..//kernel/core/tos_sys.c ****     TOS_CPU_INT_ENABLE();
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  697              	knl_idle_init:
  698              	.LFB123:
  256:..//kernel/core/tos_sys.c **** #endif
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 20
 
 
  257:..//kernel/core/tos_sys.c **** 
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  737 002c 00000000 		.word	k_idle_task_stk_addr
  738 0030 00000000 		.word	knl_idle_entry
  739 0034 00000000 		.word	.LC0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 21
 
 
  740 0038 00000000 		.word	k_idle_task
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
   39:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
  787              		.loc 1 39 5 is_stmt 1 view .LVU171
   39:..//kernel/core/tos_sys.c ****     if (err != K_ERR_NONE) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 22
 
 
  788              		.loc 1 39 11 is_stmt 0 view .LVU172
@@ -1318,57 +1318,57 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 1
  836              		.file 20 "..//kernel/core/include/tos_mmheap.h"
  837              		.file 21 "..//kernel/core/include/tos_sched.h"
  838              		.file 22 "..//kernel/core/include/tos_global.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 23
 
 
  839              		.file 23 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_sys.c
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:16     .text.knl_idle_entry:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:23     .text.knl_idle_entry:00000000 knl_idle_entry
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:49     .text.tos_knl_is_running:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:56     .text.tos_knl_is_running:00000000 tos_knl_is_running
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:76     .text.tos_knl_is_running:00000010 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:81     .text.tos_knl_irq_enter:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:88     .text.tos_knl_irq_enter:00000000 tos_knl_irq_enter
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:122    .text.tos_knl_irq_enter:00000018 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:127    .text.tos_knl_start:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:134    .text.tos_knl_start:00000000 tos_knl_start
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:183    .text.tos_knl_start:00000028 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:190    .text.knl_is_sched_locked:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:197    .text.knl_is_sched_locked:00000000 knl_is_sched_locked
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:216    .text.knl_is_sched_locked:0000000c $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:221    .text.knl_is_inirq:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:228    .text.knl_is_inirq:00000000 knl_is_inirq
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:247    .text.knl_is_inirq:0000000c $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:252    .text.tos_knl_sched_lock:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:259    .text.tos_knl_sched_lock:00000000 tos_knl_sched_lock
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:325    .text.tos_knl_sched_lock:0000003c $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:330    .text.knl_is_idle:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:337    .text.knl_is_idle:00000000 knl_is_idle
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:358    .text.knl_is_idle:0000000c $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:363    .text.knl_is_self:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:370    .text.knl_is_self:00000000 knl_is_self
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:393    .text.knl_is_self:00000010 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:398    .text.tos_knl_irq_leave:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:405    .text.tos_knl_irq_leave:00000000 tos_knl_irq_leave
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:516    .text.tos_knl_irq_leave:00000064 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:522    .text.knl_sched:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:529    .text.knl_sched:00000000 knl_sched
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:605    .text.knl_sched:00000040 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:610    .text.tos_knl_sched_unlock:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:617    .text.tos_knl_sched_unlock:00000000 tos_knl_sched_unlock
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:685    .text.tos_knl_sched_unlock:00000040 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:690    .text.knl_idle_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:697    .text.knl_idle_init:00000000 knl_idle_init
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:736    .text.knl_idle_init:00000028 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:745    .text.tos_knl_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:752    .text.tos_knl_init:00000000 tos_knl_init
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:808    .text.tos_knl_init:00000030 $d
-C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s:813    .rodata.knl_idle_init.str1.4:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:16     .text.knl_idle_entry:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:23     .text.knl_idle_entry:00000000 knl_idle_entry
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:49     .text.tos_knl_is_running:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:56     .text.tos_knl_is_running:00000000 tos_knl_is_running
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:76     .text.tos_knl_is_running:00000010 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:81     .text.tos_knl_irq_enter:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:88     .text.tos_knl_irq_enter:00000000 tos_knl_irq_enter
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:122    .text.tos_knl_irq_enter:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:127    .text.tos_knl_start:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:134    .text.tos_knl_start:00000000 tos_knl_start
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:183    .text.tos_knl_start:00000028 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:190    .text.knl_is_sched_locked:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:197    .text.knl_is_sched_locked:00000000 knl_is_sched_locked
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:216    .text.knl_is_sched_locked:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:221    .text.knl_is_inirq:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:228    .text.knl_is_inirq:00000000 knl_is_inirq
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:247    .text.knl_is_inirq:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:252    .text.tos_knl_sched_lock:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:259    .text.tos_knl_sched_lock:00000000 tos_knl_sched_lock
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:325    .text.tos_knl_sched_lock:0000003c $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:330    .text.knl_is_idle:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:337    .text.knl_is_idle:00000000 knl_is_idle
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:358    .text.knl_is_idle:0000000c $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:363    .text.knl_is_self:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:370    .text.knl_is_self:00000000 knl_is_self
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:393    .text.knl_is_self:00000010 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:398    .text.tos_knl_irq_leave:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:405    .text.tos_knl_irq_leave:00000000 tos_knl_irq_leave
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:516    .text.tos_knl_irq_leave:00000064 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:522    .text.knl_sched:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:529    .text.knl_sched:00000000 knl_sched
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:605    .text.knl_sched:00000040 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:610    .text.tos_knl_sched_unlock:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:617    .text.tos_knl_sched_unlock:00000000 tos_knl_sched_unlock
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:685    .text.tos_knl_sched_unlock:00000040 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:690    .text.knl_idle_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:697    .text.knl_idle_init:00000000 knl_idle_init
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:736    .text.knl_idle_init:00000028 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:745    .text.tos_knl_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:752    .text.tos_knl_init:00000000 tos_knl_init
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:808    .text.tos_knl_init:00000030 $d
+C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s:813    .rodata.knl_idle_init.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 task_free_all
@@ -1382,7 +1382,7 @@ k_sched_lock_nest_cnt
 tos_cpu_cpsr_save
 tos_cpu_cpsr_restore
 k_idle_task
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cclgDI5f.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccpVFGcd.s 			page 25
 
 
 cpu_irq_context_switch

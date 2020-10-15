@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
   29:..//kernel/core/tos_ring_queue.c **** {
   30:..//kernel/core/tos_ring_queue.c ****     memcpy(RING_TAIL_ITEM(ring_q), item_in, ring_q->item_size);
   31:..//kernel/core/tos_ring_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 2
 
 
   32:..//kernel/core/tos_ring_queue.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
   58              		.loc 1 54 25 is_stmt 0 view .LVU14
   59 0010 E160     		str	r1, [r4, #12]
   55:..//kernel/core/tos_ring_queue.c ****     ring_q->item_size   = item_size;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 3
 
 
   60              		.loc 1 55 5 is_stmt 1 view .LVU15
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
   41:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RING_QUEUE                     = 0xDAD6,
   42:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_STOPWATCH                      = 0xDAD7,
   43:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TASK                           = 0xDAD8,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 4
 
 
   44:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_TIMER                          = 0xDAD9,
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
   98:..//kernel/core/include/tos_sys.h ****  */
   99:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_start(void);
  100:..//kernel/core/include/tos_sys.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 5
 
 
  101:..//kernel/core/include/tos_sys.h **** /**
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  155:..//kernel/core/include/tos_sys.h ****  * @brief Unlock the scheduler.
  156:..//kernel/core/include/tos_sys.h ****  * re-enable the task schedule.
  157:..//kernel/core/include/tos_sys.h ****  *
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 6
 
 
  158:..//kernel/core/include/tos_sys.h ****  * @attention None
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  196:..//kernel/core/include/tos_sys.h **** 
  197:..//kernel/core/include/tos_sys.h **** #endif
  198:..//kernel/core/include/tos_sys.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 7
 
 
  199:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ void knl_object_alloc_reset(knl_obj_t *knl_obj)
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  121              		.loc 1 48 5 view .LVU36
  122 002e F7E7     		b	.L2
  123              		.cfi_endproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 8
 
 
  124              	.LFE114:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  213:..//kernel/core/include/tos_sys.h **** 
  214:..//kernel/core/include/tos_sys.h **** __KNL__ __STATIC_INLINE__ int knl_object_alloc_is_dynamic(knl_obj_t *knl_obj)
  215:..//kernel/core/include/tos_sys.h **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 9
 
 
  216:..//kernel/core/include/tos_sys.h ****     return knl_obj->alloc_type == KNL_OBJ_ALLOC_TYPE_DYNAMIC;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  204              	.LBI52:
  192:..//kernel/core/include/tos_sys.h **** {
  205              		.loc 2 192 32 view .LVU67
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 10
 
 
  206              	.LBB53:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  245              		.loc 1 70 16 view .LVU82
  246 0034 40F24E40 		movw	r0, #1102
  247              	.LVL25:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 11
 
 
   85:..//kernel/core/tos_ring_queue.c **** }
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  293 0014 78B1     		cbz	r0, .L17
   95:..//kernel/core/tos_ring_queue.c ****         return K_ERR_OUT_OF_MEMORY;
   96:..//kernel/core/tos_ring_queue.c ****     }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 12
 
 
   97:..//kernel/core/tos_ring_queue.c **** 
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  332              	.LBB58:
  333              	.LBI58:
  204:..//kernel/core/include/tos_sys.h **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 13
 
 
  334              		.loc 2 204 32 view .LVU114
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  380              		.syntax unified
  381              		.thumb
  382              		.thumb_func
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 14
 
 
  383              		.fpu softvfp
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  425              	.LBB63:
  216:..//kernel/core/include/tos_sys.h **** }
  426              		.loc 2 216 5 view .LVU137
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 15
 
 
  216:..//kernel/core/include/tos_sys.h **** }
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  467 002e 6061     		str	r0, [r4, #20]
  130:..//kernel/core/tos_ring_queue.c **** 
  131:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_DEINIT(ring_q);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 16
 
 
  468              		.loc 1 131 5 is_stmt 1 view .LVU157
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  509              	.LCFI8:
  510              		.cfi_def_cfa_offset 8
  511              		.cfi_offset 4, -8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 17
 
 
  512              		.cfi_offset 14, -4
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  169:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
  170:..//kernel/core/tos_ring_queue.c **** 
  171:..//kernel/core/tos_ring_queue.c ****     TOS_CPU_INT_DISABLE();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 18
 
 
  172:..//kernel/core/tos_ring_queue.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  563              	.LBE69:
  564              	.LBE68:
  565              		.loc 1 191 5 view .LVU185
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 19
 
 
  566 0008 4DF6D622 		movw	r2, #56022
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  597 0028 F4E7     		b	.L33
  598              	.LVL61:
  599              	.L34:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 20
 
 
  600              	.LCFI10:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  647              	.LBI70:
  182:..//kernel/core/include/tos_sys.h **** {
  648              		.loc 2 182 31 view .LVU209
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 21
 
 
  649              	.LBB71:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  216:..//kernel/core/tos_ring_queue.c **** }
  686              		.loc 1 216 5 view .LVU223
  216:..//kernel/core/tos_ring_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 22
 
 
  687              		.loc 1 216 12 is_stmt 0 view .LVU224
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  733              		.loc 1 169 5 view .LVU234
  734              	.LVL75:
  735              	.LBB72:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 23
 
 
  736              	.LBI72:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  178:..//kernel/core/tos_ring_queue.c ****     ring_q_item_decrease(ring_q);
  776              		.loc 1 178 5 is_stmt 1 view .LVU249
  777              	.LVL83:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 24
 
 
  778              	.LBB74:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
   41:..//kernel/core/tos_ring_queue.c ****     --ring_q->total;
  818              		.loc 1 41 18 view .LVU264
  819 0054 A380     		strh	r3, [r4, #4]	@ movhi
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 25
 
 
   42:..//kernel/core/tos_ring_queue.c **** }
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  861              	.LVL90:
  184:..//kernel/core/tos_ring_queue.c **** 
  862              		.loc 1 184 1 view .LVU278
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 26
 
 
  863 0076 7047     		bx	lr
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  910 0002 B0FA80F4 		clz	r4, r0
  911 0006 6409     		lsrs	r4, r4, #5
  912 0008 94B9     		cbnz	r4, .L61
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 27
 
 
  913 000a 0546     		mov	r5, r0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  949 0022 9C42     		cmp	r4, r3
  950 0024 14BF     		ite	ne
  951 0026 0024     		movne	r4, #0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 28
 
 
  952 0028 0124     		moveq	r4, #1
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  998 0004 0546     		mov	r5, r0
  142:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
  999              		.loc 1 142 5 is_stmt 1 view .LVU311
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 29
 
 
  142:..//kernel/core/tos_ring_queue.c ****     TOS_OBJ_VERIFY(ring_q, KNL_OBJ_TYPE_RING_QUEUE);
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  1038 0024 0646     		mov	r6, r0
  1039              	.LVL108:
  151:..//kernel/core/tos_ring_queue.c ****         TOS_CPU_INT_ENABLE();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 30
 
 
  1040              		.loc 1 151 5 is_stmt 1 view .LVU328
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
   35:..//kernel/core/tos_ring_queue.c ****     ++ring_q->total;
  1081              		.loc 1 35 18 view .LVU342
  1082 004e EB80     		strh	r3, [r5, #6]	@ movhi
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 31
 
 
   36:..//kernel/core/tos_ring_queue.c **** }
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  1124              	.LVL117:
  161:..//kernel/core/tos_ring_queue.c **** 
  1125              		.loc 1 161 1 view .LVU356
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 32
 
 
  1126 0070 7047     		bx	lr
@@ -1917,29 +1917,29 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 1
  1175              		.file 23 "..//kernel/core/include/tos_global.h"
  1176              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
  1177              		.file 25 "<built-in>"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s 			page 33
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_ring_queue.c
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:16     .text.tos_ring_q_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:24     .text.tos_ring_q_create:00000000 tos_ring_q_create
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:127    .text.tos_ring_q_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:134    .text.tos_ring_q_destroy:00000000 tos_ring_q_destroy
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:254    .text.tos_ring_q_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:261    .text.tos_ring_q_create_dyn:00000000 tos_ring_q_create_dyn
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:378    .text.tos_ring_q_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:385    .text.tos_ring_q_destroy_dyn:00000000 tos_ring_q_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:524    .text.tos_ring_q_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:531    .text.tos_ring_q_flush:00000000 tos_ring_q_flush
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:615    .text.tos_ring_q_is_empty:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:622    .text.tos_ring_q_is_empty:00000000 tos_ring_q_is_empty
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:698    .text.tos_ring_q_dequeue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:705    .text.tos_ring_q_dequeue:00000000 tos_ring_q_dequeue
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:883    .text.tos_ring_q_is_full:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:890    .text.tos_ring_q_is_full:00000000 tos_ring_q_is_full
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:970    .text.tos_ring_q_enqueue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccwwkGEb.s:977    .text.tos_ring_q_enqueue:00000000 tos_ring_q_enqueue
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:16     .text.tos_ring_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:24     .text.tos_ring_q_create:00000000 tos_ring_q_create
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:127    .text.tos_ring_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:134    .text.tos_ring_q_destroy:00000000 tos_ring_q_destroy
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:254    .text.tos_ring_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:261    .text.tos_ring_q_create_dyn:00000000 tos_ring_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:378    .text.tos_ring_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:385    .text.tos_ring_q_destroy_dyn:00000000 tos_ring_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:524    .text.tos_ring_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:531    .text.tos_ring_q_flush:00000000 tos_ring_q_flush
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:615    .text.tos_ring_q_is_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:622    .text.tos_ring_q_is_empty:00000000 tos_ring_q_is_empty
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:698    .text.tos_ring_q_dequeue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:705    .text.tos_ring_q_dequeue:00000000 tos_ring_q_dequeue
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:883    .text.tos_ring_q_is_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:890    .text.tos_ring_q_is_full:00000000 tos_ring_q_is_full
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:970    .text.tos_ring_q_enqueue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccON5OwZ.s:977    .text.tos_ring_q_enqueue:00000000 tos_ring_q_enqueue
 
 UNDEFINED SYMBOLS
 tos_mmheap_alloc

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   24:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
   33              		.loc 1 24 5 view .LVU2
   34              		.loc 1 24 5 view .LVU3
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 2
 
 
   35 0000 78B1     		cbz	r0, .L3
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   18:..//kernel/core/include/tos_sys.h **** #ifndef _TOS_SYS_H_
   19:..//kernel/core/include/tos_sys.h **** #define  _TOS_SYS_H_
   20:..//kernel/core/include/tos_sys.h **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 3
 
 
   21:..//kernel/core/include/tos_sys.h **** __CDECLS_BEGIN
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   75:..//kernel/core/include/tos_sys.h ****  * initialize the tos tiny kernel.
   76:..//kernel/core/include/tos_sys.h ****  *
   77:..//kernel/core/include/tos_sys.h ****  * @attention None
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 4
 
 
   78:..//kernel/core/include/tos_sys.h ****  *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  132:..//kernel/core/include/tos_sys.h ****  *
  133:..//kernel/core/include/tos_sys.h ****  * @param   None
  134:..//kernel/core/include/tos_sys.h ****  *
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 5
 
 
  135:..//kernel/core/include/tos_sys.h ****  * @return  None
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   64              	.LBB41:
  188:..//kernel/core/include/tos_sys.h **** {
  189:..//kernel/core/include/tos_sys.h ****     knl_obj->type = type;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 6
 
 
   65              		.loc 2 189 5 view .LVU14
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   93              	.LCFI1:
   94              		.cfi_def_cfa_offset 0
   95              		.cfi_restore 4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 7
 
 
   96              		.cfi_restore 14
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  142              		.loc 1 43 5 is_stmt 1 view .LVU33
  143              		.loc 1 43 5 view .LVU34
  144              	.LVL10:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 8
 
 
  145              	.LBB44:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   49:..//kernel/core/tos_char_fifo.c ****     err = tos_ring_q_destroy(&chr_fifo->ring_q);
  180              		.loc 1 49 5 is_stmt 1 view .LVU47
  181              		.loc 1 49 11 is_stmt 0 view .LVU48
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 9
 
 
  182 001c 0430     		adds	r0, r0, #4
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  220              	.LVL19:
  221              	.L11:
  222              	.LCFI4:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 10
 
 
  223              		.cfi_def_cfa_offset 0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  269              		.loc 1 61 1 is_stmt 0 view .LVU74
  270 0002 10B5     		push	{r4, lr}
  271              	.LCFI6:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 11
 
 
  272              		.cfi_def_cfa_offset 8
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  311              	.LVL28:
  206:..//kernel/core/include/tos_sys.h **** }
  312              		.loc 2 206 25 view .LVU89
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 12
 
 
  313              	.LBE55:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  358 0002 10B5     		push	{r4, lr}
  359              	.LCFI8:
  360              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 13
 
 
  361              		.cfi_offset 4, -8
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
   87:..//kernel/core/tos_char_fifo.c **** 
   88:..//kernel/core/tos_char_fifo.c ****     err = tos_ring_q_destroy_dyn(&chr_fifo->ring_q);
  402              		.loc 1 88 5 is_stmt 1 view .LVU115
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 14
 
 
  403              		.loc 1 88 11 is_stmt 0 view .LVU116
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  441 002c 05E0     		b	.L27
  442              	.LVL42:
  443              	.L28:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 15
 
 
  444              	.LCFI9:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  494              		.cfi_def_cfa_offset 16
  495 0004 8DF80710 		strb	r1, [sp, #7]
  101:..//kernel/core/tos_char_fifo.c ****     TOS_PTR_SANITY_CHECK(chr_fifo);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 16
 
 
  496              		.loc 1 101 5 is_stmt 1 view .LVU140
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  104:..//kernel/core/tos_char_fifo.c **** }
  539              		.loc 1 104 12 view .LVU153
  540 0026 FFF7FEFF 		bl	tos_ring_q_enqueue
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 17
 
 
  541              	.LVL53:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  586 0008 6409     		lsrs	r4, r4, #5
  587 000a FCB9     		cbnz	r4, .L47
  588 000c 0546     		mov	r5, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 18
 
 
  114:..//kernel/core/tos_char_fifo.c ****     TOS_OBJ_VERIFY_RC(chr_fifo, KNL_OBJ_TYPE_CHAR_FIFO, 0);
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  116:..//kernel/core/tos_char_fifo.c **** 
  621              		.loc 1 116 5 is_stmt 0 view .LVU175
  622 0026 8046     		mov	r8, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 19
 
 
  623              	.LVL63:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  661              		.loc 1 128 5 view .LVU191
  128:..//kernel/core/tos_char_fifo.c **** }
  662              		.loc 1 128 12 is_stmt 0 view .LVU192
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 20
 
 
  663 004a E5E7     		b	.L42
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  708              		.loc 2 184 19 view .LVU203
  709              	.LBE69:
  710              	.LBE68:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 21
 
 
  711              		.loc 1 134 5 view .LVU204
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  757              		@ args = 0, pretend = 0, frame = 8
  758              		@ frame_needed = 0, uses_anonymous_args = 0
  759              		.loc 1 140 1 is_stmt 0 view .LVU212
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 22
 
 
  760 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  148:..//kernel/core/tos_char_fifo.c ****     TOS_CPU_INT_DISABLE();
  149:..//kernel/core/tos_char_fifo.c **** 
  150:..//kernel/core/tos_char_fifo.c ****     while (i < size) {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 23
 
 
  151:..//kernel/core/tos_char_fifo.c ****         if (tos_ring_q_dequeue(&chr_fifo->ring_q, &data, K_NULL) != K_ERR_NONE) {
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  151:..//kernel/core/tos_char_fifo.c ****             TOS_CPU_INT_ENABLE();
  839              		.loc 1 151 12 view .LVU235
  840 003e 28B9     		cbnz	r0, .L70
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 24
 
 
  155:..//kernel/core/tos_char_fifo.c ****     }
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  885              	.LFB118:
  161:..//kernel/core/tos_char_fifo.c **** 
  162:..//kernel/core/tos_char_fifo.c **** __API__ k_err_t tos_chr_fifo_flush(k_chr_fifo_t *chr_fifo)
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 25
 
 
  163:..//kernel/core/tos_char_fifo.c **** {
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  927              	.LVL96:
  167:..//kernel/core/tos_char_fifo.c **** }
  928              		.loc 1 167 12 view .LVU262
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 26
 
 
  929 0016 FFF7FEFF 		bl	tos_ring_q_flush
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  978              	.LVL102:
  979              	.LBB74:
  980              	.LBI74:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 27
 
 
  182:..//kernel/core/include/tos_sys.h **** {
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  177:..//kernel/core/tos_char_fifo.c **** 
  178:..//kernel/core/tos_char_fifo.c **** __API__ int tos_chr_fifo_is_full(k_chr_fifo_t *chr_fifo)
  179:..//kernel/core/tos_char_fifo.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 28
 
 
  1026              		.loc 1 179 1 is_stmt 1 view -0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  1069              		.loc 1 183 12 is_stmt 0 view .LVU297
  1070 0018 181D     		adds	r0, r3, #4
  1071 001a FFF7FEFF 		bl	tos_ring_q_is_full
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 29
 
 
  1072              	.LVL114:
@@ -1718,33 +1718,33 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 1
  1105              		.file 23 "..//kernel/core/include/tos_sched.h"
  1106              		.file 24 "..//kernel/core/include/tos_global.h"
  1107              		.file 25 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_char_fifo.c
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:16     .text.tos_chr_fifo_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:24     .text.tos_chr_fifo_create:00000000 tos_chr_fifo_create
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:117    .text.tos_chr_fifo_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:124    .text.tos_chr_fifo_destroy:00000000 tos_chr_fifo_destroy
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:251    .text.tos_chr_fifo_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:258    .text.tos_chr_fifo_create_dyn:00000000 tos_chr_fifo_create_dyn
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:339    .text.tos_chr_fifo_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:346    .text.tos_chr_fifo_destroy_dyn:00000000 tos_chr_fifo_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:473    .text.tos_chr_fifo_push:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:480    .text.tos_chr_fifo_push:00000000 tos_chr_fifo_push
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:555    .text.tos_chr_fifo_push_stream:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:562    .text.tos_chr_fifo_push_stream:00000000 tos_chr_fifo_push_stream
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:673    .text.tos_chr_fifo_pop:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:680    .text.tos_chr_fifo_pop:00000000 tos_chr_fifo_pop
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:745    .text.tos_chr_fifo_pop_stream:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:752    .text.tos_chr_fifo_pop_stream:00000000 tos_chr_fifo_pop_stream
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:876    .text.tos_chr_fifo_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:883    .text.tos_chr_fifo_flush:00000000 tos_chr_fifo_flush
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:948    .text.tos_chr_fifo_is_empty:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:955    .text.tos_chr_fifo_is_empty:00000000 tos_chr_fifo_is_empty
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:1016   .text.tos_chr_fifo_is_full:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccuHsI9c.s:1023   .text.tos_chr_fifo_is_full:00000000 tos_chr_fifo_is_full
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:16     .text.tos_chr_fifo_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:24     .text.tos_chr_fifo_create:00000000 tos_chr_fifo_create
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:117    .text.tos_chr_fifo_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:124    .text.tos_chr_fifo_destroy:00000000 tos_chr_fifo_destroy
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:251    .text.tos_chr_fifo_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:258    .text.tos_chr_fifo_create_dyn:00000000 tos_chr_fifo_create_dyn
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:339    .text.tos_chr_fifo_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:346    .text.tos_chr_fifo_destroy_dyn:00000000 tos_chr_fifo_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:473    .text.tos_chr_fifo_push:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:480    .text.tos_chr_fifo_push:00000000 tos_chr_fifo_push
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:555    .text.tos_chr_fifo_push_stream:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:562    .text.tos_chr_fifo_push_stream:00000000 tos_chr_fifo_push_stream
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:673    .text.tos_chr_fifo_pop:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:680    .text.tos_chr_fifo_pop:00000000 tos_chr_fifo_pop
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:745    .text.tos_chr_fifo_pop_stream:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:752    .text.tos_chr_fifo_pop_stream:00000000 tos_chr_fifo_pop_stream
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:876    .text.tos_chr_fifo_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:883    .text.tos_chr_fifo_flush:00000000 tos_chr_fifo_flush
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:948    .text.tos_chr_fifo_is_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:955    .text.tos_chr_fifo_is_empty:00000000 tos_chr_fifo_is_empty
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:1016   .text.tos_chr_fifo_is_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\cc3wBh0d.s:1023   .text.tos_chr_fifo_is_full:00000000 tos_chr_fifo_is_full
 
 UNDEFINED SYMBOLS
 tos_ring_q_create

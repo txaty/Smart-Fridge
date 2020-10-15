@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
   30:..//kernel/core/tos_priority_queue.c ****     memcpy(PRIO_Q_THE_ITEM(prio_q, slot), item_in, prio_q->item_size);
   31:..//kernel/core/tos_priority_queue.c **** }
   32:..//kernel/core/tos_priority_queue.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 2
 
 
   33:..//kernel/core/tos_priority_queue.c **** __STATIC_INLINE__ void prio_q_item_increase(k_prio_q_t *prio_q)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
   60              		.loc 1 53 5 is_stmt 1 view .LVU14
   61              		.loc 1 53 23 is_stmt 0 view .LVU15
   62 0014 02F10042 		add	r2, r2, #-2147483648
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 3
 
 
   63              	.LVL4:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  107              		.loc 1 65 9 is_stmt 1 discriminator 3 view .LVU29
  108              		.loc 1 65 27 is_stmt 0 discriminator 3 view .LVU30
  109 000a 5A00     		lsls	r2, r3, #1
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 4
 
 
  110              		.loc 1 65 40 discriminator 3 view .LVU31
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  158              		.loc 1 73 37 is_stmt 0 view .LVU45
  159 0004 4360     		str	r3, [r0, #4]
   74:..//kernel/core/tos_priority_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 5
 
 
  160              		.loc 1 74 1 view .LVU46
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  201              		.loc 1 88 1 view .LVU58
  202 000e 7047     		bx	lr
  203              		.cfi_endproc
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 6
 
 
  204              	.LFE117:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  117:..//kernel/core/tos_priority_queue.c ****     first_free = &pool_mgr->pool_mgr_ent_array[pool_mgr->first_free];
  232              		.loc 1 117 5 view .LVU66
  233              		.loc 1 117 27 is_stmt 0 view .LVU67
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 7
 
 
  234 000a 4268     		ldr	r2, [r0, #4]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  278              		.loc 1 129 5 is_stmt 1 view .LVU81
  279              		.loc 1 129 26 is_stmt 0 view .LVU82
  280 0008 0180     		strh	r1, [r0]	@ movhi
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 8
 
 
  130:..//kernel/core/tos_priority_queue.c **** }
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  331              		.align	1
  332              		.syntax unified
  333              		.thumb
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 9
 
 
  334              		.thumb_func
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  144:..//kernel/core/tos_priority_queue.c **** __STATIC__ prio_q_slot_t prio_q_prio_mgr_slot_dequeue(prio_q_prio_mgr_t *prio_mgr, k_prio_t *prio)
  145:..//kernel/core/tos_priority_queue.c **** {
  146:..//kernel/core/tos_priority_queue.c ****     k_err_t err;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 10
 
 
  147:..//kernel/core/tos_priority_queue.c ****     size_t dummy;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  201:..//kernel/core/tos_priority_queue.c ****     prio_q->item_size   = 0;
  202:..//kernel/core/tos_priority_queue.c ****     prio_q->item_cnt    = 0;
  203:..//kernel/core/tos_priority_queue.c ****     prio_q->mgr_pool    = K_NULL;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 11
 
 
  204:..//kernel/core/tos_priority_queue.c ****     prio_q->data_pool   = K_NULL;
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  258:..//kernel/core/tos_priority_queue.c ****     prio_q->item_cnt    = 0;
  259:..//kernel/core/tos_priority_queue.c ****     prio_q->mgr_pool    = K_NULL;
  260:..//kernel/core/tos_priority_queue.c ****     prio_q->data_pool   = K_NULL;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 12
 
 
  261:..//kernel/core/tos_priority_queue.c **** 
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  383              		.cfi_offset 6, -12
  384              		.cfi_offset 7, -8
  385              		.cfi_offset 14, -4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 13
 
 
  386 0002 0446     		mov	r4, r0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  427              		.loc 1 306 5 is_stmt 1 view .LVU112
  428              	.LBB44:
  429              	.LBI44:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 14
 
 
   38:..//kernel/core/tos_priority_queue.c **** {
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  474 0004 8DF80420 		strb	r2, [sp, #4]
  138:..//kernel/core/tos_priority_queue.c **** 
  475              		.loc 1 138 5 is_stmt 1 view .LVU126
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 15
 
 
  138:..//kernel/core/tos_priority_queue.c **** 
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  517 0032 FFF7FEFF 		bl	tos_cpu_int_disable
  518              	.LVL46:
  519              	.L27:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 16
 
 
  141:..//kernel/core/tos_priority_queue.c **** }
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  567 000a E36A     		ldr	r3, [r4, #44]
  568              	.LVL50:
   30:..//kernel/core/tos_priority_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 17
 
 
  569              		.loc 1 30 5 view .LVU149
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  614              	.LVL55:
  615              	.LFB124:
  145:..//kernel/core/tos_priority_queue.c ****     k_err_t err;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 18
 
 
  616              		.loc 1 145 1 is_stmt 1 view -0
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  155:..//kernel/core/tos_priority_queue.c ****     }
  655              		.loc 1 155 15 view .LVU177
  656 001c 2370     		strb	r3, [r4]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 19
 
 
  657              	.L39:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  699 0040 9822     		movs	r2, #152
  700 0042 0649     		ldr	r1, .L43
  701 0044 0648     		ldr	r0, .L43+4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 20
 
 
  702              	.LVL66:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
   98:..//kernel/core/tos_priority_queue.c **** }
  749              		.loc 1 98 5 is_stmt 1 view .LVU199
  750 0002 FFF7FEFF 		bl	tos_bin_heap_flush
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 21
 
 
  751              	.LVL72:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  796 0010 0D46     		mov	r5, r1
  170:..//kernel/core/tos_priority_queue.c ****     prio_mgr_ent_pool   = (prio_q_prio_mgr_ent_t *)((uint8_t *)mgr_array + PRIO_Q_POOL_MGR_ENT_ARRA
  797              		.loc 1 170 5 view .LVU211
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 22
 
 
  798              	.LVL74:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  835              		.loc 1 182 5 is_stmt 1 view .LVU228
  836              	.LVL80:
  837              	.LBB50:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 23
 
 
  838              	.LBI50:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
   53:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_MUTEX                          = 0x6BEE,
   54:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MAIL_QUEUE            = 0x7BEE,
   55:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_PRIORITY_MESSAGE_QUEUE         = 0x8BEE,
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 24
 
 
   56:..//kernel/core/include/tos_sys.h ****     KNL_OBJ_TYPE_RWLOCK                         = 0x9BEE,
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  110:..//kernel/core/include/tos_sys.h ****  * @retval  Non-0                           the kernel is running.
  111:..//kernel/core/include/tos_sys.h ****  * @retval  0                               the kernel is not running.
  112:..//kernel/core/include/tos_sys.h ****  */
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 25
 
 
  113:..//kernel/core/include/tos_sys.h **** __API__ int     tos_knl_is_running(void);
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  167:..//kernel/core/include/tos_sys.h **** __API__ k_err_t tos_knl_sched_unlock(void);
  168:..//kernel/core/include/tos_sys.h **** 
  169:..//kernel/core/include/tos_sys.h **** #if TOS_CFG_TICKLESS_EN > 0u
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 26
 
 
  170:..//kernel/core/include/tos_sys.h **** __KNL__ k_tick_t knl_next_expires_get(void);
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  853              		.loc 2 209 32 view .LVU234
  854              	.LBB53:
  210:..//kernel/core/include/tos_sys.h **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 27
 
 
  211:..//kernel/core/include/tos_sys.h ****     knl_obj->alloc_type = KNL_OBJ_ALLOC_TYPE_STATIC;
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  901              	.LVL88:
  168:..//kernel/core/tos_priority_queue.c **** 
  902              		.loc 1 168 5 view .LVU245
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 28
 
 
  903 0056 F4E7     		b	.L48
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  948 000c 9A42     		cmp	r2, r3
  949 000e 18D1     		bne	.L59
  193:..//kernel/core/tos_priority_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 29
 
 
  950              		.loc 1 193 5 is_stmt 1 view .LVU257
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  986 002c A062     		str	r0, [r4, #40]
  201:..//kernel/core/tos_priority_queue.c ****     prio_q->item_cnt    = 0;
  987              		.loc 1 201 5 is_stmt 1 view .LVU270
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 30
 
 
  201:..//kernel/core/tos_priority_queue.c ****     prio_q->item_cnt    = 0;
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1024              		.loc 1 209 5 is_stmt 1 view .LVU288
  209:..//kernel/core/tos_priority_queue.c **** }
  1025              		.loc 1 209 12 is_stmt 0 view .LVU289
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 31
 
 
  1026 003a 04E0     		b	.L57
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1072              		.loc 1 217 5 view .LVU299
  1073 0000 68B3     		cbz	r0, .L70
  213:..//kernel/core/tos_priority_queue.c ****     k_err_t err;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 32
 
 
  1074              		.loc 1 213 1 is_stmt 0 view .LVU300
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1116 002a 2346     		mov	r3, r4
  1117 002c 0246     		mov	r2, r0
  1118 002e 3946     		mov	r1, r7
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 33
 
 
  1119 0030 3046     		mov	r0, r6
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  226:..//kernel/core/tos_priority_queue.c ****         return K_ERR_OUT_OF_MEMORY;
  1161              		.loc 1 226 9 is_stmt 0 view .LVU325
  1162 0046 FFF7FEFF 		bl	tos_mmheap_free
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 34
 
 
  1163              	.LVL118:
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  221:..//kernel/core/tos_priority_queue.c ****     }
  1209              		.loc 1 221 16 view .LVU334
  1210 0068 E9E7     		b	.L67
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 35
 
 
  1211              		.cfi_endproc
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1256 000e 1ED1     		bne	.L81
  246:..//kernel/core/tos_priority_queue.c ****         return K_ERR_OBJ_INVALID_ALLOC_TYPE;
  1257              		.loc 1 246 5 is_stmt 1 view .LVU346
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 36
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 36
 
 
  1258              	.LVL130:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  256:..//kernel/core/tos_priority_queue.c ****     prio_q->item_size   = 0;
  1299              		.loc 1 256 25 is_stmt 0 view .LVU360
  1300 0036 0020     		movs	r0, #0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 37
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 37
 
 
  1301 0038 A062     		str	r0, [r4, #40]
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1337              	.LBE71:
  1338              	.LBE70:
  265:..//kernel/core/tos_priority_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 38
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 38
 
 
  1339              		.loc 1 265 5 is_stmt 1 view .LVU379
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  317:..//kernel/core/tos_priority_queue.c **** 
  318:..//kernel/core/tos_priority_queue.c ****     if (tos_prio_q_is_empty(prio_q)) {
  319:..//kernel/core/tos_priority_queue.c ****         return K_ERR_PRIO_Q_EMPTY;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 39
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 39
 
 
  320:..//kernel/core/tos_priority_queue.c ****     }
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1412 0008 4DF6D522 		movw	r2, #56021
  1413 000c 9142     		cmp	r1, r2
  1414 000e 02D0     		beq	.L96
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 40
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 40
 
 
  1415 0010 40F24D40 		movw	r0, #1101
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  345:..//kernel/core/tos_priority_queue.c **** }
  1449              		.loc 1 345 5 view .LVU409
  345:..//kernel/core/tos_priority_queue.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 41
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 41
 
 
  1450              		.loc 1 345 12 is_stmt 0 view .LVU410
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  354:..//kernel/core/tos_priority_queue.c ****     TOS_OBJ_VERIFY_RC(prio_q, KNL_OBJ_TYPE_PRIORITY_QUEUE, K_FALSE);
  1498              		.loc 1 354 5 view .LVU419
  1499              		.loc 1 354 5 view .LVU420
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 42
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 42
 
 
  1500              	.LVL161:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1537              		.loc 1 358 5 is_stmt 1 view .LVU433
  358:..//kernel/core/tos_priority_queue.c **** 
  1538              		.loc 1 358 5 view .LVU434
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 43
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 43
 
 
  1539 0026 FFF7FEFF 		bl	tos_cpu_cpsr_restore
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1584              		.loc 1 315 5 view .LVU445
  1585 0008 29B3     		cbz	r1, .L105
  316:..//kernel/core/tos_priority_queue.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 44
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 44
 
 
  1586              		.loc 1 316 5 view .LVU446
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1626 002a FFF7FEFF 		bl	tos_cpu_cpsr_save
  1627              	.LVL177:
  1628 002e 8046     		mov	r8, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 45
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 45
 
 
  1629              	.LVL178:
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1672              	.L105:
  1673              	.LCFI35:
  1674              		.cfi_def_cfa_offset 24
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 46
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 46
 
 
  1675              		.cfi_offset 4, -24
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1721              		.loc 1 368 5 view .LVU480
  1722 0002 B0FA80F4 		clz	r4, r0
  1723 0006 6409     		lsrs	r4, r4, #5
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 47
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 47
 
 
  1724 0008 94B9     		cbnz	r4, .L115
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1760              		.loc 1 372 30 view .LVU494
  1761 0022 9C42     		cmp	r4, r3
  1762 0024 14BF     		ite	ne
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 48
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 48
 
 
  1763 0026 0024     		movne	r4, #0
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1808              		.cfi_offset 6, -12
  1809              		.cfi_offset 7, -8
  1810              		.cfi_offset 14, -4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 49
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 49
 
 
  1811 0004 0446     		mov	r4, r0
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1849 0022 2046     		mov	r0, r4
  1850 0024 FFF7FEFF 		bl	tos_prio_q_is_full
  1851              	.LVL203:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 50
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 50
 
 
  288:..//kernel/core/tos_priority_queue.c ****         return K_ERR_PRIO_Q_FULL;
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1892              	.L132:
  295:..//kernel/core/tos_priority_queue.c ****     prio_q_do_enqueue(prio_q, item, the_slot, prio);
  1893              		.loc 1 295 5 is_stmt 1 discriminator 1 view .LVU536
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 51
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 51
 
 
  1894 0054 40F22712 		movw	r2, #295
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1939              		.cfi_offset 7, -8
  1940              		.cfi_offset 14, -4
  281:..//kernel/core/tos_priority_queue.c ****     TOS_OBJ_VERIFY(prio_q, KNL_OBJ_TYPE_PRIORITY_QUEUE);
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 52
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 52
 
 
  1941              		.loc 1 281 5 view .LVU546
@@ -3089,28 +3089,28 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1962 008c 00000000 		.word	.LC0
  1963              		.cfi_endproc
  1964              	.LFE130:
- 1966              		.section	.rodata.__FUNCTION__.8460,"a"
+ 1966              		.section	.rodata.__FUNCTION__.8588,"a"
  1967              		.align	2
  1968              		.set	.LANCHOR0,. + 0
- 1971              	__FUNCTION__.8460:
+ 1971              	__FUNCTION__.8588:
  1972 0000 7072696F 		.ascii	"prio_q_prio_mgr_slot_enqueue\000"
  1972      5F715F70 
  1972      72696F5F 
  1972      6D67725F 
  1972      736C6F74 
- 1973              		.section	.rodata.__FUNCTION__.8469,"a"
+ 1973              		.section	.rodata.__FUNCTION__.8597,"a"
  1974              		.align	2
  1975              		.set	.LANCHOR1,. + 0
- 1978              	__FUNCTION__.8469:
+ 1978              	__FUNCTION__.8597:
  1979 0000 7072696F 		.ascii	"prio_q_prio_mgr_slot_dequeue\000"
  1979      5F715F70 
  1979      72696F5F 
  1979      6D67725F 
  1979      736C6F74 
- 1980              		.section	.rodata.__FUNCTION__.8509,"a"
+ 1980              		.section	.rodata.__FUNCTION__.8637,"a"
  1981              		.align	2
  1982              		.set	.LANCHOR2,. + 0
- 1985              	__FUNCTION__.8509:
+ 1985              	__FUNCTION__.8637:
  1986 0000 746F735F 		.ascii	"tos_prio_q_enqueue\000"
  1986      7072696F 
  1986      5F715F65 
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  1986      756500
  1987              		.section	.rodata.prio_q_prio_mgr_slot_enqueue.str1.4,"aMS",%progbits,1
  1988              		.align	2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 53
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 53
 
 
  1989              	.LC0:
@@ -3154,67 +3154,67 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 1
  2015              		.file 25 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
  2016              		.file 26 "d:\\arm_gcc\\8 2019-q3-update\\arm-none-eabi\\include\\stdio.h"
  2017              		.file 27 "<built-in>"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 54
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 54
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_priority_queue.c
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:16     .text.prio_q_pool_mgr_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:23     .text.prio_q_pool_mgr_init:00000000 prio_q_pool_mgr_init
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:78     .text.prio_q_pool_mgr_reset:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:84     .text.prio_q_pool_mgr_reset:00000000 prio_q_pool_mgr_reset
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:139    .text.prio_q_pool_mgr_deinit:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:145    .text.prio_q_pool_mgr_deinit:00000000 prio_q_pool_mgr_deinit
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:166    .text.prio_q_mgr_entry_cmp:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:172    .text.prio_q_mgr_entry_cmp:00000000 prio_q_mgr_entry_cmp
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:207    .text.prio_q_pool_mgr_slot_alloc:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:213    .text.prio_q_pool_mgr_slot_alloc:00000000 prio_q_pool_mgr_slot_alloc
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:254    .text.prio_q_pool_mgr_slot_free:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:260    .text.prio_q_pool_mgr_slot_free:00000000 prio_q_pool_mgr_slot_free
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:287    .text.prio_q_prio_mgr_init:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:293    .text.prio_q_prio_mgr_init:00000000 prio_q_prio_mgr_init
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:326    .text.prio_q_prio_mgr_init:00000018 $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:331    .text.prio_q_prio_mgr_deinit:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:337    .text.prio_q_prio_mgr_deinit:00000000 prio_q_prio_mgr_deinit
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:363    .text.prio_q_do_dequeue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:369    .text.prio_q_do_dequeue:00000000 prio_q_do_dequeue
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:449    .text.prio_q_prio_mgr_slot_enqueue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:455    .text.prio_q_prio_mgr_slot_enqueue:00000000 prio_q_prio_mgr_slot_enqueue
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:526    .text.prio_q_prio_mgr_slot_enqueue:00000038 $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:532    .text.prio_q_do_enqueue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:538    .text.prio_q_do_enqueue:00000000 prio_q_do_enqueue
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:607    .text.prio_q_prio_mgr_slot_dequeue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:613    .text.prio_q_prio_mgr_slot_dequeue:00000000 prio_q_prio_mgr_slot_dequeue
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:724    .text.prio_q_prio_mgr_slot_dequeue:0000005c $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:730    .text.prio_q_prio_mgr_reset:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:736    .text.prio_q_prio_mgr_reset:00000000 prio_q_prio_mgr_reset
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:758    .text.tos_prio_q_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:765    .text.tos_prio_q_create:00000000 tos_prio_q_create
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:908    .text.tos_prio_q_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:915    .text.tos_prio_q_destroy:00000000 tos_prio_q_destroy
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1055   .text.tos_prio_q_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1062   .text.tos_prio_q_create_dyn:00000000 tos_prio_q_create_dyn
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1215   .text.tos_prio_q_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1222   .text.tos_prio_q_destroy_dyn:00000000 tos_prio_q_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1370   .text.tos_prio_q_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1377   .text.tos_prio_q_flush:00000000 tos_prio_q_flush
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1470   .text.tos_prio_q_is_empty:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1477   .text.tos_prio_q_is_empty:00000000 tos_prio_q_is_empty
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1553   .text.tos_prio_q_dequeue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1560   .text.tos_prio_q_dequeue:00000000 tos_prio_q_dequeue
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1695   .text.tos_prio_q_is_full:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1702   .text.tos_prio_q_is_full:00000000 tos_prio_q_is_full
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1782   .text.tos_prio_q_enqueue:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1789   .text.tos_prio_q_enqueue:00000000 tos_prio_q_enqueue
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1961   .text.tos_prio_q_enqueue:00000088 $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1967   .rodata.__FUNCTION__.8460:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1971   .rodata.__FUNCTION__.8460:00000000 __FUNCTION__.8460
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1974   .rodata.__FUNCTION__.8469:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1978   .rodata.__FUNCTION__.8469:00000000 __FUNCTION__.8469
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1981   .rodata.__FUNCTION__.8509:00000000 $d
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1985   .rodata.__FUNCTION__.8509:00000000 __FUNCTION__.8509
-C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s:1988   .rodata.prio_q_prio_mgr_slot_enqueue.str1.4:00000000 $d
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccb2E8GG.s 			page 55
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:16     .text.prio_q_pool_mgr_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:23     .text.prio_q_pool_mgr_init:00000000 prio_q_pool_mgr_init
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:78     .text.prio_q_pool_mgr_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:84     .text.prio_q_pool_mgr_reset:00000000 prio_q_pool_mgr_reset
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:139    .text.prio_q_pool_mgr_deinit:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:145    .text.prio_q_pool_mgr_deinit:00000000 prio_q_pool_mgr_deinit
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:166    .text.prio_q_mgr_entry_cmp:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:172    .text.prio_q_mgr_entry_cmp:00000000 prio_q_mgr_entry_cmp
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:207    .text.prio_q_pool_mgr_slot_alloc:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:213    .text.prio_q_pool_mgr_slot_alloc:00000000 prio_q_pool_mgr_slot_alloc
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:254    .text.prio_q_pool_mgr_slot_free:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:260    .text.prio_q_pool_mgr_slot_free:00000000 prio_q_pool_mgr_slot_free
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:287    .text.prio_q_prio_mgr_init:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:293    .text.prio_q_prio_mgr_init:00000000 prio_q_prio_mgr_init
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:326    .text.prio_q_prio_mgr_init:00000018 $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:331    .text.prio_q_prio_mgr_deinit:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:337    .text.prio_q_prio_mgr_deinit:00000000 prio_q_prio_mgr_deinit
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:363    .text.prio_q_do_dequeue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:369    .text.prio_q_do_dequeue:00000000 prio_q_do_dequeue
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:449    .text.prio_q_prio_mgr_slot_enqueue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:455    .text.prio_q_prio_mgr_slot_enqueue:00000000 prio_q_prio_mgr_slot_enqueue
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:526    .text.prio_q_prio_mgr_slot_enqueue:00000038 $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:532    .text.prio_q_do_enqueue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:538    .text.prio_q_do_enqueue:00000000 prio_q_do_enqueue
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:607    .text.prio_q_prio_mgr_slot_dequeue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:613    .text.prio_q_prio_mgr_slot_dequeue:00000000 prio_q_prio_mgr_slot_dequeue
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:724    .text.prio_q_prio_mgr_slot_dequeue:0000005c $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:730    .text.prio_q_prio_mgr_reset:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:736    .text.prio_q_prio_mgr_reset:00000000 prio_q_prio_mgr_reset
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:758    .text.tos_prio_q_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:765    .text.tos_prio_q_create:00000000 tos_prio_q_create
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:908    .text.tos_prio_q_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:915    .text.tos_prio_q_destroy:00000000 tos_prio_q_destroy
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1055   .text.tos_prio_q_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1062   .text.tos_prio_q_create_dyn:00000000 tos_prio_q_create_dyn
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1215   .text.tos_prio_q_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1222   .text.tos_prio_q_destroy_dyn:00000000 tos_prio_q_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1370   .text.tos_prio_q_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1377   .text.tos_prio_q_flush:00000000 tos_prio_q_flush
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1470   .text.tos_prio_q_is_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1477   .text.tos_prio_q_is_empty:00000000 tos_prio_q_is_empty
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1553   .text.tos_prio_q_dequeue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1560   .text.tos_prio_q_dequeue:00000000 tos_prio_q_dequeue
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1695   .text.tos_prio_q_is_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1702   .text.tos_prio_q_is_full:00000000 tos_prio_q_is_full
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1782   .text.tos_prio_q_enqueue:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1789   .text.tos_prio_q_enqueue:00000000 tos_prio_q_enqueue
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1961   .text.tos_prio_q_enqueue:00000088 $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1967   .rodata.__FUNCTION__.8588:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1971   .rodata.__FUNCTION__.8588:00000000 __FUNCTION__.8588
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1974   .rodata.__FUNCTION__.8597:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1978   .rodata.__FUNCTION__.8597:00000000 __FUNCTION__.8597
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1981   .rodata.__FUNCTION__.8637:00000000 $d
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1985   .rodata.__FUNCTION__.8637:00000000 __FUNCTION__.8637
+C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s:1988   .rodata.prio_q_prio_mgr_slot_enqueue.str1.4:00000000 $d
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccUKt4MX.s 			page 55
 
 
 

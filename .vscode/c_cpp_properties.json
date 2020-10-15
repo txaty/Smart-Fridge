@@ -22,7 +22,8 @@
             ],
             "browse": {
                 "path":[
-                    "TOS_CONFIG"
+                    "TOS_CONFIG",
+                    "${workspaceFolder}/**"
                 ]
             },
             "defines": [

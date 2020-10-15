@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
   30:..//kernel/core/tos_binary_heap.c ****     memcpy(BIN_HEAP_LAST_ITEM(bin_heap), item_in, bin_heap->item_size);
   31:..//kernel/core/tos_binary_heap.c **** }
   32:..//kernel/core/tos_binary_heap.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 2
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 2
 
 
   33:..//kernel/core/tos_binary_heap.c **** __STATIC_INLINE__ void bin_heap_item_increase(k_bin_heap_t *bin_heap)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
   61              		.loc 1 52 5 is_stmt 1 view .LVU10
   62              		.loc 1 52 17 is_stmt 0 view .LVU11
   63 0014 D0F808B0 		ldr	fp, [r0, #8]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 3
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 3
 
 
   64              	.LVL3:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  108              	.LVL10:
  109              		.loc 1 62 21 view .LVU30
  110 0048 04FB0528 		mla	r8, r4, r5, r2
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 4
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 4
 
 
  111              	.LVL11:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  156              		@ args = 0, pretend = 0, frame = 0
  157              		@ frame_needed = 0, uses_anonymous_args = 0
  158              		.loc 1 70 1 is_stmt 0 view .LVU43
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 5
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 5
 
 
  159 0000 08B5     		push	{r3, lr}
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  206              		.loc 1 79 5 view .LVU52
   80:..//kernel/core/tos_binary_heap.c **** 
   81:..//kernel/core/tos_binary_heap.c ****     hole            = 0u;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 6
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 6
 
 
  207              		.loc 1 81 5 view .LVU53
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  243              		.loc 1 96 9 is_stmt 1 view .LVU72
  244              		.loc 1 96 26 is_stmt 0 view .LVU73
  245 0022 6B69     		ldr	r3, [r5, #20]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 7
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 7
 
 
  246 0024 E968     		ldr	r1, [r5, #12]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  288 0050 1E46     		mov	r6, r3
  289              	.LVL37:
  290              	.L9:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 8
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 8
 
 
   92:..//kernel/core/tos_binary_heap.c ****         if (cmp(lchild_item, rchild_item)) {
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  329              		.loc 1 110 9 is_stmt 1 view .LVU103
  330 007a 3A46     		mov	r2, r7
  331 007c 0146     		mov	r1, r0
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 9
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 9
 
 
  332              	.LVL44:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  377              		.loc 1 121 5 view .LVU115
  378              		.loc 1 121 5 view .LVU116
  379 000a 95B1     		cbz	r5, .L20
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 10
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 10
 
 
  122:..//kernel/core/tos_binary_heap.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
   24:..//kernel/core/include/tos_sys.h **** #define K_NESTING_LIMIT_SCHED_LOCK      (k_nesting_t)250u
   25:..//kernel/core/include/tos_sys.h **** 
   26:..//kernel/core/include/tos_sys.h **** typedef enum knl_state_en {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 11
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 11
 
 
   27:..//kernel/core/include/tos_sys.h ****     KNL_STATE_STOPPED,
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
   81:..//kernel/core/include/tos_sys.h ****  * @return  errcode
   82:..//kernel/core/include/tos_sys.h ****  * @retval  Non-#K_ERR_NONE               return failed.
   83:..//kernel/core/include/tos_sys.h ****  * @retval  #K_ERR_NONE                   return successfully.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 12
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 12
 
 
   84:..//kernel/core/include/tos_sys.h ****  */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  138:..//kernel/core/include/tos_sys.h **** 
  139:..//kernel/core/include/tos_sys.h **** /**
  140:..//kernel/core/include/tos_sys.h ****  * @brief Lock the scheduler.
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 13
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 13
 
 
  141:..//kernel/core/include/tos_sys.h ****  * prevent the kernel from performing task schedule.
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  408              	.LVL50:
  409              		.loc 2 189 19 view .LVU132
  410 001c 6380     		strh	r3, [r4, #2]	@ movhi
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 14
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 14
 
 
  411              	.LVL51:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  439 0024 7047     		bx	lr
  440              	.LVL54:
  441              	.L18:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 15
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 15
 
 
  442              	.LCFI5:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  487              		.loc 1 138 5 view .LVU152
  488              	.LVL61:
  489              	.LBB48:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 16
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 16
 
 
  490              	.LBI48:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  524              		.loc 1 144 25 view .LVU166
  525 0016 5860     		str	r0, [r3, #4]
  145:..//kernel/core/tos_binary_heap.c ****     bin_heap->cmp       = K_NULL;
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 17
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 17
 
 
  526              		.loc 1 145 5 is_stmt 1 view .LVU167
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  564              		.loc 1 153 12 is_stmt 0 view .LVU186
  565 0024 7047     		bx	lr
  566              	.LVL69:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 18
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 18
 
 
  567              	.L24:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  610 0002 F8B5     		push	{r3, r4, r5, r6, r7, lr}
  611              	.LCFI6:
  612              		.cfi_def_cfa_offset 24
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 19
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 19
 
 
  613              		.cfi_offset 3, -24
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  173:..//kernel/core/tos_binary_heap.c **** 
  174:..//kernel/core/tos_binary_heap.c ****     TOS_OBJ_INIT(bin_heap, KNL_OBJ_TYPE_BINARY_HEAP);
  655              		.loc 1 174 5 is_stmt 1 view .LVU216
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 20
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 20
 
 
  656              	.LVL79:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  697              		.cfi_restore 14
  160:..//kernel/core/tos_binary_heap.c ****     TOS_PTR_SANITY_CHECK(cmp);
  698              		.loc 1 160 5 view .LVU229
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 21
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 21
 
 
  699 0032 40F24C40 		movw	r0, #1100
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  746              		.loc 1 181 1 is_stmt 0 view .LVU238
  747 0002 10B5     		push	{r4, lr}
  748              	.LCFI9:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 22
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 22
 
 
  749              		.cfi_def_cfa_offset 8
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  791 001a 10E0     		b	.L37
  792              	.LVL95:
  793              	.L45:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 23
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 23
 
 
  187:..//kernel/core/tos_binary_heap.c ****     }
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  199:..//kernel/core/include/tos_sys.h **** {
  832              		.loc 2 199 32 view .LVU272
  833              	.LBB67:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 24
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 24
 
 
  201:..//kernel/core/include/tos_sys.h **** }
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  202:..//kernel/core/tos_binary_heap.c **** 
  203:..//kernel/core/tos_binary_heap.c **** __API__ k_err_t tos_bin_heap_push(k_bin_heap_t *bin_heap, void *item, size_t item_size)
  204:..//kernel/core/tos_binary_heap.c **** {
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 25
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 25
 
 
  205:..//kernel/core/tos_binary_heap.c ****     TOS_CPU_CPSR_ALLOC();
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  255:..//kernel/core/tos_binary_heap.c ****     TOS_CPU_CPSR_ALLOC();
  886              		.loc 1 255 5 view .LVU284
  256:..//kernel/core/tos_binary_heap.c **** 
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 26
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 26
 
 
  257:..//kernel/core/tos_binary_heap.c ****     TOS_PTR_SANITY_CHECK(bin_heap);
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  925              		.loc 1 260 5 view .LVU297
  926 0016 FFF7FEFF 		bl	tos_cpu_cpsr_save
  927              	.LVL110:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 27
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 27
 
 
  261:..//kernel/core/tos_binary_heap.c ****     TOS_CPU_INT_ENABLE();
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  974              		.cfi_def_cfa_offset 8
  975              		.cfi_offset 4, -8
  976              		.cfi_offset 14, -4
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 28
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 28
 
 
  269:..//kernel/core/tos_binary_heap.c ****     TOS_CPU_CPSR_ALLOC();
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1013              		.loc 1 275 5 view .LVU322
  1014 001a FFF7FEFF 		bl	tos_cpu_cpsr_save
  1015              	.LVL120:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 29
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 29
 
 
  276:..//kernel/core/tos_binary_heap.c ****     TOS_CPU_INT_ENABLE();
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1059 0002 F8B5     		push	{r3, r4, r5, r6, r7, lr}
  1060              	.LCFI15:
  1061              		.cfi_def_cfa_offset 24
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 30
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 30
 
 
  1062              		.cfi_offset 3, -24
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1103              	.LVL130:
  237:..//kernel/core/tos_binary_heap.c **** 
  1104              		.loc 1 237 5 is_stmt 0 view .LVU349
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 31
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 31
 
 
  1105 0020 0746     		mov	r7, r0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1144              		.loc 1 38 24 view .LVU364
  1145              	.LBB77:
   40:..//kernel/core/tos_binary_heap.c **** }
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 32
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 32
 
 
  1146              		.loc 1 40 5 view .LVU365
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1188              		.cfi_restore 14
  233:..//kernel/core/tos_binary_heap.c ****     TOS_PTR_SANITY_CHECK(item);
  1189              		.loc 1 233 5 view .LVU378
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 33
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 33
 
 
  1190 005a 40F24C40 		movw	r0, #1100
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  286:..//kernel/core/tos_binary_heap.c **** 
  287:..//kernel/core/tos_binary_heap.c ****     TOS_PTR_SANITY_CHECK_RC(bin_heap, K_FALSE);
  1238              		.loc 1 287 5 view .LVU386
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 34
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 34
 
 
  1239              		.loc 1 287 5 view .LVU387
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1276              		.loc 1 291 43 view .LVU400
  1277 0020 2B69     		ldr	r3, [r5, #16]
  291:..//kernel/core/tos_binary_heap.c ****     TOS_CPU_INT_ENABLE();
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 35
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 35
 
 
  1278              		.loc 1 291 63 view .LVU401
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1324              		.cfi_offset 5, -16
  1325              		.cfi_offset 6, -12
  1326              		.cfi_offset 7, -8
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 36
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 36
 
 
  1327              		.cfi_offset 14, -4
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1365 001e 2846     		mov	r0, r5
  1366 0020 FFF7FEFF 		bl	tos_bin_heap_is_full
  1367              	.LVL159:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 37
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 37
 
 
  215:..//kernel/core/tos_binary_heap.c ****         return K_ERR_BIN_HEAP_FULL;
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
   35:..//kernel/core/tos_binary_heap.c **** }
  1408              		.loc 1 35 15 is_stmt 0 view .LVU442
  1409 0046 6B68     		ldr	r3, [r5, #4]
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 38
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 38
 
 
   35:..//kernel/core/tos_binary_heap.c **** }
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1454              		.loc 1 208 5 view .LVU452
  1455 0060 01E0     		b	.L79
  1456              	.L82:
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 39
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 39
 
 
  209:..//kernel/core/tos_binary_heap.c **** 
@@ -2322,35 +2322,35 @@ ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 1
  1493              		.file 23 "..//kernel/core/include/tos_global.h"
  1494              		.file 24 "..//arch/arm/arm-v7m/common/include/tos_cpu.h"
  1495              		.file 25 "<built-in>"
-ARM GAS  C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s 			page 40
+ARM GAS  C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s 			page 40
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 tos_binary_heap.c
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:16     .text.bin_heap_do_percolate_up:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:23     .text.bin_heap_do_percolate_up:00000000 bin_heap_do_percolate_up
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:145    .text.bin_heap_percolate_up:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:151    .text.bin_heap_percolate_up:00000000 bin_heap_percolate_up
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:177    .text.bin_heap_percolate_down:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:183    .text.bin_heap_percolate_down:00000000 bin_heap_percolate_down
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:348    .text.tos_bin_heap_create:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:355    .text.tos_bin_heap_create:00000000 tos_bin_heap_create
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:467    .text.tos_bin_heap_destroy:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:474    .text.tos_bin_heap_destroy:00000000 tos_bin_heap_destroy
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:591    .text.tos_bin_heap_create_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:598    .text.tos_bin_heap_create_dyn:00000000 tos_bin_heap_create_dyn
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:729    .text.tos_bin_heap_destroy_dyn:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:736    .text.tos_bin_heap_destroy_dyn:00000000 tos_bin_heap_destroy_dyn
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:872    .text.tos_bin_heap_flush:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:879    .text.tos_bin_heap_flush:00000000 tos_bin_heap_flush
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:957    .text.tos_bin_heap_is_empty:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:964    .text.tos_bin_heap_is_empty:00000000 tos_bin_heap_is_empty
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:1040   .text.tos_bin_heap_pop:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:1047   .text.tos_bin_heap_pop:00000000 tos_bin_heap_pop
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:1213   .text.tos_bin_heap_is_full:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:1220   .text.tos_bin_heap_is_full:00000000 tos_bin_heap_is_full
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:1300   .text.tos_bin_heap_push:00000000 $t
-C:\Users\tianx\AppData\Local\Temp\cccRpvRY.s:1307   .text.tos_bin_heap_push:00000000 tos_bin_heap_push
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:16     .text.bin_heap_do_percolate_up:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:23     .text.bin_heap_do_percolate_up:00000000 bin_heap_do_percolate_up
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:145    .text.bin_heap_percolate_up:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:151    .text.bin_heap_percolate_up:00000000 bin_heap_percolate_up
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:177    .text.bin_heap_percolate_down:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:183    .text.bin_heap_percolate_down:00000000 bin_heap_percolate_down
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:348    .text.tos_bin_heap_create:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:355    .text.tos_bin_heap_create:00000000 tos_bin_heap_create
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:467    .text.tos_bin_heap_destroy:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:474    .text.tos_bin_heap_destroy:00000000 tos_bin_heap_destroy
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:591    .text.tos_bin_heap_create_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:598    .text.tos_bin_heap_create_dyn:00000000 tos_bin_heap_create_dyn
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:729    .text.tos_bin_heap_destroy_dyn:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:736    .text.tos_bin_heap_destroy_dyn:00000000 tos_bin_heap_destroy_dyn
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:872    .text.tos_bin_heap_flush:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:879    .text.tos_bin_heap_flush:00000000 tos_bin_heap_flush
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:957    .text.tos_bin_heap_is_empty:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:964    .text.tos_bin_heap_is_empty:00000000 tos_bin_heap_is_empty
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:1040   .text.tos_bin_heap_pop:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:1047   .text.tos_bin_heap_pop:00000000 tos_bin_heap_pop
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:1213   .text.tos_bin_heap_is_full:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:1220   .text.tos_bin_heap_is_full:00000000 tos_bin_heap_is_full
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:1300   .text.tos_bin_heap_push:00000000 $t
+C:\Users\tianx\AppData\Local\Temp\ccZrGPud.s:1307   .text.tos_bin_heap_push:00000000 tos_bin_heap_push
 
 UNDEFINED SYMBOLS
 memcpy
