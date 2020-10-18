@@ -2,6 +2,7 @@
 #define _TOS_CONFIG_H_
 
 #include "stm32f1xx.h"
+#include "stddef.h"
 
 #define TOS_CFG_TASK_PRIO_MAX 8u
 
