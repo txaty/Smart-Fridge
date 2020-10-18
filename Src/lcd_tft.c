@@ -1,5 +1,11 @@
 #include "lcd_tft.h"
 
+// TFT variables
+const float COOR_X_K = 0.09f;
+const float COOR_Y_K = 0.068f;
+const int COOR_X_B = -170;
+const int COOR_Y_B = -180;
+
 // LED functions
 void Delay(__IO uint32_t nCount)
 {
@@ -232,7 +238,7 @@ uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE)
 	return usPixelData;
 }
 
-inline void LCD_DrawDot(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usColor)
+static inline void LCD_DrawDot(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usColor)
 {
 	LCD_Write_Cmd(CMD_Set_COLUMN);
 	LCD_Write_Data(usCOLUMN >> 8);
@@ -263,30 +269,10 @@ inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 void XPT2046_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
-
 	__HAL_RCC_GPIOE_CLK_ENABLE();
 }
 
-static uint16_t XPT2046_ReadAdc(uint8_t ucChannel)
-{
-	XPT2046_SendCMD(ucChannel);
-	return XPT2046_ReceiveData();
-}
-
-int16_t sX_buffer[256];
-int16_t sY_buffer[256];
-
-void XPT2046_ReadAdc_XY(int16_t *sX_Ad, int16_t *sY_Ad)
-{
-	int16_t sX_Ad_Temp, sY_Ad_Temp;
-	sX_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_X);
-	XPT2046_DelayUS(1);
-	sY_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_Y);
-	*sX_Ad = sX_Ad_Temp;
-	*sY_Ad = sY_Ad_Temp;
-}
-
-void XPT2046_DelayUS(__IO uint32_t ulCount)
+static inline void XPT2046_DelayUS(__IO uint32_t ulCount)
 {
 	uint32_t i;
 	for (i = 0; i < ulCount; i++)
@@ -298,7 +284,7 @@ void XPT2046_DelayUS(__IO uint32_t ulCount)
 	}
 }
 
-void XPT2046_SendCMD(uint8_t cmd)
+static inline void XPT2046_SendCMD(uint8_t cmd)
 {
 	uint8_t i;
 	XPT2046_CS_ENABLE();
@@ -323,7 +309,7 @@ void XPT2046_SendCMD(uint8_t cmd)
 	}
 }
 
-uint16_t XPT2046_ReceiveData(void)
+static inline uint16_t XPT2046_ReceiveData(void)
 {
 	uint8_t i;
 	uint16_t receive_temp = 0;
@@ -352,7 +338,25 @@ uint16_t XPT2046_ReceiveData(void)
 	return receive_temp;
 }
 
-uint8_t touch_detect(void)
+static inline uint16_t XPT2046_ReadAdc(uint8_t ucChannel)
+{
+	XPT2046_SendCMD(ucChannel);
+	return XPT2046_ReceiveData();
+}
+
+static inline void XPT2046_ReadAdc_XY(int16_t *sX_Ad, int16_t *sY_Ad)
+{
+	int16_t sX_Ad_Temp, sY_Ad_Temp;
+	sX_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_X);
+	XPT2046_DelayUS(1);
+	sY_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_Y);
+	*sX_Ad = (int16_t)(COOR_X_K * (sX_Ad_Temp + COOR_X_B));
+	*sY_Ad = (int16_t)(COOR_Y_K * (sY_Ad_Temp + COOR_Y_B));
+	// *sX_Ad = sX_Ad_Temp;
+	// *sY_Ad = sY_Ad_Temp;
+}
+
+static inline uint8_t touch_detect(void)
 {
 	static Touch_State touch_state = XPT2046_STATE_RELEASE;
 	static uint8_t i;
@@ -408,4 +412,12 @@ uint8_t touch_detect(void)
 		break;
 	}
 	return result;
+}
+
+inline bool my_touchpad_read(lv_indev_t *indev, lv_indev_data_t *data)
+{
+	data->state = touch_detect() ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
+	if (data->state == LV_INDEV_STATE_PR)
+		XPT2046_ReadAdc_XY(&data->point.x, &data->point.y);
+	return false;
 }

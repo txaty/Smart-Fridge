@@ -42,15 +42,15 @@
 #define CMD_SetPixel 0x2C
 
 // TFT definitions
-#define RCC_APB2Periph_GPIOD   ((uint32_t)0x00000020)
-#define RCC_APB2Periph_GPIOE   ((uint32_t)0x00000040)
+#define RCC_APB2Periph_GPIOD ((uint32_t)0x00000020)
+#define RCC_APB2Periph_GPIOE ((uint32_t)0x00000040)
 
 #define XPT2046_PENIRQ_GPIO_CLK RCC_APB2Periph_GPIOE
 #define XPT2046_PENIRQ_GPIO_PORT GPIOE
 #define XPT2046_PENIRQ_GPIO_PIN GPIO_PIN_4
 
 #define XPT2046_PENIRQ_ActiveLevel 0
-#define XPT2046_PENIRQ_Read() HAL_GPIO_ReadPin(GPIOE,GPIO_PIN_4)
+#define XPT2046_PENIRQ_Read() HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4)
 #define XPT2046_SPI_GPIO_CLK RCC_APB2Periph_GPIOE | RCC_APB2Periph_GPIOD
 
 #define XPT2046_SPI_CS_PIN GPIO_PIN_13
@@ -65,22 +65,27 @@
 #define XPT2046_SPI_MISO_PIN GPIO_PIN_3
 #define XPT2046_SPI_MISO_PORT GPIOE
 
-#define XPT2046_CS_ENABLE() HAL_GPIO_WritePin(XPT2046_SPI_CS_PORT, XPT2046_SPI_CS_PIN,GPIO_PIN_SET)
-#define XPT2046_CS_DISABLE() HAL_GPIO_WritePin(XPT2046_SPI_CS_PORT, XPT2046_SPI_CS_PIN,GPIO_PIN_RESET)
+#define XPT2046_CS_ENABLE() HAL_GPIO_WritePin(XPT2046_SPI_CS_PORT, XPT2046_SPI_CS_PIN, GPIO_PIN_SET)
+#define XPT2046_CS_DISABLE() HAL_GPIO_WritePin(XPT2046_SPI_CS_PORT, XPT2046_SPI_CS_PIN, GPIO_PIN_RESET)
 
-#define XPT2046_CLK_HIGH() HAL_GPIO_WritePin(XPT2046_SPI_CLK_PORT, XPT2046_SPI_CLK_PIN,GPIO_PIN_SET)
-#define XPT2046_CLK_LOW() HAL_GPIO_WritePin(XPT2046_SPI_CLK_PORT, XPT2046_SPI_CLK_PIN,GPIO_PIN_RESET)
+#define XPT2046_CLK_HIGH() HAL_GPIO_WritePin(XPT2046_SPI_CLK_PORT, XPT2046_SPI_CLK_PIN, GPIO_PIN_SET)
+#define XPT2046_CLK_LOW() HAL_GPIO_WritePin(XPT2046_SPI_CLK_PORT, XPT2046_SPI_CLK_PIN, GPIO_PIN_RESET)
 
-#define XPT2046_MOSI_1() HAL_GPIO_WritePin(XPT2046_SPI_MOSI_PORT, XPT2046_SPI_MOSI_PIN,GPIO_PIN_SET)
-#define XPT2046_MOSI_0() HAL_GPIO_WritePin(XPT2046_SPI_MOSI_PORT, XPT2046_SPI_MOSI_PIN,GPIO_PIN_RESET)
+#define XPT2046_MOSI_1() HAL_GPIO_WritePin(XPT2046_SPI_MOSI_PORT, XPT2046_SPI_MOSI_PIN, GPIO_PIN_SET)
+#define XPT2046_MOSI_0() HAL_GPIO_WritePin(XPT2046_SPI_MOSI_PORT, XPT2046_SPI_MOSI_PIN, GPIO_PIN_RESET)
 
 #define XPT2046_MISO() HAL_GPIO_ReadPin(XPT2046_SPI_MISO_PORT, XPT2046_SPI_MISO_PIN)
 
 #define TOUCH_NOT_PRESSED 0
 #define TOUCH_PRESSED 1
 
-#define  XPT2046_CHANNEL_X    0x90            
-#define  XPT2046_CHANNEL_Y    0xd0  
+#define XPT2046_CHANNEL_X 0x90
+#define XPT2046_CHANNEL_Y 0xd0
+
+extern const float COOR_X_K;
+extern const float COOR_Y_K;
+extern const int COOR_X_B;
+extern const int COOR_Y_B;
 
 typedef enum
 {
@@ -102,11 +107,8 @@ uint16_t LCD_Read_Data(void);
 void LCD_Clear(uint16_t usC, uint16_t usP, uint16_t usWidth, uint16_t usHeight, uint16_t usColor);
 uint16_t LCD_GetPointPixel(uint16_t usC, uint16_t usP);
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
-void XPT2046_ReadAdc_XY ( int16_t * sX_Ad, int16_t * sY_Ad );
+
 // TFT functions
 void XPT2046_Init(void);
-void XPT2046_SendCMD(uint8_t cmd);
-void XPT2046_DelayUS(__IO uint32_t ulCount);
-uint16_t XPT2046_ReceiveData(void)	;
-uint8_t touch_detect(void);
+bool my_touchpad_read(lv_indev_t *indev, lv_indev_data_t *data);
 #endif

@@ -126,8 +126,14 @@ int main(void)
   lv_obj_set_size(btn, 100, 50);                     /*Set its size*/
   lv_obj_set_event_cb(btn, btn_event_cb);            /*Assign a callback to the button*/
 
+  lv_indev_drv_t indev_drv;               /*Descriptor of a input device driver*/
+  lv_indev_drv_init(&indev_drv);          /*Basic initialization*/
+  indev_drv.type = LV_INDEV_TYPE_POINTER; /*Touch pad is a pointer-like device*/
+  indev_drv.read_cb = my_touchpad_read;   /*Set your driver function*/
+  lv_indev_drv_register(&indev_drv);      /*Finally register the driver*/
+
   lv_obj_t *label = lv_label_create(btn, NULL); /*Add a label to the button*/
-  lv_label_set_text(label, "Button");         /*Set the labels text*/
+  lv_label_set_text(label, "Button");           /*Set the labels text*/
   /* USER CODE END 2 */
   static int16_t tsx, tsy;
   /* Infinite loop */
@@ -136,11 +142,6 @@ int main(void)
     /* USER CODE BEGIN WHILE */
     lv_tick_inc(10);
     lv_task_handler();
-    if (touch_detect() == TOUCH_PRESSED)
-    {
-      XPT2046_ReadAdc_XY(&tsx, &tsy);
-      printf("(%d,%d)\n", tsx, tsy);
-    }
     /* USER CODE END WHILE */
   }
 
