@@ -29,8 +29,12 @@
 #include "cmsis_os.h"
 #include "debug.h"
 #include "lcd_tft.h"
+#include "task.h"
 
 // osThreadDef(ledSwitchRGB, osPriorityNormal, 1, TASK1_STK_SIZE);
+// osThreadDef(lv_task, osPriorityNormal, 1, TASK2_STK_SIZE);
+// void task1(void *pdata);
+// osThreadDef(task1, osPriorityNormal, 1, TASK1_STK_SIZE);
 
 /* USER CODE END Includes */
 
@@ -103,10 +107,6 @@ int main(void)
   MX_FSMC_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  // osKernelInitialize();                         //TOS Tiny kernel initialize
-  // osThreadCreate(osThread(ledSwitchRGB), NULL); // Create task1
-  // osKernelStart();                              //Start TOS Tiny
-
   LCD_Init();
   lv_init();
   XPT2046_Init();
@@ -134,18 +134,25 @@ int main(void)
 
   lv_obj_t *label = lv_label_create(btn, NULL); /*Add a label to the button*/
   lv_label_set_text(label, "Button");           /*Set the labels text*/
+
+  // osKernelInitialize(); //TOS Tiny kernel initialize
+  // osThreadCreate(osThread(lv_task), NULL);
+  // osThreadCreate(osThread(ledSwitchRGB), NULL); // Create task1
+  // osThreadCreate(osThread(task1), NULL); // Create task1
+  // osThreadCreate(osThread(task2), NULL); // Create task2
+
+  // osKernelStart(); //Start TOS Tiny
   /* USER CODE END 2 */
-  static int16_t tsx, tsy;
+
   /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE BEGIN WHILE */
-    lv_tick_inc(10);
-    lv_task_handler();
     /* USER CODE END WHILE */
+    lv_task_handler();
+    lv_tick_inc(10);
+    /* USER CODE BEGIN 3 */
   }
-
-  /* USER CODE BEGIN 3 */
   /* USER CODE END 3 */
 }
 

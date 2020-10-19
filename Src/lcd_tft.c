@@ -36,17 +36,17 @@ void LCD_BackLed_Control(FunctionalState enumState)
 		HAL_GPIO_WritePin(LCD_BK_PORT, LCD_BK_PIN, GPIO_PIN_SET);
 }
 
-inline void LCD_Write_Cmd(uint16_t usCmd)
+static inline void LCD_Write_Cmd(uint16_t usCmd)
 {
 	*(__IO uint16_t *)(FSMC_Addr_LCD_CMD) = usCmd;
 }
 
-inline void LCD_Write_Data(uint16_t usData)
+static inline void LCD_Write_Data(uint16_t usData)
 {
 	*(__IO uint16_t *)(FSMC_Addr_LCD_DATA) = usData;
 }
 
-inline uint16_t LCD_Read_Data(void)
+static inline uint16_t LCD_Read_Data(void)
 {
 	return (*(__IO uint16_t *)(FSMC_Addr_LCD_DATA));
 }
@@ -206,7 +206,35 @@ void LCD_REG_Config(void)
 	LCD_Write_Cmd(0x29);
 }
 
-void LCD_Clear(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight, uint16_t usColor)
+static inline void LCD_OpenWindow ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight )
+{	
+	LCD_Write_Cmd ( CMD_Set_COLUMN ); 				
+	LCD_Write_Data ( usCOLUMN >> 8  );	 
+	LCD_Write_Data ( usCOLUMN & 0xff  );	 
+	LCD_Write_Data ( ( usCOLUMN + usWidth - 1 ) >> 8  );
+	LCD_Write_Data ( ( usCOLUMN + usWidth - 1 ) & 0xff  );
+
+	LCD_Write_Cmd ( CMD_Set_PAGE ); 			     
+	LCD_Write_Data ( usPAGE >> 8  );
+	LCD_Write_Data ( usPAGE & 0xff  );
+	LCD_Write_Data ( ( usPAGE + usHeight - 1 ) >> 8 );
+	LCD_Write_Data ( ( usPAGE + usHeight - 1) & 0xff );
+	
+}
+
+
+static inline void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
+{
+	uint32_t i = 0;
+	
+	/* memory write */
+	LCD_Write_Cmd ( CMD_SetPixel );	
+		
+	for ( i = 0; i < usPoint; i ++ )
+		LCD_Write_Data ( usColor );
+		
+}
+static inline void LCD_Clear(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight, uint16_t usColor)
 {
 	LCD_OpenWindow(usCOLUMN, usPAGE, usWidth, usHeight);
 
@@ -227,7 +255,7 @@ uint16_t LCD_Read_PixelData(void)
 	return (((usR >> 11) << 11) | ((usG >> 10) << 5) | (usB >> 11));
 }
 
-uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE)
+static inline uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE)
 {
 	uint16_t usPixelData;
 
@@ -254,11 +282,12 @@ static inline void LCD_DrawDot(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usCo
 inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
 	int32_t x, y;
+	
 	for (y = area->y1; y <= area->y2; y++)
 	{
-		for (x = area->x2; x >= area->x1; x--)
+		for (x = area->x1; x <= area->x2; x++)
 		{
-			LCD_DrawDot(y, x, color_p->full);
+			LCD_DrawDot(y, 320 - x, color_p->full);
 			color_p++;
 		}
 	}
@@ -352,8 +381,6 @@ static inline void XPT2046_ReadAdc_XY(int16_t *sX_Ad, int16_t *sY_Ad)
 	sY_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_Y);
 	*sX_Ad = (int16_t)(COOR_X_K * (sX_Ad_Temp + COOR_X_B));
 	*sY_Ad = (int16_t)(COOR_Y_K * (sY_Ad_Temp + COOR_Y_B));
-	// *sX_Ad = sX_Ad_Temp;
-	// *sY_Ad = sY_Ad_Temp;
 }
 
 static inline uint8_t touch_detect(void)

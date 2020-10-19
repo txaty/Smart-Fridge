@@ -97,15 +97,8 @@ typedef enum
 // LCD functions
 void LCD_Init(void);
 void LCD_Rst(void);
-void LCD_REG_Config(void);
-void LCD_FillColor(uint32_t ulAmout_Point, uint16_t usColor);
 uint16_t LCD_Read_PixelData(void);
 void LCD_BackLed_Control(FunctionalState enumState);
-void LCD_Write_Cmd(uint16_t usCmd);
-void LCD_Write_Data(uint16_t usData);
-uint16_t LCD_Read_Data(void);
-void LCD_Clear(uint16_t usC, uint16_t usP, uint16_t usWidth, uint16_t usHeight, uint16_t usColor);
-uint16_t LCD_GetPointPixel(uint16_t usC, uint16_t usP);
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
 
 // TFT functions

@@ -1,5 +1,7 @@
+#include "cmsis_os.h"
 #include "debug.h"
 #include "gpio.h"
+#include "usart.h"
 
 void ledSwitchRGB(void *pdata)
 {
