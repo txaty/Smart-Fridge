@@ -7,7 +7,7 @@ void ledSwitchRGB(void *pdata)
 {
     while (1)
     {
-        int intervalTime = 1000;
+        int intervalTime = 500;
         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
         osDelay(intervalTime);
         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);

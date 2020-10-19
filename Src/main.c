@@ -30,12 +30,6 @@
 #include "debug.h"
 #include "lcd_tft.h"
 #include "task.h"
-
-// osThreadDef(ledSwitchRGB, osPriorityNormal, 1, TASK1_STK_SIZE);
-// osThreadDef(lv_task, osPriorityNormal, 1, TASK2_STK_SIZE);
-// void task1(void *pdata);
-// osThreadDef(task1, osPriorityNormal, 1, TASK1_STK_SIZE);
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -73,7 +67,9 @@ void btn_event_cb(lv_obj_t *btn, lv_event_t event)
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+osMutexDef(display_touch_locker);
+osThreadDef(ledSwitchRGB, osPriorityNormal, 1, LED_TASK_STK_SIZE);
+osThreadDef(display_touch_task, osPriorityIdle, 1, LVGL_TASK_STK_SIZE);
 /* USER CODE END 0 */
 
 /**
@@ -135,13 +131,11 @@ int main(void)
   lv_obj_t *label = lv_label_create(btn, NULL); /*Add a label to the button*/
   lv_label_set_text(label, "Button");           /*Set the labels text*/
 
-  // osKernelInitialize(); //TOS Tiny kernel initialize
-  // osThreadCreate(osThread(lv_task), NULL);
-  // osThreadCreate(osThread(ledSwitchRGB), NULL); // Create task1
-  // osThreadCreate(osThread(task1), NULL); // Create task1
-  // osThreadCreate(osThread(task2), NULL); // Create task2
-
-  // osKernelStart(); //Start TOS Tiny
+  osKernelInitialize();
+  tos_mutex_create(&display_touch_locker);
+  osThreadCreate(osThread(ledSwitchRGB), NULL);
+  osThreadCreate(osThread(display_touch_task), NULL);
+  osKernelStart(); //Start TOS Tiny
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -149,8 +143,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    lv_task_handler();
-    lv_tick_inc(10);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
