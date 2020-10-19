@@ -1,41 +1,19 @@
 #include "task.h"
-#include "gpio.h"
+#include "lvgl.h"
 
-void redLedBlink(void *pdata)
+k_mutex_t display_touch_locker;
+
+void display_touch_task(void *pdata)
 {
-    while (1)
-    {
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
-        osDelay(500);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
-        osDelay(500);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-        osDelay(500);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-        printf("test\n");
+    k_err_t err;
+    while (K_TRUE)
+    {   
+        err = tos_mutex_pend(&display_touch_locker);
+        if (err == K_ERR_NONE) {
+            lv_task_handler();
+            lv_tick_inc(5);
+            tos_mutex_post(&display_touch_locker);
+        }
+        osDelay(1);
     }
 }
-
-#if defined(__CC_ARM) || defined(__ICCARM__)
-
-int fputc(int ch, FILE *f)
-{
-    if (ch == '\n')
-    {
-        HAL_UART_Transmit(&huart1, (void *)"\r", 1, 30000);
-    }
-    HAL_UART_Transmit(&huart1, (unit8_t *)&ch, 1, 0xFFFF);
-    return ch;
-}
-
-#elif defined (__GNUC__)
-
-int _write(int fd, char *ptr, int len)
-{
-    (void)HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, 0xFFFF);
-    return len;
-}
-
-#endif

@@ -1,23 +1,15 @@
 #ifndef _TASK_H_
 #define _TASK_H_
 
-#define TASK1_STK_SIZE 512
-
 #include "cmsis_os.h"
-#include "usart.h"
+#include "tos_k.h"
 
-void redLedBlink(void *pdata);
+#define LED_TASK_STK_SIZE 256
+#define LVGL_TASK_STK_SIZE 2048
 
-#if defined(__CC_ARM) || defined(__ICCARM__)
+extern k_mutex_t display_touch_locker;
 
-int fputc(int ch, FILE *f);
+void display_touch_task(void *pdata);
 
-#elif defined (__GNUC__)
-
-int _write(int fd, char *ptr, int len);
-
-#endif
-
-void redLedBlink(void *pdata);
 
 #endif
