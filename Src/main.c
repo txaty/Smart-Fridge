@@ -93,10 +93,10 @@ int main(void)
   MX_FSMC_Init();
   MX_USART1_UART_Init();
   MX_USART3_UART_Init();
-  // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET); // CH_EN
-  // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET); // RST
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET); // CH_EN
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET); // RST
   /* USER CODE BEGIN 2 */
-  osKernelInitialize();
+  //osKernelInitialize();
   // osThreadCreate(osThread(application), NULL);
   // osKernelStart(); //Start TOS Tiny
   /* USER CODE END 2 */
