@@ -1,4 +1,4 @@
-#include "lcd_tft.h"
+#include <lcd_tft.h>
 
 // TFT variables
 const float COOR_X_K = 0.09f;
