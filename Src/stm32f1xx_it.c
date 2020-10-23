@@ -24,11 +24,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tos_k.h"
+#include "tos_at.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-
+uint8_t recv_buffer[1] = {0};
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -58,12 +59,13 @@
 
 /* External variables --------------------------------------------------------*/
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M3 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M3 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -217,7 +219,71 @@ void USART1_IRQHandler(void)
   /* USER CODE END USART1_IRQn 1 */
 }
 
-/* USER CODE BEGIN 1 */
+/**
+  * @brief This function handles USART3 global interrupt.
+  */
+void USART3_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART3_IRQn 0 */
+  // tos_knl_irq_enter();
+  /* USER CODE END USART3_IRQn 0 */
+  HAL_UART_IRQHandler(&huart3);
+  /* USER CODE BEGIN USART3_IRQn 1 */
+  // tos_knl_irq_leave();
+  /* USER CODE END USART3_IRQn 1 */
+}
 
+/* USER CODE BEGIN 1 */
+void UART_RxAgain(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
+{
+  // use the code from HAL_UART_Receive_IT() to repost interrupt
+  huart->pRxBuffPtr = pData;
+  huart->RxXferSize = Size;
+  huart->RxXferCount = Size;
+  huart->ErrorCode = HAL_UART_ERROR_NONE;
+
+  /* Check if a transmit process is ongoing or not */
+  if (huart->RxState == HAL_UART_STATE_BUSY_TX)
+  {
+
+    huart->RxState = HAL_UART_STATE_BUSY_TX_RX;
+  }
+  else
+  {
+
+    huart->RxState = HAL_UART_STATE_BUSY_RX;
+  }
+
+  /* Enable the UART Parity Error Interrupt */
+  __HAL_UART_ENABLE_IT(huart, UART_IT_PE);
+
+  /* Enable the UART Error Interrupt: (Frame error, noise error, overrun error) */
+  __HAL_UART_ENABLE_IT(huart, UART_IT_ERR);
+
+  /* Process Unlocked */
+  //__HAL_UNLOCK(huart);
+  /* Enable the UART Data Register not empty Interrupt */
+
+  __HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  // uint8_t data;
+  if (huart->Instance == USART3)
+  {
+    // HAL_UART_Receive_IT(&huart3, (uint8_t *)recv_buffer, sizeof(recv_buffer));
+    UART_RxAgain(&huart3, (uint8_t *)recv_buffer, sizeof(recv_buffer));
+    tos_at_uart_input_byte(recv_buffer[0]);
+  }
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+  if (huart->Instance == USART3)
+  {
+    UART_RxAgain(&huart3, (uint8_t *)recv_buffer, sizeof(recv_buffer));
+  }
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

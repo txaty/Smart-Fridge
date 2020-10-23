@@ -123,8 +123,8 @@ int esp8266_join_ap(const char *ssid, const char *pwd)
     tos_at_echo_create(&echo, NULL, 0, "OK");
     while (try ++ < 10)
     {
-        tos_at_cmd_exec_until(&echo, 10000, "AT+CWJAP=\"%s\",\"%s\"\r\n", ssid, pwd);
-        if (echo.status == AT_ECHO_STATUS_OK)
+        tos_at_cmd_exec_until(&echo, 15000, "AT+CWJAP=\"%s\",\"%s\"\r\n", ssid, pwd);
+        if (echo.status == AT_ECHO_STATUS_EXPECT)
         {
             return 0;
         }
