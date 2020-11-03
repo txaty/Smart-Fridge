@@ -41,24 +41,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define WIFI_TASK_SIZE 4096
-k_task_t k_task_wifi;
-uint8_t k_wifi_stk[WIFI_TASK_SIZE];
-
-void task_wifi(void *pdata)
-{
-  if (esp8266_sal_init(HAL_UART_PORT_3) == 0)
-  {
-    if (esp8266_join_ap("ASD", "qwertyuiop") != 0)
-    {
-      printf("AP joining failed\n");
-    }
-    else
-    {
-      printf("AP joning success\n");
-    }
-  }
-}
 
 /* USER CODE END PD */
 
