@@ -9,19 +9,19 @@ k_mutex_t display_touch_locker;
 
 void display_touch_task(void *pdata)
 {
-    k_err_t err;
-    while (K_TRUE)
-    {   
-        err = tos_mutex_pend(&display_touch_locker);
-        if (err == K_ERR_NONE) {
-            lv_task_handler();
-            lv_tick_inc(5);
-            tos_mutex_post(&display_touch_locker);
-        }
-        osDelay(1);
+  k_err_t err;
+  while (K_TRUE)
+  {
+    err = tos_mutex_pend(&display_touch_locker);
+    if (err == K_ERR_NONE)
+    {
+      lv_task_handler();
+      lv_tick_inc(5);
+      tos_mutex_post(&display_touch_locker);
     }
+    osDelay(1);
+  }
 }
-
 
 // Wifi connection test
 k_task_t k_task_wifi;
@@ -41,10 +41,39 @@ void task_wifi(void *pdata)
       printf("AP joning success\n");
     }
   }
-  socket_id_0 = tos_sal_module_connect("108.160.133.235", "80", TOS_SAL_PROTO_TCP); 
-    if (socket_id_0 == -1) {
-        printf("TCP0 connect failed\r\n");
-    } else {
-        printf("TCP0 connect success! fd: %d\n", socket_id_0);
-    }
+  socket_id_0 = tos_sal_module_connect("108.160.133.235", "80", TOS_SAL_PROTO_TCP);
+  if (socket_id_0 == -1)
+  {
+    printf("TCP0 connect failed\r\n");
+  }
+  else
+  {
+    printf("TCP0 connect success! fd: %d\n", socket_id_0);
+  }
+}
+
+//SDIO test
+k_task_t k_task_sdio;
+uint8_t k_sdio_stk[SDIO_TASK_SIZE];
+
+void task_sdio(void *pdata)
+{
+  char buffer[200];
+  int indx = 0;
+  Mount_SD("/");
+  Format_SD();
+  Unmount_SD("/");
+  for (int i = 0; i < 10; ++i)
+  {
+    Mount_SD("/");
+    sprintf(buffer, "Hello ---> %d\n", indx);
+    Update_File("FILE1.TXT", buffer);
+    sprintf(buffer, "world ---> %d\n", indx);
+    Update_File("FILE2.TXT", buffer);
+    Unmount_SD("/");
+
+    indx++;
+    printf("Debug %d\n", indx);
+    osDelay(2000);
+  }
 }
