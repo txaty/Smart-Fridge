@@ -35,6 +35,7 @@
 #include "tos_at.h"
 #include "stm32f1xx_it.h"
 #include "file_handling.h"
+#include "lcd_tft.h"
 
 /* USER CODE END Includes */
 
@@ -62,7 +63,13 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void btn_event_cb(lv_obj_t *btn, lv_event_t event)
+{
+  if (event == LV_EVENT_CLICKED)
+  {
+    printf("Button Clicked\n");
+  }
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,7 +98,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
+   
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -104,6 +111,9 @@ int main(void)
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+  // LCD_Init();
+  // lv_init();
+  // XPT2046_Init();
   // osKernelInitialize();
   // tos_task_create(&k_task_wifi, "wifi", task_wifi, NULL, 4, k_wifi_stk, WIFI_TASK_SIZE, 0);
   // osKernelStart();
@@ -118,6 +128,7 @@ int main(void)
   Unmount_SD("/");
   char buffer[200];
   int indx = 0;
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -205,5 +216,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,7 +2,7 @@
 #include "stm32f1xx_hal.h"
 #include "stdlib.h"
 
-// #define UART_DEBUG
+#define UART_DEBUG
 
 #ifdef UART_DEBUG
 
