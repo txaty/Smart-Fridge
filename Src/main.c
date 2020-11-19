@@ -22,6 +22,7 @@
 #include "main.h"
 #include "fatfs.h"
 #include "sdio.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 #include "fsmc.h"
@@ -35,6 +36,8 @@
 #include "tos_at.h"
 #include "stm32f1xx_it.h"
 #include "file_handling.h"
+#include "temp_sensor.h"
+// #include "ds18b20.h"
 
 /* USER CODE END Includes */
 
@@ -79,6 +82,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
+  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -103,6 +107,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   // osKernelInitialize();
   // tos_task_create(&k_task_wifi, "wifi", task_wifi, NULL, 4, k_wifi_stk, WIFI_TASK_SIZE, 0);
@@ -111,28 +116,51 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  Mount_SD("/");
-  Format_SD();
-  Create_File("FILE1.TXT");
-  Create_File("FILE2.TXT");
-  Unmount_SD("/");
-  char buffer[200];
-  int indx = 0;
+  // Mount_SD("/");
+  // Format_SD();
+  // Create_File("FILE1.TXT");
+  // Create_File("FILE2.TXT");
+  // Unmount_SD("/");
+  // char buffer[200];
+  // int indx = 0;
+  uint8_t temp_byte1 = 0;
+  uint8_t temp_byte2 = 0;
+  int presence = 0;
+  __HAL_TIM_SET_COUNTER(&htim6, 0);
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    Mount_SD("/");
-    sprintf(buffer, "Hello ---> %d\n", indx);
-    Update_File("FILE1.TXT", buffer);
-    sprintf(buffer, "world ---> %d\n", indx);
-    Update_File("FILE2.TXT", buffer);
-    Unmount_SD("/");
+    // Mount_SD("/");
+    // sprintf(buffer, "Hello ---> %d\n", indx);
+    // Update_File("FILE1.TXT", buffer);
+    // sprintf(buffer, "world ---> %d\n", indx);
+    // Update_File("FILE2.TXT", buffer);
+    // Unmount_SD("/");
 
-    indx++;
-    printf("Debug %d\n", indx);
-    HAL_Delay(2000);
+    // indx++;
+    // printf("Debug %d\n", indx);
+    // HAL_Delay(2000);
+    /*
+    presence = DS18B20_Start();
+    printf("check %d\r\n", presence);
+    HAL_Delay(1);
+    DS18B20_Write(0xCC); // skip ROM
+    DS18B20_Write(0x44); // convert t
+    HAL_Delay(800);
+
+    presence = DS18B20_Start();
+    HAL_Delay(1);
+    DS18B20_Write(0xCC); // skip ROM
+    DS18B20_Write(0xBE); // Read Scratch-pad
+
+    temp_byte1 = DS18B20_Read();
+    temp_byte2 = DS18B20_Read();
+
+    printf("%d %d\r\n", temp_byte1, temp_byte2);
+    */
+   printf("%d \r\n", htim6.Instance->CNT);
   }
   /* USER CODE END 3 */
 }
@@ -161,10 +189,11 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
@@ -189,7 +218,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -198,7 +227,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{
+{ 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
