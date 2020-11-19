@@ -882,6 +882,7 @@ HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData,
 
     /* Enable the UART Data Register not empty Interrupt */
     __HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
+
     return HAL_OK;
   }
   else
@@ -2401,7 +2402,7 @@ static HAL_StatusTypeDef UART_EndTransmit_IT(UART_HandleTypeDef *huart)
 static HAL_StatusTypeDef UART_Receive_IT(UART_HandleTypeDef *huart)
 {
   uint16_t* tmp;
-
+  
   /* Check that a Rx process is ongoing */
   if(huart->RxState == HAL_UART_STATE_BUSY_RX) 
   {
