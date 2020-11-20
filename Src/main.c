@@ -22,6 +22,7 @@
 #include "main.h"
 #include "fatfs.h"
 #include "sdio.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 #include "fsmc.h"
@@ -35,6 +36,7 @@
 #include "tos_at.h"
 #include "stm32f1xx_it.h"
 #include "file_handling.h"
+#include "temp_sensor.h"
 #include "lcd_tft.h"
 
 /* USER CODE END Includes */
@@ -110,7 +112,9 @@ int main(void)
   MX_USART3_UART_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start(&htim6);
   // LCD_Init();
   // lv_init();
   // XPT2046_Init();
@@ -121,29 +125,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  Mount_SD("/");
-  Format_SD();
-  Create_File("FILE1.TXT");
-  Create_File("FILE2.TXT");
-  Unmount_SD("/");
-  char buffer[200];
-  int indx = 0;
-
   while (1)
   {
     /* USER CODE END WHILE */
-
+    float temp = DS18B20_GetCelsiusTemp();
+    printf("temp %d \r\n", (int)temp);
     /* USER CODE BEGIN 3 */
-    Mount_SD("/");
-    sprintf(buffer, "Hello ---> %d\n", indx);
-    Update_File("FILE1.TXT", buffer);
-    sprintf(buffer, "world ---> %d\n", indx);
-    Update_File("FILE2.TXT", buffer);
-    Unmount_SD("/");
-
-    indx++;
-    printf("Debug %d\n", indx);
-    HAL_Delay(2000);
   }
   /* USER CODE END 3 */
 }
