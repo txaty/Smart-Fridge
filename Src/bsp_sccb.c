@@ -17,7 +17,7 @@ void SCCB_GPIO_Config(void)
 
 static void SCCB_delay(void)
 {
-	uint16_t i = 1000;
+	uint16_t i = 300;
 	while (i)
 	{
 		i--;
@@ -28,66 +28,64 @@ static int SCCB_Start(void)
 {
 	SDA_H;
 	SCL_H;
-	SCCB_delay();
+	delay_us(50);
 	if (!SDA_read) {
-		printf("step 1\r\n");
 		return DISABLE;
 	}
 	SDA_L;
-	SCCB_delay();
+	delay_us(50);
 	if (SDA_read) {
-		printf("step 2\r\n");
 		return DISABLE;
 	}
 	SDA_L;
-	SCCB_delay();
+	delay_us(50);
 	return ENABLE;
 }
 
 static void SCCB_Stop(void)
 {
 	SCL_L;
-	SCCB_delay();
+	delay_us(50);
 	SDA_L;
-	SCCB_delay();
+	delay_us(50);
 	SCL_H;
-	SCCB_delay();
+	delay_us(50);
 	SDA_H;
-	SCCB_delay();
+	delay_us(50);
 }
 
 static void SCCB_Ack(void)
 {
 	SCL_L;
-	SCCB_delay();
+	delay_us(50);
 	SDA_L;
-	SCCB_delay();
+	delay_us(50);
 	SCL_H;
-	SCCB_delay();
+	delay_us(50);
 	SCL_L;
-	SCCB_delay();
+	delay_us(50);
 }
 
 static void SCCB_NoAck(void)
 {
 	SCL_L;
-	SCCB_delay();
+	delay_us(50);
 	SDA_H;
-	SCCB_delay();
+	delay_us(50);
 	SCL_H;
-	SCCB_delay();
+	delay_us(50);
 	SCL_L;
-	SCCB_delay();
+	delay_us(50);
 }
 
 static int SCCB_WaitAck(void)
 {
 	SCL_L;
-	SCCB_delay();
+	delay_us(50);
 	SDA_H;
-	SCCB_delay();
+	delay_us(50);
 	SCL_H;
-	SCCB_delay();
+	delay_us(50);
 	if (SDA_read)
 	{
 		SCL_L;
@@ -103,15 +101,15 @@ static void SCCB_SendByte(uint8_t SendByte)
 	while (i--)
 	{
 		SCL_L;
-		SCCB_delay();
+		delay_us(50);
 		if (SendByte & 0x80)
 			SDA_H;
 		else
 			SDA_L;
 		SendByte <<= 1;
-		SCCB_delay();
+		delay_us(50);
 		SCL_H;
-		SCCB_delay();
+		delay_us(50);
 	}
 	SCL_L;
 }
@@ -126,9 +124,9 @@ static int SCCB_ReceiveByte(void)
 	{
 		ReceiveByte <<= 1;
 		SCL_L;
-		SCCB_delay();
+		delay_us(50);
 		SCL_H;
-		SCCB_delay();
+		delay_us(50);
 		if (SDA_read)
 		{
 			ReceiveByte |= 0x01;
@@ -142,13 +140,11 @@ int SCCB_WriteByte(uint16_t WriteAddress, uint8_t SendByte)
 {
 	if (!SCCB_Start())
 	{
-		printf("start error\r\n");
 		return DISABLE;
 	}
 	SCCB_SendByte(DEV_ADR);
 	if (!SCCB_WaitAck())
 	{
-		printf("waitack error\r\n");
 		SCCB_Stop();
 		return DISABLE;
 	}

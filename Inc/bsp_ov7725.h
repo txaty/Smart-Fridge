@@ -268,11 +268,10 @@ typedef struct
 			printf("<<-OV7725-DEBUG->> [%d]" fmt "\n", __LINE__, ##arg); \
 	} while (0)
 
-extern uint8_t Ov7725_vsync;
+extern volatile uint8_t Ov7725_vsync;
 
 void OV7725_GPIO_Config(void);
 ErrorStatus OV7725_Init(void);
-void ImagDisp(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);
 void OV7725_Light_Mode(uint8_t mode);
 void OV7725_Color_Saturation(int8_t sat);
 void OV7725_Brightness(int8_t bri);

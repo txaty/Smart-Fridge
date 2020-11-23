@@ -30,13 +30,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "debug.h"
-// #include "task.h"
-// #include "esp8266.h"
-// #include "sal_module_wrapper.h"
-// #include "tos_at.h"
+#include "task.h"
+#include "esp8266.h"
+#include "sal_module_wrapper.h"
+#include "tos_at.h"
 #include "stm32f1xx_it.h"
-// #include "file_handling.h"
-// #include "temp_sensor.h"
+#include "file_handling.h"
+#include "temp_sensor.h"
 #include "lcd_tft.h"
 #include "bsp_ov7725.h"
 
@@ -83,7 +83,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -110,19 +109,20 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-  // HAL_TIM_Base_Start(&htim6);
-  // LCD_Init();
-  // lv_init();
-  // XPT2046_Init();
+  HAL_TIM_Base_Start(&htim6);
+  LCD_Init();
+  lv_init();
+  XPT2046_Init();
   // osKernelInitialize();
   // tos_task_create(&k_task_wifi, "wifi", task_wifi, NULL, 4, k_wifi_stk, WIFI_TASK_SIZE, 0);
   // osKernelStart();
   LCD_Init();
   OV7725_GPIO_Config();
-  while (OV7725_Init() != 1) {
-    printf("Re-initializing\r\n");
-  }
-  printf("Camera init success\r\n");
+  // while (OV7725_Init() != 1) {
+  //   printf("Re-initializing\r\n");
+  // }
+  // printf("Camera init success\r\n");
+  OV7725_Init();
   Ov7725_vsync = 0;
   /* USER CODE END 2 */
 
@@ -131,7 +131,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    if (Ov7725_vsync == 2)
+    {
+      printf("Fetch image\r\n");
+      FIFO_PREPARE;            
+      Ov7725_vsync = 0;
+    }
+    //printf("Finish loop\r\n");
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -161,8 +167,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -190,7 +195,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -199,7 +204,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

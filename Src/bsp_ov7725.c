@@ -129,7 +129,7 @@ Reg_Info Sensor_Config[] =
 uint8_t OV7725_REG_NUM = sizeof(Sensor_Config) / sizeof(Sensor_Config[0]);
 
 // volatile uint8_t Ov7725_vsync;
-uint8_t Ov7725_vsync;
+volatile uint8_t Ov7725_vsync;
 
 static void FIFO_GPIO_Config(void)
 {
@@ -172,7 +172,7 @@ static void FIFO_GPIO_Config(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(OV7725_DATA_GPIO_PORT, &GPIO_InitStruct);
 
-	GPIO_InitStruct.Pin = OV7725_DATA_2_GPIO_PIN;
+	GPIO_InitStruct.Pin = OV7725_DATA_3_GPIO_PIN;
 	HAL_GPIO_Init(OV7725_DATA_GPIO_PORT, &GPIO_InitStruct);
 
 	FIFO_OE_L();
@@ -248,9 +248,10 @@ ErrorStatus OV7725_Init(void)
 	}
 	else
 	{
+		printf("Sensor ID not match\r\n");
 		return ERROR;
 	}
-	//DEBUG("ov7725 Register Config Success");
+	printf("ov7725 Register Config Success\r\n");
 
 	return SUCCESS;
 }
@@ -538,24 +539,6 @@ void OV7725_Window_VGA_Set(uint16_t sx, uint16_t sy, uint16_t width, uint16_t he
 	cal_temp = (reg_raw | (width & 0x03) | ((height & 0x01) << 2));
 
 	SCCB_WriteByte(REG_EXHCH, cal_temp);
-}
-
-void ImagDisp(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height)
-{
-	uint16_t i, j;
-	uint16_t Camera_Data;
-
-	LCD_OpenWindow(sx, sy, width, height);
-	LCD_Write_Cmd(CMD_SetPixel);
-
-	for (i = 0; i < width; i++)
-	{
-		for (j = 0; j < height; j++)
-		{
-			READ_FIFO_PIXEL(Camera_Data);
-			LCD_Write_Data(Camera_Data);
-		}
-	}
 }
 
 void OV7725_VSYNC_EXTI_INT_FUNCTION ( void )
