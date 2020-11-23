@@ -25,3 +25,22 @@ void set_pin_input(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(GPIOx, &GPIO_InitStruct);
 }
+
+uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+  uint8_t bitstatus = 0x00;
+  
+  /* Check the parameters */
+  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+  assert_param(IS_GET_GPIO_PIN(GPIO_Pin)); 
+  
+  if ((GPIOx->IDR & GPIO_Pin) != (uint32_t)GPIO_PIN_RESET)
+  {
+    bitstatus = (uint8_t)GPIO_PIN_SET;
+  }
+  else
+  {
+    bitstatus = (uint8_t)GPIO_PIN_RESET;
+  }
+  return bitstatus;
+}

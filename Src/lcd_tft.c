@@ -13,29 +13,6 @@ void Delay(__IO uint32_t nCount)
 		;
 }
 
-void LCD_Init(void)
-{
-	LCD_BackLed_Control(ENABLE);
-	LCD_Rst();
-	LCD_REG_Config();
-}
-
-void LCD_Rst(void)
-{
-	HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_RESET);
-	Delay(0xAFFf << 2);
-	HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET);
-	Delay(0xAFFf << 2);
-}
-
-void LCD_BackLed_Control(FunctionalState enumState)
-{
-	if (enumState)
-		HAL_GPIO_WritePin(LCD_BK_PORT, LCD_BK_PIN, GPIO_PIN_RESET);
-	else
-		HAL_GPIO_WritePin(LCD_BK_PORT, LCD_BK_PIN, GPIO_PIN_SET);
-}
-
 static inline void LCD_Write_Cmd(uint16_t usCmd)
 {
 	*(__IO uint16_t *)(FSMC_Addr_LCD_CMD) = usCmd;
@@ -44,11 +21,6 @@ static inline void LCD_Write_Cmd(uint16_t usCmd)
 static inline void LCD_Write_Data(uint16_t usData)
 {
 	*(__IO uint16_t *)(FSMC_Addr_LCD_DATA) = usData;
-}
-
-static inline uint16_t LCD_Read_Data(void)
-{
-	return (*(__IO uint16_t *)(FSMC_Addr_LCD_DATA));
 }
 
 void LCD_REG_Config(void)
@@ -206,6 +178,34 @@ void LCD_REG_Config(void)
 	LCD_Write_Cmd(0x29);
 }
 
+void LCD_Init(void)
+{
+	LCD_BackLed_Control(ENABLE);
+	LCD_Rst();
+	LCD_REG_Config();
+}
+
+void LCD_Rst(void)
+{
+	HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_RESET);
+	Delay(0xAFFf << 2);
+	HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET);
+	Delay(0xAFFf << 2);
+}
+
+void LCD_BackLed_Control(FunctionalState enumState)
+{
+	if (enumState)
+		HAL_GPIO_WritePin(LCD_BK_PORT, LCD_BK_PIN, GPIO_PIN_RESET);
+	else
+		HAL_GPIO_WritePin(LCD_BK_PORT, LCD_BK_PIN, GPIO_PIN_SET);
+}
+
+uint16_t LCD_Read_Data(void)
+{
+	return (*(__IO uint16_t *)(FSMC_Addr_LCD_DATA));
+}
+
 static inline void LCD_OpenWindow ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight )
 {	
 	LCD_Write_Cmd ( CMD_Set_COLUMN ); 				
@@ -222,7 +222,6 @@ static inline void LCD_OpenWindow ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t
 	
 }
 
-
 static inline void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
 {
 	uint32_t i = 0;
@@ -234,6 +233,7 @@ static inline void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
 		LCD_Write_Data ( usColor );
 		
 }
+
 static inline void LCD_Clear(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight, uint16_t usColor)
 {
 	LCD_OpenWindow(usCOLUMN, usPAGE, usWidth, usHeight);
@@ -294,10 +294,11 @@ inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 	lv_disp_flush_ready(disp);
 }
 
+
 // TFT functions
 void XPT2046_Init(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
+	// GPIO_InitTypeDef GPIO_InitStructure;
 	__HAL_RCC_GPIOE_CLK_ENABLE();
 }
 
