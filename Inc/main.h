@@ -61,9 +61,15 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define Temp_Sensor_IO_Pin GPIO_PIN_6
 #define Temp_Sensor_IO_GPIO_Port GPIOE
+#define Key2_Pin GPIO_PIN_13
+#define Key2_GPIO_Port GPIOC
+#define Key2_EXTI_IRQn EXTI15_10_IRQn
 #define Cam_VSYNC_Pin GPIO_PIN_3
 #define Cam_VSYNC_GPIO_Port GPIOC
 #define Cam_VSYNC_EXTI_IRQn EXTI3_IRQn
+#define Key1_Pin GPIO_PIN_0
+#define Key1_GPIO_Port GPIOA
+#define Key1_EXTI_IRQn EXTI0_IRQn
 #define Cam_FIFO_RRST_Pin GPIO_PIN_2
 #define Cam_FIFO_RRST_GPIO_Port GPIOA
 #define Cam_FIFO_OE_Pin GPIO_PIN_3
