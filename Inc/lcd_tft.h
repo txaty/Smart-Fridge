@@ -5,7 +5,7 @@
 #include "gpio.h"
 #include "lvgl.h"
 
-// LED definitions
+// LCD definitions
 #define FSMC_Addr_LCD_CMD ((uint32_t)0x60000000)
 #define FSMC_Addr_LCD_DATA ((uint32_t)0x60020000)
 

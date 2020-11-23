@@ -222,7 +222,6 @@ static inline void LCD_OpenWindow ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t
 	
 }
 
-
 static inline void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
 {
 	uint32_t i = 0;
@@ -234,6 +233,7 @@ static inline void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
 		LCD_Write_Data ( usColor );
 		
 }
+
 static inline void LCD_Clear(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight, uint16_t usColor)
 {
 	LCD_OpenWindow(usCOLUMN, usPAGE, usWidth, usHeight);
@@ -293,6 +293,7 @@ inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 	}
 	lv_disp_flush_ready(disp);
 }
+
 
 // TFT functions
 void XPT2046_Init(void)
