@@ -45,7 +45,7 @@
 #define LV_COLOR_TRANSP    LV_COLOR_LIME         /*LV_COLOR_LIME: pure green*/
 
 /* Enable anti-aliasing (lines, and radiuses will be smoothed) */
-#define LV_ANTIALIAS        1
+#define LV_ANTIALIAS        0 //1
 
 /* Default display refresh period.
  * Can be changed in the display driver (`lv_disp_drv_t`).*/

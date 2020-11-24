@@ -7,7 +7,7 @@
 
 // LCD display and touch screen
 #define LED_TASK_STK_SIZE 256
-#define LVGL_TASK_STK_SIZE 2048
+#define LVGL_TASK_STK_SIZE 1024
 extern k_mutex_t display_touch_locker;
 
 void display_touch_task(void *pdata);

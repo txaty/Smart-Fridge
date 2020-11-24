@@ -29,16 +29,16 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stm32f1xx_it.h"
 #include "debug.h"
 #include "task.h"
-#include "esp8266.h"
-#include "sal_module_wrapper.h"
-#include "tos_at.h"
-#include "stm32f1xx_it.h"
-#include "file_handling.h"
-#include "temp_sensor.h"
-#include "lcd_tft.h"
-#include "bsp_ov7725.h"
+// #include "esp8266.h"
+// #include "sal_module_wrapper.h"
+// #include "tos_at.h"
+// #include "file_handling.h"
+// #include "temp_sensor.h"
+// #include "lcd_tft.h"
+// #include "bsp_ov7725.h"
 #include "pwm_control.h"
 
 /* USER CODE END Includes */
@@ -67,12 +67,20 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+// void btn_event_cb(lv_obj_t *btn, lv_event_t event)
+// {
+//   if (event == LV_EVENT_CLICKED)
+//   {
+//     printf("Clicked\n");
+//   }
+// }
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+// osMutexDef(display_touch_locker);
+// osThreadDef(ledSwitchRGB, osPriorityNormal, 1, LED_TASK_STK_SIZE);
+// osThreadDef(display_touch_task, osPriorityIdle, 1, LVGL_TASK_STK_SIZE);
 /* USER CODE END 0 */
 
 /**
@@ -84,7 +92,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -106,9 +113,9 @@ int main(void)
   MX_GPIO_Init();
   MX_FSMC_Init();
   MX_USART1_UART_Init();
-  MX_USART3_UART_Init();
-  MX_SDIO_SD_Init();
-  MX_FATFS_Init();
+  // MX_USART3_UART_Init();
+  // MX_SDIO_SD_Init();
+  // MX_FATFS_Init();
   MX_TIM6_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
@@ -132,6 +139,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  // osKernelInitialize();
+  // tos_mutex_create(&display_touch_locker);
+  // osThreadCreate(osThread(ledSwitchRGB), NULL);
+  // osThreadCreate(osThread(display_touch_task), NULL);
+  // osKernelStart(); //Start TOS Tiny
   while (1)
   {
     /* USER CODE END WHILE */
@@ -167,8 +180,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -196,7 +208,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -205,7 +217,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

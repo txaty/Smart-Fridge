@@ -19,6 +19,5 @@
 void SCCB_GPIO_Config(void);
 int SCCB_WriteByte( uint16_t WriteAddress , uint8_t SendByte);
 int SCCB_ReadByte(uint8_t* pBuffer,   uint16_t length,   uint8_t ReadAddress);
-uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 
 #endif 
