@@ -4,11 +4,37 @@
 #include "esp8266.h"
 #include "tos_at.h"
 #include "sal_module_wrapper.h"
+#include "file_handling.h"
+
+
+// LED debug
+k_task_t k_led_switch_rgb;
+uint8_t k_led_switch_rgb_stk[LED_TASK_STK_SIZE];
+
+void led_switch_rgb(void *pdata)
+{
+  while (1)
+  {
+    int interval_time = 500;
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+    osDelay(interval_time);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+    osDelay(interval_time);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+    osDelay(interval_time);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+    printf("test\n");
+  }
+}
 
 // LCD display and touch screen
 k_mutex_t display_touch_locker;
+k_task_t k_display_touch;
+uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 
-void display_touch_task(void *pdata)
+void task_display_touch(void *pdata)
 {
   k_err_t err;
   while (K_TRUE)
@@ -17,19 +43,25 @@ void display_touch_task(void *pdata)
     if (err == K_ERR_NONE)
     {
       lv_task_handler();
-      lv_tick_inc(5);
       tos_mutex_post(&display_touch_locker);
     }
-    osDelay(1);
+    else {
+      printf("%d\r\n", err);
+    }
+    osDelay(5);
   }
 }
 
 // Wifi connection test
-k_task_t k_task_wifi;
-uint8_t k_wifi_stk[WIFI_TASK_SIZE];
+k_task_t k_wifi_test;
+uint8_t k_wifi_test_stk[WIFI_TEST_TASK_SIZE];
+char *wifi_ssid = "ASD";
+char *wifi_pwd = "qwertyuiop";
+char *server_ip = "108.160.133.235";
+char *server_port = "80";
 int socket_id_0 = -1;
 
-void task_wifi(void *pdata)
+void task_wifi_test(void *pdata)
 {
   // Configure Pin PB8, PB9
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -43,7 +75,7 @@ void task_wifi(void *pdata)
 
   if (esp8266_sal_init(HAL_UART_PORT_3) == 0)
   {
-    if (esp8266_join_ap("ASD", "qwertyuiop") != 0)
+    if (esp8266_join_ap(wifi_ssid, wifi_pwd) != 0)
     {
       printf("AP joining failed\n");
     }
@@ -52,7 +84,7 @@ void task_wifi(void *pdata)
       printf("AP joning success\n");
     }
   }
-  socket_id_0 = tos_sal_module_connect("108.160.133.235", "80", TOS_SAL_PROTO_TCP);
+  socket_id_0 = tos_sal_module_connect(server_ip, server_port, TOS_SAL_PROTO_TCP);
   if (socket_id_0 == -1)
   {
     printf("TCP0 connect failed\r\n");
@@ -63,7 +95,7 @@ void task_wifi(void *pdata)
   }
 }
 
-//SDIO test
+// SDIO test
 k_task_t k_task_sdio;
 uint8_t k_sdio_stk[SDIO_TASK_SIZE];
 
@@ -87,4 +119,20 @@ void task_sdio(void *pdata)
     printf("Debug %d\n", indx);
     osDelay(2000);
   }
+}
+
+// Application entry
+k_task_t k_application_entry;
+uint8_t k_application_entry_stk[APPLICATION_ENTRY_SIZE];
+
+void application_entry(void *arg)
+{
+  printf("Hello TOS!\r\n");
+  tos_mutex_create(&display_touch_locker);
+  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
+                    7, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+  tos_task_create(&k_led_switch_rgb, "led_switch_rgb", led_switch_rgb, NULL,
+                    4, k_led_switch_rgb_stk, LED_TASK_STK_SIZE, 0);
+  tos_task_create(&k_wifi_test, "wifi_test", task_wifi_test, NULL,
+                    4, k_wifi_test_stk, WIFI_TEST_TASK_SIZE, 0);
 }

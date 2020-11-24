@@ -73,19 +73,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-// osMutexDef(display_touch_locker);
-// osThreadDef(ledSwitchRGB, osPriorityNormal, 1, LED_TASK_STK_SIZE);
-// osThreadDef(display_touch_task, osPriorityIdle, 1, LVGL_TASK_STK_SIZE);
-// osThreadDef(task_wifi, osPriorityAboveNormal, 1, WIFI_TASK_SIZE);
-
-// void btn_event_cb(lv_obj_t *btn, lv_event_t event)
-// {
-//   if (event == LV_EVENT_CLICKED)
-//   {
-//     printf("Clicked\n");
-//     osThreadCreate(osThread(task_wifi), NULL);
-//   }
-// }
+void btn_event_cb(lv_obj_t *btn, lv_event_t event)
+{
+  if (event == LV_EVENT_CLICKED)
+  {
+    printf("Clicked\n");
+    // osThreadCreate(osThread(task_wifi), NULL);
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -97,7 +92,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -156,19 +150,18 @@ int main(void)
   lv_obj_t *obj1 = lv_obj_create(par, NULL); /*Create an object on the previously created parent object*/
   lv_obj_set_pos(obj1, 10, 10);              /*Set the position of the new object*/
 
-  // lv_obj_t *btn = lv_btn_create(lv_scr_act(), NULL); /*Add a button to the current screen*/
-  // lv_obj_set_pos(btn, 10, 10);                       /*Set its position*/
-  // lv_obj_set_size(btn, 100, 50);                     /*Set its size*/
-  // lv_obj_set_event_cb(btn, btn_event_cb);            /*Assign a callback to the button*/
+  lv_obj_t *btn = lv_btn_create(lv_scr_act(), NULL); /*Add a button to the current screen*/
+  lv_obj_set_pos(btn, 10, 10);                       /*Set its position*/
+  lv_obj_set_size(btn, 100, 50);                     /*Set its size*/
+  lv_obj_set_event_cb(btn, btn_event_cb);            /*Assign a callback to the button*/
 
-  // lv_obj_t *label = lv_label_create(btn, NULL); /*Add a label to the button*/
-  // lv_label_set_text(label, "Button");           /*Set the labels text*/
+  lv_obj_t *label = lv_label_create(btn, NULL); /*Add a label to the button*/
+  lv_label_set_text(label, "Button");           /*Set the labels text*/
 
-  // osKernelInitialize();
-  // tos_mutex_create(&display_touch_locker);
-  // osThreadCreate(osThread(ledSwitchRGB), NULL);
-  // osThreadCreate(osThread(display_touch_task), NULL);
-  // osKernelStart(); //Start TOS Tiny
+  tos_knl_init();
+  tos_task_create(&k_application_entry, "application_entry", application_entry, NULL,
+                            4, k_application_entry_stk, APPLICATION_ENTRY_SIZE, 0);
+  tos_knl_start();
 
   /* USER CODE END 2 */
 
@@ -179,7 +172,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    lv_task_handler();
   }
   /* USER CODE END 3 */
 }
@@ -196,7 +188,7 @@ void SystemClock_Config(void)
 
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -210,8 +202,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -251,7 +242,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -260,7 +251,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
