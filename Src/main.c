@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "fatfs.h"
+#include "rtc.h"
 #include "sdio.h"
 #include "tim.h"
 #include "usart.h"
@@ -72,7 +73,19 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// osMutexDef(display_touch_locker);
+// osThreadDef(ledSwitchRGB, osPriorityNormal, 1, LED_TASK_STK_SIZE);
+// osThreadDef(display_touch_task, osPriorityIdle, 1, LVGL_TASK_STK_SIZE);
+// osThreadDef(task_wifi, osPriorityAboveNormal, 1, WIFI_TASK_SIZE);
 
+// void btn_event_cb(lv_obj_t *btn, lv_event_t event)
+// {
+//   if (event == LV_EVENT_CLICKED)
+//   {
+//     printf("Clicked\n");
+//     osThreadCreate(osThread(task_wifi), NULL);
+//   }
+// }
 /* USER CODE END 0 */
 
 /**
@@ -111,23 +124,52 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM6_Init();
   MX_TIM4_Init();
+  MX_RTC_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim6);
+  HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
-  // LCD_Init();
-  // lv_init();
-  // XPT2046_Init();
+  LCD_Init();
+  lv_init();
+  XPT2046_Init();
+  static lv_disp_buf_t disp_buf;
+  static lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];                  /*Declare a buffer for 1/10 screen size*/
+  lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX / 10); /*Initialize the display buffer*/
+
+  lv_disp_drv_t disp_drv;      /*Descriptor of a display driver*/
+  lv_disp_drv_init(&disp_drv); /*Basic initialization*/
+
+  disp_drv.flush_cb = my_disp_flush; /*Set your driver function*/
+  disp_drv.buffer = &disp_buf;       /*Assign the buffer to the display*/
+  lv_disp_drv_register(&disp_drv);   /*Finally register the driver*/
+
+  lv_indev_drv_t indev_drv;               /*Descriptor of a input device driver*/
+  lv_indev_drv_init(&indev_drv);          /*Basic initialization*/
+  indev_drv.type = LV_INDEV_TYPE_POINTER; /*Touch pad is a pointer-like device*/
+  indev_drv.read_cb = my_touchpad_read;   /*Set your driver function*/
+  lv_indev_drv_register(&indev_drv);      /*Finally register the driver*/
+
+  lv_obj_t *par = lv_obj_create(lv_scr_act(), NULL); /*Create a parent object on the current screen*/
+  lv_obj_set_size(par, 100, 80);                     /*Set the size of the parent*/
+
+  lv_obj_t *obj1 = lv_obj_create(par, NULL); /*Create an object on the previously created parent object*/
+  lv_obj_set_pos(obj1, 10, 10);              /*Set the position of the new object*/
+
+  // lv_obj_t *btn = lv_btn_create(lv_scr_act(), NULL); /*Add a button to the current screen*/
+  // lv_obj_set_pos(btn, 10, 10);                       /*Set its position*/
+  // lv_obj_set_size(btn, 100, 50);                     /*Set its size*/
+  // lv_obj_set_event_cb(btn, btn_event_cb);            /*Assign a callback to the button*/
+
+  // lv_obj_t *label = lv_label_create(btn, NULL); /*Add a label to the button*/
+  // lv_label_set_text(label, "Button");           /*Set the labels text*/
+
   // osKernelInitialize();
-  // tos_task_create(&k_task_wifi, "wifi", task_wifi, NULL, 4, k_wifi_stk, WIFI_TASK_SIZE, 0);
-  // osKernelStart();
-  // LCD_Init();
-  // OV7725_GPIO_Config();
-  // while (OV7725_Init() != 1) {
-  //   printf("Re-initializing\r\n");
-  // }
-  // printf("Camera init success\r\n");
-  // OV7725_Init();
-  // Ov7725_vsync = 0;
+  // tos_mutex_create(&display_touch_locker);
+  // osThreadCreate(osThread(ledSwitchRGB), NULL);
+  // osThreadCreate(osThread(display_touch_task), NULL);
+  // osKernelStart(); //Start TOS Tiny
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -137,8 +179,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    printf("pwm_value: %d\r\n", pwm_value);
-    HAL_Delay(1000);
+    lv_task_handler();
   }
   /* USER CODE END 3 */
 }
@@ -151,13 +192,15 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
@@ -178,10 +221,22 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM2)
+  {
+    lv_tick_inc(1);
+  }
+}
 /* USER CODE END 4 */
 
 /**

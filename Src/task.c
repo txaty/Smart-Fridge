@@ -1,4 +1,5 @@
 #include "task.h"
+#include "gpio.h"
 #include "lvgl.h"
 #include "esp8266.h"
 #include "tos_at.h"
@@ -30,6 +31,16 @@ int socket_id_0 = -1;
 
 void task_wifi(void *pdata)
 {
+  // Configure Pin PB8, PB9
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_SET);
+
   if (esp8266_sal_init(HAL_UART_PORT_3) == 0)
   {
     if (esp8266_join_ap("ASD", "qwertyuiop") != 0)

@@ -60,6 +60,7 @@ uint8_t recv_buffer[1] = {0};
 
 /* External variables --------------------------------------------------------*/
 extern SD_HandleTypeDef hsd;
+extern TIM_HandleTypeDef htim2;
 extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
@@ -206,10 +207,24 @@ void EXTI0_IRQHandler(void)
     HAL_GPIO_EXTI_Callback(GPIO_PIN_0);
   }
   /* USER CODE END EXTI0_IRQn 0 */
-  // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+  /* USER CODE END TIM2_IRQn 1 */
 }
 
 /**
@@ -239,7 +254,7 @@ void EXTI15_10_IRQHandler(void)
     HAL_GPIO_EXTI_Callback(GPIO_PIN_13);
   }
   /* USER CODE END EXTI15_10_IRQn 0 */
-  // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
   /* USER CODE END EXTI15_10_IRQn 1 */
