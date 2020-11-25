@@ -57,7 +57,7 @@ k_task_t k_wifi_test;
 uint8_t k_wifi_test_stk[WIFI_TEST_TASK_SIZE];
 char *wifi_ssid = "ASD";
 char *wifi_pwd = "qwertyuiop";
-char *server_ip = "108.160.133.235";
+char *server_ip = "45.76.101.197";
 char *server_port = "80";
 int socket_id_0 = -1;
 
