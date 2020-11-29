@@ -4,6 +4,13 @@
 #include "cmsis_os.h"
 #include "tos_k.h"
 
+// Mutex
+extern k_mutex_t display_touch_locker;
+extern k_mutex_t pb8_pb9_mutex;
+
+// Completion
+extern k_completion_t wifi_connect_success;
+
 // LED debug
 #define LED_TASK_STK_SIZE 256
 extern k_task_t k_led_switch_rgb;
@@ -13,7 +20,6 @@ void led_switch_rgb(void *pdata);
 
 // LCD display and touch screen
 #define DISPLAY_TOUCH_TASK_SIZE 2048
-extern k_mutex_t display_touch_locker;
 extern k_task_t k_display_touch;
 extern uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 

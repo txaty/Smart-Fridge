@@ -200,6 +200,7 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
+  tos_knl_irq_enter();
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_0) != RESET)
   {
     if (pwm_value > MIN_PWM_PULSE)
@@ -210,6 +211,7 @@ void EXTI0_IRQHandler(void)
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
     HAL_GPIO_EXTI_Callback(GPIO_PIN_0);
   }
+  tos_knl_irq_leave();
   /* USER CODE END EXTI0_IRQn 0 */
   //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
@@ -223,6 +225,7 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
+  tos_knl_irq_enter();
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET)
   {
     if (pwm_value < MAX_PWM_PULSE)
@@ -233,6 +236,7 @@ void EXTI1_IRQHandler(void)
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
     HAL_GPIO_EXTI_Callback(GPIO_PIN_1);
   }
+  tos_knl_irq_leave();
   /* USER CODE END EXTI1_IRQn 0 */
   // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
@@ -246,11 +250,11 @@ void EXTI1_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-
+  tos_knl_irq_enter();
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
-
+  tos_knl_irq_leave();
   /* USER CODE END TIM2_IRQn 1 */
 }
 
@@ -274,11 +278,11 @@ void USART3_IRQHandler(void)
 void SDIO_IRQHandler(void)
 {
   /* USER CODE BEGIN SDIO_IRQn 0 */
-
+  tos_knl_irq_enter();
   /* USER CODE END SDIO_IRQn 0 */
   HAL_SD_IRQHandler(&hsd);
   /* USER CODE BEGIN SDIO_IRQn 1 */
-
+  tos_knl_irq_leave();
   /* USER CODE END SDIO_IRQn 1 */
 }
 

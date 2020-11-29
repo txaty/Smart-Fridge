@@ -166,14 +166,7 @@ static void FIFO_GPIO_Config(void)
 	// GPIO_Init(OV7725_DATA_GPIO_PORT, &GPIO_InitStructure);
 
 	// Recover from USART3
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
-    GPIO_InitStruct.Pin = OV7725_DATA_2_GPIO_PIN;
-    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(OV7725_DATA_GPIO_PORT, &GPIO_InitStruct);
-
-	GPIO_InitStruct.Pin = OV7725_DATA_3_GPIO_PIN;
-	HAL_GPIO_Init(OV7725_DATA_GPIO_PORT, &GPIO_InitStruct);
+	switch_pin_for_camera();
 
 	FIFO_OE_L();
 	FIFO_WE_H();
