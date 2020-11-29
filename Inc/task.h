@@ -20,16 +20,23 @@ extern uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 void task_display_touch(void *pdata);
 
 // Wifi connection test
-#define WIFI_TEST_TASK_SIZE 4096
-extern k_task_t k_wifi_test;
-extern uint8_t k_wifi_test_stk[WIFI_TEST_TASK_SIZE];
+#define WIFI_TEST_CONNECT_SIZE 2048
+extern k_task_t k_wifi_connect;
+extern uint8_t k_wifi_connect_stk[WIFI_TEST_CONNECT_SIZE];
 extern char *wifi_ssid;
 extern char *wifi_pwd;
+
+void task_wifi_connect(void *pdata);
+
+// TCP test
+#define TCP_TEST_SIZE 4096
+extern k_task_t k_tcp_test;
+extern uint8_t k_tcp_test_stk[TCP_TEST_SIZE];
 extern char *server_ip;
 extern char *server_port;
 extern int socket_id_0;
 
-void task_wifi_test(void *pdata);
+void task_tcp_test(void *pdata);
 
 // SDIO test
 #define SDIO_TASK_SIZE 512

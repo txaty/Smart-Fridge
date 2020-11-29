@@ -202,15 +202,42 @@ void EXTI0_IRQHandler(void)
   /* USER CODE BEGIN EXTI0_IRQn 0 */
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_0) != RESET)
   {
-    PWM_SetValue(pwm_value--);
+    if (pwm_value > MIN_PWM_PULSE)
+    {
+      PWM_SetValue(pwm_value--);
+    }
+    printf("Key 1 pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
     HAL_GPIO_EXTI_Callback(GPIO_PIN_0);
   }
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line1 interrupt.
+  */
+void EXTI1_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI1_IRQn 0 */
+  if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET)
+  {
+    if (pwm_value < MAX_PWM_PULSE)
+    {
+      PWM_SetValue(pwm_value++);
+    }
+    printf("Key cap pressed\r\n");
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
+    HAL_GPIO_EXTI_Callback(GPIO_PIN_1);
+  }
+  /* USER CODE END EXTI1_IRQn 0 */
+  // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+  /* USER CODE BEGIN EXTI1_IRQn 1 */
+
+  /* USER CODE END EXTI1_IRQn 1 */
 }
 
 /**
@@ -239,25 +266,6 @@ void USART3_IRQHandler(void)
   /* USER CODE BEGIN USART3_IRQn 1 */
   tos_knl_irq_leave();
   /* USER CODE END USART3_IRQn 1 */
-}
-
-/**
-  * @brief This function handles EXTI line[15:10] interrupts.
-  */
-void EXTI15_10_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-  if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_13) != RESET)
-  {
-    PWM_SetValue(pwm_value++);
-    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_13);
-    HAL_GPIO_EXTI_Callback(GPIO_PIN_13);
-  }
-  /* USER CODE END EXTI15_10_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
-  /* USER CODE BEGIN EXTI15_10_IRQn 1 */
-
-  /* USER CODE END EXTI15_10_IRQn 1 */
 }
 
 /**
