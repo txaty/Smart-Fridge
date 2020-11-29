@@ -5,6 +5,7 @@
 #include "tos_at.h"
 #include "sal_module_wrapper.h"
 #include "file_handling.h"
+#include "sntp.h"
 
 // LED debug
 k_task_t k_led_switch_rgb;
@@ -84,6 +85,8 @@ void task_wifi_connect(void *pdata)
       else
       {
         printf("AP joning success\n");
+        tos_task_create(&k_ntp_time_sync, "ntp_time_sync", task_ntp_time_sync, NULL,
+                      4, k_ntp_time_sync_stk, NTP_TIME_SYNC_SIZE, 0);
       }
     }
   }
@@ -114,6 +117,15 @@ void task_tcp_test(void *pdata)
   }
 }
 
+// NTP time sync
+k_task_t k_ntp_time_sync;
+uint8_t k_ntp_time_sync_stk[NTP_TIME_SYNC_SIZE];
+
+void task_ntp_time_sync(void *pdata)
+{
+  ntp_client();
+}
+
 // SDIO test
 k_task_t k_task_sdio;
 uint8_t k_sdio_stk[SDIO_TASK_SIZE];
@@ -140,6 +152,21 @@ void task_sdio(void *pdata)
   }
 }
 
+// Console printf debug
+k_task_t k_console_printf_debug;
+uint8_t k_console_printf_debug_stk[CONSOLE_PRINTF_DEBUG_SIZE];
+
+void task_console_printf_debug(void *pdata)
+{
+  while (K_TRUE)
+  {
+      RTC_TimeTypeDef rtc_timer;
+    HAL_RTC_GetTime(&hrtc, &rtc_timer, RTC_FORMAT_BIN);
+    printf("%0.2d:%0.2d:%0.2d\r\n", rtc_timer.Hours, rtc_timer.Minutes, rtc_timer.Seconds);
+    tos_sleep_ms(1000);
+  }
+}
+
 // Application entry
 k_task_t k_application_entry;
 uint8_t k_application_entry_stk[APPLICATION_ENTRY_SIZE];
@@ -147,12 +174,16 @@ uint8_t k_application_entry_stk[APPLICATION_ENTRY_SIZE];
 void application_entry(void *arg)
 {
   printf("Hello TOS!\r\n");
-  tos_mutex_create(&display_touch_locker);
+  // tos_mutex_create(&display_touch_locker);
   tos_mutex_create(&pb8_pb9_mutex);
-  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
-                  7, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
-  tos_task_create(&k_led_switch_rgb, "led_switch_rgb", led_switch_rgb, NULL,
-                  4, k_led_switch_rgb_stk, LED_TASK_STK_SIZE, 0);
+  // tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
+  //                 7, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+  // tos_task_create(&k_led_switch_rgb, "led_switch_rgb", led_switch_rgb, NULL,
+  //                 4, k_led_switch_rgb_stk, LED_TASK_STK_SIZE, 0);
   tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
                       4, WIFI_TEST_CONNECT_SIZE, 0);
+  tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
+                      7, k_console_printf_debug_stk,CONSOLE_PRINTF_DEBUG_SIZE, 0);
+  // tos_task_create(&k_ntp_time_sync, "ntp_time_sync", task_ntp_time_sync, NULL,
+  //                     4, k_ntp_time_sync_stk, NTP_TIME_SYNC_SIZE, 0);
 }

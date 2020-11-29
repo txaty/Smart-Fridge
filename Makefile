@@ -85,7 +85,8 @@ Src/temp_sensor.c \
 Src/tools.c \
 Src/bsp_ov7725.c \
 Src/bsp_sccb.c \
-Src/pwm_control.c
+Src/pwm_control.c \
+Src/sntp.c
 
 C_SOURCES += $(USER_SOURCES)
 
