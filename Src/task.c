@@ -8,13 +8,22 @@
 #include "sntp.h"
 #include "tools.h"
 #include "display_content.h"
+#include "temp_sensor.h"
+
+// Global variables
+int rtc_hour = 0;
+int rtc_minutes = 0;
+int fridge_temp = 0;
 
 // Mutex
 k_mutex_t display_touch_locker;
 k_mutex_t pb8_pb9_mutex;
+k_mutex_t rtc_update_locker;
+k_mutex_t temp_update_locker;
 
 // Completion
 k_completion_t wifi_connect_success;
+k_completion_t sntp_success;
 
 // LED debug
 k_task_t k_led_switch_rgb;
@@ -45,11 +54,6 @@ void task_display_touch(void *pdata)
 {
   k_err_t err;
 
-  while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE);
-  show_init_image();
-  tos_mutex_post(&display_touch_locker);
-
-
   while (K_TRUE)
   {
     err = tos_mutex_pend(&display_touch_locker);
@@ -63,8 +67,8 @@ void task_display_touch(void *pdata)
 }
 
 // Wifi initialization and connection to AP
-k_task_t k_wifi_connect;
-uint8_t k_wifi_connect_stk[WIFI_TEST_CONNECT_SIZE];
+k_task_t *k_wifi_connect;
+// uint8_t k_wifi_connect_stk[WIFI_TEST_CONNECT_SIZE];
 char *wifi_ssid = "ASD";
 char *wifi_pwd = "qwertyuiop";
 
@@ -85,12 +89,16 @@ void task_wifi_connect(void *pdata)
       {
         printf("AP joning success\n");
         tos_completion_post(&wifi_connect_success);
+        tos_task_create_dyn(&k_ntp_time_sync, "ntp_time_sync", task_ntp_time_sync, NULL,
+                            4, NTP_TIME_SYNC_SIZE, 0);
       }
     }
   }
 }
 
 // TCP test
+#if TCP_TEST_ENABLE
+
 k_task_t k_tcp_test;
 uint8_t k_tcp_test_stk[TCP_TEST_SIZE];
 char *server_ip = "45.76.101.197";
@@ -116,15 +124,73 @@ void task_tcp_test(void *pdata)
   }
 }
 
+#endif
+
 // NTP time sync
-k_task_t k_ntp_time_sync;
-uint8_t k_ntp_time_sync_stk[NTP_TIME_SYNC_SIZE];
+k_task_t *k_ntp_time_sync;
+// uint8_t k_ntp_time_sync_stk[NTP_TIME_SYNC_SIZE];
 
 void task_ntp_time_sync(void *pdata)
 {
-  while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE);
-  
+  while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE)
+    ;
+  tos_task_destroy(k_wifi_connect);
   ntp_client();
+
+  tos_completion_post(&sntp_success);
+}
+
+//RTC update
+k_task_t k_rtc_update;
+uint8_t k_rtc_update_stk[RTC_UPDATE_SIZE];
+
+void task_rtc_update(void *pdata)
+{
+  while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
+    ;
+
+  tos_task_destroy(k_ntp_time_sync);
+  k_err_t err;
+
+  while (K_TRUE)
+  {
+    err = tos_mutex_pend(&rtc_update_locker);
+    if (err == K_ERR_NONE)
+    {
+      RTC_TimeTypeDef rtc_timer;
+      HAL_RTC_GetTime(&hrtc, &rtc_timer, RTC_FORMAT_BIN);
+      rtc_hour = rtc_timer.Hours;
+      rtc_minutes = rtc_timer.Minutes;
+      tos_mutex_post(&rtc_update_locker);
+    }
+    tos_sleep_ms(3000);
+  }
+}
+
+// Temperature update
+k_task_t k_temp_update;
+uint8_t k_temp_update_stk[TEMP_UPDATE_SIZE];
+
+void task_temp_update(void *pdata)
+{
+  k_err_t err;
+
+  while (K_TRUE)
+  {
+    err = tos_mutex_pend(&temp_update_locker);
+    if (err == K_ERR_NONE)
+    {
+      err = tos_knl_sched_lock();
+      if (err == K_ERR_NONE)
+      {
+        fridge_temp = (int)DS18B20_GetCelsiusTemp();
+        printf("%d\r\n", fridge_temp);
+      }
+      tos_knl_sched_unlock();
+      tos_mutex_post(&temp_update_locker);
+    }
+    tos_sleep_ms(500);
+  }
 }
 
 // SDIO test
@@ -160,35 +226,21 @@ uint8_t k_console_printf_debug_stk[CONSOLE_PRINTF_DEBUG_SIZE];
 void task_console_printf_debug(void *pdata)
 {
   while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE)
-  {
-    printf("Pend completion failed\r\n");
-  }
+    ;
 
   while (K_TRUE)
   {
     // RTC_TimeTypeDef rtc_timer;
     // HAL_RTC_GetTime(&hrtc, &rtc_timer, RTC_FORMAT_BIN);
     // printf("%0.2d:%0.2d:%0.2d\r\n", rtc_timer.Hours, rtc_timer.Minutes, rtc_timer.Seconds);
-    printf("dummy\r\n");
+    // printf("dummy\r\n");
+    k_err_t err;
+    err = tos_mutex_pend(&rtc_update_locker);
+    if (err == K_ERR_NONE)
+    {
+      printf("%d, %d\r\n", rtc_hour, rtc_minutes);
+      tos_mutex_post(&rtc_update_locker);
+    }
     tos_sleep_ms(1000);
   }
-}
-
-// Application entry
-k_task_t k_application_entry;
-uint8_t k_application_entry_stk[APPLICATION_ENTRY_SIZE];
-
-void application_entry(void *arg)
-{
-  printf("Hello TOS!\r\n");
-  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
-                  4, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
-  tos_task_create(&k_led_switch_rgb, "led_switch_rgb", led_switch_rgb, NULL,
-                  8, k_led_switch_rgb_stk, LED_TASK_STK_SIZE, 0);
-  tos_task_create(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
-                      4, k_wifi_connect_stk, WIFI_TEST_CONNECT_SIZE, 0);
-  tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
-                      7, k_console_printf_debug_stk,CONSOLE_PRINTF_DEBUG_SIZE, 0);
-  // tos_task_create(&k_ntp_time_sync, "ntp_time_sync", task_ntp_time_sync, NULL,
-  //                     4, k_ntp_time_sync_stk, NTP_TIME_SYNC_SIZE, 0);
 }

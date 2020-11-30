@@ -139,14 +139,28 @@ int main(void)
   indev_drv.read_cb = my_touchpad_read;   /*Set your driver function*/
   lv_indev_drv_register(&indev_drv);      /*Finally register the driver*/
 
+  show_init_image();
+  update_main_page();
+
   tos_knl_init();
   // Mutex creation
   tos_mutex_create(&pb8_pb9_mutex);
   tos_mutex_create(&display_touch_locker);
+  tos_mutex_create(&rtc_update_locker);
+  tos_mutex_create(&temp_update_locker);
   // Completion creation
   tos_completion_create(&wifi_connect_success);
-  tos_task_create(&k_application_entry, "application_entry", application_entry, NULL,
-                  4, k_application_entry_stk, APPLICATION_ENTRY_SIZE, 0);
+  tos_completion_create(&sntp_success);
+  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
+                  4, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+  tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
+                      4, WIFI_TEST_CONNECT_SIZE, 0);
+  tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
+                  7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
+  tos_task_create(&k_rtc_update, "rtc_update", task_rtc_update, NULL,
+                  4, k_rtc_update_stk, RTC_UPDATE_SIZE, 0);
+  tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,
+                  2, k_temp_update_stk, TEMP_UPDATE_SIZE, 0);
   tos_knl_start();
 
   /* USER CODE END 2 */
