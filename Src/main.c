@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "fatfs.h"
 #include "rtc.h"
 #include "sdio.h"
@@ -114,11 +115,14 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM4_Init();
   MX_RTC_Init();
+  MX_ADC1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim6);
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+  HAL_ADCEx_Calibration_Start(&hadc1);
+
   LCD_Init();
   lv_init();
   XPT2046_Init();
@@ -139,9 +143,6 @@ int main(void)
   indev_drv.read_cb = my_touchpad_read;   /*Set your driver function*/
   lv_indev_drv_register(&indev_drv);      /*Finally register the driver*/
 
-  show_init_image();
-  update_main_page();
-
   tos_knl_init();
   // Mutex creation
   tos_mutex_create(&pb8_pb9_mutex);
@@ -151,8 +152,8 @@ int main(void)
   // Completion creation
   tos_completion_create(&wifi_connect_success);
   tos_completion_create(&sntp_success);
-  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
-                  4, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+  tos_task_create_dyn(&k_init_image, "init_image", task_init_image, NULL,
+                      3, INIT_IMAGE_SIZE, 0);
   tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
                       4, WIFI_TEST_CONNECT_SIZE, 0);
   tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
@@ -212,8 +213,9 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC | RCC_PERIPHCLK_ADC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -221,11 +223,41 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+uint16_t lcd_timer_tick = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (htim->Instance == TIM2)
   {
     lv_tick_inc(1);
+
+    lcd_timer_tick++;
+    if (lcd_timer_tick >= 1000)
+    {
+      lcd_adc_read();
+      printf("value read\r\n");
+      if (lcd_adc_index == 10)
+      {
+        lcd_adc_index = 0;
+        lcd_adc_average = 0;
+        int i = 0;
+        for (int i = 0; i < 10; ++i)
+        {
+          lcd_adc_average += lcd_adc_sample_list[i];
+        }
+        lcd_adc_average /= 10;
+        printf("ADC avg: %d\r\n", lcd_adc_average);
+        int lcd_pwm_result = (int)(LCD_ADC_2_PWM_K*lcd_adc_average + LCD_ADC_2_PWM_B);
+        if (lcd_pwm_value > LCD_MAX_PWM_PULSE) {
+          lcd_pwm_result = LCD_MAX_PWM_PULSE;
+        } else if (lcd_pwm_result < LCD_MIN_PWM_PULSE) {
+          lcd_pwm_result = LCD_MIN_PWM_PULSE;
+        }
+        printf("PWM result: %d\r\n", lcd_pwm_result);
+        lcd_pwm_set_value(lcd_pwm_result);
+      }
+
+      lcd_timer_tick = 0;
+    }
   }
 }
 /* USER CODE END 4 */

@@ -9,6 +9,7 @@
 #include "tools.h"
 #include "display_content.h"
 #include "temp_sensor.h"
+#include "pwm_control.h"
 
 // Global variables
 int rtc_hour = 0;
@@ -46,12 +47,25 @@ void led_switch_rgb(void *pdata)
   }
 }
 
+// Init image
+k_task_t *k_init_image;
+
+void task_init_image(void *pdata)
+{
+  lcd_pwm_set_value(0);
+  show_init_image();
+  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
+                  4, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+}
+
 // LCD display and touch screen
 k_task_t k_display_touch;
 uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 
 void task_display_touch(void *pdata)
 {
+  tos_task_destroy(k_init_image);
+
   k_err_t err;
 
   while (K_TRUE)
@@ -68,7 +82,6 @@ void task_display_touch(void *pdata)
 
 // Wifi initialization and connection to AP
 k_task_t *k_wifi_connect;
-// uint8_t k_wifi_connect_stk[WIFI_TEST_CONNECT_SIZE];
 char *wifi_ssid = "ASD";
 char *wifi_pwd = "qwertyuiop";
 
@@ -126,9 +139,34 @@ void task_tcp_test(void *pdata)
 
 #endif
 
+// TCP task
+k_task_t k_tcp_task;
+char *server_ip = "45.76.101.197";
+char *server_port = "4000";
+int tcp_socket_id = -1;
+
+void task_tcp_task(void *pdata)
+{
+  tcp_socket_id = tos_sal_module_connect(server_ip, server_port, TOS_SAL_PROTO_TCP);
+  if (tcp_socket_id == -1)
+  {
+    printf("TCP0 connect failed\r\n");
+  }
+  else
+  {
+    printf("TCP0 connect success! fd: %d\n", tcp_socket_id);
+    tos_sal_module_send(tcp_socket_id, (const void *)"This is TCP Test!\r\n", strlen("This is TCP Test!\r\n"));
+  }
+  tos_sleep_ms(1000);
+  tcp_socket_id = tos_sal_module_close(tcp_socket_id);
+  if (tcp_socket_id != -1)
+  {
+    printf("Close connection success!");
+  }
+}
+
 // NTP time sync
 k_task_t *k_ntp_time_sync;
-// uint8_t k_ntp_time_sync_stk[NTP_TIME_SYNC_SIZE];
 
 void task_ntp_time_sync(void *pdata)
 {

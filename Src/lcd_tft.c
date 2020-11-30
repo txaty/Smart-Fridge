@@ -180,7 +180,7 @@ void LCD_REG_Config(void)
 
 void LCD_Init(void)
 {
-	LCD_BackLed_Control(ENABLE);
+	// LCD_BackLed_Control(ENABLE);
 	LCD_Rst();
 	LCD_REG_Config();
 }

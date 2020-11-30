@@ -15,17 +15,25 @@ void show_init_image()
     team_logo_img = lv_img_create(lv_scr_act(), NULL);
     lv_img_set_src(team_logo_img, &team_logo);
     lv_obj_set_pos(team_logo_img, 24, 20);
+    tos_knl_sched_lock();
     lv_task_handler();
-    HAL_Delay(500);
+    tos_knl_sched_unlock();
+    tos_sleep_ms(500);
     lv_obj_clean(lv_scr_act());
 
     name_img = lv_img_create(lv_scr_act(), NULL);
     lv_img_set_src(name_img, &name);
     lv_obj_set_pos(name_img, 40, 70);
+    tos_knl_sched_lock();
     lv_task_handler();
-    HAL_Delay(1000);
+    tos_knl_sched_unlock();
+    tos_sleep_ms(1000);
+    while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE)
+        ;
     lv_obj_clean(lv_scr_act());
     lv_task_handler();
+
+    update_main_page();
 }
 
 lv_obj_t *time_label;
@@ -96,7 +104,7 @@ static void create_clock()
     lv_task_create(clock_event_update, 5000, LV_TASK_PRIO_LOW, NULL);
 }
 
-static  temp_label_event_update(void *p)
+static temp_label_event_update(void *p)
 {
     k_err_t err;
     err = tos_mutex_pend(&temp_update_locker);

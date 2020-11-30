@@ -67,7 +67,7 @@ extern UART_HandleTypeDef huart3;
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M3 Processor Interruption and Exception Handlers          */
+/*           Cortex-M3 Processor Interruption and Exception Handlers          */ 
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -203,9 +203,9 @@ void EXTI0_IRQHandler(void)
   tos_knl_irq_enter();
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_0) != RESET)
   {
-    if (pwm_value > MIN_PWM_PULSE)
+    if (lcd_pwm_value > LCD_MIN_PWM_PULSE)
     {
-      PWM_SetValue(pwm_value--);
+      lcd_pwm_set_value(lcd_pwm_value--);
     }
     printf("Key 1 pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
@@ -213,7 +213,7 @@ void EXTI0_IRQHandler(void)
   }
   tos_knl_irq_leave();
   /* USER CODE END EXTI0_IRQn 0 */
-  //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
@@ -228,9 +228,9 @@ void EXTI1_IRQHandler(void)
   tos_knl_irq_enter();
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET)
   {
-    if (pwm_value < MAX_PWM_PULSE)
+    if (lcd_pwm_value < LCD_MAX_PWM_PULSE)
     {
-      PWM_SetValue(pwm_value++);
+      lcd_pwm_set_value(lcd_pwm_value++);
     }
     printf("Key cap pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
@@ -238,7 +238,7 @@ void EXTI1_IRQHandler(void)
   }
   tos_knl_irq_leave();
   /* USER CODE END EXTI1_IRQn 0 */
-  // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
 
   /* USER CODE END EXTI1_IRQn 1 */

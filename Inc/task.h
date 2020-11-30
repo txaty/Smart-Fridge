@@ -28,6 +28,12 @@ extern uint8_t k_led_switch_rgb_stk[LED_TASK_STK_SIZE];
 
 void led_switch_rgb(void *pdata);
 
+// Init images
+#define INIT_IMAGE_SIZE 4096
+extern k_task_t *k_init_image;
+
+void task_init_image(void *pdata);
+
 // LCD display and touch screen
 #define DISPLAY_TOUCH_TASK_SIZE 4096
 extern k_task_t k_display_touch;
@@ -36,7 +42,7 @@ extern uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 void task_display_touch(void *pdata);
 
 // Wifi connection test
-#define WIFI_TEST_CONNECT_SIZE 2048
+#define WIFI_TEST_CONNECT_SIZE 4096
 extern k_task_t *k_wifi_connect;
 extern char *wifi_ssid;
 extern char *wifi_pwd;
@@ -56,7 +62,14 @@ void task_tcp_test(void *pdata);
 
 #endif
 
+// TCP task
+#define TCP_TASK_SIZE 4096
+extern k_task_t k_tcp_task;
+extern char *server_ip;
+extern char *server_port;
+extern int tcp_socket_id;
 
+void task_tcp_task(void *pdata);
 
 //NTP time sync
 #define NTP_TIME_SYNC_SIZE 4096
