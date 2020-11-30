@@ -3,8 +3,9 @@
 
 uint16_t temp_pwm_value = 120;
 uint16_t lcd_pwm_value = 120;
+uint16_t target_temp = 10;
 
-uint32_t lcd_adc_sample_list[10] = {0};
+uint32_t lcd_adc_sample_list[5] = {0};
 uint32_t lcd_adc_average = 0;
 uint8_t lcd_adc_index = 0;
 
@@ -28,7 +29,7 @@ uint8_t lcd_pwm_set_value(uint16_t value)
 
 void lcd_adc_read(void)
 {
-    if (lcd_adc_index == 10) {
+    if (lcd_adc_index == 5) {
         lcd_adc_index = 0;
     }
     HAL_ADC_Start(&hadc1);

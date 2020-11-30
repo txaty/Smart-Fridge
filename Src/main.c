@@ -154,12 +154,12 @@ int main(void)
   tos_completion_create(&sntp_success);
   tos_task_create_dyn(&k_init_image, "init_image", task_init_image, NULL,
                       3, INIT_IMAGE_SIZE, 0);
-  tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
-                      4, WIFI_TEST_CONNECT_SIZE, 0);
-  tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
-                  7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
-  tos_task_create(&k_rtc_update, "rtc_update", task_rtc_update, NULL,
-                  4, k_rtc_update_stk, RTC_UPDATE_SIZE, 0);
+  // tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
+  //                     4, WIFI_TEST_CONNECT_SIZE, 0);
+  // tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
+  //                 7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
+  // tos_task_create(&k_rtc_update, "rtc_update", task_rtc_update, NULL,
+  //                 4, k_rtc_update_stk, RTC_UPDATE_SIZE, 0);
   tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,
                   2, k_temp_update_stk, TEMP_UPDATE_SIZE, 0);
   tos_knl_start();
@@ -231,28 +231,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     lv_tick_inc(1);
 
     lcd_timer_tick++;
-    if (lcd_timer_tick >= 1000)
+    if (lcd_timer_tick >= 1500)
     {
       lcd_adc_read();
-      printf("value read\r\n");
-      if (lcd_adc_index == 10)
+      if (lcd_adc_index == 5)
       {
         lcd_adc_index = 0;
         lcd_adc_average = 0;
         int i = 0;
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < 5; ++i)
         {
           lcd_adc_average += lcd_adc_sample_list[i];
         }
-        lcd_adc_average /= 10;
-        printf("ADC avg: %d\r\n", lcd_adc_average);
+        lcd_adc_average /= 5;
         int lcd_pwm_result = (int)(LCD_ADC_2_PWM_K*lcd_adc_average + LCD_ADC_2_PWM_B);
         if (lcd_pwm_value > LCD_MAX_PWM_PULSE) {
           lcd_pwm_result = LCD_MAX_PWM_PULSE;
         } else if (lcd_pwm_result < LCD_MIN_PWM_PULSE) {
           lcd_pwm_result = LCD_MIN_PWM_PULSE;
         }
-        printf("PWM result: %d\r\n", lcd_pwm_result);
         lcd_pwm_set_value(lcd_pwm_result);
       }
 

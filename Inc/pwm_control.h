@@ -18,8 +18,9 @@
 
 extern uint16_t temp_pwm_value;
 extern uint16_t lcd_pwm_value;
+extern uint16_t target_temp;
 
-extern uint32_t lcd_adc_sample_list[10];
+extern uint32_t lcd_adc_sample_list[5];
 extern uint32_t lcd_adc_average;
 extern uint8_t lcd_adc_index;
 

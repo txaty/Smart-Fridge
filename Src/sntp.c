@@ -9,6 +9,7 @@ int set_rtc_time(struct tm* local_time)
     rtc_timer.Hours = local_time->tm_hour;
     rtc_timer.Minutes = local_time->tm_min;
     rtc_timer.Seconds = local_time->tm_sec;
+    printf("%d, %d\r\n", local_time->tm_hour, local_time->tm_min);
     HAL_RTC_SetTime(SYSTEM_RTC, &rtc_timer, RTC_FORMAT_BIN);
     return 0;
 }

@@ -67,14 +67,24 @@ void task_display_touch(void *pdata)
   tos_task_destroy(k_init_image);
 
   k_err_t err;
-
+  int refresh_counter = 0;
   while (K_TRUE)
   {
-    err = tos_mutex_pend(&display_touch_locker);
-    if (err == K_ERR_NONE)
+    if (flag_lvgl_enable)
     {
-      lv_task_handler();
-      tos_mutex_post(&display_touch_locker);
+      err = tos_mutex_pend(&display_touch_locker);
+      if (err == K_ERR_NONE)
+      {
+        if (refresh_counter >= 200)
+        {
+          lv_event_send_refresh(temp_label);
+          lv_event_send_refresh(time_label);
+          refresh_counter = 0;
+        }
+        lv_task_handler();
+        refresh_counter++;
+        tos_mutex_post(&display_touch_locker);
+      }
     }
     tos_sleep_ms(10);
   }
@@ -103,7 +113,7 @@ void task_wifi_connect(void *pdata)
         printf("AP joning success\n");
         tos_completion_post(&wifi_connect_success);
         tos_task_create_dyn(&k_ntp_time_sync, "ntp_time_sync", task_ntp_time_sync, NULL,
-                            4, NTP_TIME_SYNC_SIZE, 0);
+                            2, NTP_TIME_SYNC_SIZE, 0);
       }
     }
   }
@@ -172,37 +182,12 @@ void task_ntp_time_sync(void *pdata)
 {
   while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE)
     ;
+  printf("start sntp\r\n");
   tos_task_destroy(k_wifi_connect);
   ntp_client();
 
   tos_completion_post(&sntp_success);
-}
-
-//RTC update
-k_task_t k_rtc_update;
-uint8_t k_rtc_update_stk[RTC_UPDATE_SIZE];
-
-void task_rtc_update(void *pdata)
-{
-  while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
-    ;
-
-  tos_task_destroy(k_ntp_time_sync);
-  k_err_t err;
-
-  while (K_TRUE)
-  {
-    err = tos_mutex_pend(&rtc_update_locker);
-    if (err == K_ERR_NONE)
-    {
-      RTC_TimeTypeDef rtc_timer;
-      HAL_RTC_GetTime(&hrtc, &rtc_timer, RTC_FORMAT_BIN);
-      rtc_hour = rtc_timer.Hours;
-      rtc_minutes = rtc_timer.Minutes;
-      tos_mutex_post(&rtc_update_locker);
-    }
-    tos_sleep_ms(3000);
-  }
+  tos_task_destroy(NULL);
 }
 
 // Temperature update
@@ -222,12 +207,11 @@ void task_temp_update(void *pdata)
       if (err == K_ERR_NONE)
       {
         fridge_temp = (int)DS18B20_GetCelsiusTemp();
-        printf("%d\r\n", fridge_temp);
       }
       tos_knl_sched_unlock();
       tos_mutex_post(&temp_update_locker);
     }
-    tos_sleep_ms(500);
+    tos_sleep_ms(2000);
   }
 }
 
@@ -258,6 +242,8 @@ void task_sdio(void *pdata)
 }
 
 // Console printf debug
+#if CONSOLE_PRINTF_DEBUG_ENABLE
+
 k_task_t k_console_printf_debug;
 uint8_t k_console_printf_debug_stk[CONSOLE_PRINTF_DEBUG_SIZE];
 
@@ -282,3 +268,5 @@ void task_console_printf_debug(void *pdata)
     tos_sleep_ms(1000);
   }
 }
+
+#endif

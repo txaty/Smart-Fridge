@@ -5,6 +5,7 @@
 #include "tos_k.h"
 
 #define TCP_TEST_ENABLE 0
+#define CONSOLE_PRINTF_DEBUG_ENABLE 0
 
 // Global variables
 extern int rtc_hour;
@@ -77,12 +78,6 @@ extern k_task_t *k_ntp_time_sync;
 
 void task_ntp_time_sync(void *pdata);
 
-//RTC update
-#define RTC_UPDATE_SIZE 512
-extern k_task_t k_rtc_update;
-extern uint8_t k_rtc_update_stk[RTC_UPDATE_SIZE];
-
-void task_rtc_update(void *pdata);
 
 // Temperature update
 #define TEMP_UPDATE_SIZE 512
@@ -99,10 +94,14 @@ extern uint8_t k_sdio_stk[SDIO_TASK_SIZE];
 void task_sdio(void *pdata);
 
 // Console printf debug
+#if CONSOLE_PRINTF_DEBUG_ENABLE
+
 #define CONSOLE_PRINTF_DEBUG_SIZE 512
 extern k_task_t k_console_printf_debug;
 extern uint8_t k_console_printf_debug_stk[CONSOLE_PRINTF_DEBUG_SIZE];
 
 void task_console_printf_debug(void *pdata);
+
+#endif
 
 #endif
