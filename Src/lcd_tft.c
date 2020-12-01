@@ -1,4 +1,5 @@
 #include "lcd_tft.h"
+#include "bsp_ov7725.h"
 
 // TFT variables
 const float COOR_X_K = 0.09f;
@@ -206,32 +207,30 @@ uint16_t LCD_Read_Data(void)
 	return (*(__IO uint16_t *)(FSMC_Addr_LCD_DATA));
 }
 
-static inline void LCD_OpenWindow ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight )
-{	
-	LCD_Write_Cmd ( CMD_Set_COLUMN ); 				
-	LCD_Write_Data ( usCOLUMN >> 8  );	 
-	LCD_Write_Data ( usCOLUMN & 0xff  );	 
-	LCD_Write_Data ( ( usCOLUMN + usWidth - 1 ) >> 8  );
-	LCD_Write_Data ( ( usCOLUMN + usWidth - 1 ) & 0xff  );
+static inline void LCD_OpenWindow(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight)
+{
+	LCD_Write_Cmd(CMD_Set_COLUMN);
+	LCD_Write_Data(usCOLUMN >> 8);
+	LCD_Write_Data(usCOLUMN & 0xff);
+	LCD_Write_Data((usCOLUMN + usWidth - 1) >> 8);
+	LCD_Write_Data((usCOLUMN + usWidth - 1) & 0xff);
 
-	LCD_Write_Cmd ( CMD_Set_PAGE ); 			     
-	LCD_Write_Data ( usPAGE >> 8  );
-	LCD_Write_Data ( usPAGE & 0xff  );
-	LCD_Write_Data ( ( usPAGE + usHeight - 1 ) >> 8 );
-	LCD_Write_Data ( ( usPAGE + usHeight - 1) & 0xff );
-	
+	LCD_Write_Cmd(CMD_Set_PAGE);
+	LCD_Write_Data(usPAGE >> 8);
+	LCD_Write_Data(usPAGE & 0xff);
+	LCD_Write_Data((usPAGE + usHeight - 1) >> 8);
+	LCD_Write_Data((usPAGE + usHeight - 1) & 0xff);
 }
 
-static inline void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
+static inline void LCD_FillColor(uint32_t usPoint, uint16_t usColor)
 {
 	uint32_t i = 0;
-	
+
 	/* memory write */
-	LCD_Write_Cmd ( CMD_SetPixel );	
-		
-	for ( i = 0; i < usPoint; i ++ )
-		LCD_Write_Data ( usColor );
-		
+	LCD_Write_Cmd(CMD_SetPixel);
+
+	for (i = 0; i < usPoint; i++)
+		LCD_Write_Data(usColor);
 }
 
 static inline void LCD_Clear(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight, uint16_t usColor)
@@ -279,10 +278,10 @@ static inline void LCD_DrawDot(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usCo
 	LCD_Write_Data(usColor);
 }
 
-inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
+void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
 	int32_t x, y;
-	
+
 	for (y = area->y1; y <= area->y2; y++)
 	{
 		for (x = area->x1; x <= area->x2; x++)
@@ -294,6 +293,23 @@ inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 	lv_disp_flush_ready(disp);
 }
 
+void ImagDisp(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height)
+{
+	uint16_t i, j; 
+	uint16_t Camera_Data;
+	
+	ILI9341_OpenWindow(sx,sy,width,height);
+	ILI9341_Write_Cmd ( CMD_SetPixel );	
+
+	for(i = 0; i < width; i++)
+	{
+		for(j = 0; j < height; j++)
+		{
+			READ_FIFO_PIXEL(Camera_Data);		/* 从FIFO读出一个rgb565像素到Camera_Data变量 */
+			ILI9341_Write_Data(Camera_Data);
+		}
+	}
+}
 
 // TFT functions
 void XPT2046_Init(void)

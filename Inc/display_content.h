@@ -13,5 +13,6 @@ extern uint8_t temp_label_state;
 
 void show_init_image(void);
 void update_main_page(void);
+void create_camera_init_label(void);
 
 #endif

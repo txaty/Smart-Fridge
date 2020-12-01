@@ -16,6 +16,9 @@
 #define LCD_ADC_2_PWM_K 0.08f
 #define LCD_ADC_2_PWM_B -160
 
+#define TARGET_TEMP_MAX 30
+#define TARGET_TEMP_MIN -10
+
 extern uint16_t temp_pwm_value;
 extern uint16_t lcd_pwm_value;
 extern uint16_t target_temp;

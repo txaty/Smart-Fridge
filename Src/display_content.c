@@ -34,8 +34,6 @@ void show_init_image()
     lv_obj_clean(lv_scr_act());
     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_RED_GPIO_PIN);
 
-    tos_task_create_dyn(&k_led_connecting_wifi, "led_connecting_wifi", task_led_connecting_wifi, NULL,
-                        6, LED_TASK_STK_SIZE, 0);
     name_img = lv_img_create(lv_scr_act(), NULL);
     lv_img_set_src(name_img, &name);
     lv_obj_set_pos(name_img, 40, 70);
@@ -43,10 +41,10 @@ void show_init_image()
     lv_task_handler();
     tos_knl_sched_unlock();
     tos_sleep_ms(1000);
-    while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
-    {
-        tos_sleep_ms(100);
-    }
+    // while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
+    // {
+    //     tos_sleep_ms(100);
+    // }
     lv_obj_clean(lv_scr_act());
     lv_task_handler();
 
@@ -83,6 +81,7 @@ static void clock_event_handler(lv_obj_t *obj, lv_event_t event)
             sprintf(time_label_string, "%d : %d", rtc_hour, rtc_minutes);
         }
         lv_label_set_text(obj, time_label_string);
+        lv_obj_align(time_label, NULL, LV_ALIGN_IN_TOP_MID, 0, 30);
         break;
     }
 }
@@ -92,8 +91,8 @@ static void create_clock()
     static lv_style_t clock_digit_style;
     lv_style_init(&clock_digit_style);
 
-    lv_style_set_radius(&clock_digit_style, LV_STATE_DEFAULT, 5);
-    lv_style_set_bg_color(&clock_digit_style, LV_STATE_DEFAULT, LV_COLOR_SILVER);
+    // lv_style_set_radius(&clock_digit_style, LV_STATE_DEFAULT, 5);
+    // lv_style_set_bg_color(&clock_digit_style, LV_STATE_DEFAULT, LV_COLOR_SILVER);
 
     lv_style_set_text_color(&clock_digit_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     lv_style_set_text_letter_space(&clock_digit_style, LV_STATE_DEFAULT, 5);
@@ -144,6 +143,28 @@ static void temp_label_event_handler(lv_obj_t *obj, lv_event_t event)
     }
 }
 
+static void temp_increment_button_event_handler(lv_obj_t *obj, lv_event_t event)
+{
+    if (event == LV_EVENT_SHORT_CLICKED || event == LV_EVENT_LONG_PRESSED_REPEAT)
+    {
+        if (target_temp < TARGET_TEMP_MAX)
+        {
+            target_temp++;
+        }
+    }
+}
+
+static void temp_decrement_button_event_handler(lv_obj_t *obj, lv_event_t event)
+{
+    if (event == LV_EVENT_SHORT_CLICKED || event == LV_EVENT_LONG_PRESSED_REPEAT)
+    {
+        if (target_temp > TARGET_TEMP_MIN)
+        {
+            target_temp--;
+        }
+    }
+}
+
 static void temp_background_event_handler(lv_obj_t *obj, lv_event_t event)
 {
     if (event == LV_EVENT_CLICKED)
@@ -153,8 +174,8 @@ static void temp_background_event_handler(lv_obj_t *obj, lv_event_t event)
         if (temp_label_state)
         {
             sprintf(temp_label_string, "Temperature: %d", fridge_temp);
-            lv_obj_clean(temp_decrement_button);
-            lv_obj_clean(temp_increment_button);
+            lv_obj_del(temp_decrement_button);
+            lv_obj_del(temp_increment_button);
         }
         else
         {
@@ -162,15 +183,17 @@ static void temp_background_event_handler(lv_obj_t *obj, lv_event_t event)
 
             lv_coord_t h = lv_obj_get_height(obj);
             temp_increment_button = lv_btn_create(lv_scr_act(), NULL);
+            lv_obj_set_style_local_bg_color(temp_increment_button, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
             lv_obj_set_size(temp_increment_button, h, h);
             lv_obj_align(temp_increment_button, obj, LV_ALIGN_OUT_RIGHT_MID, 5, 0);
-            lv_theme_apply(temp_increment_button, LV_THEME_SPINBOX_BTN);
             lv_obj_set_style_local_value_str(temp_increment_button, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_SYMBOL_PLUS);
 
             temp_decrement_button = lv_btn_create(lv_scr_act(), temp_increment_button);
             lv_obj_align(temp_decrement_button, obj, LV_ALIGN_OUT_LEFT_MID, -5, 0);
-            // lv_obj_set_event_cb(btn, lv_spinbox_decrement_event_cb);
             lv_obj_set_style_local_value_str(temp_decrement_button, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_SYMBOL_MINUS);
+
+            lv_obj_set_event_cb(temp_increment_button, temp_increment_button_event_handler);
+            lv_obj_set_event_cb(temp_decrement_button, temp_decrement_button_event_handler);
         }
         lv_label_set_text(temp_label, temp_label_string);
         lv_obj_align(temp_label, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -196,43 +219,64 @@ static void create_temp_label()
     lv_obj_set_event_cb(temp_background, temp_background_event_handler);
 }
 
-static void event_handler(lv_obj_t *obj, lv_event_t event)
+void create_camera_init_label(void)
 {
-    if (event == LV_EVENT_CLICKED)
+    lv_obj_clean(lv_scr_act());
+    lv_obj_t *camera_init_label;
+    camera_init_label = lv_label_create(lv_scr_act(), NULL);
+    lv_label_set_text(camera_init_label, "CAMERA INITIALIZATION");
+    lv_obj_set_style_local_text_font(camera_init_label, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, &lv_font_montserrat_18);
+    lv_obj_align(camera_init_label, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
+}
+
+static void camera_button_event_handler(lv_obj_t *obj, lv_event_t event)
+{
+
+    if (event == LV_EVENT_RELEASED)
     {
-        printf("Clicked\n");
+        create_camera_init_label();
+        tos_task_create_dyn(&k_camera_init, "camera_init", task_camera_init, NULL,
+                            2, CAMERA_INIT_SIZE, 0);
     }
-    else if (event == LV_EVENT_VALUE_CHANGED)
-    {
-        printf("Toggled\n");
-    }
+}
+
+static void server_button_event_handler(lv_obj_t *obj, lv_event_t event)
+{
 }
 
 static void create_buttons()
 {
     lv_obj_t *label;
 
-    lv_obj_t *btn1 = lv_btn_create(lv_scr_act(), NULL);
-    lv_obj_set_event_cb(btn1, event_handler);
-    lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, 0, -40);
+    lv_obj_t *camera_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_set_size(camera_button, 80, 40);
+    lv_obj_set_style_local_bg_color(camera_button, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+    lv_obj_align(camera_button, NULL, LV_ALIGN_IN_BOTTOM_MID, -50, -30);
 
-    label = lv_label_create(btn1, NULL);
-    lv_label_set_text(label, "Button");
+    label = lv_label_create(camera_button, NULL);
+    lv_label_set_recolor(label, true);
+    lv_label_set_text(label, "#ffffff CAMERA#");
 
-    lv_obj_t *btn2 = lv_btn_create(lv_scr_act(), NULL);
-    lv_obj_set_event_cb(btn2, event_handler);
-    lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 0, 40);
-    lv_btn_set_checkable(btn2, true);
-    lv_btn_toggle(btn2);
-    lv_btn_set_fit2(btn2, LV_FIT_NONE, LV_FIT_TIGHT);
+    lv_obj_t *server_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_set_size(server_button, 80, 40);
+    lv_obj_set_style_local_bg_color(server_button, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+    lv_obj_align(server_button, NULL, LV_ALIGN_IN_BOTTOM_MID, 50, -30);
 
-    label = lv_label_create(btn2, NULL);
-    lv_label_set_text(label, "Toggled");
+    label = lv_label_create(server_button, NULL);
+    lv_label_set_recolor(label, true);
+    lv_label_set_text(label, "#ffffff SERVER#");
+
+    lv_obj_set_event_cb(camera_button, camera_button_event_handler);
+    lv_obj_set_event_cb(server_button, server_button_event_handler);
 }
 
 void update_main_page()
 {
     create_clock();
     create_temp_label();
-    // create_buttons();
+    create_buttons();
+}
+
+void clear_main_page()
+{
 }

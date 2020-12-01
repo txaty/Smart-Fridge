@@ -93,13 +93,13 @@ void task_init_image(void *pdata)
 {
   lcd_pwm_set_value(0);
   show_init_image();
-  tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
-                  2, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+  tos_task_create_dyn(&k_display_touch, "display_touch", task_display_touch, NULL,
+                      2, DISPLAY_TOUCH_TASK_SIZE, 0);
 }
 
 // LCD display and touch screen
-k_task_t k_display_touch;
-uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
+k_task_t *k_display_touch;
+// uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 
 void task_display_touch(void *pdata)
 {
@@ -125,7 +125,7 @@ void task_display_touch(void *pdata)
         tos_mutex_post(&display_touch_locker);
       }
     }
-    tos_sleep_ms(10);
+    tos_sleep_ms(5);
   }
 }
 
@@ -256,6 +256,23 @@ void task_temp_update(void *pdata)
     }
     tos_sleep_ms(2000);
   }
+}
+
+// Camera initialization
+k_task_t k_camera_init;
+
+void task_camera_init(void *pdata)
+{
+  while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
+  {
+    tos_sleep_ms(100);
+  }
+  lv_deinit();
+  tos_task_suspend(task_display_touch);
+  
+  switch_pin_for_camera();
+
+  
 }
 
 // SDIO test

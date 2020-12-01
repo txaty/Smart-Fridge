@@ -97,9 +97,7 @@ typedef enum
 // LCD functions
 void LCD_Init(void);
 void LCD_Rst(void);
-uint16_t LCD_Read_PixelData(void);
-void LCD_BackLed_Control(FunctionalState enumState);
-void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
 
 // TFT functions
 void XPT2046_Init(void);

@@ -22,6 +22,7 @@
 #include "main.h"
 #include "adc.h"
 #include "fatfs.h"
+#include "iwdg.h"
 #include "rtc.h"
 #include "sdio.h"
 #include "tim.h"
@@ -88,6 +89,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
+  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -117,6 +119,7 @@ int main(void)
   MX_RTC_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
+  MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim6);
   HAL_TIM_Base_Start_IT(&htim2);
@@ -127,21 +130,23 @@ int main(void)
   lv_init();
   XPT2046_Init();
   lv_disp_buf_t disp_buf;
-  lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];                         /*Declare a buffer for 1/10 screen size*/
-  lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX / 10); /*Initialize the display buffer*/
+  lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];                         
+  lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX / 10); 
 
-  lv_disp_drv_t disp_drv;      /*Descriptor of a display driver*/
-  lv_disp_drv_init(&disp_drv); /*Basic initialization*/
+  lv_disp_drv_t disp_drv;     
+  lv_disp_drv_init(&disp_drv); 
 
-  disp_drv.flush_cb = my_disp_flush; /*Set your driver function*/
-  disp_drv.buffer = &disp_buf;       /*Assign the buffer to the display*/
-  lv_disp_drv_register(&disp_drv);   /*Finally register the driver*/
+  disp_drv.flush_cb = my_disp_flush; 
+  disp_drv.buffer = &disp_buf;       
+  lv_disp_drv_register(&disp_drv); 
 
-  lv_indev_drv_t indev_drv;               /*Descriptor of a input device driver*/
-  lv_indev_drv_init(&indev_drv);          /*Basic initialization*/
-  indev_drv.type = LV_INDEV_TYPE_POINTER; /*Touch pad is a pointer-like device*/
-  indev_drv.read_cb = my_touchpad_read;   /*Set your driver function*/
-  lv_indev_drv_register(&indev_drv);      /*Finally register the driver*/
+  lv_indev_drv_t indev_drv;             
+  lv_indev_drv_init(&indev_drv);       
+  indev_drv.type = LV_INDEV_TYPE_POINTER;
+  indev_drv.read_cb = my_touchpad_read;  
+  lv_indev_drv_register(&indev_drv);     
+
+  // OV7725_Init();
 
   tos_knl_init();
   // Mutex creation
@@ -154,8 +159,8 @@ int main(void)
   tos_completion_create(&sntp_success);
   tos_task_create_dyn(&k_init_image, "init_image", task_init_image, NULL,
                       3, INIT_IMAGE_SIZE, 0);
-  tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
-                      4, WIFI_TEST_CONNECT_SIZE, 0);
+  // tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
+  //                     4, WIFI_TEST_CONNECT_SIZE, 0);
   // tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
   //                 7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
   tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,
@@ -187,7 +192,7 @@ void SystemClock_Config(void)
 
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -201,7 +206,8 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -211,7 +217,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC | RCC_PERIPHCLK_ADC;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_ADC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
@@ -252,6 +258,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       }
 
       lcd_timer_tick = 0;
+
+      HAL_IWDG_Refresh(&hiwdg);
     }
   }
 }
@@ -269,7 +277,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -278,7 +286,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{
+{ 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
