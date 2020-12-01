@@ -128,6 +128,7 @@ int main(void)
   HAL_ADCEx_Calibration_Start(&hadc1);
 
   LCD_Init();
+  LCD_GramScan(6);
   lv_init();
   XPT2046_Init();
   lv_disp_buf_t disp_buf;
@@ -166,6 +167,10 @@ int main(void)
   //                 7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
   tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,
                   2, k_temp_update_stk, TEMP_UPDATE_SIZE, 0);
+  // tos_task_create(&k_task_sdio, "sdio_test", task_sdio, NULL,
+  //                 1, k_sdio_stk, SDIO_TASK_SIZE, 0);
+  // tos_task_create_dyn(&k_camera_init, "camera_init", task_camera_init, NULL,
+  //                     2, CAMERA_INIT_SIZE, 0);
   tos_knl_start();
 
   /* USER CODE END 2 */
@@ -177,6 +182,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    // if (Ov7725_vsync == 2)
+    // {
+    //   printf("Fetch image\r\n");
+    //   FIFO_PREPARE;
+    //   Ov7725_vsync = 0;
+    //   camera_img_disp(0, 0, 320, 240);
+    // }
   }
   /* USER CODE END 3 */
 }
@@ -274,7 +286,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         alarm_counter = 0;
       }
 
-      if (alarm_counter >= 40)
+      if (alarm_counter >= 20)
       {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
       }

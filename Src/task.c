@@ -12,10 +12,12 @@
 #include "pwm_control.h"
 #include "bsp_ov7725.h"
 #include "lcd_tft.h"
+#include "write_bmp.h"
 
 // Global variables
 int rtc_hour = 0;
 int rtc_minutes = 0;
+uint8_t flag_take_photo = 0;
 
 // Mutex
 k_mutex_t display_touch_locker;
@@ -254,7 +256,6 @@ void task_temp_update(void *pdata)
         tos_knl_sched_unlock();
       }
       float pid_result = temp_get_pid();
-      printf("PID: %d\r\n", (int)pid_result);
       temp_pwm_set_value(pid_result);
       tos_mutex_post(&temp_update_locker);
     }
@@ -263,7 +264,7 @@ void task_temp_update(void *pdata)
 }
 
 // Camera initialization
-k_task_t k_camera_init;
+k_task_t *k_camera_init;
 
 void task_camera_init(void *pdata)
 {
@@ -271,21 +272,52 @@ void task_camera_init(void *pdata)
   {
     tos_sleep_ms(100);
   }
-  lv_deinit();
-  tos_task_suspend(&task_display_touch);
-  
+  tos_task_suspend(&k_display_touch);
+  tos_task_suspend(&k_temp_update);
+  tos_knl_sched_lock();
   switch_pin_for_camera();
+  OV7725_GPIO_Config();
   OV7725_Init();
+  LCD_GramScan(5);
+
+  Mount_SD("/");
+  Format_SD();
+  Unmount_SD("/");
+
+  flag_take_photo = 1;
 
   while (K_TRUE)
   {
-    camera_img_disp(0, 0, 100, 100);
-    HAL_Delay(10);
+    if (flag_take_photo == 0)
+    {
+      switch_pin_for_wifi();
+
+      LCD_GramScan(6);
+      break;
+    }
+    else
+    {
+      if (Ov7725_vsync == 2)
+      {
+        FIFO_PREPARE;
+        Ov7725_vsync = 0;
+        camera_img_disp(0, 0, 320, 240);
+      }
+    }
   }
 
+  tos_knl_sched_unlock();
+  printf("run here\r\n");
+  tos_mutex_post(&display_touch_locker);
+  // tos_task_resume(&k_display_touch);
+  tos_task_resume(&k_temp_update);
+  // tos_task_destroy(NULL);
+  printf("run here\r\n");
 }
 
 // SDIO test
+#if SDIO_TEST_ENABLE
+
 k_task_t k_task_sdio;
 uint8_t k_sdio_stk[SDIO_TASK_SIZE];
 
@@ -295,6 +327,8 @@ void task_sdio(void *pdata)
   int indx = 0;
   Mount_SD("/");
   Format_SD();
+  Create_File("FILE1.TXT");
+  Create_File("FILE2.TXT");
   Unmount_SD("/");
   for (int i = 0; i < 10; ++i)
   {
@@ -310,6 +344,8 @@ void task_sdio(void *pdata)
     osDelay(2000);
   }
 }
+
+#endif
 
 // Console printf debug
 #if CONSOLE_PRINTF_DEBUG_ENABLE

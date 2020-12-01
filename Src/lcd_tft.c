@@ -7,6 +7,8 @@ const float COOR_Y_K = 0.068f;
 const int COOR_X_B = -170;
 const int COOR_Y_B = -180;
 
+uint8_t LCD_SCAN_MODE = 6;
+
 // LED functions
 void Delay(__IO uint32_t nCount)
 {
@@ -254,7 +256,7 @@ uint16_t LCD_Read_PixelData(void)
 	return (((usR >> 11) << 11) | ((usG >> 10) << 5) | (usB >> 11));
 }
 
-static inline uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE)
+uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE)
 {
 	uint16_t usPixelData;
 
@@ -278,6 +280,45 @@ static inline void LCD_DrawDot(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usCo
 	LCD_Write_Data(usColor);
 }
 
+uint16_t LCD_X_LENGTH = ILI9341_LESS_PIXEL;
+uint16_t LCD_Y_LENGTH = ILI9341_MORE_PIXEL;
+
+void LCD_GramScan(uint8_t ucOption)
+{
+	if (ucOption > 7)
+		return;
+
+	LCD_SCAN_MODE = ucOption;
+
+	if (ucOption % 2 == 0)
+	{
+		LCD_X_LENGTH = ILI9341_LESS_PIXEL;
+		LCD_Y_LENGTH = ILI9341_MORE_PIXEL;
+	}
+	else
+	{
+		LCD_X_LENGTH = ILI9341_MORE_PIXEL;
+		LCD_Y_LENGTH = ILI9341_LESS_PIXEL;
+	}
+
+	LCD_Write_Cmd(0x36);
+	LCD_Write_Data(0x08 | (ucOption << 5));
+	LCD_Write_Cmd(CMD_SetCoordinateX);
+	LCD_Write_Data(0x00);
+	LCD_Write_Data(0x00);
+	LCD_Write_Data(((LCD_X_LENGTH - 1) >> 8) & 0xFF);
+	LCD_Write_Data((LCD_X_LENGTH - 1) & 0xFF);
+
+	LCD_Write_Cmd(CMD_SetCoordinateY);
+	LCD_Write_Data(0x00);
+	LCD_Write_Data(0x00);
+	LCD_Write_Data(((LCD_Y_LENGTH - 1) >> 8) & 0xFF);
+	LCD_Write_Data((LCD_Y_LENGTH - 1) & 0xFF);
+
+	/* write gram start */
+	LCD_Write_Cmd(CMD_SetPixel);
+}
+
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
 	int32_t x, y;
@@ -293,19 +334,19 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 	lv_disp_flush_ready(disp);
 }
 
-void camera_img_disp(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height)
+void camera_img_disp(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height)
 {
-	uint16_t i, j; 
+	uint16_t i, j;
 	uint16_t Camera_Data;
-	
-	LCD_OpenWindow(sx,sy,width,height);
-	LCD_Write_Cmd( CMD_SetPixel );	
 
-	for(i = 0; i < width; i++)
+	LCD_OpenWindow(sx, sy, width, height);
+	LCD_Write_Cmd(CMD_SetPixel);
+
+	for (i = 0; i < width; i++)
 	{
-		for(j = 0; j < height; j++)
+		for (j = 0; j < height; j++)
 		{
-			READ_FIFO_PIXEL(Camera_Data);		
+			READ_FIFO_PIXEL(Camera_Data);
 			LCD_Write_Data(Camera_Data);
 		}
 	}

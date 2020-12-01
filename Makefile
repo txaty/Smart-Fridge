@@ -94,7 +94,8 @@ Src/pwm_control.c \
 Src/sntp.c \
 Src/team_logo.c \
 Src/name.c \
-Src/display_content.c
+Src/display_content.c \
+Src/write_bmp.c
 
 C_SOURCES += $(USER_SOURCES)
 

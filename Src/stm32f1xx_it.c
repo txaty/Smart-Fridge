@@ -26,11 +26,15 @@
 #include "tos_k.h"
 #include "tos_at.h"
 #include "pwm_control.h"
+#include "task.h"
+#include "ff.h"
+#include "lcd_tft.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
 uint8_t recv_buffer[1] = {0};
+int name_count = 0;
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -67,7 +71,7 @@ extern UART_HandleTypeDef huart3;
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M3 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M3 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -203,9 +207,26 @@ void EXTI0_IRQHandler(void)
   tos_knl_irq_enter();
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_0) != RESET)
   {
-    if (lcd_pwm_value > LCD_MIN_PWM_PULSE)
+    if (flag_take_photo)
     {
-      lcd_pwm_set_value(lcd_pwm_value--);
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+      FATFS fs;
+      FRESULT res_sd;
+      char name[40];
+      sprintf(name, "0:photo_%d.bmp", name_count);
+      name_count++;
+      res_sd = f_mount(&fs, "0:", 1);
+      // LCD_GramScan(3);
+
+      if (res_sd == FR_OK)
+      {
+        if (screen_shot(0, 0, LCD_X_LENGTH, LCD_Y_LENGTH, name) == 0)
+        {
+          printf("Photo taken\r\n");
+          // flag_take_photo = 0;
+        }
+      }
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
     }
     printf("Key 1 pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
@@ -213,7 +234,7 @@ void EXTI0_IRQHandler(void)
   }
   tos_knl_irq_leave();
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
@@ -228,17 +249,14 @@ void EXTI1_IRQHandler(void)
   tos_knl_irq_enter();
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET)
   {
-    if (lcd_pwm_value < LCD_MAX_PWM_PULSE)
-    {
-      lcd_pwm_set_value(lcd_pwm_value++);
-    }
+    flag_take_photo = 0;
     printf("Key cap pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
     HAL_GPIO_EXTI_Callback(GPIO_PIN_1);
   }
   tos_knl_irq_leave();
   /* USER CODE END EXTI1_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+  // HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
 
   /* USER CODE END EXTI1_IRQn 1 */

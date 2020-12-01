@@ -1,6 +1,7 @@
 #include "tools.h"
 #include "tim.h"
 #include "bsp_ov7725.h"
+#include "usart.h"
 
 void delay_us(uint16_t time)
 {
@@ -49,6 +50,8 @@ uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 int switch_pin_for_wifi(void)
 {
   // Configure Pin PB8, PB9 for ESP8266
+  MX_USART3_UART_Init();
+  HAL_Delay(100);
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -63,11 +66,15 @@ int switch_pin_for_wifi(void)
 
 int switch_pin_for_camera()
 {
+  HAL_UART_DeInit(&huart3);
+  HAL_Delay(100);
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  GPIO_InitStruct.Pin = OV7725_DATA_2_GPIO_PIN | OV7725_DATA_3_GPIO_PIN;
+  GPIO_InitStruct.Pin = OV7725_DATA_0_GPIO_PIN | OV7725_DATA_1_GPIO_PIN | OV7725_DATA_2_GPIO_PIN | OV7725_DATA_3_GPIO_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(OV7725_DATA_GPIO_PORT, &GPIO_InitStruct);
 
+  // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
+  // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);
   return 0;
 }

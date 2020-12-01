@@ -7,6 +7,7 @@
 
 #define TCP_TEST_ENABLE 0
 #define CONSOLE_PRINTF_DEBUG_ENABLE 0
+#define SDIO_TEST_ENABLE 0
 
 #define LED_GPIO_PORT GPIOB
 #define LED_RED_GPIO_PIN GPIO_PIN_5
@@ -16,6 +17,7 @@
 // Global variables
 extern int rtc_hour;
 extern int rtc_minutes;
+extern uint8_t flag_take_photo;
 
 // Mutex
 extern k_mutex_t display_touch_locker;
@@ -58,6 +60,7 @@ void task_init_image(void *pdata);
 // LCD display and touch screen
 #define DISPLAY_TOUCH_TASK_SIZE 4096
 extern k_task_t *k_display_touch;
+// extern uint8_t k_display_touch_stk[DISPLAY_TOUCH_TASK_SIZE];
 
 void task_display_touch(void *pdata);
 
@@ -106,15 +109,19 @@ extern uint8_t k_temp_update_stk[TEMP_UPDATE_SIZE];
 void task_temp_update(void *pdata);
 
 // Camera initialization
-#define CAMERA_INIT_SIZE 518
-extern k_task_t k_camera_init;
+#define CAMERA_INIT_SIZE 4096
+extern k_task_t *k_camera_init;
 
 void task_camera_init(void *pdata);
 
 // SDIO test
-#define SDIO_TASK_SIZE 512
+#if SDIO_TEST_ENABLE
+
+#define SDIO_TASK_SIZE 4096
 extern k_task_t k_task_sdio;
 extern uint8_t k_sdio_stk[SDIO_TASK_SIZE];
+
+#endif
 
 void task_sdio(void *pdata);
 
