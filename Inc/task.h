@@ -3,9 +3,15 @@
 
 #include "cmsis_os.h"
 #include "tos_k.h"
+#include "gpio.h"
 
 #define TCP_TEST_ENABLE 0
 #define CONSOLE_PRINTF_DEBUG_ENABLE 0
+
+#define LED_GPIO_PORT GPIOB
+#define LED_RED_GPIO_PIN GPIO_PIN_5
+#define LED_GREEN_GPIO_PIN GPIO_PIN_0
+#define LED_BLUE_GPIO_PIN GPIO_PIN_1
 
 // Global variables
 extern int rtc_hour;
@@ -28,6 +34,21 @@ extern k_task_t k_led_switch_rgb;
 extern uint8_t k_led_switch_rgb_stk[LED_TASK_STK_SIZE];
 
 void led_switch_rgb(void *pdata);
+
+// LED system boot
+extern k_task_t *k_led_system_boot;
+
+void task_led_system_boot(void *pdata);
+
+// LED connecting wifi
+extern k_task_t *k_led_connecting_wifi;
+
+void task_led_connecting_wifi(void *pdata);
+
+// LED sntp time sync
+extern k_task_t *k_led_sntp_time_sync;
+
+void task_led_sntp_time_sync(void *pdata);
 
 // Init images
 #define INIT_IMAGE_SIZE 4096

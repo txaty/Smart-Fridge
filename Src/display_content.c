@@ -11,22 +11,31 @@ LV_IMAGE_DECLARE(team_logo);
 LV_IMAGE_DECLARE(name);
 lv_obj_t *team_logo_img = NULL;
 lv_obj_t *name_img = NULL;
+
 int flag_lvgl_enable = 1;
+
 lv_obj_t *time_label;
 lv_obj_t *temp_label;
+lv_obj_t *temp_increment_button;
+lv_obj_t *temp_decrement_button;
+
 uint8_t temp_label_state = 1;
 
 void show_init_image()
 {
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_RED_GPIO_PIN);
     team_logo_img = lv_img_create(lv_scr_act(), NULL);
     lv_img_set_src(team_logo_img, &team_logo);
     lv_obj_set_pos(team_logo_img, 24, 20);
     tos_knl_sched_lock();
     lv_task_handler();
     tos_knl_sched_unlock();
-    tos_sleep_ms(200);
+    tos_sleep_ms(500);
     lv_obj_clean(lv_scr_act());
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_RED_GPIO_PIN);
 
+    tos_task_create_dyn(&k_led_connecting_wifi, "led_connecting_wifi", task_led_connecting_wifi, NULL,
+                        6, LED_TASK_STK_SIZE, 0);
     name_img = lv_img_create(lv_scr_act(), NULL);
     lv_img_set_src(name_img, &name);
     lv_obj_set_pos(name_img, 40, 70);
@@ -34,12 +43,15 @@ void show_init_image()
     lv_task_handler();
     tos_knl_sched_unlock();
     tos_sleep_ms(1000);
-    // while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE)
-    //     ;
+    while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
+    {
+        tos_sleep_ms(100);
+    }
     lv_obj_clean(lv_scr_act());
     lv_task_handler();
 
     update_main_page();
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
 }
 
 static void clock_event_handler(lv_obj_t *obj, lv_event_t event)
@@ -141,10 +153,24 @@ static void temp_background_event_handler(lv_obj_t *obj, lv_event_t event)
         if (temp_label_state)
         {
             sprintf(temp_label_string, "Temperature: %d", fridge_temp);
+            lv_obj_clean(temp_decrement_button);
+            lv_obj_clean(temp_increment_button);
         }
         else
         {
             sprintf(temp_label_string, "Target: %d", target_temp);
+
+            lv_coord_t h = lv_obj_get_height(obj);
+            temp_increment_button = lv_btn_create(lv_scr_act(), NULL);
+            lv_obj_set_size(temp_increment_button, h, h);
+            lv_obj_align(temp_increment_button, obj, LV_ALIGN_OUT_RIGHT_MID, 5, 0);
+            lv_theme_apply(temp_increment_button, LV_THEME_SPINBOX_BTN);
+            lv_obj_set_style_local_value_str(temp_increment_button, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_SYMBOL_PLUS);
+
+            temp_decrement_button = lv_btn_create(lv_scr_act(), temp_increment_button);
+            lv_obj_align(temp_decrement_button, obj, LV_ALIGN_OUT_LEFT_MID, -5, 0);
+            // lv_obj_set_event_cb(btn, lv_spinbox_decrement_event_cb);
+            lv_obj_set_style_local_value_str(temp_decrement_button, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_SYMBOL_MINUS);
         }
         lv_label_set_text(temp_label, temp_label_string);
         lv_obj_align(temp_label, NULL, LV_ALIGN_CENTER, 0, 0);

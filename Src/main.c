@@ -154,12 +154,10 @@ int main(void)
   tos_completion_create(&sntp_success);
   tos_task_create_dyn(&k_init_image, "init_image", task_init_image, NULL,
                       3, INIT_IMAGE_SIZE, 0);
-  // tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
-  //                     4, WIFI_TEST_CONNECT_SIZE, 0);
+  tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
+                      4, WIFI_TEST_CONNECT_SIZE, 0);
   // tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
   //                 7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
-  // tos_task_create(&k_rtc_update, "rtc_update", task_rtc_update, NULL,
-  //                 4, k_rtc_update_stk, RTC_UPDATE_SIZE, 0);
   tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,
                   2, k_temp_update_stk, TEMP_UPDATE_SIZE, 0);
   tos_knl_start();

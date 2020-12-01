@@ -47,6 +47,45 @@ void led_switch_rgb(void *pdata)
   }
 }
 
+// LED system boot
+k_task_t *k_led_system_boot;
+
+void task_led_system_boot(void *pdata)
+{
+  int interval_time = 500;
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_RED_GPIO_PIN);
+  tos_sleep_ms(interval_time);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_RED_GPIO_PIN);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
+  tos_sleep_ms(interval_time);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+  tos_sleep_ms(interval_time);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+}
+
+// LED connecting wifi
+k_task_t *k_led_connecting_wifi;
+
+void task_led_connecting_wifi(void *pdata)
+{
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
+  tos_sleep_ms(100);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+  tos_sleep_ms(100);
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+}
+
+// LED sntp time sync
+k_task_t *k_led_sntp_time_sync;
+
+void task_led_sntp_time_sync(void *pdata)
+{
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+  tos_sleep_ms(100);
+}
+
 // Init image
 k_task_t *k_init_image;
 
@@ -55,7 +94,7 @@ void task_init_image(void *pdata)
   lcd_pwm_set_value(0);
   show_init_image();
   tos_task_create(&k_display_touch, "display_touch", task_display_touch, NULL,
-                  4, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
+                  2, k_display_touch_stk, DISPLAY_TOUCH_TASK_SIZE, 0);
 }
 
 // LCD display and touch screen
@@ -97,6 +136,7 @@ char *wifi_pwd = "qwertyuiop";
 
 void task_wifi_connect(void *pdata)
 {
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
   k_err_t err;
   err = tos_mutex_pend(&pb8_pb9_mutex);
   if (err == K_ERR_NONE)
@@ -112,6 +152,7 @@ void task_wifi_connect(void *pdata)
       {
         printf("AP joning success\n");
         tos_completion_post(&wifi_connect_success);
+        HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
         tos_task_create_dyn(&k_ntp_time_sync, "ntp_time_sync", task_ntp_time_sync, NULL,
                             2, NTP_TIME_SYNC_SIZE, 0);
       }
@@ -181,8 +222,10 @@ k_task_t *k_ntp_time_sync;
 void task_ntp_time_sync(void *pdata)
 {
   while (tos_completion_pend(&wifi_connect_success) != K_ERR_NONE)
-    ;
-  printf("start sntp\r\n");
+  {
+    tos_sleep_ms(100);
+  }
+  HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
   tos_task_destroy(k_wifi_connect);
   ntp_client();
 

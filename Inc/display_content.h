@@ -7,6 +7,8 @@ extern int flag_lvgl_enable;
 
 extern lv_obj_t *time_label;
 extern lv_obj_t *temp_label;
+extern lv_obj_t *temp_increment_button;
+extern lv_obj_t *temp_decrement_button;
 extern uint8_t temp_label_state;
 
 void show_init_image(void);
