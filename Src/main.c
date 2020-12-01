@@ -146,7 +146,7 @@ int main(void)
   indev_drv.read_cb = my_touchpad_read;  
   lv_indev_drv_register(&indev_drv);     
 
-  // OV7725_Init();
+  OV7725_Init();
 
   tos_knl_init();
   // Mutex creation
@@ -159,8 +159,8 @@ int main(void)
   tos_completion_create(&sntp_success);
   tos_task_create_dyn(&k_init_image, "init_image", task_init_image, NULL,
                       3, INIT_IMAGE_SIZE, 0);
-  // tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
-  //                     4, WIFI_TEST_CONNECT_SIZE, 0);
+  tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
+                      4, WIFI_TEST_CONNECT_SIZE, 0);
   // tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
   //                 7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
   tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,

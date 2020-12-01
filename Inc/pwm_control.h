@@ -19,6 +19,11 @@
 #define TARGET_TEMP_MAX 30
 #define TARGET_TEMP_MIN -10
 
+extern float temp_kp;
+extern float temp_ki;
+extern float temp_kd;
+
+
 extern uint16_t temp_pwm_value;
 extern uint16_t lcd_pwm_value;
 extern uint16_t target_temp;

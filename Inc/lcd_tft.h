@@ -98,6 +98,7 @@ typedef enum
 void LCD_Init(void);
 void LCD_Rst(void);
 inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+void camera_img_disp(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height);
 
 // TFT functions
 void XPT2046_Init(void);

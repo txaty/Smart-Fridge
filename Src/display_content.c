@@ -41,10 +41,10 @@ void show_init_image()
     lv_task_handler();
     tos_knl_sched_unlock();
     tos_sleep_ms(1000);
-    // while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
-    // {
-    //     tos_sleep_ms(100);
-    // }
+    while (tos_completion_pend(&sntp_success) != K_ERR_NONE)
+    {
+        tos_sleep_ms(100);
+    }
     lv_obj_clean(lv_scr_act());
     lv_task_handler();
 

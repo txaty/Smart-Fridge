@@ -286,27 +286,27 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 	{
 		for (x = area->x1; x <= area->x2; x++)
 		{
-			LCD_DrawDot(y, 320 - x, color_p->full);
+			LCD_DrawDot(240 - y, x, color_p->full);
 			color_p++;
 		}
 	}
 	lv_disp_flush_ready(disp);
 }
 
-void ImagDisp(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height)
+void camera_img_disp(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height)
 {
 	uint16_t i, j; 
 	uint16_t Camera_Data;
 	
-	ILI9341_OpenWindow(sx,sy,width,height);
-	ILI9341_Write_Cmd ( CMD_SetPixel );	
+	LCD_OpenWindow(sx,sy,width,height);
+	LCD_Write_Cmd( CMD_SetPixel );	
 
 	for(i = 0; i < width; i++)
 	{
 		for(j = 0; j < height; j++)
 		{
-			READ_FIFO_PIXEL(Camera_Data);		/* 从FIFO读出一个rgb565像素到Camera_Data变量 */
-			ILI9341_Write_Data(Camera_Data);
+			READ_FIFO_PIXEL(Camera_Data);		
+			LCD_Write_Data(Camera_Data);
 		}
 	}
 }
@@ -396,8 +396,10 @@ static inline void XPT2046_ReadAdc_XY(int16_t *sX_Ad, int16_t *sY_Ad)
 	sX_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_X);
 	XPT2046_DelayUS(1);
 	sY_Ad_Temp = XPT2046_ReadAdc(XPT2046_CHANNEL_Y);
-	*sX_Ad = (int16_t)(COOR_X_K * (sX_Ad_Temp + COOR_X_B));
-	*sY_Ad = (int16_t)(COOR_Y_K * (sY_Ad_Temp + COOR_Y_B));
+	sX_Ad_Temp = (int16_t)(COOR_X_K * (sX_Ad_Temp + COOR_X_B));
+	sY_Ad_Temp = (int16_t)(COOR_Y_K * (sY_Ad_Temp + COOR_Y_B));
+	*sX_Ad = 320 - sX_Ad_Temp;
+	*sY_Ad = 240 - sY_Ad_Temp;
 }
 
 static inline uint8_t touch_detect(void)

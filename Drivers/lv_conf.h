@@ -592,10 +592,10 @@ typedef void * lv_obj_user_data_t;
 #endif
 
 /*Canvas (dependencies: lv_img)*/
-#define LV_USE_CANVAS   1
+#define LV_USE_CANVAS   0
 
 /*Check box (dependencies: lv_btn, lv_label)*/
-#define LV_USE_CHECKBOX       1
+#define LV_USE_CHECKBOX       0
 
 /*Chart (dependencies: -)*/
 #define LV_USE_CHART    0

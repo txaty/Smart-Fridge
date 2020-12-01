@@ -10,6 +10,8 @@
 #include "display_content.h"
 #include "temp_sensor.h"
 #include "pwm_control.h"
+#include "bsp_ov7725.h"
+#include "lcd_tft.h"
 
 // Global variables
 int rtc_hour = 0;
@@ -249,7 +251,7 @@ void task_temp_update(void *pdata)
       err = tos_knl_sched_lock();
       if (err == K_ERR_NONE)
       {
-        fridge_temp = (int)DS18B20_GetCelsiusTemp();
+        fridge_temp = DS18B20_GetCelsiusTemp();
       }
       tos_knl_sched_unlock();
       tos_mutex_post(&temp_update_locker);
@@ -271,8 +273,14 @@ void task_camera_init(void *pdata)
   tos_task_suspend(task_display_touch);
   
   switch_pin_for_camera();
+  OV7725_Init();
 
-  
+  while (K_TRUE)
+  {
+    camera_img_disp(0, 0, 100, 100);
+    HAL_Delay(10);
+  }
+
 }
 
 // SDIO test
