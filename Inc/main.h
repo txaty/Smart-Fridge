@@ -59,6 +59,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Hall_sensor_Pin GPIO_PIN_5
+#define Hall_sensor_GPIO_Port GPIOE
 #define Temp_Sensor_IO_Pin GPIO_PIN_6
 #define Temp_Sensor_IO_GPIO_Port GPIOE
 #define Cam_VSYNC_Pin GPIO_PIN_3
@@ -71,6 +73,8 @@ void Error_Handler(void);
 #define Cam_FIFO_RRST_GPIO_Port GPIOA
 #define Cam_FIFO_OE_Pin GPIO_PIN_3
 #define Cam_FIFO_OE_GPIO_Port GPIOA
+#define Buzzer_Pin GPIO_PIN_7
+#define Buzzer_GPIO_Port GPIOA
 #define Cam_FIFO_WRST_Pin GPIO_PIN_4
 #define Cam_FIFO_WRST_GPIO_Port GPIOC
 #define Cam_FIFO_RCLK_Pin GPIO_PIN_5

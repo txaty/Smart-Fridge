@@ -89,7 +89,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -120,33 +119,35 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_IWDG_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim6);
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
   HAL_ADCEx_Calibration_Start(&hadc1);
 
   LCD_Init();
   lv_init();
   XPT2046_Init();
   lv_disp_buf_t disp_buf;
-  lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];                         
-  lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX / 10); 
+  lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];
+  lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX / 10);
 
-  lv_disp_drv_t disp_drv;     
-  lv_disp_drv_init(&disp_drv); 
+  lv_disp_drv_t disp_drv;
+  lv_disp_drv_init(&disp_drv);
 
-  disp_drv.flush_cb = my_disp_flush; 
-  disp_drv.buffer = &disp_buf;       
-  lv_disp_drv_register(&disp_drv); 
+  disp_drv.flush_cb = my_disp_flush;
+  disp_drv.buffer = &disp_buf;
+  lv_disp_drv_register(&disp_drv);
 
-  lv_indev_drv_t indev_drv;             
-  lv_indev_drv_init(&indev_drv);       
+  lv_indev_drv_t indev_drv;
+  lv_indev_drv_init(&indev_drv);
   indev_drv.type = LV_INDEV_TYPE_POINTER;
-  indev_drv.read_cb = my_touchpad_read;  
-  lv_indev_drv_register(&indev_drv);     
+  indev_drv.read_cb = my_touchpad_read;
+  lv_indev_drv_register(&indev_drv);
 
-  OV7725_Init();
+  // OV7725_Init();
 
   tos_knl_init();
   // Mutex creation
@@ -192,7 +193,7 @@ void SystemClock_Config(void)
 
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -206,8 +207,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -217,7 +217,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_ADC;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC | RCC_PERIPHCLK_ADC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
@@ -228,6 +228,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 uint16_t lcd_timer_tick = 0;
+uint8_t alarm_counter = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (htim->Instance == TIM2)
@@ -248,10 +249,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
           lcd_adc_average += lcd_adc_sample_list[i];
         }
         lcd_adc_average /= 5;
-        int lcd_pwm_result = (int)(LCD_ADC_2_PWM_K*lcd_adc_average + LCD_ADC_2_PWM_B);
-        if (lcd_pwm_value > LCD_MAX_PWM_PULSE) {
+        int lcd_pwm_result = (int)(LCD_ADC_2_PWM_K * lcd_adc_average + LCD_ADC_2_PWM_B);
+        if (lcd_pwm_value > LCD_MAX_PWM_PULSE)
+        {
           lcd_pwm_result = LCD_MAX_PWM_PULSE;
-        } else if (lcd_pwm_result < LCD_MIN_PWM_PULSE) {
+        }
+        else if (lcd_pwm_result < LCD_MIN_PWM_PULSE)
+        {
           lcd_pwm_result = LCD_MIN_PWM_PULSE;
         }
         lcd_pwm_set_value(lcd_pwm_result);
@@ -260,6 +264,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       lcd_timer_tick = 0;
 
       HAL_IWDG_Refresh(&hiwdg);
+
+      if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_SET)
+      {
+        alarm_counter++;
+      }
+      else
+      {
+        alarm_counter = 0;
+      }
+
+      if (alarm_counter >= 40)
+      {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+      }
+      else
+      {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+      }
     }
   }
 }
@@ -277,7 +299,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -286,7 +308,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

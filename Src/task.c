@@ -16,7 +16,6 @@
 // Global variables
 int rtc_hour = 0;
 int rtc_minutes = 0;
-int fridge_temp = 0;
 
 // Mutex
 k_mutex_t display_touch_locker;
@@ -252,11 +251,14 @@ void task_temp_update(void *pdata)
       if (err == K_ERR_NONE)
       {
         fridge_temp = DS18B20_GetCelsiusTemp();
+        tos_knl_sched_unlock();
       }
-      tos_knl_sched_unlock();
+      float pid_result = temp_get_pid();
+      printf("PID: %d\r\n", (int)pid_result);
+      temp_pwm_set_value(pid_result);
       tos_mutex_post(&temp_update_locker);
     }
-    tos_sleep_ms(2000);
+    tos_sleep_ms(1500);
   }
 }
 
@@ -270,7 +272,7 @@ void task_camera_init(void *pdata)
     tos_sleep_ms(100);
   }
   lv_deinit();
-  tos_task_suspend(task_display_touch);
+  tos_task_suspend(&task_display_touch);
   
   switch_pin_for_camera();
   OV7725_Init();

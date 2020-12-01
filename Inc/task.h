@@ -16,7 +16,6 @@
 // Global variables
 extern int rtc_hour;
 extern int rtc_minutes;
-extern int fridge_temp;
 
 // Mutex
 extern k_mutex_t display_touch_locker;
