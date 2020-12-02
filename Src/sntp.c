@@ -49,8 +49,6 @@ int ntp_client(void)
                 tos_sal_module_close(socket_id);
                 return 0;
             }
-            // printf("%d-%d-%d %d:%d:%d\r\n", (net_time->tm_year) + 1900, (net_time->tm_mon) + 1, net_time->tm_mday, 
-            //         net_time->tm_hour, net_time->tm_min, net_time->tm_sec);
             tos_sal_module_close(socket_id);
         }
     }

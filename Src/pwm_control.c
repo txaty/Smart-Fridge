@@ -23,6 +23,8 @@ int temp_pwm = 10;
 float max_accumulation = 15.0;
 float min_accumulation = -15.0;
 
+uint8_t flag_enable_cooling = 1;
+
 uint8_t lcd_pwm_set_value(uint16_t value)
 {
     if (value >= LCD_MIN_PWM_PULSE && value <= LCD_MAX_PWM_PULSE)
@@ -79,14 +81,21 @@ float temp_get_pid(void)
 
 void temp_pwm_set_value(int pid_value)
 {
-    temp_pwm -= pid_value;
-    if (temp_pwm < TEMP_MIN_PWM_PULSE)
+    if (flag_enable_cooling)
     {
-        temp_pwm = TEMP_MIN_PWM_PULSE;
+        temp_pwm -= pid_value;
+        if (temp_pwm < TEMP_MIN_PWM_PULSE)
+        {
+            temp_pwm = TEMP_MIN_PWM_PULSE;
+        }
+        else if (temp_pwm > TEMP_MAX_PWM_PULSE)
+        {
+            temp_pwm = TEMP_MAX_PWM_PULSE;
+        }
     }
-    else if (temp_pwm > TEMP_MAX_PWM_PULSE)
+    else
     {
-        temp_pwm = TEMP_MAX_PWM_PULSE;
+        temp_pwm = 0;
     }
 
     TIM_OC_InitTypeDef timOcConf;
