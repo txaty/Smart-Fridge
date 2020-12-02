@@ -1,25 +1,6 @@
 #include "cmsis_os.h"
 #include "debug.h"
-#include "gpio.h"
 #include "usart.h"
-
-void ledSwitchRGB(void *pdata)
-{
-    while (1)
-    {
-        int intervalTime = 500;
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
-        osDelay(intervalTime);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
-        osDelay(intervalTime);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-        osDelay(intervalTime);
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-        printf("test\n");
-    }
-}
 
 #if defined(__CC_ARM) || defined(__ICCARM__)
 

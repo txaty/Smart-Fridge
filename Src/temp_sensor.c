@@ -80,13 +80,14 @@ uint8_t DS18B20_Read(void)
     return value;
 }
 
-float DS18B20_GetCelsiusTemp(void)
+int DS18B20_GetCelsiusTemp(void)
 {
     uint8_t lsb;
     uint8_t msb;
     bool temp_sign;
-    int16_t temp_int;
-    float temp_result;
+    uint16_t temp_int;
+    int temp_decimal;
+    // float temp_result;
 
     DS18B20_Start();
     HAL_Delay(1);
@@ -102,23 +103,35 @@ float DS18B20_GetCelsiusTemp(void)
     lsb = DS18B20_Read();
     msb = DS18B20_Read();
 
-    if (msb > 7)
+    // if (msb > 7)
+    // {
+    //     msb = ~msb;
+    //     lsb = ~msb;
+    //     temp_sign = false;
+    // }
+    // else
+    // {
+    //     temp_sign = true;
+    // }
+    // temp_int = msb;
+    // temp_int <<= 8;
+    // temp_int += lsb;
+    // if (!temp_sign)
+    // {
+    //     temp_int = -temp_int;
+    // }
+    temp_int = ((uint16_t)msb << 8) | lsb;
+    int negative;
+    negative = (temp_int & (1 << 15)) != 0;
+    if (negative)
     {
-        msb = ~msb;
-        lsb = ~msb;
-        temp_sign = false;
+        temp_decimal = temp_int | ~((1 << 16) - 1);
     }
     else
     {
-        temp_sign = true;
+        temp_decimal = temp_int;
     }
-    temp_int = msb;
-    temp_int <<= 8;
-    temp_int += lsb;
-    if (!temp_sign)
-    {
-        temp_int = -temp_int;
-    }
-    temp_result = (float)temp_int / 16;
-    return temp_result;
+    // temp_result = temp_decimal / 16;
+    temp_decimal /= 16;
+    return temp_decimal;
 }

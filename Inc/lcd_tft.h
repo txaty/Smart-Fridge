@@ -41,6 +41,15 @@
 #define CMD_Set_PAGE 0x2B
 #define CMD_SetPixel 0x2C
 
+#define ILI9341_LESS_PIXEL 240
+#define ILI9341_MORE_PIXEL 320
+
+extern uint16_t LCD_X_LENGTH, LCD_Y_LENGTH;
+extern uint8_t LCD_SCAN_MODE;
+
+#define CMD_SetCoordinateX 0x2A
+#define CMD_SetCoordinateY 0x2B
+
 // TFT definitions
 #define RCC_APB2Periph_GPIOD ((uint32_t)0x00000020)
 #define RCC_APB2Periph_GPIOE ((uint32_t)0x00000040)
@@ -97,9 +106,10 @@ typedef enum
 // LCD functions
 void LCD_Init(void);
 void LCD_Rst(void);
-uint16_t LCD_Read_PixelData(void);
-void LCD_BackLed_Control(FunctionalState enumState);
+void LCD_GramScan(uint8_t ucOption);
+uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE);
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+void camera_img_disp(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);
 
 // TFT functions
 void XPT2046_Init(void);
