@@ -202,10 +202,10 @@ int tcp_socket_id = -1;
 
 void task_tcp_task(void *pdata)
 {
-  // while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
-  // {
-  //   tos_sleep_ms(100);
-  // }
+  while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
+  {
+    tos_sleep_ms(100);
+  }
   if (flag_server_connect == 1)
   {
     flag_server_connect = 1;
@@ -233,9 +233,13 @@ void task_tcp_task(void *pdata)
         tos_sleep_ms(5000);
       }
     }
-    // tos_mutex_post(&display_touch_locker);
+    tos_mutex_post(&display_touch_locker);
+    lv_obj_clean(lv_scr_act());
+    lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+    update_main_page();
+    lv_task_handler();
     flag_lvgl_enable = 1;
-    // tos_task_destroy(NULL);
+    tos_task_destroy(NULL);
   }
 }
 
@@ -288,10 +292,10 @@ k_task_t *k_camera_init;
 
 void task_camera_init(void *pdata)
 {
-  // while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
-  // {
-  //   tos_sleep_ms(100);
-  // }
+  while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
+  {
+    tos_sleep_ms(100);
+  }
   if (flag_take_photo == 1)
   {
     flag_lvgl_enable = 0;
@@ -324,12 +328,14 @@ void task_camera_init(void *pdata)
         }
       }
     }
-
     tos_knl_sched_unlock();
-    printf("run here\r\n");
-    // tos_mutex_post(&display_touch_locker);
+    tos_mutex_post(&display_touch_locker);
+    lv_obj_clean(lv_scr_act());
+    lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+    update_main_page();
+    lv_task_handler();
     flag_lvgl_enable = 1;
-    printf("run here\r\n");
+    tos_task_destroy(NULL);
   }
   tos_sleep_ms(300);
 }

@@ -30,6 +30,7 @@
 #include "ff.h"
 #include "lcd_tft.h"
 #include "write_bmp.h"
+#include "display_content.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -253,6 +254,8 @@ void EXTI1_IRQHandler(void)
   if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET)
   {
     flag_take_photo = 0;
+    flag_server_connect = 0;
+    temp_label_state = 1;
     printf("Key cap pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
     HAL_GPIO_EXTI_Callback(GPIO_PIN_1);
