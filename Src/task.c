@@ -223,8 +223,10 @@ void task_tcp_task(void *pdata)
       {
         char send_buffer[20];
         char recv_buffer[20];
-        sprintf(send_buffer, "temp %d\n", fridge_temp);
+        sprintf(send_buffer, "temp %d, target %d\n", fridge_temp, target_temp);
+        HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN);
         tos_sal_module_send(tcp_socket_id, (const void *)send_buffer, strlen(send_buffer));
+        HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
 
         HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
         int recv_len = tos_sal_module_recv_timeout(tcp_socket_id, recv_buffer, sizeof(recv_buffer), 5000);
@@ -275,6 +277,8 @@ void task_tcp_task(void *pdata)
     update_main_page();
     lv_task_handler();
     flag_lvgl_enable = 1;
+    HAL_GPIO_WritePin(LED_GPIO_PORT, LED_GREEN_GPIO_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN, GPIO_PIN_SET);
     tos_task_destroy(NULL);
   }
 }
