@@ -31,6 +31,7 @@ void show_init_image()
     lv_task_handler();
     tos_knl_sched_unlock();
     tos_sleep_ms(500);
+    lv_obj_del(team_logo_img);
     lv_obj_clean(lv_scr_act());
     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_RED_GPIO_PIN);
 
@@ -45,6 +46,7 @@ void show_init_image()
     {
         tos_sleep_ms(100);
     }
+    lv_obj_del(name_img);
     lv_obj_clean(lv_scr_act());
     lv_task_handler();
 
@@ -229,12 +231,23 @@ void create_camera_init_label(void)
     lv_obj_align(camera_init_label, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
 }
 
+void create_server_init_label(void)
+{
+    lv_obj_clean(lv_scr_act());
+    lv_obj_t *camera_init_label;
+    camera_init_label = lv_label_create(lv_scr_act(), NULL);
+    lv_label_set_text(camera_init_label, "SERVER MODE");
+    lv_obj_set_style_local_text_font(camera_init_label, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, &lv_font_montserrat_18);
+    lv_obj_align(camera_init_label, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
+}
+
 static void camera_button_event_handler(lv_obj_t *obj, lv_event_t event)
 {
 
     if (event == LV_EVENT_RELEASED)
     {
         create_camera_init_label();
+        flag_take_photo = 1;
         tos_task_create_dyn(&k_camera_init, "camera_init", task_camera_init, NULL,
                             2, CAMERA_INIT_SIZE, 0);
     }
@@ -242,6 +255,13 @@ static void camera_button_event_handler(lv_obj_t *obj, lv_event_t event)
 
 static void server_button_event_handler(lv_obj_t *obj, lv_event_t event)
 {
+    if (event == LV_EVENT_RELEASED)
+    {
+        create_server_init_label();
+        flag_server_connect = 1;
+        tos_task_create_dyn(&k_tcp_task, "tcp_task", task_tcp_task, NULL,
+                            2, TCP_TASK_SIZE, 0);
+    }
 }
 
 static void create_buttons()

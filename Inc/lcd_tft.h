@@ -107,9 +107,9 @@ typedef enum
 void LCD_Init(void);
 void LCD_Rst(void);
 void LCD_GramScan(uint8_t ucOption);
-inline uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE);
-inline void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
-inline void camera_img_disp(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);
+uint16_t LCD_GetPointPixel(uint16_t usCOLUMN, uint16_t usPAGE);
+void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+void camera_img_disp(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);
 
 // TFT functions
 void XPT2046_Init(void);

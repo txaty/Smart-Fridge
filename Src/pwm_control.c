@@ -9,9 +9,9 @@ uint32_t lcd_adc_sample_list[5] = {0};
 uint32_t lcd_adc_average = 0;
 uint8_t lcd_adc_index = 0;
 
-float temp_kp = 1.2;
+float temp_kp = 3;
 float temp_ki = 0.1;
-float temp_kd = 3;
+float temp_kd = 1;
 
 float last_error = 0;
 float curr_error = 0;
@@ -89,7 +89,6 @@ void temp_pwm_set_value(int pid_value)
         temp_pwm = TEMP_MAX_PWM_PULSE;
     }
 
-    printf("PWM: %d\r\n", temp_pwm);
     TIM_OC_InitTypeDef timOcConf;
 
     timOcConf.OCMode = TIM_OCMODE_PWM1;

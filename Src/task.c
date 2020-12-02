@@ -18,6 +18,7 @@
 int rtc_hour = 0;
 int rtc_minutes = 0;
 uint8_t flag_take_photo = 0;
+uint8_t flag_server_connect = 0;
 
 // Mutex
 k_mutex_t display_touch_locker;
@@ -167,7 +168,7 @@ void task_wifi_connect(void *pdata)
 #if TCP_TEST_ENABLE
 
 k_task_t k_tcp_test;
-uint8_t k_tcp_test_stk[TCP_TEST_SIZE];
+// uint8_t k_tcp_test_stk[TCP_TEST_SIZE];
 char *server_ip = "45.76.101.197";
 char *server_port = "4000";
 int socket_id_0 = -1;
@@ -194,28 +195,47 @@ void task_tcp_test(void *pdata)
 #endif
 
 // TCP task
-k_task_t k_tcp_task;
+k_task_t *k_tcp_task;
 char *server_ip = "45.76.101.197";
 char *server_port = "4000";
 int tcp_socket_id = -1;
 
 void task_tcp_task(void *pdata)
 {
-  tcp_socket_id = tos_sal_module_connect(server_ip, server_port, TOS_SAL_PROTO_TCP);
-  if (tcp_socket_id == -1)
+  // while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
+  // {
+  //   tos_sleep_ms(100);
+  // }
+  if (flag_server_connect == 1)
   {
-    printf("TCP0 connect failed\r\n");
-  }
-  else
-  {
-    printf("TCP0 connect success! fd: %d\n", tcp_socket_id);
-    tos_sal_module_send(tcp_socket_id, (const void *)"This is TCP Test!\r\n", strlen("This is TCP Test!\r\n"));
-  }
-  tos_sleep_ms(1000);
-  tcp_socket_id = tos_sal_module_close(tcp_socket_id);
-  if (tcp_socket_id != -1)
-  {
-    printf("Close connection success!");
+    flag_server_connect = 1;
+    tcp_socket_id = -1;
+    flag_lvgl_enable = 0;
+
+    tcp_socket_id = tos_sal_module_connect(server_ip, server_port, TOS_SAL_PROTO_TCP);
+    if (tcp_socket_id == -1)
+    {
+      printf("TCP connection failed\r\n");
+    }
+    else
+    {
+      while (K_TRUE)
+      {
+        char send_buffer[20];
+        sprintf(send_buffer, "temp %d\n", fridge_temp);
+        tos_sal_module_send(tcp_socket_id, (const void *)send_buffer, strlen(send_buffer));
+
+        if (flag_server_connect == 0)
+        {
+          break;
+        }
+
+        tos_sleep_ms(5000);
+      }
+    }
+    // tos_mutex_post(&display_touch_locker);
+    flag_lvgl_enable = 1;
+    // tos_task_destroy(NULL);
   }
 }
 
@@ -268,51 +288,50 @@ k_task_t *k_camera_init;
 
 void task_camera_init(void *pdata)
 {
-  while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
+  // while (tos_mutex_pend(&display_touch_locker) != K_ERR_NONE)
+  // {
+  //   tos_sleep_ms(100);
+  // }
+  if (flag_take_photo == 1)
   {
-    tos_sleep_ms(100);
-  }
-  tos_task_suspend(&k_display_touch);
-  tos_task_suspend(&k_temp_update);
-  tos_knl_sched_lock();
-  switch_pin_for_camera();
-  OV7725_GPIO_Config();
-  OV7725_Init();
-  LCD_GramScan(5);
+    flag_lvgl_enable = 0;
+    tos_knl_sched_lock();
+    switch_pin_for_camera();
+    OV7725_GPIO_Config();
+    OV7725_Init();
+    LCD_GramScan(5);
 
-  Mount_SD("/");
-  Format_SD();
-  Unmount_SD("/");
+    Mount_SD("/");
+    Format_SD();
+    Unmount_SD("/");
 
-  flag_take_photo = 1;
-
-  while (K_TRUE)
-  {
-    if (flag_take_photo == 0)
+    while (K_TRUE)
     {
-      switch_pin_for_wifi();
-
-      LCD_GramScan(6);
-      break;
-    }
-    else
-    {
-      if (Ov7725_vsync == 2)
+      if (flag_take_photo == 0)
       {
-        FIFO_PREPARE;
-        Ov7725_vsync = 0;
-        camera_img_disp(0, 0, 320, 240);
+        switch_pin_for_wifi();
+
+        LCD_GramScan(6);
+        break;
+      }
+      else
+      {
+        if (Ov7725_vsync == 2)
+        {
+          FIFO_PREPARE;
+          Ov7725_vsync = 0;
+          camera_img_disp(0, 0, 320, 240);
+        }
       }
     }
-  }
 
-  tos_knl_sched_unlock();
-  printf("run here\r\n");
-  tos_mutex_post(&display_touch_locker);
-  // tos_task_resume(&k_display_touch);
-  tos_task_resume(&k_temp_update);
-  // tos_task_destroy(NULL);
-  printf("run here\r\n");
+    tos_knl_sched_unlock();
+    printf("run here\r\n");
+    // tos_mutex_post(&display_touch_locker);
+    flag_lvgl_enable = 1;
+    printf("run here\r\n");
+  }
+  tos_sleep_ms(300);
 }
 
 // SDIO test

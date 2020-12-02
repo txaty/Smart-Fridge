@@ -18,6 +18,7 @@
 extern int rtc_hour;
 extern int rtc_minutes;
 extern uint8_t flag_take_photo;
+extern uint8_t flag_server_connect;
 
 // Mutex
 extern k_mutex_t display_touch_locker;
@@ -87,7 +88,7 @@ void task_tcp_test(void *pdata);
 
 // TCP task
 #define TCP_TASK_SIZE 4096
-extern k_task_t k_tcp_task;
+extern k_task_t *k_tcp_task;
 extern char *server_ip;
 extern char *server_port;
 extern int tcp_socket_id;

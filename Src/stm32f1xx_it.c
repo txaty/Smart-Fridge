@@ -29,6 +29,7 @@
 #include "task.h"
 #include "ff.h"
 #include "lcd_tft.h"
+#include "write_bmp.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -228,6 +229,8 @@ void EXTI0_IRQHandler(void)
       }
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
     }
+
+    flag_server_connect = 0;
     printf("Key 1 pressed\r\n");
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
     HAL_GPIO_EXTI_Callback(GPIO_PIN_0);

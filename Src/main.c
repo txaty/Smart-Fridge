@@ -163,12 +163,8 @@ int main(void)
                       3, INIT_IMAGE_SIZE, 0);
   tos_task_create_dyn(&k_wifi_connect, "wifi_connect", task_wifi_connect, NULL,
                       4, WIFI_TEST_CONNECT_SIZE, 0);
-  // tos_task_create(&k_console_printf_debug, "console_printf_debug", task_console_printf_debug, NULL,
-  //                 7, k_console_printf_debug_stk, CONSOLE_PRINTF_DEBUG_SIZE, 0);
   tos_task_create(&k_temp_update, "temp_update", task_temp_update, NULL,
                   2, k_temp_update_stk, TEMP_UPDATE_SIZE, 0);
-  // tos_task_create(&k_task_sdio, "sdio_test", task_sdio, NULL,
-  //                 1, k_sdio_stk, SDIO_TASK_SIZE, 0);
   // tos_task_create_dyn(&k_camera_init, "camera_init", task_camera_init, NULL,
   //                     2, CAMERA_INIT_SIZE, 0);
   tos_knl_start();
@@ -182,13 +178,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // if (Ov7725_vsync == 2)
-    // {
-    //   printf("Fetch image\r\n");
-    //   FIFO_PREPARE;
-    //   Ov7725_vsync = 0;
-    //   camera_img_disp(0, 0, 320, 240);
-    // }
   }
   /* USER CODE END 3 */
 }
@@ -289,10 +278,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       if (alarm_counter >= 20)
       {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LED_GPIO_PORT, LED_RED_GPIO_PIN, GPIO_PIN_RESET);
       }
       else
       {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(LED_GPIO_PORT, LED_RED_GPIO_PIN, GPIO_PIN_SET);
       }
     }
   }
