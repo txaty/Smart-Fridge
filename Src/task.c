@@ -222,8 +222,43 @@ void task_tcp_task(void *pdata)
       while (K_TRUE)
       {
         char send_buffer[20];
+        char recv_buffer[20];
         sprintf(send_buffer, "temp %d\n", fridge_temp);
         tos_sal_module_send(tcp_socket_id, (const void *)send_buffer, strlen(send_buffer));
+
+        HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+        int recv_len = tos_sal_module_recv_timeout(tcp_socket_id, recv_buffer, sizeof(recv_buffer), 5000);
+        // printf("%s\r\n", send_buffer);
+        HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_BLUE_GPIO_PIN);
+        
+        if (recv_len > 0)
+        {
+          char *turn_on = "turn_on";
+          char *turn_off = "turn_off";
+          char *set_target = "target";
+          if (strstr(recv_buffer, turn_on) != NULL)
+          {
+            flag_enable_cooling = 1;
+          } else if (strstr(recv_buffer, turn_off) != NULL)
+          {
+            flag_enable_cooling = 0;
+          } else if (strstr(recv_buffer, set_target) != NULL)
+          {
+            int target_num = 0;
+            for (int i = 0; i < strlen(recv_buffer); ++i)
+            {
+              char c = recv_buffer[i];
+              if (c >= '0' && c <= '9')
+              {
+                target_num = target_num*10 + c - '0';
+              }
+            }
+            if (target_num <= TARGET_TEMP_MAX && target_num >= TARGET_TEMP_MIN)
+            {
+              target_temp = target_num;
+            }
+          }
+        }
 
         if (flag_server_connect == 0)
         {
@@ -233,6 +268,7 @@ void task_tcp_task(void *pdata)
         tos_sleep_ms(5000);
       }
     }
+    tos_sal_module_close(tcp_socket_id);
     tos_mutex_post(&display_touch_locker);
     lv_obj_clean(lv_scr_act());
     lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);

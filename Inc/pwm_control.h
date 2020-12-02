@@ -37,6 +37,7 @@ extern int temp_pwm;
 extern uint16_t temp_pwm_value;
 extern uint16_t lcd_pwm_value;
 
+extern uint8_t flag_enable_cooling;
 
 extern uint32_t lcd_adc_sample_list[5];
 extern uint32_t lcd_adc_average;
