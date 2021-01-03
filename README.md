@@ -1,10 +1,15 @@
 # IoT-Smart-Fridge
 
 ## Overall Looking
-<img src="img/overall_look.jpg" width="300">
+<img src="img/overall_look.jpg" width="450">
 
-## WiFi Connection
-<img src="img/wifi_connection.png" width="300">
+## CubeMX Config
+<img src="img/cubemx.png" width="450">
+
+
+## Demo Video
+[![Alt text](https://img.youtube.com/vi/H3oVvfylMU0/0.jpg)](https://www.youtube.com/watch?v=H3oVvfylMU0)
+
 
 ## Features
 - Real-time inner temperature measurement with DS18B20 (1-Wire Communication Protocol).
@@ -19,3 +24,8 @@
 - Pin-switch-on-the-fly. There are some pins used by both camera ov7725 and ESP8266. The system can configure the correct states for the pin for each component in run time (UART, GPIO).
 - System crash detection and auto reboot (IWDG).
 - RTOS integration. Multi-task execution, better system resources distribution, dynamic memory allocation but much more complicated software design.
+
+## Dependencies
+Tencent OS Tiny (RTOS): https://github.com/Tencent/TencentOS-tiny <br/>
+LVGL (GUI library): https://github.com/lvgl/lvgl <br/>
+ARM tool chain (compatible version): https://launchpad.net/gcc-arm-embedded/+announcement/15293
